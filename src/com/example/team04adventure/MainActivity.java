@@ -18,5 +18,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	// K so im just testing some stuff 
 
 }

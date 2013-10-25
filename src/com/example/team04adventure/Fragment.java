@@ -2,7 +2,7 @@ package com.example.team04adventure;
 
 import java.util.ArrayList;
 
-
+// fuck you
 public class Fragment {
 	
 	String title;

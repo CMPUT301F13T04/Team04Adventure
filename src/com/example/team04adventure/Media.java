@@ -1,3 +1,5 @@
+package com.example.team04adventure;
+
 import android.graphics.Bitmap;
 
 

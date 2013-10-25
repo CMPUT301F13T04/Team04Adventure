@@ -1,4 +1,6 @@
-//testing egit addon for eclipse - delete this later - anthony
+package com.example.team04adventure;
+
+//testing egit addon for eclipse - delete this later - anthony VERSION2
 public class Choice {
 	
 	String body;

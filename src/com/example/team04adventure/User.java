@@ -3,23 +3,19 @@ import java.util.ArrayList;
 
 public class User {
 
-	private String usrname, password;
+	private String usrname;
 	private long id;
 	private ArrayList<Story> stories;
 	
-	public User(String usrname, String password){
-		this.usrname = usrname;
-		this.password = password;
+	public User(String usrname){
 		
+		this.usrname = usrname;
+	
 	}
 	
 	public String getName(){
-		return this.usrname;
 		
-	}
-	
-	public String getPass(){
-		return this.password;
+		return this.usrname;
 		
 	}
 	
@@ -30,25 +26,25 @@ public class User {
 	}
 	
 	public long getId(){
+		
 		return this.id;
+	
 	}
 	
 	public void setName(String name){
+	
 		this.usrname = name;
 		
 	}
 	
-	public void setPass(String pass){
-		this.password = pass;
-		
-	}
-	
 	public void setId(long id){
+		
 		this.id = id;
 		
 	}
 	
 	public void addStory(Story story){
+		
 		this.stories.add(story);
 		
 	}

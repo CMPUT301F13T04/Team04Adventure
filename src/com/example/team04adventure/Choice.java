@@ -1,4 +1,4 @@
-
+//testing egit addon for eclipse - delete this later - anthony
 public class Choice {
 	
 	String body;

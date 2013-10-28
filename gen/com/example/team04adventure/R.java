@@ -24,18 +24,27 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f080006;
+        public static final int login=0x7f080001;
+        public static final int offline=0x7f080002;
+        public static final int register=0x7f080005;
+        public static final int registerusername=0x7f080004;
+        public static final int signup=0x7f080003;
+        public static final int username=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int activity_sign_up=0x7f030001;
     }
     public static final class menu {
         public static final int main=0x7f070000;
+        public static final int sign_up=0x7f070001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
+        public static final int title_activity_sign_up=0x7f050003;
     }
     public static final class style {
         /** 
@@ -64,5 +73,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int test=0x7f060002;
     }
 }

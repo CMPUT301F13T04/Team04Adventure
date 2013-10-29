@@ -8,7 +8,7 @@ public class Story {
 	String title;
 	ArrayList<Fragment> frags;
 	User author;
-	long id;
+	String id;
 	
 	public Story(User author){
 		
@@ -52,10 +52,13 @@ public class Story {
 	
 	}
 	
-	public long getId(){
+	public String getId(){
 		
 		return this.id;
 	
+	}
+	public String toString(){
+		return "title = " + title + '\n' + "Author = " + author.getName() + '\n' + "ID = " + id; 
 	}
 }
 

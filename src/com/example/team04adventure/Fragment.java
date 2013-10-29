@@ -1,8 +1,6 @@
 package com.example.team04adventure;
 
 import java.util.ArrayList;
-
-// fuck you
 public class Fragment {
 	
 	String title;
@@ -99,5 +97,10 @@ public class Fragment {
 		return this.choices;
 		
 	}
+	public String toString(){
+			return "Fragment [id=" + id + ", user=" + author.getName() + ", title]";
+		}
+		
+	
 	
 }

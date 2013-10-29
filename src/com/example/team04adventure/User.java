@@ -1,4 +1,6 @@
+package com.example.team04adventure;
 import java.util.ArrayList;
+
 
 
 public class User {

@@ -10,8 +10,9 @@ public class Fragment {
 	ArrayList<Media> pictures;
 	ArrayList<Media> vids;
 	ArrayList<Choice> choices;
+	String offlineAuthor;
 	
-	public Fragment(User author){
+	public Fragment(){
 		
 		this.pictures = new ArrayList<Media>();
 		this.vids = new ArrayList<Media>();

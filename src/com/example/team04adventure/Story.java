@@ -1,7 +1,4 @@
-package com.example.team04adventure;
-
 import java.util.ArrayList;
-
 
 
 public class Story {
@@ -10,7 +7,12 @@ public class Story {
 	ArrayList<Fragment> frags;
 	User author;
 	long id;
-	String offlineAuthor;
+	
+	public Story(User author){
+		
+		this.author = author;
+	
+	}
 
 	public void setTitle(String title){
 		
@@ -22,11 +24,6 @@ public class Story {
 		
 		this.author = author;
 		
-	}
-	
-	public void setAuthorString(String author){
-		
-		this.offlineAuthor = author;
 	}
 	
 	public void addFragment(Fragment frag){
@@ -41,7 +38,7 @@ public class Story {
 	
 	}
 	
-	public User getAuthor(){
+	public User getUser(){
 		
 		return this.author;
 	
@@ -58,13 +55,5 @@ public class Story {
 		return this.id;
 	
 	}
-	
-	public void setId(long id){
-		
-		this.id = id;
-	
-	}
-	
-	
 }
 

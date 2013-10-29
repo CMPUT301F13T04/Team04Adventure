@@ -1,7 +1,4 @@
-package com.example.team04adventure;
-
 import java.util.ArrayList;
-
 
 
 public class Fragment {
@@ -13,14 +10,13 @@ public class Fragment {
 	ArrayList<Media> pictures;
 	ArrayList<Media> vids;
 	ArrayList<Choice> choices;
-	String offlineAuthor;
 	
-	public Fragment(){
+	public Fragment(User author){
 		
 		this.pictures = null;
 		this.vids = null;
 		this.choices = null;
-		
+		this.author = author;
 	
 	}
 
@@ -100,17 +96,6 @@ public class Fragment {
 		
 		return this.choices;
 		
-	}
-
-	public void setId(long id) {
-		
-		this.id = id;
-		
-	}
-
-	public void setAuthorString(String author){
-		
-		this.offlineAuthor = author;
 	}
 	
 }

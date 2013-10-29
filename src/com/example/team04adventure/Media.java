@@ -1,11 +1,10 @@
-package com.example.team04adventure;
+import android.graphics.Bitmap;
 
 
 public class Media {
 	
 	long id;
-	byte[] content;
-	String type;
+	Bitmap content;
 	
 	
 	public long getID(){
@@ -14,13 +13,13 @@ public class Media {
 		
 	}
 
-	public void setContent(byte[] content){
+	public void setMedia(Bitmap content){
 		
 		this.content = content;
 		
 	}
 	
-	public byte[] getMedia(){
+	public Bitmap getMedia(){
 		
 		return this.content;
 		
@@ -30,17 +29,6 @@ public class Media {
 		
 		this.id = id;
 		
-	}
-	
-	public void setType(String type){
-		
-		this.type = type;
-		
-	}
-	
-	public String getType(){
-		
-		return this.type;
 	}
 	
 }

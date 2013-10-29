@@ -13,10 +13,9 @@ public class Fragment {
 	
 	public Fragment(User author){
 		
-		this.pictures = null;
-		this.vids = null;
-		this.choices = null;
-		this.author = author;
+		this.pictures = new ArrayList<Media>();
+		this.vids = new ArrayList<Media>();
+		this.choices = new ArrayList<Choice>();
 	
 	}
 
@@ -97,10 +96,17 @@ public class Fragment {
 		return this.choices;
 		
 	}
-	public String toString(){
-			return "Fragment [id=" + id + ", user=" + author.getName() + ", title]";
-		}
+	
+	public void setId(long id) {
 		
+		this.id = id;
+		
+	}
+
+	public void setAuthorString(String author){
+		
+		this.offlineAuthor = author;
+	}
 	
 	
 }

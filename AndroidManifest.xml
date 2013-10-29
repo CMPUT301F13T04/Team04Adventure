@@ -30,6 +30,10 @@
             android:name="com.example.team04adventure.StoryIntro"
             android:label="@string/title_activity_story_intro" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.FragmentViewer"
+            android:label="@string/title_activity_fragment_viewer" >
+        </activity>
     </application>
 
 </manifest>

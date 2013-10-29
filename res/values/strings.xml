@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_story_intro">StoryIntro</string>
+    <string name="title_activity_fragment_viewer">FragmentViewer</string>
 
 </resources>

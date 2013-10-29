@@ -1,9 +1,6 @@
 package com.example.team04adventure;
 
 import java.util.ArrayList;
-
-
-
 public class Fragment {
 	
 	String title;
@@ -17,9 +14,9 @@ public class Fragment {
 	
 	public Fragment(){
 		
-		this.pictures = null;
-		this.vids = null;
-		this.choices = null;
+		this.pictures = new ArrayList<Media>();
+		this.vids = new ArrayList<Media>();
+		this.choices = new ArrayList<Choice>();
 		
 	
 	}
@@ -112,5 +109,6 @@ public class Fragment {
 		
 		this.offlineAuthor = author;
 	}
+	
 	
 }

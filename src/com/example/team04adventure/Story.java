@@ -11,6 +11,12 @@ public class Story {
 	User author;
 	long id;
 	String offlineAuthor;
+	
+	public Story(){
+		
+		this.frags = new ArrayList<Fragment>();
+		
+	}
 
 	public void setTitle(String title){
 		
@@ -27,6 +33,11 @@ public class Story {
 	public void setAuthorString(String author){
 		
 		this.offlineAuthor = author;
+	}
+	
+	public String getAuthorString(){
+		
+		return offlineAuthor;
 	}
 	
 	public void addFragment(Fragment frag){

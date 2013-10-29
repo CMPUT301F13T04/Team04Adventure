@@ -10,13 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-public class storyListAdapter extends BaseAdapter {
+public class StoryListAdapter extends BaseAdapter {
  
 		private ArrayList<Story> stories;
 	 
 	    private LayoutInflater layoutInflater;
 	 
-	    public storyListAdapter(Context context, ArrayList<Story> stories) {
+	    public StoryListAdapter(Context context, ArrayList<Story> stories) {
 	        this.stories = stories;
 	        layoutInflater = LayoutInflater.from(context);
 	    }
@@ -50,20 +50,19 @@ public class storyListAdapter extends BaseAdapter {
 	            holder = (ViewHolder) convertView.getTag();
 	        
 	        holder.titleView.setText(stories.get(position).getTitle());
-	        holder.authorView.setText("By, " + stories.get(position).getAuthor().getName());
-	        holder.fragmentView.setText("Fragments: " + stories.get(position).frags.size());
+	        holder.authorView.setText("By, " + stories.get(position).getAuthorString());
+	        holder.fragmentView.setText("Fragments: " + stories.get(position).getFrags().size());
 	        
 	 
 	        return convertView;
 	    }
 	 
 	    static class ViewHolder {
-	        TextView titleView;
+	       
+	    	TextView titleView;
 	        TextView authorView;
 	        TextView fragmentView;
 	      
 	    }
 	 
 }
-
-

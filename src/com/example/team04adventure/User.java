@@ -1,17 +1,19 @@
 package com.example.team04adventure;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 
 public class User {
 
 	private String usrname;
 	private long id;
-	private ArrayList<Story> stories;
+	private ArrayList<Story> stories; // Users and stories are stored on server, stories have frags associated, frags are
+	 // not independently stored on the server. If a story is stored, all its fragments are stored too.
 	
-	public User(String usrname){
+	
+	public User(){
 		
-		this.usrname = usrname;
+	 this.stories = new ArrayList<Story>();	
 	
 	}
 	

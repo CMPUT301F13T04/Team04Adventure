@@ -1,11 +1,11 @@
 package com.example.team04adventure;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-
 
 	  public static final String TABLE_STORIES = "Stories";
 	  public static final String COLUMN_UNAME = "UName";
@@ -103,3 +103,4 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  }
 	
 }
+

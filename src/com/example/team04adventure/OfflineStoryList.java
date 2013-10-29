@@ -2,13 +2,17 @@ package com.example.team04adventure;
 
 import java.util.ArrayList;
 
+import com.example.cmoulds_notes.Entry;
+import com.example.cmoulds_notes.Log_full_desc;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 public class OfflineStoryList extends Activity {
 
@@ -24,19 +28,29 @@ public class OfflineStoryList extends Activity {
 		/** Open DB connection and retrieve all of 
 		    the cached stories. **/
 		
+		
 		storylist = sm.getAll();
 		
 		
-		storyListView.setAdapter(new storyListAdapter(this, storylist));
+		storyListView.setAdapter(new StoryListAdapter(this, storylist));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
         
 			/** When a story is selected **/
 			@Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                
+				Story s = (Story) storyListView.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), StoryIntro.class);
+        		intent.putExtra("id", s.getId());
+        		
+        		startActivity(intent);
              }
+
+			
         });
+	
 	}
+	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

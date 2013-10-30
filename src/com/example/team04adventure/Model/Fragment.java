@@ -1,20 +1,22 @@
-package com.example.team04adventure;
+package com.example.team04adventure.Model;
 
 import java.util.ArrayList;
+
+
 public class Fragment {
 	
 	String title;
 	User author;
 	long id;
 	Media profile;
-	ArrayList<Media> pictures;
-	ArrayList<Media> vids;
-	ArrayList<Choice> choices;
+	private ArrayList<Media> pictures;
+	private ArrayList<Media> vids;
+	private ArrayList<Choice> choices;
 	String offlineAuthor;
 	
 	public Fragment(){
 		
-		this.pictures = new ArrayList<Media>();
+		this.setPictures(new ArrayList<Media>());
 		this.vids = new ArrayList<Media>();
 		this.choices = new ArrayList<Choice>();
 	
@@ -40,7 +42,7 @@ public class Fragment {
 	
 	public void addPicture(Media pic){
 		
-		this.pictures.add(pic);
+		this.getPictures().add(pic);
 	
 	}
 
@@ -64,7 +66,7 @@ public class Fragment {
 	
 	public ArrayList<Media> getImages(){
 		
-		return this.pictures;
+		return this.getPictures();
 	
 	}
 	
@@ -107,6 +109,14 @@ public class Fragment {
 	public void setAuthorString(String author){
 		
 		this.offlineAuthor = author;
+	}
+
+	public ArrayList<Media> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(ArrayList<Media> pictures) {
+		this.pictures = pictures;
 	}
 	
 	

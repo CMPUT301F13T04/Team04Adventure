@@ -1,4 +1,9 @@
-package com.example.team04adventure;
+package com.example.team04adventure.View;
+
+import com.example.team04adventure.R;
+import com.example.team04adventure.R.id;
+import com.example.team04adventure.R.layout;
+import com.example.team04adventure.R.menu;
 
 import android.app.Activity;
 import android.content.Intent;

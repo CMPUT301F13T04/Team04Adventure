@@ -38,6 +38,10 @@
             android:name="com.example.team04adventure.OfflineStoryList"
             android:label="@string/title_activity_offline_story_list" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.OnlineStoryList"
+            android:label="@string/title_activity_online_story_list" >
+        </activity>
     </application>
 
 </manifest>

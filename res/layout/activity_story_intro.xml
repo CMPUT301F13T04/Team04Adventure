@@ -36,9 +36,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/StoryAuthor"
         android:layout_below="@+id/StoryAuthor"
         android:text="Play Story!" />
+
     <Button
         android:id="@+id/AddFrag"
         android:layout_width="wrap_content"
@@ -63,5 +64,14 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Edit"
         android:text="Download" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Download"
+        android:layout_alignRight="@+id/Download"
+        android:layout_below="@+id/Download"
+        android:text="Remove from Cache" />
 
 </RelativeLayout>

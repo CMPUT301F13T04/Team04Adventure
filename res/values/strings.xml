@@ -8,5 +8,6 @@
     <string name="title_activity_story_intro">StoryIntro</string>
     <string name="title_activity_fragment_viewer">FragmentViewer</string>
     <string name="title_activity_offline_story_list">OfflineStoryList</string>
+    <string name="title_activity_online_story_list">OnlineStoryList</string>
 
 </resources>

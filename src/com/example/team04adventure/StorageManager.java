@@ -1,13 +1,16 @@
 package com.example.team04adventure;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 
 public class StorageManager {
@@ -158,7 +161,7 @@ public class StorageManager {
 	private long addMedia(Media m) {
 		
 		ContentValues values = new ContentValues();
-		values.put(SQLiteHelper.COLUMN_CONTENT, m.getMedia());
+		values.put(SQLiteHelper.COLUMN_CONTENT, convertToBlob(m.getMedia()));
 		values.put(SQLiteHelper.COLUMN_MTYPE, m.getType());
 		database.insert(SQLiteHelper.TABLE_MEDIA, null,
 	    		values);
@@ -174,6 +177,16 @@ public class StorageManager {
 		return lastId;
 		
 	}
+
+	private byte[] convertToBlob(Bitmap media) {
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+		media.compress(Bitmap.CompressFormat.PNG, 100, baos);   
+		byte[] photo = baos.toByteArray(); 
+		
+		return photo;
+	}
+
 
 	/**
 	 * addChoices: Inserts a Choice object into the DB.
@@ -496,11 +509,19 @@ public class StorageManager {
 	private Media cursorToMedia(Cursor cursor) {
 		Media med = new Media();
 		med.setID(cursor.getLong(0));
-		med.setContent(cursor.getBlob(1));
+		med.setContent(convertToBitmap(cursor.getBlob(1)));
 		med.setType(cursor.getString(2));
 		
 		return med;
 	}
+
+	private Bitmap convertToBitmap(byte[] blob) {
+		
+		ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
+	        Bitmap image = BitmapFactory.decodeStream(imageStream);
+		return image;
+	}
+
 
 	/**
 	 * getFragChoiceInfo: Returns an ArrayList of Choices that

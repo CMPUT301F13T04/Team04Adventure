@@ -1,12 +1,16 @@
 package com.example.team04adventure;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -49,6 +53,11 @@ public class StoryListAdapter extends BaseAdapter {
 	        } else 
 	            holder = (ViewHolder) convertView.getTag();
 	        
+	      
+	      
+	       
+	        
+	        
 	        holder.titleView.setText(stories.get(position).getTitle());
 	        holder.authorView.setText("By, " + stories.get(position).getAuthorString());
 	        holder.fragmentView.setText("Fragments: " + stories.get(position).getFrags().size());
@@ -59,6 +68,7 @@ public class StoryListAdapter extends BaseAdapter {
 	 
 	    static class ViewHolder {
 	       
+	    	ImageView profilePic;
 	    	TextView titleView;
 	        TextView authorView;
 	        TextView fragmentView;

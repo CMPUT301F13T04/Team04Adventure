@@ -1,9 +1,11 @@
 package com.example.team04adventure;
 
+import android.graphics.Bitmap;
+
 public class Media {
 	
 	long id;
-	byte[] content;
+	Bitmap content;
 	String type;
 	
 	
@@ -13,13 +15,13 @@ public class Media {
 		
 	}
 
-	public void setContent(byte[] content){
+	public void setContent(Bitmap content){
 		
 		this.content = content;
 		
 	}
 	
-	public byte[] getMedia(){
+	public Bitmap getMedia(){
 		
 		return this.content;
 		

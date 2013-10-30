@@ -8,6 +8,10 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -41,6 +45,10 @@
         <activity
             android:name="com.example.team04adventure.OnlineStoryList"
             android:label="@string/title_activity_online_story_list" >
+        </activity>
+        <activity
+            android:name="com.example.team04adventure.EditFragment"
+            android:label="@string/title_activity_edit_fragment" >
         </activity>
     </application>
 

@@ -4,10 +4,17 @@
     <string name="app_name">Team04Adventure</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="frag_title">Fragment title</string>
+    <string name="frag_body">Fragment body</string>
+    <string name="upload">Upload</string>
+    <string name="camera">Camera</string>
+    <string name="link">Link</string>
+    <string name="save">Save</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_story_intro">StoryIntro</string>
     <string name="title_activity_fragment_viewer">FragmentViewer</string>
     <string name="title_activity_offline_story_list">OfflineStoryList</string>
     <string name="title_activity_online_story_list">OnlineStoryList</string>
+    <string name="title_activity_edit_fragment">EditFragment</string>
 
 </resources>

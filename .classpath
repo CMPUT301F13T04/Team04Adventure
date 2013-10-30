@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/fluent-hc-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/httpclient-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/httpclient-cache-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/httpcore-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/H-Train/Downloads/ESDemo-master/ESDemo/lib/httpmime-4.2.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

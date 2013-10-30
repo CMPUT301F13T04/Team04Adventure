@@ -8,6 +8,7 @@ public class Fragment {
 	String title;
 	User author;
 	long id;
+	String fragid;
 	Media profile;
 	private ArrayList<Media> pictures;
 	private ArrayList<Media> vids;
@@ -87,6 +88,9 @@ public class Fragment {
 		return this.id;
 	
 	}
+	public String getfragid(){
+		return fragid;
+	}
 	
 	public void setChoice(Choice choice){
 		
@@ -103,8 +107,13 @@ public class Fragment {
 	public void setId(long id) {
 		
 		this.id = id;
-		
+		this.fragid = String.valueOf(id);
 	}
+	public void setId(String id) {
+		this.fragid = id;
+		this.id = Long.valueOf(fragid);
+	}
+	
 
 	public void setAuthorString(String author){
 		

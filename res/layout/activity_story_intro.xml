@@ -38,7 +38,8 @@
         android:layout_alignLeft="@+id/StoryTitle"
         android:layout_alignRight="@+id/StoryAuthor"
         android:layout_below="@+id/StoryAuthor"
-        android:text="Play Story!" />
+        android:text="Play Story!"
+        android:onClick="playStory"  />
 
     <Button
         android:id="@+id/AddFrag"
@@ -72,6 +73,8 @@
         android:layout_alignLeft="@+id/Download"
         android:layout_alignRight="@+id/Download"
         android:layout_below="@+id/Download"
-        android:text="Remove from Cache" />
+        android:text="Remove from Cache" 
+        android:onClick="removeFromCache" 
+        />
 
 </RelativeLayout>

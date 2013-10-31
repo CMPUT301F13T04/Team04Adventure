@@ -49,7 +49,6 @@ public class OfflineStoryList extends Activity {
         		startActivity(intent);
              }
 
-			
         });
 	
 	}

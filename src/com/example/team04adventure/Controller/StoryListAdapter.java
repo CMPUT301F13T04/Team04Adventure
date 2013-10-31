@@ -1,16 +1,10 @@
 package com.example.team04adventure.Controller;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Story;
-import com.example.team04adventure.R.id;
-import com.example.team04adventure.R.layout;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

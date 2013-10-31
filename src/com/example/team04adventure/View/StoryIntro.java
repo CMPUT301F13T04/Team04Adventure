@@ -1,15 +1,18 @@
 package com.example.team04adventure.View;
 
+
+import java.util.ArrayList;
+
 import com.example.team04adventure.R;
 import com.example.team04adventure.Controller.StorageManager;
+import com.example.team04adventure.Model.Fragment;
 import com.example.team04adventure.Model.Story;
-import com.example.team04adventure.R.id;
-import com.example.team04adventure.R.layout;
-import com.example.team04adventure.R.menu;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -17,6 +20,8 @@ public class StoryIntro extends Activity {
 
 	TextView 	storyTitle,
 				storyAuthor;
+	long id;
+	Story story;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,7 @@ public class StoryIntro extends Activity {
 		setContentView(R.layout.activity_story_intro);
 		
 		Bundle extras = getIntent().getExtras();
-		long id = extras.getLong("id");
+		id = extras.getLong("id");
 		StorageManager sm = new StorageManager(this);
 		
 		Story s = sm.getStory(id);
@@ -35,6 +40,34 @@ public class StoryIntro extends Activity {
 		storyAuthor.append(s.getAuthor().getName());
 	}
 
+	public void removeFromCache(View view){
+		Intent i;
+		StorageManager sm = new StorageManager(this);
+		
+		/** Open DB connection and deletes 
+	     the note. **/
+		story = sm.getStory(id);
+		sm.deleteStory(story);
+		
+		
+		i = new Intent();
+		i.setClassName("com.example.team04adventure",
+		               "com.example.team04adventure.OfflineStoryList");
+		startActivity(i);
+		
+		
+	}
+	
+	public void playStory(View view){
+		
+		ArrayList<Fragment> frags = story.getFrags();
+		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+		intent.putExtra("fid", frags.get(0).getId());
+		startActivity(intent);
+		
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

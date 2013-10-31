@@ -415,7 +415,12 @@ public class StorageManager {
 		String fwhere = "_fid = ?";
 		String[] whereargs = {""+fid};
 		Fragment frag = null;
+		int flag = 0;
 		
+		if(!database.isOpen()){
+			this.open();
+			flag = 1;
+		}	
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS,
 				allFrags, fwhere, whereargs, null, null, null);
 		
@@ -423,6 +428,7 @@ public class StorageManager {
 		frag = cursorToFragment(cursor);
 		
 		ArrayList<Choice> choicearr = getFragChoiceInfo(frag.getId());
+		
 		
 		if (!choicearr.isEmpty()){
 			for(Choice c : choicearr)
@@ -444,6 +450,10 @@ public class StorageManager {
 			}
 		
 		cursor.close();
+		
+		if(flag == 1)
+			this.close();
+		
 		return frag;
 		
 	}

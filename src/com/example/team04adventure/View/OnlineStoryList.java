@@ -1,21 +1,25 @@
-package com.example.team04adventure;
+package com.example.team04adventure.View;
+
+import com.example.team04adventure.R;
+import com.example.team04adventure.R.layout;
+import com.example.team04adventure.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class FragmentViewer extends Activity {
+public class OnlineStoryList extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment_viewer);
+		setContentView(R.layout.activity_online_story_list);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.fragment_viewer, menu);
+		getMenuInflater().inflate(R.menu.online_story_list, menu);
 		return true;
 	}
 

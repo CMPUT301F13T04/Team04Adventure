@@ -1,8 +1,14 @@
-package com.example.team04adventure;
+package com.example.team04adventure.Controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
+import com.example.team04adventure.Model.Choice;
+import com.example.team04adventure.Model.Fragment;
+import com.example.team04adventure.Model.Media;
+import com.example.team04adventure.Model.SQLiteHelper;
+import com.example.team04adventure.Model.Story;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -76,8 +82,8 @@ public class StorageManager {
 		
 		values.clear();
 		
-		if(!story.frags.isEmpty()) {
-			for (Fragment f : story.frags){
+		if(!story.getFrags().isEmpty()) {
+			for (Fragment f : story.getFrags()){
 				lastid = addFrags(f);
 				values.put(SQLiteHelper.COLUMN_SID, lastsId);
 				values.put(SQLiteHelper.COLUMN_FID, lastid);
@@ -115,8 +121,8 @@ public class StorageManager {
 		}
 		
 		
-		if(!f.choices.isEmpty()){
-			for (Choice c : f.choices){
+		if(!f.getChoices().isEmpty()){
+			for (Choice c : f.getChoices()){
 				lastid = addChoices(c);
 				values.clear();
 				values.put(SQLiteHelper.COLUMN_FID, lastfId);
@@ -126,8 +132,8 @@ public class StorageManager {
 			}
 		}
 		
-		if(!f.pictures.isEmpty()){
-			for (Media m : f.pictures){
+		if(!f.getPictures().isEmpty()){
+			for (Media m : f.getPictures()){
 				lastid = addMedia(m);
 				values.clear();
 				values.put(SQLiteHelper.COLUMN_FID, lastfId);
@@ -138,8 +144,8 @@ public class StorageManager {
 			}
 		}
 		
-		if(!f.vids.isEmpty()){
-			for (Media m : f.vids){
+		if(!f.getVids().isEmpty()){
+			for (Media m : f.getVids()){
 				lastid = addMedia(m);
 				values.put(SQLiteHelper.COLUMN_FID, lastfId);
 				values.put(SQLiteHelper.COLUMN_MID, lastid);
@@ -229,8 +235,8 @@ public class StorageManager {
 		database.delete(SQLiteHelper.TABLE_STORY_FRAGS, SQLiteHelper.COLUMN_SID
 				+ " = " + story.getId(), null);
 		
-		if(!story.frags.isEmpty()){
-			for(Fragment f : story.frags){
+		if(!story.getFrags().isEmpty()){
+			for(Fragment f : story.getFrags()){
 				
 				deleteFragment(f);
 				
@@ -260,21 +266,21 @@ public class StorageManager {
 				+ " = " + f.getId(), null);
 		
 		
-		if(!f.choices.isEmpty()){
-			for (Choice c : f.choices)
+		if(!f.getChoices().isEmpty()){
+			for (Choice c : f.getChoices())
 				deleteChoice(c);
 			
 		}
 		
-		if(!f.pictures.isEmpty()){
-			for (Media m : f.pictures)
+		if(!f.getPictures().isEmpty()){
+			for (Media m : f.getPictures())
 				deleteMedia(m);
 			
 			
 		}
 		
-		if(!f.vids.isEmpty()){
-			for (Media m : f.vids)
+		if(!f.getVids().isEmpty()){
+			for (Media m : f.getVids())
 				deleteMedia(m);
 			
 		}

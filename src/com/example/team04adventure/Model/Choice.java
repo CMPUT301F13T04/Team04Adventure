@@ -1,4 +1,4 @@
-package com.example.team04adventure;
+package com.example.team04adventure.Model;
 
 //testing egit addon for eclipse - delete this later - anthony VERSION2 v5.mike
 public class Choice {

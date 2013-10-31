@@ -1,13 +1,15 @@
-package com.example.team04adventure;
+package com.example.team04adventure.Model;
 
 import java.util.ArrayList;
+
+
 
 
 
 public class Story {
 	
 	String title;
-	ArrayList<Fragment> frags;
+	private ArrayList<Fragment> frags;
 	User author;
 	long id;
 	String offlineAuthor;

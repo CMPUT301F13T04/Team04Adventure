@@ -31,9 +31,17 @@ public class StoryIntro extends Activity {
 		id = extras.getLong("id");
 		StorageManager sm = new StorageManager(this);
 		
+		System.out.println("ID: "+ id);
+		
+	
 		Story s = sm.getStory(id);
 		
+<<<<<<< HEAD
 		story = s;
+=======
+		
+		
+>>>>>>> refs/remotes/origin/master
 		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());

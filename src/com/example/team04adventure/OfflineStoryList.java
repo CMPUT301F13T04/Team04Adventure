@@ -21,9 +21,21 @@ public class OfflineStoryList extends Activity {
 		setContentView(R.layout.activity_offline_story_list);
 		
 		// Hardcoding a new story
+<<<<<<< HEAD
 		long id = 75;
 		Story s1 = new Story();
+=======
 		
+		User chris = new User("Chris");
+		
+		Story s = new Story();
+		s.setTitle("Big T's Leg Day");
+		s.setAuthor(chris);
+		
+		s.setAuthor(new User("Big T"));
+>>>>>>> refs/remotes/origin/master
+		
+<<<<<<< HEAD
 		s1.setTitle("Big T's Leg Day");
 		s1.setAuthorString("Big T");
 //		s1.setId(id);
@@ -38,6 +50,17 @@ public class OfflineStoryList extends Activity {
 		//f1.setChoice(null);
 		
 		s1.addFragment(f1);
+=======
+		Fragment frag = new Fragment();
+		frag.setAuthor(chris);
+		frag.setAuthorString("Chris");
+		frag.setBody("test");
+		
+		s.addFragment(frag);
+		
+		
+		
+>>>>>>> refs/remotes/origin/master
 		
 		
 		

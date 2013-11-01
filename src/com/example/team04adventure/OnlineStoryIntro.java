@@ -46,8 +46,6 @@ public void playStory(View view){
 
 ArrayList<Frag> frags = story.getFrags();
 Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-System.out.println(frags.get(0).getTitle());
-System.out.println(frags.get(0).getId());
 intent.putExtra("fid", frags.get(0).getId());
 startActivity(intent);
 
@@ -55,18 +53,22 @@ startActivity(intent);
 
 public void cacheStory(View view) {
 		
+		String cache = "Story Cached.";
+		String cantcache = "This Story is already cached!";
 		JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 		
 		Story s = parser.getStory(id);
-		sm.addStory(s);
 		
-		
-		
-		if (s != null) {
-			String message = "Story Cached.";
-			Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+		if(sm.StoryExists(s))
+			Toast.makeText(getBaseContext(), cantcache, Toast.LENGTH_LONG).show();	
+				
+		else{ 
+			sm.addStory(s);
+			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
+		
+		
 	}
 
 

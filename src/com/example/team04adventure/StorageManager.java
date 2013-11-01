@@ -50,6 +50,25 @@ public class StorageManager {
 		dbHelper.close();
 	}
 	
+	
+	public boolean storyExists(String id){
+		String[] sId = {SQLiteHelper.COLUMN_SID};
+		String swhere = "_sid = ?";
+		String[] whereargs = {""+id};
+		
+		this.open();
+		
+		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
+				sId, swhere, whereargs, null, null, null);
+		
+		cursor.moveToFirst();
+		if(cursor.getString(0) == null)
+			return false;
+			
+		return true;
+		
+	}
+	
 	/**
 	 * addEntry: Adds a Story to the DB from information 
 	 * contained in the object story.

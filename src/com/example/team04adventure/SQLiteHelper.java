@@ -36,7 +36,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  
 	  private static final String DATABASE_CREATE_STORY = "create table "
 		  + TABLE_STORIES + "(" + COLUMN_SID
-		  + " integer primary key autoincrement, " + COLUMN_STITLE
+		  + " text primary key, " + COLUMN_STITLE
 		  + " text not null," + COLUMN_UNAME +" text not null);";
 	  
 	  private static final String DATABASE_CREATE_STORY_FRAG = "create table "

@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 				Authenticator auth = new Authenticator();
 				int yayOrNay = auth.authenticate(Uname);
 				
-				String message;
+				String message = "";
 				
 				switch (yayOrNay) {
 					case -1:
@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
 				startActivity(i);
 				*/
-				}
+				//}
 			}
 		});
 		

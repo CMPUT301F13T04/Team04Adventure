@@ -37,7 +37,28 @@ public class MainActivity extends Activity {
 				
 //FIX/ADD CONDITIONS AND CHECK IF LOGIN IS VALID HERE~~~
 				String Uname = UsernameText.getText().toString();
-				if (!Uname.equals("valid username")){
+				
+				Authenticator auth = new Authenticator();
+				int yayOrNay = auth.authenticate(Uname);
+				
+				String message;
+				
+				switch (yayOrNay) {
+					case -1:
+						message = "Connection Failed.";
+						break;
+					case 0:
+						message = "Not A Valid Username.";
+						break;
+					case 1:
+						Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
+						startActivity(i);
+						break;
+				}
+				
+				Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+				
+				/*if (!Uname.equals("valid username")){
 					
 				String message = "Please enter a valid username.";
 				Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
@@ -45,6 +66,7 @@ public class MainActivity extends Activity {
 				else {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
 				startActivity(i);
+				*/
 				}
 			}
 		});

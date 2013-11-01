@@ -52,6 +52,20 @@ startActivity(intent);
 
 }
 
+public void cacheStory(View view) {
+		
+		JSONparser parser = new JSONparser();
+		StorageManager sm = new StorageManager(this);
+		
+		Story s = parser.getStory("" +id);
+		sm.addStory(s);
+		
+		if (s != null) {
+			String message = "Story Cached.";
+			Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+		}
+	}
+
 
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {

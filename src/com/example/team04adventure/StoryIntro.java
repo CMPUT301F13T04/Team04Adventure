@@ -35,14 +35,7 @@ public class StoryIntro extends Activity {
 		
 	
 		Story s = sm.getStory(id);
-		
-<<<<<<< HEAD
 		story = s;
-=======
-		
-		
->>>>>>> refs/remotes/origin/master
-		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
@@ -70,7 +63,7 @@ public class StoryIntro extends Activity {
 	
 	public void playStory(View view){
 		
-		ArrayList<Fragment> frags = story.getFrags();
+		ArrayList<Frag> frags = story.getFrags();
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);

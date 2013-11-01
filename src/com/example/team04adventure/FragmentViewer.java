@@ -46,7 +46,7 @@ public class FragmentViewer extends Activity {
 		// Get the fragment, and then assign the choices
 		StorageManager sm = new StorageManager(this);
 		
-		Fragment f = sm.getFrag(fragID);
+		Frag f = sm.getFrag(fragID);
 
 		choices = f.getChoices();
 		// Set the title and body fields in the XML file

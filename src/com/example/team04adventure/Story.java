@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class Story {
 	
 	String title;
-	private ArrayList<Fragment> frags;
+	private ArrayList<Frag> frags;
 	User author;
 	long id;
 	String offlineAuthor;
 	
 	public Story(){
 		
-		this.frags = new ArrayList<Fragment>();
+		this.frags = new ArrayList<Frag>();
 		
 	}
 
@@ -43,7 +43,7 @@ public class Story {
 		return offlineAuthor;
 	}
 	
-	public void addFragment(Fragment frag){
+	public void addFragment(Frag frag){
 		
 		this.frags.add(frag);
 	
@@ -61,7 +61,7 @@ public class Story {
 	
 	}
 	
-	public ArrayList<Fragment> getFrags(){
+	public ArrayList<Frag> getFrags(){
 		
 		return this.frags;
 	

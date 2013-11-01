@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
     <uses-feature
@@ -49,6 +49,14 @@
         <activity
             android:name="com.example.team04adventure.EditFragment"
             android:label="@string/title_activity_edit_fragment" >
+        </activity>
+        <activity
+            android:name="com.example.team04adventure.AllStoriesListSwipe"
+            android:label="@string/title_activity_all_stories_list_swipe" >
+        </activity>
+        <activity
+            android:name="com.example.team04adventure.MyStoriesListSwipe"
+            android:label="@string/title_activity_my_stories_list_swipe" >
         </activity>
     </application>
 

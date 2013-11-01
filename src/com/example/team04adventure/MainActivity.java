@@ -37,14 +37,14 @@ public class MainActivity extends Activity {
 				
 //FIX/ADD CONDITIONS AND CHECK IF LOGIN IS VALID HERE~~~
 				String Uname = UsernameText.getText().toString();
-				if (Uname != "valid username"){
+				if (!Uname.equals("valid username")){
 					
 				String message = "Please enter a valid username.";
 				Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
 				}
 				else {
-				//Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
-				//startActivity(i);
+				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
+				startActivity(i);
 				}
 			}
 		});

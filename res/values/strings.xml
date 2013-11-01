@@ -16,5 +16,9 @@
     <string name="title_activity_offline_story_list">OfflineStoryList</string>
     <string name="title_activity_online_story_list">OnlineStoryList</string>
     <string name="title_activity_edit_fragment">EditFragment</string>
+    <string name="title_section1">All Stories</string>
+    <string name="title_section2">My Stories</string>
+    <string name="title_activity_all_stories_list_swipe">AllStoriesListSwipe</string>
+    <string name="title_activity_my_stories_list_swipe">MyStoriesListSwipe</string>
 
 </resources>

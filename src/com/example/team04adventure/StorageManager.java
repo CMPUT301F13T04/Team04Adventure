@@ -79,7 +79,7 @@ public class StorageManager {
 		values.clear();
 		
 		if(!story.getFrags().isEmpty()) {
-			for (Fragment f : story.getFrags()){
+			for (Frag f : story.getFrags()){
 				lastid = addFrags(f);
 				values.put(SQLiteHelper.COLUMN_SID, lastsId);
 				values.put(SQLiteHelper.COLUMN_FID, lastid);
@@ -93,12 +93,12 @@ public class StorageManager {
 	}
 	
 	/**
-	 * addFrags: Inserts a Fragment object into the DB.
+	 * addFrags: Inserts a Frag object into the DB.
 	 * @param f
 	 * @return the ID of the fragment that was just added.
 	 * to
 	 */
-	private long addFrags(Fragment f) {
+	private long addFrags(Frag f) {
 		
 		long lastid;
 		long lastfId = -1;
@@ -232,7 +232,7 @@ public class StorageManager {
 				+ " = " + story.getId(), null);
 		
 		if(!story.getFrags().isEmpty()){
-			for(Fragment f : story.getFrags()){
+			for(Frag f : story.getFrags()){
 				
 				deleteFragment(f);
 				
@@ -246,11 +246,11 @@ public class StorageManager {
 	}
 	
 	/**
-	 * deleteFragment: Deletes a Fragment from the DB
+	 * deleteFragment: Deletes a Frag from the DB
 	 * 
 	 * @param f
 	 */
-	private void deleteFragment(Fragment f) {
+	private void deleteFragment(Frag f) {
 		
 		database.delete(SQLiteHelper.TABLE_FRAGS, SQLiteHelper.COLUMN_FID
 				+ " = " + f.getId(), null);
@@ -388,7 +388,7 @@ public class StorageManager {
 		
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Fragment frag = new Fragment();
+			Frag frag = new Frag();
 			frag = getFrag(cursor.getLong(0));
 			story.addFragment(frag);
 			cursor.moveToNext();
@@ -401,17 +401,17 @@ public class StorageManager {
 	}
 
 	/**
-	 * getFrag: Returns a single Fragment object.
+	 * getFrag: Returns a single Frag object.
 	 * 
 	 * @param fid
 	 * 
 	 * @return A fragment to be stored in a story.
 	 */
-	public Fragment getFrag(long fid) {
+	public Frag getFrag(long fid) {
 		
 		String fwhere = "_fid = ?";
 		String[] whereargs = {""+fid};
-		Fragment frag = null;
+		Frag frag = null;
 		int flag = 0;
 		
 		if (database == null) {
@@ -612,15 +612,15 @@ public class StorageManager {
 
 
 	/**
-	 * cursorToFragment: Helper method that stores all the Fragment 
-	 * attributes in a new Fragment object for addition to an
+	 * cursorToFragment: Helper method that stores all the Frag 
+	 * attributes in a new Frag object for addition to an
 	 * ArrayList.
 	 * @param cursor
 	 * @return the fragment in the row the cursor is currently pointing
 	 * to
 	 */
-	private Fragment cursorToFragment(Cursor cursor) {
-		Fragment frag = new Fragment();
+	private Frag cursorToFragment(Cursor cursor) {
+		Frag frag = new Frag();
 	    frag.setId(cursor.getLong(0));
 	    frag.setTitle(cursor.getString(1));
 	    frag.setAuthorString(cursor.getString(2));

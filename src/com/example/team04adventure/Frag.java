@@ -4,14 +4,14 @@ package com.example.team04adventure;
 import java.util.ArrayList;
 
 
-public class Fragment {
+public class Frag {
 	
 	/*
 	 * I dont know who made this class so I wasn't sure if there was
 	 * supposed to be a "body" variable that held the frags description.
 	 * I added one because it seemed like it needed one, and I added the
 	 * appropriate getters and setters too. If this was done on purpose,
-	 * just delete it but let me know because fragview.java uses these
+	 * just delete it but let me know because frag.java uses these
 	 * fields.
 	 * - Mike
 	 */
@@ -27,7 +27,7 @@ public class Fragment {
 	private ArrayList<Choice> choices;
 	String offlineAuthor;
 	
-	public Fragment(){
+	public Frag(){
 		
 		this.setPictures(new ArrayList<Media>());
 		this.vids = new ArrayList<Media>();

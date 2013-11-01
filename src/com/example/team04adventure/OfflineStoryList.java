@@ -22,12 +22,22 @@ public class OfflineStoryList extends Activity {
 		
 		// Hardcoding a new story
 		
-		long id = 75;
+		User chris = new User("Chris");
+		
 		Story s = new Story();
 		s.setTitle("Big T's Leg Day");
-		s.setAuthorString("Big T");
-		s.setId(id);
+		s.setAuthor(chris);
+		
 		s.setAuthor(new User("Big T"));
+		
+		Fragment frag = new Fragment();
+		frag.setAuthor(chris);
+		frag.setAuthorString("Chris");
+		frag.setBody("test");
+		
+		s.addFragment(frag);
+		
+		
 		
 		
 		

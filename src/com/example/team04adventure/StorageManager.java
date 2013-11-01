@@ -62,9 +62,15 @@ public class StorageManager {
 				sId, swhere, whereargs, null, null, null);
 		
 		cursor.moveToFirst();
-		if(cursor.getString(0) == null)
+		
+		if(cursor.getString(0) == null){
+			cursor.close();
+			this.close();
 			return false;
-			
+		}	
+		
+		cursor.close();
+		this.close();
 		return true;
 		
 	}

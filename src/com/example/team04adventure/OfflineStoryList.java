@@ -4,14 +4,9 @@ package com.example.team04adventure;
 
 import java.util.ArrayList;
 
-import com.example.team04adventure.R;
-import com.example.team04adventure.R.layout;
-import com.example.team04adventure.R.menu;
-
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +20,18 @@ public class OfflineStoryList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_offline_story_list);
 		
+		// Hardcoding a new story
+		
+		long id = 75;
+		Story s = new Story();
+		s.setTitle("Big T's Leg Day");
+		s.setAuthorString("Big T");
+		s.setId(id);
+		s.setAuthor(new User("Big T"));
+		
+		
+		
+		
 		final ListView storyListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Story> storylist = new ArrayList<Story>();
 		StorageManager sm = new StorageManager(this);
@@ -32,6 +39,7 @@ public class OfflineStoryList extends Activity {
 		/** Open DB connection and retrieve all of 
 		    the cached stories. **/
 		
+		sm.addStory(s);
 		
 		storylist = sm.getAll();
 		

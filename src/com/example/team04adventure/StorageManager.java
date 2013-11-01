@@ -64,24 +64,18 @@ public class StorageManager {
 		this.open();
 		
 		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COLUMN_SID, story.getID());
 		values.put(SQLiteHelper.COLUMN_STITLE, story.getTitle());
 		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor().getName());
 		database.insert(SQLiteHelper.TABLE_STORIES, null,
 	    		values);
-		
-		
-		String query = "SELECT _sid from Stories order by _sid DESC limit 1";
-		Cursor cursor = database.rawQuery(query, null);
-		if (cursor != null && cursor.moveToFirst()) {
-			lastsId = cursor.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
-		}
 		
 		values.clear();
 		
 		if(!story.getFrags().isEmpty()) {
 			for (Frag f : story.getFrags()){
 				lastid = addFrags(f);
-				values.put(SQLiteHelper.COLUMN_SID, lastsId);
+				values.put(SQLiteHelper.COLUMN_SID, story.getId());
 				values.put(SQLiteHelper.COLUMN_FID, lastid);
 				database.insert(SQLiteHelper.TABLE_STORY_FRAGS, null,
 						values);
@@ -643,7 +637,7 @@ public class StorageManager {
 	 */
 	private Story cursorToStory(Cursor cursor) {
 		Story story = new Story();
-	    story.setId(cursor.getLong(0));
+	    story.setId(cursor.getString(0));
 	    story.setTitle(cursor.getString(1));
 	    story.setAuthorString(cursor.getString(2));
 	   

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class User {
 
 	private String usrname;
-	private long id;
 	private ArrayList<Story> stories; // Users and stories are stored on server, stories have frags associated, frags are
 	 // not independently stored on the server. If a story is stored, all its fragments are stored too.
 	
@@ -32,11 +31,6 @@ public class User {
 		
 	}
 	
-	public long getId(){
-		
-		return this.id;
-	
-	}
 	
 	public void setName(String name){
 	
@@ -44,12 +38,7 @@ public class User {
 		
 	}
 	
-	public void setId(long id){
-		
-		this.id = id;
-		
-	}
-	
+
 	public void addStory(Story story){
 		
 		this.stories.add(story);

@@ -7,15 +7,26 @@ public class Authenticator {
 	//	-1 if there is no internet connection
 	//	0 if the username and password combo is incorrect
 	// 	1 if the username and password combo is valid
-	public int authenticate(String user, String pass) {
+	public int authenticate(String user) {
 		
 		if (!checkConnection()) {
 			return -1;
 		}
 		
-		//change 1
+		JSONparser j = new JSONparser();
+		User u;
 		
-		return 1;
+		u = j.getUser(user);
+		
+		if (u != null) {
+			return 1;
+		}
+		
+		else {
+			return 0;
+		}
+		
+		
 		
 	}
 	

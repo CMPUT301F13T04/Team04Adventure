@@ -12,7 +12,7 @@ public class Story {
 	String title;
 	private ArrayList<Frag> frags;
 	User author;
-	long id;
+	String id;
 	String offlineAuthor;
 	
 	public Story(){

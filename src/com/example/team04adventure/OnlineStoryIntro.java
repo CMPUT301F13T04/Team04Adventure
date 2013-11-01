@@ -60,7 +60,7 @@ public void cacheStory(View view) {
 		
 		Story s = parser.getStory(id);
 		
-		if(sm.storyExists(s.getId())
+		if(sm.storyExists(s.getId()))
 			Toast.makeText(getBaseContext(), cantcache, Toast.LENGTH_LONG).show();	
 				
 		else{ 

@@ -25,9 +25,9 @@ public class EditFragment extends Activity {
 	private Button linkButton;
 	private Button saveButton;
 	
-	Frag fragment;
-	
+	long id;
 	Uri imageFileUri;
+	JSONparser json;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class EditFragment extends Activity {
 		setContentView(R.layout.activity_edit_fragment);
 		
 		Bundle extras = getIntent().getExtras();
+		id = extras.getLong("id");
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
@@ -45,8 +46,7 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
+				uploadImage();
 			}
 		});
 		
@@ -62,8 +62,7 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
+				linkFrag();				
 			}
 		});
 		
@@ -71,8 +70,7 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
+				saveFrag();
 			}
 		});
 	}
@@ -99,17 +97,29 @@ public class EditFragment extends Activity {
 //			ImageView mImageView = (ImageView) findViewById(R.id.image);
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-//				mImageView.setImageBitmap(bitmap);
+				Media media = new Media();
+				media.setContent(bitmap);
+				media.setType("pic");
+				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 	
+	public void uploadImage() {
+		
+	}
+	
+	public void linkFrag() {
+		
+	}
+	
+	public void saveFrag() {
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -51,7 +51,7 @@ public class JSONparser {
 		if (searchUsers(aUser.getName()).isEmpty()) { 
 			//Meaning searching by their name returns nothing so they arent in the server and they need to be added.
 	
-			HttpPost httpPost = new HttpPost(WebService + users + aUser.getId());
+			HttpPost httpPost = new HttpPost(WebService + users + aUser.getName());
 			StringEntity stringentity = null;
 			try {
 				stringentity = new StringEntity(gson.toJson(aUser));
@@ -213,10 +213,10 @@ public class JSONparser {
 
 	}
 	//Update stories by changing the fragments around not actually messing with the story. 
-	private void updateStory(Story aStory) {
+	public void updateStory(Story aStory) {
 	}
 
-	private Story getStory(String StoryID) {
+	public Story getStory(String StoryID) {
 		// Retrieve a story from the webservice. This method can probably be
 		// used when you want to cache a story
 		// when you want to cache, get it then store it to sql.
@@ -250,7 +250,7 @@ public class JSONparser {
 	// Im not even sure if we have to implement a search but whatever
 	// Allow the user to search stories (can only search using story name.
 	// return stories that match the criteria, not void.
-	private ArrayList<Story> searchStories(String storytitle) throws ClientProtocolException, IOException {
+	public ArrayList<Story> searchStories(String storytitle) throws ClientProtocolException, IOException {
 		HttpGet searchRequest = new HttpGet(WebService + stories + java.net.URLEncoder.encode(storytitle, "UTF-8"));
 		searchRequest.setHeader("Accept", "application/json");
 		HttpResponse response = client.execute(searchRequest);

@@ -5,6 +5,7 @@ package com.example.team04adventure;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -57,9 +58,9 @@ public class FragmentViewer extends Activity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Choice c = (Choice) choiceListView.getItemAtPosition(position);
                /** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
-				//Intent intent = new Intent(getApplicationContext(), StoryIntro.class);
-        		//intent.putExtra("fid", c.getChild());
-        		//startActivity(intent);
+				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+        		intent.putExtra("fid", c.getChild());
+        		startActivity(intent);
              }
 
 			

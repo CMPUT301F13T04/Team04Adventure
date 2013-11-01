@@ -36,7 +36,8 @@ public class StoryIntro extends Activity {
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-		storyAuthor.append(s.getAuthor().getName());
+	//	if (s.getAuthor() != null)
+		storyAuthor.append(s.getAuthorString());
 	}
 
 	public void removeFromCache(View view){

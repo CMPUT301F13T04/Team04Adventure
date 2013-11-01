@@ -344,7 +344,8 @@ public class StorageManager {
 	 */
 	public Story getStory(long sid){
 		
-		String[] sId = {SQLiteHelper.COLUMN_SID};
+		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
+				SQLiteHelper.COLUMN_UNAME};
 		String swhere = "_sid = ?";
 		String[] whereargs = {""+sid};
 		
@@ -641,7 +642,7 @@ public class StorageManager {
 	    story.setId(cursor.getLong(0));
 	    story.setTitle(cursor.getString(1));
 	    story.setAuthorString(cursor.getString(2));
-	    
+	   
 	    return story;
 	
 	}

@@ -14,7 +14,7 @@ public class OnlineStoryIntro extends Activity {
 
 	TextView 	storyTitle,
 	storyAuthor;
-	long id;
+	String id;
 	Story story;
 
 @Override
@@ -23,13 +23,13 @@ super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_story_intro);
 
 Bundle extras = getIntent().getExtras();
-id = extras.getLong("id");
+id = extras.getString("id");
 
 
 JSONparser jp = new JSONparser();
 
 
-Story s = jp.getStory(""+id);
+Story s = jp.getStory(id);
 
 
 story = s;
@@ -58,8 +58,10 @@ public void cacheStory(View view) {
 		JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 		
-		Story s = parser.getStory("" +id);
+		Story s = parser.getStory(id);
 		sm.addStory(s);
+		
+		
 		
 		if (s != null) {
 			String message = "Story Cached.";

@@ -1,4 +1,4 @@
-package com.example.team04adventure.Controller;
+
 
 public class Authenticator {
 

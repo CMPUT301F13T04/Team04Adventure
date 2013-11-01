@@ -1,4 +1,4 @@
-package com.example.team04adventure.Controller;
+
 
 import java.util.ArrayList;
 
@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Choice;
 
 public class FragChoiceAdapter extends BaseAdapter {
 

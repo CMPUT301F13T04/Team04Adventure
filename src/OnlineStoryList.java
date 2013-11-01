@@ -1,4 +1,4 @@
-package com.example.team04adventure.View;
+
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.R.layout;

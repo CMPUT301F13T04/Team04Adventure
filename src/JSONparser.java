@@ -1,4 +1,4 @@
-package com.example.team04adventure.Model;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

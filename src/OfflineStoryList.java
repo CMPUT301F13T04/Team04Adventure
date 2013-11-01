@@ -1,11 +1,9 @@
-package com.example.team04adventure.View;
+
+
 
 import java.util.ArrayList;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Controller.StorageManager;
-import com.example.team04adventure.Controller.StoryListAdapter;
-import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.R.layout;
 import com.example.team04adventure.R.menu;
 

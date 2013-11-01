@@ -1,9 +1,8 @@
-package com.example.team04adventure.Controller;
+
 
 import java.util.ArrayList;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Story;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

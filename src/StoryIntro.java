@@ -1,12 +1,10 @@
-package com.example.team04adventure.View;
+
+
 
 
 import java.util.ArrayList;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Controller.StorageManager;
-import com.example.team04adventure.Model.Fragment;
-import com.example.team04adventure.Model.Story;
 
 import android.app.Activity;
 import android.content.Intent;

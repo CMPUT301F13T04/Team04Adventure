@@ -64,7 +64,7 @@ public class StorageManager {
 		this.open();
 		
 		ContentValues values = new ContentValues();
-		values.put(SQLiteHelper.COLUMN_SID, story.getID());
+		values.put(SQLiteHelper.COLUMN_SID, story.getId());
 		values.put(SQLiteHelper.COLUMN_STITLE, story.getTitle());
 		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor().getName());
 		database.insert(SQLiteHelper.TABLE_STORIES, null,

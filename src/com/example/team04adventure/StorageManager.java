@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -23,7 +22,8 @@ public class StorageManager {
 		      SQLiteHelper.COLUMN_STITLE,SQLiteHelper.COLUMN_UNAME 
 		      };
 	private String[] allFrags = { SQLiteHelper.COLUMN_FID,
-			SQLiteHelper.COLUMN_FTITLE, SQLiteHelper.COLUMN_AUT
+			SQLiteHelper.COLUMN_FTITLE, SQLiteHelper.COLUMN_AUT,
+			SQLiteHelper.COLUMN_BODY
 			};
 	private String[] allMedia = { SQLiteHelper.COLUMN_MID,
 			SQLiteHelper.COLUMN_CONTENT, SQLiteHelper.COLUMN_MTYPE
@@ -93,7 +93,7 @@ public class StorageManager {
 	}
 	
 	/**
-	 * addFrags: Inserts a Frag object into the DB.
+	 * addFrags: Inserts a F object into the DB.
 	 * @param f
 	 * @return the ID of the fragment that was just added.
 	 * to
@@ -106,6 +106,7 @@ public class StorageManager {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_FTITLE, f.getTitle());
 		values.put(SQLiteHelper.COLUMN_AUT, f.getAuthor().getName());
+		values.put(SQLiteHelper.COLUMN_BODY, f.getBody());
 		database.insert(SQLiteHelper.TABLE_FRAGS, null,
 	    		values);
 		
@@ -246,7 +247,7 @@ public class StorageManager {
 	}
 	
 	/**
-	 * deleteFragment: Deletes a Frag from the DB
+	 * deleteFragment: Deletes a Fragment from the DB
 	 * 
 	 * @param f
 	 */
@@ -401,7 +402,7 @@ public class StorageManager {
 	}
 
 	/**
-	 * getFrag: Returns a single Frag object.
+	 * getFrag: Returns a single Fragment object.
 	 * 
 	 * @param fid
 	 * 
@@ -413,8 +414,10 @@ public class StorageManager {
 		String[] whereargs = {""+fid};
 		Frag frag = null;
 		int flag = 0;
-		
+
+
 		if (database == null) {
+
 			this.open();
 			flag = 1;
 		}	
@@ -612,8 +615,8 @@ public class StorageManager {
 
 
 	/**
-	 * cursorToFragment: Helper method that stores all the Frag 
-	 * attributes in a new Frag object for addition to an
+	 * cursorToFragment: Helper method that stores all the Fragment 
+	 * attributes in a new Fragment object for addition to an
 	 * ArrayList.
 	 * @param cursor
 	 * @return the fragment in the row the cursor is currently pointing
@@ -624,6 +627,7 @@ public class StorageManager {
 	    frag.setId(cursor.getLong(0));
 	    frag.setTitle(cursor.getString(1));
 	    frag.setAuthorString(cursor.getString(2));
+	    frag.setBody(cursor.getString(3));
 	    
 	    return frag;
 	}

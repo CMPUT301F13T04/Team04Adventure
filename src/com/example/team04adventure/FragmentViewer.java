@@ -2,23 +2,16 @@ package com.example.team04adventure;
 
 
 
-import com.example.team04adventure.R;
-import com.example.team04adventure.R.layout;
-import com.example.team04adventure.R.menu;
-
 import java.util.ArrayList;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class FragmentViewer extends Activity {
 	// This is the title and body fields that are allocated at runtime
@@ -38,7 +31,7 @@ public class FragmentViewer extends Activity {
 		// StoryIntro.java class. They have to be supplied again before
 		// you can go to another frament.
 		Bundle extras = getIntent().getExtras();
-		long fragID = extras.getLong("fragID");
+		long fragID = extras.getLong("fid");
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
 		
 		// Initialize the list of choices for that frag

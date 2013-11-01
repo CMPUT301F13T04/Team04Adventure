@@ -19,6 +19,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_AUT = "Author";
 	  public static final String TABLE_FRAGS_MEDIA = "FragsMedia";
 	  public static final String TABLE_FRAGS_CHOICE = "FragsChoices";
+	  public static final String COLUMN_BODY = "Body";
 	  public static final String TABLE_CHOICE = "Choices";
 	  public static final String COLUMN_CID = "_cid";
 	  public static final String COLUMN_TEXT = "Text";
@@ -29,7 +30,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MTYPE = "Type";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 1;
+	  private static final int DATABASE_VERSION = 2;
 
 	  // Database creation sql statement
 	  
@@ -46,7 +47,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  private static final String DATABASE_CREATE_FRAGS = "create table "
 		  + TABLE_FRAGS + "(" + COLUMN_FID
 		  + " integer primary key autoincrement, " + COLUMN_FTITLE
-		  + " text not null, " + COLUMN_AUT + " text not null);";
+		  + " text not null, " + COLUMN_AUT + " text not null, "+
+		   COLUMN_BODY + " text not null);";
 	  
 	  
 	  private static final String DATABASE_CREATE_FRAGS_MEDIA = "create table "
@@ -77,7 +79,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
-	    
 	    database.execSQL(DATABASE_CREATE_STORY);
 	    database.execSQL(DATABASE_CREATE_STORY_FRAG);
 	    database.execSQL(DATABASE_CREATE_FRAGS);

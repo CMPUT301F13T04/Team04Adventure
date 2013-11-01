@@ -1,8 +1,5 @@
 package com.example.team04adventure;
 
-
-
-
 import java.util.ArrayList;
 
 import com.example.team04adventure.R;
@@ -35,11 +32,14 @@ public class StoryIntro extends Activity {
 		
 	
 		Story s = sm.getStory(id);
+		
+
 		story = s;
+
+		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-	//	if (s.getAuthor() != null)
 		storyAuthor.append(s.getAuthorString());
 	}
 
@@ -65,6 +65,8 @@ public class StoryIntro extends Activity {
 		
 		ArrayList<Frag> frags = story.getFrags();
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+		System.out.println(frags.get(0).getTitle());
+		System.out.println(frags.get(0).getId());
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);
 		

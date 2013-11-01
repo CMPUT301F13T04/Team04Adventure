@@ -1,3 +1,4 @@
+package com.example.team04adventure;
 
 import java.io.BufferedReader;
 import java.io.IOException;

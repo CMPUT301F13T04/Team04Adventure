@@ -414,7 +414,7 @@ public class StorageManager {
 		Fragment frag = null;
 		int flag = 0;
 		
-		if(!database.isOpen()){
+		if (database == null) {
 			this.open();
 			flag = 1;
 		}	

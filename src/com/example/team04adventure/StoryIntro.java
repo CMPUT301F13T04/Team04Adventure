@@ -33,6 +33,8 @@ public class StoryIntro extends Activity {
 		
 		Story s = sm.getStory(id);
 		
+		story = s;
+		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);

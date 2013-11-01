@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".StoryIntro" >
+
+    <TextView
+        android:id="@+id/StoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:textSize="24sp"
+        android:maxLines="4"
+        android:scrollbars="vertical"
+        android:text="" />
+    
+    <TextView
+        android:id="@+id/StoryAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/StoryTitle"
+        android:text="Story Written By " />
+
+    <Button
+        android:id="@+id/Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/StoryTitle"
+        android:layout_alignRight="@+id/StoryAuthor"
+        android:layout_below="@+id/StoryAuthor"
+        android:text="Play Story!"
+        android:onClick="playStory"  />
+
+    <Button
+        android:id="@+id/AddFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/StoryTitle"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Play"
+        android:text="Add Fragment" />
+    <Button
+        android:id="@+id/Edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/StoryTitle"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/AddFrag"
+        android:text="Edit" />
+    <Button
+        android:id="@+id/Download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/StoryTitle"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit"
+        android:text="Download" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Download"
+        android:layout_alignRight="@+id/Download"
+        android:layout_below="@+id/Download"
+        android:text="Remove from Cache" 
+        android:onClick="delete" 
+        />
+
+</RelativeLayout>

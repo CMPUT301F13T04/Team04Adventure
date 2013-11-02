@@ -19,7 +19,6 @@ public class Frag {
 	String title;
 	// NEW
 	String body;
-	User author;
 	String id;
 	Media profile;
 	private ArrayList<Media> pictures;
@@ -32,12 +31,6 @@ public class Frag {
 		this.setPictures(new ArrayList<Media>());
 		this.vids = new ArrayList<Media>();
 		this.choices = new ArrayList<Choice>();
-	
-	}
-
-	public void setAuthor(User author){
-		
-		this.author = author;
 	
 	}
 	
@@ -68,12 +61,6 @@ public class Frag {
 	public void addVideo(Media vid){
 		
 		this.vids.add(vid);
-	
-	}
-	
-	public User getAuthor(){
-		
-		return this.author;
 	
 	}
 	

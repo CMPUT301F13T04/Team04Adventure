@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+Story story;
+
 public class fragList extends Activity {
 
 	@Override
@@ -21,18 +23,18 @@ public class fragList extends Activity {
 		setContentView(R.layout.activity_frag_list);
 		
 	  Bundle extras = getIntent().getExtras();
-		id = extras.getString("id");
+		String id = extras.getString("id");
 		
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
 		
 		JSONparser jp = new JSONparser();
 		
-		Story story = jp.getStory(id);
+		story = jp.getStory(id);
 		
 		fraglist = story.getFrags();
 		
-		fragListView.setAdapter(new FragListAdapter(this, fraglist));
+		fragListView.setAdapter(new FragAdapter(this, fraglist));
 		fragListView.setOnItemClickListener(new OnItemClickListener() {
         
 			/** When a story is selected **/

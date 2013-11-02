@@ -25,11 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:textSize="14sp"
+        android:layout_below="@+id/StoryTitle"
         android:maxLines="2"
         android:scrollbars="vertical"
-        android:layout_below="@+id/StoryTitle"
-        android:text="Story Written By " />
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/Play"
@@ -42,39 +41,13 @@
         android:onClick="playStory"  />
 
     <Button
-        android:id="@+id/AddFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Play"
-        android:text="Add Fragment" />
-    <Button
-        android:id="@+id/Edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/AddFrag"
-        android:text="Edit" />
-    <Button
-        android:id="@+id/Download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit"
-        android:text="Download" />
-
-    <Button
         android:id="@+id/fuploadmedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Download"
-        android:layout_alignRight="@+id/Download"
-        android:layout_below="@+id/Download"
-        android:text="Remove from Cache" 
-        android:onClick="removeFromCache" 
-        />
+        android:layout_alignLeft="@+id/StoryTitle"
+        android:layout_alignRight="@+id/Play"
+        android:layout_below="@+id/Play"
+        android:onClick="removeFromCache"
+        android:text="Remove from Cache" />
 
 </RelativeLayout>

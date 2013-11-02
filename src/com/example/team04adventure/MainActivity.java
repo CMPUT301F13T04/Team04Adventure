@@ -2,9 +2,6 @@ package com.example.team04adventure;
 
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.R.id;
-import com.example.team04adventure.R.layout;
-import com.example.team04adventure.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -26,70 +23,30 @@ public class MainActivity extends Activity {
 		
 		UsernameText = (EditText) findViewById(R.id.username);
 		Button Login = (Button) findViewById(R.id.login);
-		Button OfflineMode = (Button) findViewById(R.id.offline);
-		Button SignUp = (Button) findViewById(R.id.signup);
-		
 		Login.setOnClickListener(new View.OnClickListener()
 		{
 				
 			public void onClick(View v)
 			{
 				
-//FIX/ADD CONDITIONS AND CHECK IF LOGIN IS VALID HERE~~
 				String Uname = UsernameText.getText().toString();
-				
-				Authenticator auth = new Authenticator();
-				int yayOrNay = auth.authenticate(Uname);
-				
-				String message = "";
-				
-				switch (yayOrNay) {
-					case -1:
-						message = "Connection Failed.";
-						break;
-					case 0:
-						message = "Not A Valid Username.";
-						break;
-					case 1:
-						Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
-						startActivity(i);
-						break;
-				}
-				
-				Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
-				
-				/*if (!Uname.equals("valid username")){
+
+				if ((Uname.equals("")) || Uname.equals(null)){
 					
-				String message = "Please enter a valid username.";
-				Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+				String validun = "Please enter a valid username.";
+				Toast.makeText(getBaseContext(), validun, Toast.LENGTH_LONG).show();
 				}
 				else {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
+				i.putExtra("uname", Uname);
 				startActivity(i);
-				*/
-				//}
+				
+				
+				}
 			}
 		});
 		
-		OfflineMode.setOnClickListener(new View.OnClickListener()
-		{
 				
-			public void onClick(View v)
-			{
-				Intent i = new Intent(MainActivity.this, OfflineStoryList.class);
-				startActivity(i);
-			}
-		});
-		
-		SignUp.setOnClickListener(new View.OnClickListener()
-		{
-				
-			public void onClick(View v)
-			{
-				Intent i = new Intent(MainActivity.this, SignUp.class);
-				startActivity(i);
-			}
-		});		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

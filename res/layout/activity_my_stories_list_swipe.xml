@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="My Stories"
+        android:text="Cached Stories"
         android:textSize="20sp" />
 
     <SearchView
@@ -22,16 +22,11 @@
         android:layout_height="wrap_content" />
 
     <ListView
-        android:id="@+id/offline_list"
+        android:id="@+id/cachedlist"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.32"
         android:text="No Stories" />
 
-    <Button
-        android:id="@+id/add_story"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Story" />
-
+   
 </LinearLayout>

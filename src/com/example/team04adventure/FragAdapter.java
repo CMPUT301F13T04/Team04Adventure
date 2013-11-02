@@ -19,7 +19,7 @@ public class FragAdapter extends BaseAdapter {
 	 
     private LayoutInflater layoutInflater;
  
-    public FragChoiceAdapter(Context context, ArrayList<Frag> frag) {
+    public FragAdapter(Context context, ArrayList<Frag> frag) {
         this.frags = frag;
         layoutInflater = LayoutInflater.from(context);
     }

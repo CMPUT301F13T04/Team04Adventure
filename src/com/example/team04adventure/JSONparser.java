@@ -273,7 +273,7 @@ public class JSONparser {
 		return tempList;
 	}
 
-	public void deleteStory() {
+	public void deleteStory(Story s) {
 	}
 
 	public void storeFrag(Frag aFrag) throws IllegalStateException,

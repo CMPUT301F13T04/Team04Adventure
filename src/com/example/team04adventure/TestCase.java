@@ -6,6 +6,6 @@ public interface TestCase {
 	
 	public void tearDown();
 	
-	public void ru();
+	public void run();
 	
 }

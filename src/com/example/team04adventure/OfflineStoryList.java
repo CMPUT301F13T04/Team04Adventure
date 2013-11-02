@@ -20,37 +20,9 @@ public class OfflineStoryList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_offline_story_list);
 		
-		// Hardcoding a new storys
-		long id = 75;
-		Story s1 = new Story();
 		
-		User chris = new User("Chris");
 		
-		Story s = new Story();
-		s.setTitle("Big T's Leg Day");
-		s.setAuthor(chris);
 		
-		s.setAuthor(new User("Big T"));
-		s1.setTitle("Big T's Leg Day");
-		s1.setAuthorString("Big T");
-//		s1.setId(id);
-		s1.setAuthor(new User("Big T"));
-		
-		Frag f1 = new Frag();
-		f1.setAuthor(new User("Mike"));
-		f1.setAuthorString("Mike");
-		f1.setBody("Test bodyyyyyy");
-		f1.setTitle("The Frag of all frags");
-		//f1.setId(id);
-		//f1.setChoice(null);
-		
-		s1.addFragment(f1);
-		Frag frag = new Frag();
-		frag.setAuthor(chris);
-		frag.setAuthorString("Chris");
-		frag.setBody("test");
-		
-		s.addFragment(frag);
 		
 		
 		
@@ -61,7 +33,6 @@ public class OfflineStoryList extends Activity {
 		/** Open DB connection and retrieve all of 
 		    the cached stories. **/
 		
-		sm.addStory(s1);
 		
 		storylist = sm.getAll();
 		

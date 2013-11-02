@@ -43,7 +43,7 @@ story = s;
 storyTitle = (TextView) findViewById(R.id.StoryTitle);
 storyTitle.append(s.getTitle());
 storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-storyAuthor.append(s.getAuthorString());
+storyAuthor.append(s.getAuthor());
 }
 
 

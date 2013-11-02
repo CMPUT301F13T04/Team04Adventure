@@ -1,6 +1,5 @@
 package com.example.team04adventure;
 
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.text.method.ScrollingMovementMethod;
@@ -23,9 +22,9 @@ public class CreateFragment extends Activity {
 		body.setMovementMethod(new ScrollingMovementMethod());
 		
 		
-		
 	}
 
+	
 	private void link(View view){
 		
 		
@@ -35,7 +34,6 @@ public class CreateFragment extends Activity {
 		
 		
 	}
-	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -4,16 +4,12 @@ package com.example.team04adventure;
 import java.util.ArrayList;
 
 
-
-
-
 public class Story {
 	
 	String title;
 	private ArrayList<Frag> frags;
-	User author;
 	String id;
-	String offlineAuthor;
+	String Author;
 	
 	public Story(){
 		
@@ -27,22 +23,13 @@ public class Story {
 		
 	}
 	
-	public void setAuthor(User author){
+	public void setAuthor(String author){
 		
-		this.author = author;
+		this.Author = author;
 		
 	}
 	
-	public void setAuthorString(String author){
-		
-		this.offlineAuthor = author;
-	}
-	
-	public String getAuthorString(){
-		
-		return offlineAuthor;
-	}
-	
+
 	public void addFragment(Frag frag){
 		
 		this.frags.add(frag);
@@ -55,9 +42,9 @@ public class Story {
 	
 	}
 	
-	public User getAuthor(){
+	public String getAuthor(){
 		
-		return this.author;
+		return this.Author;
 	
 	}
 	

@@ -52,6 +52,7 @@ public class StorageManager {
 	
 	
 	public boolean storyExists(String id){
+		
 		String[] sId = {SQLiteHelper.COLUMN_SID};
 		String swhere = "_sid = ?";
 		String[] whereargs = {""+id};
@@ -83,14 +84,12 @@ public class StorageManager {
 	 */
 	public void addStory(Story story) {
 		
-		
-		
 		this.open();
 		
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_SID, story.getId());
 		values.put(SQLiteHelper.COLUMN_STITLE, story.getTitle());
-		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor().getName());
+		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor());
 		database.insert(SQLiteHelper.TABLE_STORIES, null,
 	    		values);
 		
@@ -380,7 +379,6 @@ public class StorageManager {
 		return story;
 		
 		
-		
 	}
 	
 	
@@ -479,11 +477,11 @@ public class StorageManager {
 	 * 
 	 * @return A list of videos or pictures.
 	 */
-	private ArrayList<Media> getFragMediaInfo(String string, String type) {
+	private ArrayList<Media> getFragMediaInfo(String fid, String type) {
 		
 		String[] mIds = {SQLiteHelper.COLUMN_MID};
 		String mwhere = "_fid = ?";
-		String[] whereargs = {""+string};
+		String[] whereargs = {""+fid};
 		ArrayList<Media> medarr = new ArrayList<Media>();
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS_MEDIA,
@@ -560,11 +558,11 @@ public class StorageManager {
 	 * 
 	 * @return A list of choices.
 	 */
-	private ArrayList<Choice> getFragChoiceInfo(String string) {
+	private ArrayList<Choice> getFragChoiceInfo(String fid) {
 		
 		String[] cIds = {SQLiteHelper.COLUMN_CID};
 		String cwhere = "_fid = ?";
-		String[] whereargs = {""+string};
+		String[] whereargs = {""+fid};
 		ArrayList<Choice> choicearr = new ArrayList<Choice>();
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS_CHOICE,
@@ -658,7 +656,7 @@ public class StorageManager {
 		Story story = new Story();
 	    story.setId(cursor.getString(0));
 	    story.setTitle(cursor.getString(1));
-	    story.setAuthorString(cursor.getString(2));
+	    story.setAuthor(cursor.getString(2));
 	   
 	    return story;
 	

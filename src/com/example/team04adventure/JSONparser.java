@@ -1,3 +1,5 @@
+package com.example.team04adventure;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,14 +7,12 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -37,9 +37,9 @@ public class JSONparser {
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();
 	private final String WebService = "http://cmput301.softwareprocess.es:8080/cmput301f13t04/";
-//	private final String users = "users/";
+	//	private final String users = "users/";
 	private final String stories = "stories/";
-//	private final String frags = "fragments/";
+	//	private final String frags = "fragments/";
 
 	// Just the generic constructor
 	public JSONparser() {
@@ -49,48 +49,48 @@ public class JSONparser {
 	// Assumption is that the User being stored is not in the server already. 
 	public void storeStory(Story aStory) throws ClientProtocolException, IllegalStateException, IOException {
 		// Check if story is already registered before storing
-//		if (!checkStory(aStory)) { // IF its true then the user exists.
-			HttpPost httpPost = new HttpPost(WebService + stories+ aStory.getId());
-			StringEntity stringentity = null;
-			try {
-				stringentity = new StringEntity(gson.toJson(aStory));
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+		//		if (!checkStory(aStory)) { // IF its true then the user exists.
+		HttpPost httpPost = new HttpPost(WebService + stories+ aStory.getId());
+		StringEntity stringentity = null;
+		try {
+			stringentity = new StringEntity(gson.toJson(aStory));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
-			httpPost.setHeader("Accept", "application/json");
-			httpPost.setEntity(stringentity);
-			HttpResponse response = null;
+		httpPost.setHeader("Accept", "application/json");
+		httpPost.setEntity(stringentity);
+		HttpResponse response = null;
 
-			try {
-				response = client.execute(httpPost);
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			response = client.execute(httpPost);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-			String status = response.getStatusLine().toString();
-			System.out.println(status);
-			HttpEntity entity = response.getEntity();
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					entity.getContent()));
-			String output;
-			System.err.println("Output from Server -> ");
-			while ((output = br.readLine()) != null) {
-				System.err.println(output);
-			}
+		String status = response.getStatusLine().toString();
+		System.out.println(status);
+		HttpEntity entity = response.getEntity();
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				entity.getContent()));
+		String output;
+		System.err.println("Output from Server -> ");
+		while ((output = br.readLine()) != null) {
+			System.err.println(output);
+		}
 
-			try {
-				EntityUtils.consume(entity);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			EntityUtils.consume(entity);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-			httpPost.releaseConnection();
-//		} else {
-//			// TELL THE USER THEY ARE ALREADY IN THE SYSTEM.!>!!
-//		}
+		httpPost.releaseConnection();
+		//		} else {
+		//			// TELL THE USER THEY ARE ALREADY IN THE SYSTEM.!>!!
+		//		}
 	}
 
 	//Assume user is on the server
@@ -125,12 +125,12 @@ public class JSONparser {
 	}
 
 	public boolean checkStory(Story aStory){
-			HttpGet getRequest = new HttpGet(WebService + stories + aStory.getId());
-			getRequest.addHeader("Accept", "application/json");
-			HttpResponse response;
-			try {
-				response = client.execute(getRequest);
-//			System.out.println(response.);
+		HttpGet getRequest = new HttpGet(WebService + stories + aStory.getId());
+		getRequest.addHeader("Accept", "application/json");
+		HttpResponse response;
+		try {
+			response = client.execute(getRequest);
+			//			System.out.println(response.);
 			String notFound = "HTTP/1.1 404 Not Found";
 			String status = response.getStatusLine().toString();
 			System.out.println(status);
@@ -141,64 +141,64 @@ public class JSONparser {
 			}
 			else 
 				return true; // User is there. 
-		
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return false;
+
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
 	 * search by keywords
 	 */
-	 public ArrayList<Story> search(String[] keywords) throws IOException {
-         String query_str = "";
-         
-         // create query string
-         for (int i = 0; i < keywords.length; i++) {
-                 query_str += keywords[i] + " OR ";
-         }
-         
-         query_str = query_str.substring(0, query_str.length() - 4);        
-         
-         HttpPost searchRequest = new HttpPost(WebService + stories + "/_search?pretty=1");
-         String query =         "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \"" + query_str + "\"}}}";
-         
-         StringEntity stringentity = null;                
-         try {
-                 stringentity = new StringEntity(query);
-         } catch (UnsupportedEncodingException e) {
-                 e.printStackTrace();
-         }
-         
-         searchRequest.setHeader("Accept","application/json");
-         searchRequest.setEntity(stringentity);
-         
-         HttpResponse response = null;
-         try {
-                 response = client.execute(searchRequest);
-         } catch (ClientProtocolException e) {
-                 e.printStackTrace();
-         }
-         
-         String status = response.getStatusLine().toString();
-         System.out.println(status);
+	public ArrayList<Story> search(String[] keywords) throws IOException {
+		String query_str = "";
 
-         String json = getEntityContent(response);
+		// create query string
+		for (int i = 0; i < keywords.length; i++) {
+			query_str += keywords[i] + " OR ";
+		}
 
-         Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>(){}.getType();
-         ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
-         
+		query_str = query_str.substring(0, query_str.length() - 4);        
+
+		HttpPost searchRequest = new HttpPost(WebService + stories + "/_search?pretty=1");
+		String query =         "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \"" + query_str + "\"}}}";
+
+		StringEntity stringentity = null;                
+		try {
+			stringentity = new StringEntity(query);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		searchRequest.setHeader("Accept","application/json");
+		searchRequest.setEntity(stringentity);
+
+		HttpResponse response = null;
+		try {
+			response = client.execute(searchRequest);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		}
+
+		String status = response.getStatusLine().toString();
+		System.out.println(status);
+
+		String json = getEntityContent(response);
+
+		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>(){}.getType();
+		ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+
 		// return 
-		ArrayList<Story> abc = new ArrayList<Story>();
+				ArrayList<Story> abc = new ArrayList<Story>();
 		for (ElasticSearchResponse<Story> r : esResponse.getHits()) {
 			abc.add(r.getSource());
-         }
-         
-         return abc;
- }
+		}
+
+		return abc;
+	}
 
 	// Not needed right now.
 	public void deleteStory(Story S1) {
@@ -235,9 +235,9 @@ public class JSONparser {
 			String[] a = new String[1];
 			a[0] = "*";
 			list = search(a);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return list;
 
 	}
@@ -272,3 +272,4 @@ public class JSONparser {
 		System.err.println("JSON:" + json);
 		return json;
 	}
+}

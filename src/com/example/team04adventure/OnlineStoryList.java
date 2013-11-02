@@ -115,14 +115,13 @@ public class OnlineStoryList extends FragmentActivity implements
         });
 		
 		
-		final ListView ostoryListView = (ListView) findViewById(R.id.list);
+		final ListView ostoryListView = (ListView) findViewById(R.id.cachedlist);
 		ArrayList<Story> ostorylist = new ArrayList<Story>();
 		
 		
 		JSONparser jp = new JSONparser();
 		
 		ArrayList<Story> stories = jp.getAll();
-		
 
 		storyListView.setAdapter(new StoryListAdapter(this, stories));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {

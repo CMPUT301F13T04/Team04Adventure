@@ -34,7 +34,7 @@ public final class R {
         public static final int StoryAuthor=0x7f080018;
         public static final int StoryTitle=0x7f080017;
         public static final int action_settings=0x7f080026;
-        public static final int add_story=0x7f080016;
+        public static final int cachedlist=0x7f080016;
         public static final int camera=0x7f08000c;
         public static final int choice=0x7f080020;
         public static final int fbody=0x7f080003;

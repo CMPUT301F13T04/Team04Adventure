@@ -51,11 +51,6 @@ public class JSONparserTest implements TestCase{
 		testGetStory();
 		testSearchStories();
 		testDeleteStory();
-		testStoreFrag();
-		testUpdateFragment();
-		testSearchFrag();
-		testGetFrag();
-		testRemoveFrag();
 		testAdvancedSearch();
 		testGetEntityContent();
 
@@ -67,7 +62,12 @@ public class JSONparserTest implements TestCase{
 		setUp();
 		
 		/* Ensure stored story equals s */
-		jp.cacheStory(s);
+		try {
+			jp.storeStory(s);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		assert(s.equals(jp.getStory(s.getTitle())));
 		/* Modify s */
 		s.setTitle("New Title");
@@ -83,6 +83,24 @@ public class JSONparserTest implements TestCase{
 	
 	public void testGetStory() {
 		
+		setUp();
+		
+		/* Store a story online */
+		try {
+			jp.storeStory(s);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		/* Ensure s2 is an unit story */
+		Story s2 = null;
+		assert(s2 == null);
+		/* Ensure s2 equals after it loads from server */
+		s2 = jp.getStory(s.getTitle());
+		assert(s2.equals(s));
+		
+		tearDown();
+		
 	}
 	
 	public void testSearchStories() {
@@ -91,25 +109,22 @@ public class JSONparserTest implements TestCase{
 	
 	public void testDeleteStory() {
 		
-	}
-	
-	public void testStoreFrag() {
+		setUp();
+		/* Store a story online */
+		try {
+			jp.storeStory(s);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		/* Ensure story exists on server */
+		assert(jp.getStory(s.title) != null);
+		/* Delete story */
+		jp.deleteStory(s);
+		/* Ensure story doesn't exist on server */
+		assert(jp.getStory(s.title) == null);
 		
-	}
-	
-	public void testUpdateFragment() {
-		
-	}
-	
-	public void testSearchFrag() {
-		
-	}
-	
-	public void testGetFrag() {
-		
-	}
-	
-	public void testRemoveFrag() {
+		tearDown();
 		
 	}
 	
@@ -124,9 +139,6 @@ public class JSONparserTest implements TestCase{
 	public void testGetEntityContent() {
 		
 	}
-	
-	
-	
 	
 
 }

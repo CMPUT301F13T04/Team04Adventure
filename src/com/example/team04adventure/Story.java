@@ -65,8 +65,7 @@ public class Story {
 		this.id = id;
 	
 	}
-	
-	
+		
 }
 
 

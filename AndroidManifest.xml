@@ -11,8 +11,8 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-        
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -59,6 +59,10 @@
         <activity
             android:name="com.example.team04adventure.MyStoriesListSwipe"
             android:label="@string/title_activity_my_stories_list_swipe" >
+        </activity>
+        <activity
+            android:name="com.example.team04adventure.CreateFragment"
+            android:label="@string/title_activity_create_fragment" >
         </activity>
     </application>
 

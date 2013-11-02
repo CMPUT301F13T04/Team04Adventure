@@ -20,5 +20,6 @@
     <string name="title_section2">My Stories</string>
     <string name="title_activity_all_stories_list_swipe">AllStoriesListSwipe</string>
     <string name="title_activity_my_stories_list_swipe">MyStoriesListSwipe</string>
+    <string name="title_activity_create_fragment">CreateFragment</string>
 
 </resources>

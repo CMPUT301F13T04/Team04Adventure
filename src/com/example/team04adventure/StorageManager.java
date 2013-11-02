@@ -123,7 +123,7 @@ public class StorageManager {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_FID, f.getId());
 		values.put(SQLiteHelper.COLUMN_FTITLE, f.getTitle());
-		values.put(SQLiteHelper.COLUMN_AUT, f.getAuthor().getName());
+		values.put(SQLiteHelper.COLUMN_AUT, f.getAuthor());
 		values.put(SQLiteHelper.COLUMN_BODY, f.getBody());
 		database.insert(SQLiteHelper.TABLE_FRAGS, null,
 	    		values);
@@ -637,7 +637,7 @@ public class StorageManager {
 		Frag frag = new Frag();
 	    frag.setId(cursor.getString(0));
 	    frag.setTitle(cursor.getString(1));
-	    frag.setAuthorString(cursor.getString(2));
+	    frag.setAuthor(cursor.getString(2));
 	    frag.setBody(cursor.getString(3));
 	    
 	    return frag;

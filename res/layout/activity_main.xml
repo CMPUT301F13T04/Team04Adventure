@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Username" >
+        android:hint="Author" >
 
         <requestFocus />
     </EditText>
@@ -31,25 +31,5 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/username"
         android:text="Login" />
-
-    <Button
-        android:id="@+id/offline"
-        style="@style/AppTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/login"
-        android:text="Offline Mode" />
-
-    <Button
-        android:id="@+id/signup"
-        style="@style/AppTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/offline"
-        android:text="Sign Up" />
 
 </RelativeLayout>

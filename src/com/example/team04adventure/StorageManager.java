@@ -83,8 +83,7 @@ public class StorageManager {
 	 */
 	public void addStory(Story story) {
 		
-		long lastsId = -1;
-		long lastid = -1;
+		
 		
 		this.open();
 		
@@ -99,9 +98,9 @@ public class StorageManager {
 		
 		if(!story.getFrags().isEmpty()) {
 			for (Frag f : story.getFrags()){
-				lastid = addFrags(f);
+				addFrags(f);
 				values.put(SQLiteHelper.COLUMN_SID, story.getId());
-				values.put(SQLiteHelper.COLUMN_FID, lastid);
+				values.put(SQLiteHelper.COLUMN_FID, f.getId());
 				database.insert(SQLiteHelper.TABLE_STORY_FRAGS, null,
 						values);
 			}
@@ -117,12 +116,13 @@ public class StorageManager {
 	 * @return the ID of the fragment that was just added.
 	 * to
 	 */
-	private long addFrags(Frag f) {
+	private void addFrags(Frag f) {
 		
 		long lastid;
-		long lastfId = -1;
+		
 		
 		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COLUMN_FID, f.getId());
 		values.put(SQLiteHelper.COLUMN_FTITLE, f.getTitle());
 		values.put(SQLiteHelper.COLUMN_AUT, f.getAuthor().getName());
 		values.put(SQLiteHelper.COLUMN_BODY, f.getBody());
@@ -130,18 +130,12 @@ public class StorageManager {
 	    		values);
 		
 		
-		String query = "SELECT _fid from Fragments order by _fid DESC limit 1";
-		Cursor cursor = database.rawQuery(query, null);
-		if (cursor != null && cursor.moveToFirst()) {
-			lastfId = cursor.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
-		}
-		
 		
 		if(!f.getChoices().isEmpty()){
 			for (Choice c : f.getChoices()){
 				lastid = addChoices(c);
 				values.clear();
-				values.put(SQLiteHelper.COLUMN_FID, lastfId);
+				values.put(SQLiteHelper.COLUMN_FID, f.getId());
 				values.put(SQLiteHelper.COLUMN_CID, lastid);
 				database.insert(SQLiteHelper.TABLE_FRAGS_CHOICE, null,
 		    		values);
@@ -152,7 +146,7 @@ public class StorageManager {
 			for (Media m : f.getPictures()){
 				lastid = addMedia(m);
 				values.clear();
-				values.put(SQLiteHelper.COLUMN_FID, lastfId);
+				values.put(SQLiteHelper.COLUMN_FID, f.getId());
 				values.put(SQLiteHelper.COLUMN_MID, lastid);
 				database.insert(SQLiteHelper.TABLE_FRAGS_MEDIA, null,
 		    		values);
@@ -163,14 +157,14 @@ public class StorageManager {
 		if(!f.getVids().isEmpty()){
 			for (Media m : f.getVids()){
 				lastid = addMedia(m);
-				values.put(SQLiteHelper.COLUMN_FID, lastfId);
+				values.put(SQLiteHelper.COLUMN_FID, f.getId());
 				values.put(SQLiteHelper.COLUMN_MID, lastid);
 				database.insert(SQLiteHelper.TABLE_FRAGS_MEDIA, null,
 	    		values);
 			}
 		}
 		
-		return lastfId;
+		
 	}
 
 
@@ -485,11 +479,11 @@ public class StorageManager {
 	 * 
 	 * @return A list of videos or pictures.
 	 */
-	private ArrayList<Media> getFragMediaInfo(long id, String type) {
+	private ArrayList<Media> getFragMediaInfo(String string, String type) {
 		
 		String[] mIds = {SQLiteHelper.COLUMN_MID};
 		String mwhere = "_fid = ?";
-		String[] whereargs = {""+id};
+		String[] whereargs = {""+string};
 		ArrayList<Media> medarr = new ArrayList<Media>();
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS_MEDIA,
@@ -562,15 +556,15 @@ public class StorageManager {
 	 * getFragChoiceInfo: Returns an ArrayList of Choices that
 	 * belong to the fragment with ID of fid.
 	 * 
-	 * @param fid
+	 * @param string
 	 * 
 	 * @return A list of choices.
 	 */
-	private ArrayList<Choice> getFragChoiceInfo(long fid) {
+	private ArrayList<Choice> getFragChoiceInfo(String string) {
 		
 		String[] cIds = {SQLiteHelper.COLUMN_CID};
 		String cwhere = "_fid = ?";
-		String[] whereargs = {""+fid};
+		String[] whereargs = {""+string};
 		ArrayList<Choice> choicearr = new ArrayList<Choice>();
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS_CHOICE,
@@ -643,7 +637,7 @@ public class StorageManager {
 	 */
 	private Frag cursorToFragment(Cursor cursor) {
 		Frag frag = new Frag();
-	    frag.setId(cursor.getLong(0));
+	    frag.setId(cursor.getString(0));
 	    frag.setTitle(cursor.getString(1));
 	    frag.setAuthorString(cursor.getString(2));
 	    frag.setBody(cursor.getString(3));

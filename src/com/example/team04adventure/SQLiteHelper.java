@@ -46,7 +46,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		 
 	  private static final String DATABASE_CREATE_FRAGS = "create table "
 		  + TABLE_FRAGS + "(" + COLUMN_FID
-		  + " integer primary key autoincrement, " + COLUMN_FTITLE
+		  + " text primary key, " + COLUMN_FTITLE
 		  + " text not null, " + COLUMN_AUT + " text not null, "+
 		   COLUMN_BODY + " text not null);";
 	  

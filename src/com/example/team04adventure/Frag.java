@@ -20,7 +20,7 @@ public class Frag {
 	// NEW
 	String body;
 	User author;
-	long id;
+	String id;
 	Media profile;
 	private ArrayList<Media> pictures;
 	private ArrayList<Media> vids;
@@ -107,7 +107,7 @@ public class Frag {
 	
 	}
 	
-	public long getId(){
+	public String getId(){
 		
 		return this.id;
 	
@@ -125,7 +125,7 @@ public class Frag {
 		
 	}
 	
-	public void setId(long id) {
+	public void setId(String id) {
 		
 		this.id = id;
 		

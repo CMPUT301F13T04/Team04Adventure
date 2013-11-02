@@ -48,7 +48,10 @@
         android:layout_alignLeft="@+id/StoryTitle"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Play"
-        android:text="Add Fragment" />
+        android:text="Add Fragment" 
+        android:onClick = "addFragment"
+        />
+    	
     <Button
         android:id="@+id/Edit"
         android:layout_width="wrap_content"

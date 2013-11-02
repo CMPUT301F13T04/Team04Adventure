@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
 
 public class CreateFragment extends Activity {
@@ -25,12 +26,12 @@ public class CreateFragment extends Activity {
 		
 	}
 
-	private void link(){
+	private void link(View view){
 		
 		
 	}
 	
-	private void saveFragment(){
+	private void saveFragment(View view){
 		
 		
 	}

@@ -1,12 +1,17 @@
 package com.example.team04adventure;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +19,7 @@ public class OnlineStoryIntro extends Activity {
 
 	TextView 	storyTitle,
 	storyAuthor;
-	String id;
+	String sid;
 	Story story;
 
 @Override
@@ -23,13 +28,13 @@ super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_story_intro);
 
 Bundle extras = getIntent().getExtras();
-id = extras.getString("id");
+sid = extras.getString("id");
 
 
 JSONparser jp = new JSONparser();
 
 
-Story s = jp.getStory(id);
+Story s = jp.getStory(sid);
 
 
 story = s;
@@ -51,6 +56,54 @@ startActivity(intent);
 
 }
 
+public void addFragment(View view){
+	
+	AlertDialog.Builder adb = new AlertDialog.Builder(this);
+	final EditText input = new EditText(this); 
+	 adb.setView(input);
+	
+	adb.setTitle("Fragment Title");
+	
+	
+	adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
+	    public void onClick(DialogInterface dialog, int whichButton) {  
+	        Frag frag = new Frag();
+	       frag.setTitle(input.getText().toString());
+	       Random rg = new Random();
+	       int rint = rg.nextInt(100);
+	       
+	       frag.setId(frag.getTitle()+rint);
+	       
+	       story.addFragment(frag);
+	       
+	       JSONparser jp = new JSONparser();
+	       
+	       try {
+			jp.storeStory(story);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       
+	       
+	       
+	       
+	       }  
+	     });  
+	
+	adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+        public void onClick(DialogInterface dialog, int which) {
+           
+            return;   
+        }
+    });
+}
+
+
 public void cacheStory(View view) {
 		
 		String cache = "Story Cached.";
@@ -58,7 +111,7 @@ public void cacheStory(View view) {
 		JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 		
-		Story s = parser.getStory(id);
+		Story s = parser.getStory(sid);
 		
 		if(sm.storyExists(s.getId()))
 			Toast.makeText(getBaseContext(), cantcache, Toast.LENGTH_LONG).show();	

@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-Story story;
+
 
 public class fragList extends Activity {
 
@@ -30,7 +30,7 @@ public class fragList extends Activity {
 		
 		JSONparser jp = new JSONparser();
 		
-		story = jp.getStory(id);
+		final Story story = jp.getStory(id);
 		
 		fraglist = story.getFrags();
 		
@@ -49,3 +49,4 @@ public class fragList extends Activity {
         });
 	
 	}
+}

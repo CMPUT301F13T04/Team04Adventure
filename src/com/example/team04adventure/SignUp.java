@@ -18,7 +18,7 @@ public class SignUp extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up);
-		regUsernameText = (EditText) findViewById(R.id.username);
+		
 		Button Register = (Button) findViewById(R.id.register);
 
 		Register.setOnClickListener(new View.OnClickListener()
@@ -26,8 +26,11 @@ public class SignUp extends Activity {
 
 			public void onClick(View v)
 			{
+				regUsernameText = (EditText) findViewById(R.id.registerusername);
 				String Uname = regUsernameText.getText().toString();
-
+				
+				System.out.println("Username ===== " + Uname);
+				
 				Authenticator auth = new Authenticator();
 				int yayOrNay = auth.authenticate(Uname);
 

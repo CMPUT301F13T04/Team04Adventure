@@ -36,7 +36,7 @@
     </EditText>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/fuploadmedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fbody"
@@ -45,39 +45,39 @@
         android:text="Upload Media" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/fsetillus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/fcamera"
+        android:layout_alignRight="@+id/fuploadmedia"
+        android:layout_below="@+id/fuploadmedia"
         android:text="Set Illustration" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/fcamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button5"
+        android:layout_alignLeft="@+id/fuploadmedia"
+        android:layout_alignRight="@+id/fuploadmedia"
+        android:layout_below="@+id/fsetillus"
         android:text="Camera" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/flink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/fcamera"
+        android:layout_alignRight="@+id/fcamera"
+        android:layout_below="@+id/fcamera"
         android:text="Link" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/fsave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignRight="@+id/button3"
-        android:layout_below="@+id/button3"
+        android:layout_alignLeft="@+id/flink"
+        android:layout_alignRight="@+id/flink"
+        android:layout_below="@+id/flink"
         android:text="Save" />
 
 </RelativeLayout>

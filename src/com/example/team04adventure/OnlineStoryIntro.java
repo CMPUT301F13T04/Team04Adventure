@@ -21,6 +21,7 @@ public class OnlineStoryIntro extends Activity {
 	storyAuthor;
 	String sid;
 	Story story;
+	String Uname;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ setContentView(R.layout.activity_story_intro);
 
 Bundle extras = getIntent().getExtras();
 sid = extras.getString("id");
+Uname = extras.getString("uname");
 
 
 JSONparser jp = new JSONparser();
@@ -73,7 +75,7 @@ public void addFragment(View view){
 	       int rint = rg.nextInt(100);
 	       
 	       frag.setId(frag.getTitle()+rint);
-	       
+	       frag.setAuthor(Uname);
 	       story.addFragment(frag);
 	       
 	       JSONparser jp = new JSONparser();

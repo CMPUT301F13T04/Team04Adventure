@@ -32,7 +32,7 @@ public class fragList extends Activity {
 		
 		fraglist = story.getFrags();
 		
-		fragListView.setAdapter(new StoryListAdapter(this, fraglist));
+		fragListView.setAdapter(new FragListAdapter(this, fraglist));
 		fragListView.setOnItemClickListener(new OnItemClickListener() {
         
 			/** When a story is selected **/

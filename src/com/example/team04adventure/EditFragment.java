@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,8 +26,11 @@ public class EditFragment extends Activity {
 	private Button linkButton;
 	private Button saveButton;
 	
+    private static final int SELECT_PICTURE = 1;
+	
 	long id;
 	Uri imageFileUri;
+	Frag fragment;
 	JSONparser json;
 		
 	@Override
@@ -94,23 +98,41 @@ public class EditFragment extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-//			ImageView mImageView = (ImageView) findViewById(R.id.image);
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
 				Media media = new Media();
 				media.setContent(bitmap);
 				media.setType("pic");
+				fragment.addPicture(media);
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}	
+		else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+			Uri selectedImageUri = data.getData();
+			try {
+				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+				Media media = new Media();
+				media.setContent(bitmap);
+				media.setType("pic");
+				fragment.addPicture(media);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public void uploadImage() {
-		
+		Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
 	}
 	
 	public void linkFrag() {

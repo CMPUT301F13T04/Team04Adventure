@@ -17,14 +17,13 @@ public class Frag {
 	 */
 	
 	String title;
-	// NEW
 	String body;
 	String id;
 	Media profile;
 	private ArrayList<Media> pictures;
 	private ArrayList<Media> vids;
 	private ArrayList<Choice> choices;
-	String offlineAuthor;
+	String Author;
 	
 	public Frag(){
 		
@@ -33,13 +32,19 @@ public class Frag {
 		this.choices = new ArrayList<Choice>();
 	
 	}
+
+	public void setAuthor(String author){
+		
+		this.Author = author;
+	
+	}
 	
 	public void setTitle(String title){
 		
 		this.title = title;
 		
 	}
-	// NEW
+	
 	public void setBody(String body){
 		
 		this.body = body;
@@ -61,6 +66,12 @@ public class Frag {
 	public void addVideo(Media vid){
 		
 		this.vids.add(vid);
+	
+	}
+	
+	public String getAuthor(){
+		
+		return this.Author;
 	
 	}
 	
@@ -118,10 +129,6 @@ public class Frag {
 		
 	}
 
-	public void setAuthorString(String author){
-		
-		this.offlineAuthor = author;
-	}
 
 	public ArrayList<Media> getPictures() {
 		return pictures;

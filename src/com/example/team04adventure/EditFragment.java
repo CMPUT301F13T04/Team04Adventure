@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class EditFragment extends Activity {
 
@@ -25,6 +25,9 @@ public class EditFragment extends Activity {
 	private Button cameraButton;
 	private Button linkButton;
 	private Button saveButton;
+	
+//	private TextView fragTitle;
+	private EditText fragBody;
 	
     private static final int SELECT_PICTURE = 1;
 	
@@ -80,6 +83,8 @@ public class EditFragment extends Activity {
 	}
 	
 	public void openCamera() {
+		// Opens the camera app and stores the resulting image as a jpg file in the /team04adventure in the external memory.
+		
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         
         String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/team04adventure";
@@ -98,6 +103,7 @@ public class EditFragment extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+			// Saves the bitmap result from the camera into the frag object
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
 				Media media = new Media();
@@ -112,6 +118,7 @@ public class EditFragment extends Activity {
 			}
 		}	
 		else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+			// Saves the bitmap from the selected image to be uploaded into the frag object
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
@@ -129,6 +136,7 @@ public class EditFragment extends Activity {
 	}
 	
 	public void uploadImage() {
+		// Starts the image picker for the user to choose a picture to add to the fragment
 		Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -140,6 +148,8 @@ public class EditFragment extends Activity {
 	}
 	
 	public void saveFrag() {
+		// Saves the changes to the fragment text
+		fragBody = (EditText) findViewById(R.id.frag_body);
 		
 	}
 	@Override

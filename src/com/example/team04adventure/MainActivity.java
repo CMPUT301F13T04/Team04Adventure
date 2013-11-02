@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v)
 			{
 				
-//FIX/ADD CONDITIONS AND CHECK IF LOGIN IS VALID HERE~~~
+//FIX/ADD CONDITIONS AND CHECK IF LOGIN IS VALID HERE~~
 				String Uname = UsernameText.getText().toString();
 				
 				Authenticator auth = new Authenticator();

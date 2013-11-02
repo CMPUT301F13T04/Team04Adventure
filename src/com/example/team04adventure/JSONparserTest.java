@@ -3,6 +3,7 @@ package com.example.team04adventure;
 public class JSONparserTest implements TestCase{
 
 	Story s;
+	JSONparser jp;
 	
 	@Override
 	public void setUp() {
@@ -28,27 +29,24 @@ public class JSONparserTest implements TestCase{
 		s.setTitle("Mike's Book");
 		s.addFragment(f);
 		
+		/* Set up a new JSONparser */
+		jp = new JSONparser();
+		
 		
 	}
 
 	@Override
 	public void tearDown() {
 		
-		JSONparser jpars = new JSONparser();
-		jpars.deleteStory(s);
+		jp.deleteStory(s);
 		
 		
 	}
 
 	@Override
 	public void run() {
-		
-		setUp();
-		
-		testStoreUser();
-		testGetUser();
-		testSearchUsers();
-		testDeleteUser();
+
+		testCacheStory();
 		testUpdateStory();
 		testGetStory();
 		testSearchStories();
@@ -59,30 +57,27 @@ public class JSONparserTest implements TestCase{
 		testGetFrag();
 		testRemoveFrag();
 		testAdvancedSearch();
-		testCacheStory();
 		testGetEntityContent();
+
+	}
+
+	
+	public void testUpdateStory() {
+		
+		setUp();
+		
+		/* Ensure stored story equals s */
+		jp.cacheStory(s);
+		assert(s.equals(jp.getStory(s.getTitle())));
+		/* Modify s */
+		s.setTitle("New Title");
+		s.setAuthor("New Author");
+		/* Cache new story and check equality again */
+		jp.updateStory(s);
+		assert(s.equals(jp.getStory(s.getTitle())));
 		
 		tearDown();
 		
-	}
-	
-	public void testStoreUser() {
-		
-	}
-	
-	public void testGetUser() {
-		
-	}
-	
-	public void testSearchUsers() {
-		
-	}
-	
-	public void testDeleteUser() {
-		
-	}
-	
-	public void testUpdateStory() {
 		
 	}
 	

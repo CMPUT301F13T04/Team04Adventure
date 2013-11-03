@@ -150,7 +150,8 @@ public class EditFragment extends Activity {
 	public void saveFrag() {
 		// Saves the changes to the fragment text
 		fragBody = (EditText) findViewById(R.id.frag_body);
-		
+		String fragBodyString = fragBody.getText().toString();
+		fragment.setBody(fragBodyString);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

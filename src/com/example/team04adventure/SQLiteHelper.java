@@ -6,6 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * SQLiteHelper is meant to handle required SQLite operations that the user does not have access to. It also contains 
+ * the raw queries to be accessed from StorageManager.
+ */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
 	  public static final String TABLE_STORIES = "Stories";
@@ -77,6 +81,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	    
 	  }
 
+	  /**
+	   * Creates all the necessary tables to store data in.
+	   */
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {
 	    database.execSQL(DATABASE_CREATE_STORY);
@@ -88,6 +95,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_FRAGS_CHOICE);
 	    
 	  }
+	  
+	  /**
+	   * If the database needs to be upgraded, drops all existing tables and creates the upgraded tables.
+	   */
 	  @Override
 	  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	    Log.w(SQLiteHelper.class.getName(),

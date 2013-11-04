@@ -13,7 +13,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-
+/**
+ * StorageManager is meant to write data into the SQLite database. This data is meant for access in offline mode in the case
+ * that the user chooses offline mode or to view stories that the user has cached in the device memory.
+ */
 public class StorageManager {
 
 	private SQLiteDatabase database;

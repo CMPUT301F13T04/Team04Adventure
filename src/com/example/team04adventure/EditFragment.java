@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * EditFragment creates the activity screen displayed when the user chooses to edit an existing fragment of the story.
+ * This fragment allows the user to upload images, open the camera to take images which will be uploaded, 
+ * connect the selected fragment to other existing fragments, and edit the text of a fragment.
+ */
+
 public class EditFragment extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -35,7 +41,6 @@ public class EditFragment extends Activity {
 	long id;
 	Uri imageFileUri;
 	Frag fragment;
-	JSONparser json;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +97,15 @@ public class EditFragment extends Activity {
 		});
 	}
 	
+	/**
+	 *  Opens the camera application and prepares to store the captured image in a file.
+	 */
 	public void openCamera() {
 		// Opens the camera app and stores the resulting image as a jpg file in the /team04adventure in the external memory.
 		
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         
-        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/team04adventure";
+        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/team04adventure/pic";
         File folderF = new File(folder);
         if (!folderF.exists()) {
             folderF.mkdir();
@@ -145,6 +153,9 @@ public class EditFragment extends Activity {
 		
 	}
 	
+	/**
+	 * Opens the image picker for the user to add to the fragment.
+	 */
 	public void uploadImage() {
 		// Starts the image picker for the user to choose a picture to add to the fragment
 		Intent intent = new Intent();
@@ -153,10 +164,17 @@ public class EditFragment extends Activity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
 	}
 	
+	/**
+	 * Opens the activity that contains all existing fragments to allow the user to choose one to make
+	 * a connection to.
+	 */
 	public void linkFrag() {
 		
 	}
 	
+	/**
+	 * Saves the current text in the main TextView as the body text of the fragment.
+	 */
 	public void saveFrag() {
 		// Saves the changes to the fragment text
 		String fragBodyString = fragBody.getText().toString();

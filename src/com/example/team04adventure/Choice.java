@@ -1,7 +1,12 @@
 package com.example.team04adventure;
 
-
-//testing egit addon for eclipse - delete this later - anthony VERSION2 v5.mike
+/**
+ * @author Team04Adventure
+ * Class that models a choice associated with a fragment item. It contains
+ * text(body) that differentiates it from other choices, an ID for storage and
+ * linking purposes, and a childID that links to the fragment it represents.
+ *
+ */
 public class Choice {
 	
 	String body;
@@ -16,6 +21,10 @@ public class Choice {
 		
 	}
 	
+	/*
+	 * Simple getters and setters.
+	 * 
+	 */
 	public String getBody(){
 		
 		return this.body;

@@ -242,11 +242,15 @@ public class StorageManager {
 		
 		this.open();
 		
+		String[] storyargs = {story.getId()};
+		
 		database.delete(SQLiteHelper.TABLE_STORIES, SQLiteHelper.COLUMN_SID
-				+ " = " + story.getId(), null);
+				+ " = ?" , storyargs);
 	
 		database.delete(SQLiteHelper.TABLE_STORY_FRAGS, SQLiteHelper.COLUMN_SID
-				+ " = " + story.getId(), null);
+				+ " = ?", storyargs);
+		
+	
 		
 		if(!story.getFrags().isEmpty()){
 			for(Frag f : story.getFrags()){
@@ -269,14 +273,16 @@ public class StorageManager {
 	 */
 	private void deleteFragment(Frag f) {
 		
+		String[] fragargs = {f.getId()};
+		
 		database.delete(SQLiteHelper.TABLE_FRAGS, SQLiteHelper.COLUMN_FID
-				+ " = " + f.getId(), null);
+				+ " = ?", fragargs);
 		
 		database.delete(SQLiteHelper.TABLE_FRAGS_MEDIA, SQLiteHelper.COLUMN_FID
-				+ " = " + f.getId(), null);
+				+ " = ?", fragargs);
 		
 		database.delete(SQLiteHelper.TABLE_FRAGS_CHOICE, SQLiteHelper.COLUMN_FID
-				+ " = " + f.getId(), null);
+				+ " = ?", fragargs);
 		
 		
 		if(!f.getChoices().isEmpty()){
@@ -306,8 +312,11 @@ public class StorageManager {
 	 * @param m
 	 */
 	private void deleteMedia(Media m) {
+		
+		String[] medargs = {""+m.getID()};
+		
 		database.delete(SQLiteHelper.TABLE_MEDIA, SQLiteHelper.COLUMN_MID
-				+ " = " + m.getID(), null);
+				+ " = ?", medargs);
 		
 	}
 
@@ -317,8 +326,11 @@ public class StorageManager {
 	 * @param c
 	 */
 	private void deleteChoice(Choice c) {
+		
+		String[] choiargs = {""+c.getID()};
+		
 		database.delete(SQLiteHelper.TABLE_CHOICE, SQLiteHelper.COLUMN_CID
-				+ " = " + c.getID(), null);		
+				+ " = ?", choiargs);		
 	}
 
 

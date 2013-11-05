@@ -9,10 +9,11 @@
     android:orientation="vertical"
     tools:context=".EditFragment" >
 
-    <TextView
+    <EditText
         android:id="@+id/frag_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:hint=""
         android:text="@string/frag_title" />
     <EditText
         android:id="@+id/frag_body"

@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * EditFragment creates the activity screen displayed when the user chooses to edit an existing fragment of the story.
@@ -33,7 +32,7 @@ public class EditFragment extends Activity {
 	private Button linkButton;
 	private Button saveButton;
 	
-	private TextView fragTitle;
+	private EditText fragTitle;
 	private EditText fragBody;
 	
     private static final int SELECT_PICTURE = 1;
@@ -58,7 +57,7 @@ public class EditFragment extends Activity {
 		linkButton = (Button) findViewById(R.id.link);
 		saveButton = (Button) findViewById(R.id.save);
 		
-		fragTitle = (TextView) findViewById(R.id.frag_title);
+		fragTitle = (EditText) findViewById(R.id.frag_title);
 		fragBody = (EditText) findViewById(R.id.frag_body);
 		
 		fragTitle.setText(fragment.getTitle());
@@ -177,7 +176,9 @@ public class EditFragment extends Activity {
 	 */
 	public void saveFrag() {
 		// Saves the changes to the fragment text
+		String fragTitleString = fragTitle.getText().toString();
 		String fragBodyString = fragBody.getText().toString();
+		fragment.setTitle(fragTitleString);
 		fragment.setBody(fragBodyString);
 	}
 	@Override

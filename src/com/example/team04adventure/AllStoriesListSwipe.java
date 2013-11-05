@@ -27,7 +27,7 @@ public class AllStoriesListSwipe extends Fragment {
 
 
 		View rootView = inflater.inflate(R.layout.activity_all_stories_list_swipe, container, false);
-		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
+		storyListView = (ListView) rootView.findViewById(R.id.story_list);
 
 
 		return rootView;
@@ -37,9 +37,28 @@ public class AllStoriesListSwipe extends Fragment {
 //		ArrayList<Story> ostorylist = new ArrayList<Story>();
 
 
-		JSONparser jp = new JSONparser();
+//		JSONparser jp = new JSONparser();
 
-		ArrayList<Story> stories = jp.getAll();
+//		ArrayList<Story> stories = jp.getAll();
+		
+		String id = "69696";
+		
+	    /* Simple choice */
+
+	    /* Simple fragment */
+	    Frag f = new Frag();
+	    f.setTitle("title");
+	    f.setAuthor("Frag authored by " + id);
+	    f.setBody("This fragment body belongs to frag " + id);
+	    f.setId(id);
+	    /* Simple story */
+	    Story s = new Story();
+	    s.setAuthor("Story authored by " + id);
+	    s.setTitle("Title " + id);
+	    s.setId(id);
+	    s.addFragment(f);
+	    ArrayList<Story> stories = new ArrayList<Story>();
+	    stories.add(s);
 
 		storyListView.setAdapter(new StoryListAdapter(getActivity(), stories));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
@@ -54,6 +73,8 @@ public class AllStoriesListSwipe extends Fragment {
 			}
 
 		});
+		
+		super.onResume();
 	}
 
 	public void addStory(View view){

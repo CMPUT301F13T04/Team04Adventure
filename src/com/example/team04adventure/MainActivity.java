@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		
 		UsernameText = (EditText) findViewById(R.id.username);
 		Button Login = (Button) findViewById(R.id.login);
-		Login.setOnClickListener(new View.OnClickListener()
+		Login.setOnClickListener(new View.OnClickListener() 
 		{
 				
 			public void onClick(View v)

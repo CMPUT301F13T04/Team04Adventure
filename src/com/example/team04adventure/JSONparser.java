@@ -1,6 +1,7 @@
 package com.example.team04adventure;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -84,13 +85,13 @@ public class JSONparser {
 				System.err.println(output);
 			}
 
-			try {
-				EntityUtils.consume(entity);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//try {
+			//	EntityUtils.consume(entity);
+		//	} catch (IOException e) {
+		//		e.printStackTrace();
+			//}
 
-			httpPost.releaseConnection();
+			//httpPost.releaseConnection();
 //		} else {
 //			// TELL THE USER THEY ARE ALREADY IN THE SYSTEM.!>!!
 //		}
@@ -115,11 +116,11 @@ public class JSONparser {
 			// Now we expect to get a User response
 			ElasticSearchResponse<Story> esResponse = gson.fromJson(json,elasticSearchResponseType);
 			Story s1 = esResponse.getSource();
-			System.out.println(s1.toString());
 			
 			
 			
-//			getRequest.releaseConnection();
+			
+		//	getRequest.releaseConnection();
 			return s1;
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

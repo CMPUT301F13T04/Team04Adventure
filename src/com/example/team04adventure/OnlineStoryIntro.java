@@ -36,14 +36,14 @@ public class OnlineStoryIntro extends Activity {
 		JSONparser jp = new JSONparser();
 
 
-		Story s = jp.getStory(sid);
+		story = jp.getStory(sid);
 
-		story = s;
+	
 
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
-		storyTitle.append(s.getTitle());
+		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-		storyAuthor.append(s.getAuthor());
+		storyAuthor.append(story.getAuthor());
 	}
 
 
@@ -132,9 +132,18 @@ public class OnlineStoryIntro extends Activity {
 			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
 
+	
 
 	}
-
+	public void deleteStory(View view){	
+		JSONparser parser = new JSONparser();
+		
+		parser.deleteStory(story);
+		Intent intent = new Intent(this, OnlineStoryList.class);
+		startActivity(intent);
+		
+		
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

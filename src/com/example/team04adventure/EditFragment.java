@@ -49,9 +49,9 @@ public class EditFragment extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		id = extras.getString("id");
-		StorageManager sm = new StorageManager(this);
+		JSONparser jp = new JSONparser();
 		
-		fragment = sm.getFrag(id);
+		//fragment = jp.g.getFrag(id);
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);

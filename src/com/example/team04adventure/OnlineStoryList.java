@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -217,6 +218,9 @@ public class OnlineStoryList extends FragmentActivity implements
 					e.printStackTrace();
 				}
 
+				Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
+				
+				startActivity(intent);
 			}  
 		});  
 

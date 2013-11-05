@@ -41,7 +41,7 @@
         android:onClick="playStory"  />
 
     <Button
-        android:id="@+id/fuploadmedia"
+        android:id="@+id/remove_from_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/StoryTitle"

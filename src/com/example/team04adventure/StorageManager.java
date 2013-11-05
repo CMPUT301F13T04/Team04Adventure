@@ -358,7 +358,7 @@ public class StorageManager {
 	 * 
 	 * @return A Story to be displayed to the user.
 	 */
-	public Story getStory(long sid){
+	public Story getStory(String sid){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
 				SQLiteHelper.COLUMN_UNAME};
@@ -396,7 +396,7 @@ public class StorageManager {
 	private Story getInfo(Story story) {
 		String[] fIds = {SQLiteHelper.COLUMN_FID};
 		String sFwhere = "_sid = ?";
-		String[] whereargs = {""+story.getId()};
+		String[] whereargs = {story.getId()};
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORY_FRAGS,
 				fIds, sFwhere, whereargs, null, null, null);
@@ -404,7 +404,7 @@ public class StorageManager {
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Frag frag = new Frag();
-			frag = getFrag(cursor.getLong(0));
+			frag = getFrag(cursor.getString(0));
 			story.addFragment(frag);
 			cursor.moveToNext();
 		}
@@ -422,10 +422,10 @@ public class StorageManager {
 	 * 
 	 * @return A fragment to be stored in a story.
 	 */
-	public Frag getFrag(long fid) {
+	public Frag getFrag(String fid) {
 		
 		String fwhere = "_fid = ?";
-		String[] whereargs = {""+fid};
+		String[] whereargs = {fid};
 		Frag frag = null;
 		int flag = 0;
 

@@ -34,7 +34,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MTYPE = "Type";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 2;
+	  private static final int DATABASE_VERSION = 3;
 
 	  // Database creation sql statement
 	  
@@ -45,7 +45,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  
 	  private static final String DATABASE_CREATE_STORY_FRAG = "create table "
 		  + TABLE_STORY_FRAGS + "(" + COLUMN_SID
-		  + " integer primary key, " + COLUMN_FID + " integer);";
+		  + " text primary key, " + COLUMN_FID + " text);";
 	  
 		 
 	  private static final String DATABASE_CREATE_FRAGS = "create table "
@@ -57,12 +57,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  
 	  private static final String DATABASE_CREATE_FRAGS_MEDIA = "create table "
 		  + TABLE_FRAGS_MEDIA + "(" + COLUMN_FID
-		  + " integer primary key, " + COLUMN_MID + " integer);";
+		  + " text primary key, " + COLUMN_MID + " integer);";
 	  
 	  
 	  private static final String DATABASE_CREATE_FRAGS_CHOICE = "create table "
 		  + TABLE_FRAGS_CHOICE + "(" + COLUMN_FID 
-		  + " integer primary key, " + COLUMN_CID + " integer);";
+		  + " text primary key, " + COLUMN_CID + " integer);";
 	  
 	  private static final String DATABASE_CREATE_MEDIA = "create table "
 		  + TABLE_MEDIA + "(" + COLUMN_MID 

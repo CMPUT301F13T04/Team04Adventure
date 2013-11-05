@@ -32,7 +32,7 @@ public class FragmentViewer extends Activity {
 		// StoryIntro.java class. They have to be supplied again before
 		// you can go to another frament.
 		Bundle extras = getIntent().getExtras();
-		long fragID = extras.getLong("fid");
+		String fragID = extras.getString("fid");
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
 		
 		// Initialize the list of choices for that frag

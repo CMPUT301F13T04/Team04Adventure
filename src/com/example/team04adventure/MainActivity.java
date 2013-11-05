@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	public static String username;
 	private EditText UsernameText; 
 
 	@Override
@@ -38,7 +39,7 @@ public class MainActivity extends Activity {
 				}
 				else {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
-				i.putExtra("uname", Uname);
+				username = Uname;
 				startActivity(i);
 				
 				

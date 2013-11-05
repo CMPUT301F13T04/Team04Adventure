@@ -16,7 +16,7 @@ public class StoryIntro extends Activity {
 
 	TextView 	storyTitle,
 				storyAuthor;
-	long id;
+	String id;
 	Story story;
 	
 	@Override
@@ -25,22 +25,19 @@ public class StoryIntro extends Activity {
 		setContentView(R.layout.activity_story_intro);
 		
 		Bundle extras = getIntent().getExtras();
-		id = extras.getLong("id");
+		id = extras.getString("id");
 		StorageManager sm = new StorageManager(this);
 		
 		System.out.println("ID: "+ id);
 		
 	
-		Story s = sm.getStory(id);
+		story = sm.getStory(id);
 		
-
-		story = s;
-
 		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
-		storyTitle.append(s.getTitle());
+		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-		storyAuthor.append(s.getAuthor());
+		storyAuthor.append(story.getAuthor());
 	}
 
 	public void removeFromCache(View view){
@@ -55,7 +52,7 @@ public class StoryIntro extends Activity {
 		
 		i = new Intent();
 		i.setClassName("com.example.team04adventure",
-		               "com.example.team04adventure.OfflineStoryList");
+		               "com.example.team04adventure.OnlineStoryList");
 		startActivity(i);
 		
 		
@@ -64,9 +61,12 @@ public class StoryIntro extends Activity {
 	public void playStory(View view){
 		
 		ArrayList<Frag> frags = story.getFrags();
+		if (story.getFrags().isEmpty()) {
+			System.out.println("empty");
+		}
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-		System.out.println(frags.get(0).getTitle());
-		System.out.println(frags.get(0).getId());
+//		System.out.println(frags.get(0).getTitle());
+//		System.out.println(frags.get(0).getId());
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);
 		

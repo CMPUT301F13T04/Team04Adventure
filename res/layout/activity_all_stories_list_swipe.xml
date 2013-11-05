@@ -8,13 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".AllStoriesListSwipe" >
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="All Stories" />
 	
     <SearchView 
         android:id="@+id/offline_story_search"

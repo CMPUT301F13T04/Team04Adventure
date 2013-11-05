@@ -1,23 +1,78 @@
 package com.example.team04adventure;
 
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 public class MyStoriesListSwipe extends Fragment {
 
+	private ListView storyListView;
+	private StoryListAdapter sla;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.activity_my_stories_list_swipe, container, false);
-         
-        return rootView;
-    }
-	
+			Bundle savedInstanceState) {
 
-	
-	
+		View rootView = inflater.inflate(R.layout.activity_my_stories_list_swipe, container, false);
+		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
+
+		return rootView;
+	}
+
+	public void onResume() {
+		ArrayList<Story> storylist = new ArrayList<Story>();
+		StorageManager sm = new StorageManager(getActivity());
+
+		/** Open DB connection and retrieve all of 
+    	the cached stories. **/
+
+//		String id = "69696";
+//		
+//	    /* Simple choice */
+//
+//	    /* Simple fragment */
+//	    Frag f = new Frag();
+//	    f.setTitle("title");
+//	    f.setAuthor("Frag authored by " + id);
+//	    f.setBody("This fragment body belongs to frag " + id);
+//	    f.setId(id);
+//	    /* Simple story */
+//	    Story s = new Story();
+//	    s.setAuthor("Story authored by " + id);
+//	    s.setTitle("Title " + id);
+//	    s.setId(id);
+//	    s.addFragment(f);
+//	    sm.addStory(s);
+		
+		storylist = sm.getAll();
+
+
+		storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
+		storyListView.setOnItemClickListener(new OnItemClickListener() {
+
+			/** When a story is selected **/
+			@Override
+			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+				Story s = (Story) storyListView.getItemAtPosition(position);
+
+				Intent intent = new Intent(getActivity(), StoryIntro.class);
+//				intent.putExtra("uname", Uname);
+				intent.putExtra("id", s.getId());
+				startActivity(intent);
+			}
+
+		});
+		
+		super.onResume();
+	}
 }
+

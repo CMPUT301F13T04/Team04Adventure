@@ -38,7 +38,7 @@ public class EditFragment extends Activity {
 	
     private static final int SELECT_PICTURE = 1;
 	
-	long id;
+	String id;
 	Uri imageFileUri;
 	Frag fragment;
 		
@@ -48,7 +48,7 @@ public class EditFragment extends Activity {
 		setContentView(R.layout.activity_edit_fragment);
 		
 		Bundle extras = getIntent().getExtras();
-		id = extras.getLong("id");
+		id = extras.getString("id");
 		StorageManager sm = new StorageManager(this);
 		
 		fragment = sm.getFrag(id);

@@ -50,10 +50,15 @@ public class OnlineStoryIntro extends Activity {
 	public void playStory(View view){
 
 		ArrayList<Frag> frags = story.getFrags();
+		if (story.getFrags().isEmpty()) {
+			Toast.makeText(getBaseContext(), "This story has no fragments", Toast.LENGTH_LONG).show();
+			}
+		else {
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+		
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);
-
+		}
 	}
 
 	public void addFragment(View view){

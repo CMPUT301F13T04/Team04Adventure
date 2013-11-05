@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class StoryIntro extends Activity {
@@ -61,13 +62,14 @@ public class StoryIntro extends Activity {
 		
 		ArrayList<Frag> frags = story.getFrags();
 		if (story.getFrags().isEmpty()) {
-			System.out.println("empty");
-		}
+			Toast.makeText(getBaseContext(), "This story has no fragments", Toast.LENGTH_LONG).show();
+			}
+		else {
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-
+		
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);
-		
+		}
 	}
 	
 	

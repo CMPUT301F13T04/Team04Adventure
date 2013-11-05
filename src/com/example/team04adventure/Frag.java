@@ -34,6 +34,9 @@ public class Frag {
 		this.setPictures(new ArrayList<Media>());
 		this.vids = new ArrayList<Media>();
 		this.choices = new ArrayList<Choice>();
+		this.profile = new Media();
+		this.profile.type = "pic";
+		this.body = "";
 	
 	}
 	

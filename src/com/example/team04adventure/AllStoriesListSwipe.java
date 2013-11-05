@@ -1,11 +1,7 @@
 package com.example.team04adventure;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListView;
 
 public class AllStoriesListSwipe extends Fragment {
@@ -37,28 +32,29 @@ public class AllStoriesListSwipe extends Fragment {
 //		ArrayList<Story> ostorylist = new ArrayList<Story>();
 
 
-//		JSONparser jp = new JSONparser();
+		JSONparser jp = new JSONparser();
 
-//		ArrayList<Story> stories = jp.getAll();
+		ArrayList<Story> stories = new ArrayList<Story>();
+		stories.add(jp.getStory("10"));
 		
-		String id = "69696";
-		
-	    /* Simple choice */
-
-	    /* Simple fragment */
-	    Frag f = new Frag();
-	    f.setTitle("title");
-	    f.setAuthor("Frag authored by " + id);
-	    f.setBody("This fragment body belongs to frag " + id);
-	    f.setId(id);
-	    /* Simple story */
-	    Story s = new Story();
-	    s.setAuthor("Story authored by " + id);
-	    s.setTitle("Title " + id);
-	    s.setId(id);
-	    s.addFragment(f);
-	    ArrayList<Story> stories = new ArrayList<Story>();
-	    stories.add(s);
+//		String id = "69696";
+//		
+//	    /* Simple choice */
+//
+//	    /* Simple fragment */
+//	    Frag f = new Frag();
+//	    f.setTitle("title");
+//	    f.setAuthor("Frag authored by " + id);
+//	    f.setBody("This fragment body belongs to frag " + id);
+//	    f.setId(id);
+//	    /* Simple story */
+//	    Story s = new Story();
+//	    s.setAuthor("Story authored by " + id);
+//	    s.setTitle("Title " + id);
+//	    s.setId(id);
+//	    s.addFragment(f);
+//	    ArrayList<Story> stories = new ArrayList<Story>();
+//	    stories.add(s);
 
 		storyListView.setAdapter(new StoryListAdapter(getActivity(), stories));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
@@ -77,46 +73,5 @@ public class AllStoriesListSwipe extends Fragment {
 		super.onResume();
 	}
 
-	public void addStory(View view){
 
-		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-		final EditText input = new EditText(getActivity()); 
-		adb.setView(input);
-
-		adb.setTitle("Story Title");
-
-		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
-			public void onClick(DialogInterface dialog, int whichButton) {  
-				Story story = new Story();
-				story.setTitle(input.getText().toString());
-				Random rg = new Random();
-				int rint = rg.nextInt(100);
-
-				story.setId(story.getTitle()+rint);
-				story.setAuthor(MainActivity.username);
-				JSONparser jp = new JSONparser();
-
-				try {
-					jp.storeStory(story);
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}  
-		});  
-
-		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int which) {
-
-				return;   
-			}
-		});
-
-
-	}
 }	

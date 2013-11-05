@@ -2,7 +2,6 @@ package com.example.team04adventure;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 public class MyStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;
-	private StoryListAdapter sla;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,24 +32,6 @@ public class MyStoriesListSwipe extends Fragment {
 
 		/** Open DB connection and retrieve all of 
     	the cached stories. **/
-
-//		String id = "69696";
-//		
-//	    /* Simple choice */
-//
-//	    /* Simple fragment */
-//	    Frag f = new Frag();
-//	    f.setTitle("title");
-//	    f.setAuthor("Frag authored by " + id);
-//	    f.setBody("This fragment body belongs to frag " + id);
-//	    f.setId(id);
-//	    /* Simple story */
-//	    Story s = new Story();
-//	    s.setAuthor("Story authored by " + id);
-//	    s.setTitle("Title " + id);
-//	    s.setId(id);
-//	    s.addFragment(f);
-//	    sm.addStory(s);
 		
 		storylist = sm.getAll();
 

@@ -1,10 +1,13 @@
 package com.example.team04adventure;
 
+import java.io.IOException;
 import java.util.Locale;
+import java.util.Random;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class OnlineStoryList extends FragmentActivity implements
@@ -182,4 +186,49 @@ public class OnlineStoryList extends FragmentActivity implements
 		}
 	}
 
+	public void addStory(View view){
+
+		System.out.println("addStory in OnlineStoryList");
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		final EditText input = new EditText(this); 
+		adb.setView(input);
+
+		adb.setTitle("Story Title");
+
+		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int whichButton) {  
+				Story story = new Story();
+				story.setTitle(input.getText().toString());
+				Random rg = new Random();
+				int rint = rg.nextInt(100);
+
+				story.setId(story.getTitle()+rint);
+				story.setAuthor(MainActivity.username);
+				JSONparser jp = new JSONparser();
+
+				try {
+					jp.storeStory(story);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}  
+		});  
+
+		adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+
+				return;   
+			}
+		});
+		
+		adb.show();
+
+
+	}
 }

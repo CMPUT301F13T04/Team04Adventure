@@ -18,6 +18,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,7 +34,7 @@ import com.google.gson.reflect.TypeToken;
 // At this point you can outline the general code but to make it specific you need to know exactly how the app will run
 // and what it will need from each method. 
 
-public class JSONparser {
+public class JSONparser extends AsyncTask<String, Void> {
 
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();

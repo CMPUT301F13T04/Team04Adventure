@@ -66,6 +66,11 @@
             android:name="com.example.team04adventure.CreateFragment"
             android:label="@string/title_activity_create_fragment" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.OnlineStoryIntro"
+            android:label="@string/title_activity_online_story_intro" >
+        </activity>
+        
     </application>
 
 </manifest>

@@ -24,6 +24,6 @@
         android:id="@+id/add_story"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Stories"
+        android:text="New Story"
         android:onClick="addStory" />
 </LinearLayout>

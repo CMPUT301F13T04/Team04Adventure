@@ -202,9 +202,10 @@ public class OnlineStoryList extends FragmentActivity implements
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
 
-				story.setId(story.getTitle()+rint);
+				story.setId(story.getTitle().replace(" ", "")+rint);
 				story.setAuthor(MainActivity.username);
 				JSONparser jp = new JSONparser();
+				
 
 				try {
 					jp.storeStory(story);

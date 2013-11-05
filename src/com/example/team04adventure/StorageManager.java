@@ -65,9 +65,10 @@ public class StorageManager {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
 				sId, swhere, whereargs, null, null, null);
 		
-		cursor.moveToFirst();
+	
+	
 		
-		if(cursor.getString(0) == null){
+		if(cursor.moveToFirst() == false){
 			cursor.close();
 			this.close();
 			return false;

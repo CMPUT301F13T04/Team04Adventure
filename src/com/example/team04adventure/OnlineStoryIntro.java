@@ -26,7 +26,7 @@ public class OnlineStoryIntro extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_story_intro);
+		setContentView(R.layout.activity_online_story_intro);
 
 		Bundle extras = getIntent().getExtras();
 		sid = extras.getString("id");

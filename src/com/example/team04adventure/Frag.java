@@ -3,6 +3,9 @@ package com.example.team04adventure;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 
 /**
  * Frag is meant to contain the id, title, body, and related media of a single story fragment inside a single object. 
@@ -36,6 +39,10 @@ public class Frag {
 		this.choices = new ArrayList<Choice>();
 		this.profile = new Media();
 		this.profile.type = "pic";
+		
+		Bitmap bm = BitmapFactory.decodeResource(null, R.drawable.ic_launcher);
+		
+		this.profile.setContent(bm);
 		this.body = "";
 	
 	}

@@ -22,7 +22,8 @@ public class StorageManager {
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
 	private String[] allStories = { SQLiteHelper.COLUMN_SID,
-		      SQLiteHelper.COLUMN_STITLE,SQLiteHelper.COLUMN_UNAME 
+		      SQLiteHelper.COLUMN_STITLE,SQLiteHelper.COLUMN_UNAME,
+		      SQLiteHelper.COLUMN_SYN
 		      };
 	private String[] allFrags = { SQLiteHelper.COLUMN_FID,
 			SQLiteHelper.COLUMN_FTITLE, SQLiteHelper.COLUMN_AUT,
@@ -94,6 +95,7 @@ public class StorageManager {
 		values.put(SQLiteHelper.COLUMN_SID, story.getId());
 		values.put(SQLiteHelper.COLUMN_STITLE, story.getTitle());
 		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor());
+		values.put(SQLiteHelper.COLUMN_SYN, story.getSynopsis());
 		database.insert(SQLiteHelper.TABLE_STORIES, null,
 	    		values);
 		
@@ -283,8 +285,7 @@ public class StorageManager {
 		
 		database.delete(SQLiteHelper.TABLE_FRAGS_CHOICE, SQLiteHelper.COLUMN_FID
 				+ " = ?", fragargs);
-		
-		
+			
 		if(!f.getChoices().isEmpty()){
 			for (Choice c : f.getChoices())
 				deleteChoice(c);
@@ -673,6 +674,7 @@ public class StorageManager {
 	    story.setId(cursor.getString(0));
 	    story.setTitle(cursor.getString(1));
 	    story.setAuthor(cursor.getString(2));
+	    story.setSynopsis(cursor.getString(3));
 	   
 	    return story;
 	

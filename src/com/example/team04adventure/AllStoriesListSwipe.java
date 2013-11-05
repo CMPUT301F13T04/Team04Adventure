@@ -52,7 +52,9 @@ public class AllStoriesListSwipe extends Fragment {
 		JSONparser jp = new JSONparser();
 
 		ArrayList<Story> stories = new ArrayList<Story>();
-		stories.add(jp.getStory("10"));
+		stories = jp.getAll();
+		
+		//stories.add(jp.getStory("10"));
 		
 		/*
 		 * Code used for testing. Hard-coded story that can be added into the list.

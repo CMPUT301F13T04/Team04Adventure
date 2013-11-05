@@ -23,5 +23,6 @@
     <string name="title_activity_create_fragment">CreateFragment</string>
     <string name="title_activity_online_story_intro">Story menu</string>
     <string name="title_activity_frag_list">Story Fragments</string>
+    <string name="frag_image">Image</string>
 
 </resources>

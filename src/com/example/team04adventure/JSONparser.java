@@ -18,11 +18,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import android.os.AsyncTask;
+import android.os.StrictMode;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 /*
  * This class deals with storage on the server. It stores stores and users,
  * is able to get stories and users and is able to search them. 
@@ -34,7 +33,7 @@ import com.google.gson.reflect.TypeToken;
 // At this point you can outline the general code but to make it specific you need to know exactly how the app will run
 // and what it will need from each method. 
 
-public class JSONparser extends AsyncTask<String, Void> {
+public class JSONparser {
 
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();
@@ -46,6 +45,8 @@ public class JSONparser extends AsyncTask<String, Void> {
 	// Just the generic constructor
 	public JSONparser() {
 		this.gson = new Gson();
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 	}
 
 	// Assumption is that the User being stored is not in the server already. 
@@ -115,8 +116,10 @@ public class JSONparser extends AsyncTask<String, Void> {
 			ElasticSearchResponse<Story> esResponse = gson.fromJson(json,elasticSearchResponseType);
 			Story s1 = esResponse.getSource();
 			System.out.println(s1.toString());
-			getRequest.releaseConnection();
-
+			
+			
+			
+//			getRequest.releaseConnection();
 			return s1;
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

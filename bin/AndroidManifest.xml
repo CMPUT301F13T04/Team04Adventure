@@ -13,7 +13,9 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -64,6 +66,15 @@
             android:name="com.example.team04adventure.CreateFragment"
             android:label="@string/title_activity_create_fragment" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.OnlineStoryIntro"
+            android:label="@string/title_activity_online_story_intro" >
+        </activity>
+        <activity
+            android:name="com.example.team04adventure.fragList"
+            android:label="@string/title_activity_frag_list" >
+        </activity>
+        
     </application>
 
 </manifest>

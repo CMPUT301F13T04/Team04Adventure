@@ -16,6 +16,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_UNAME = "UName";
 	  public static final String COLUMN_SID = "_sid";
 	  public static final String COLUMN_STITLE = "Title";
+	  public static final String COLUMN_SYN = "Synop";
 	  public static final String TABLE_STORY_FRAGS = "StoriesFrags";
 	  public static final String TABLE_FRAGS = "Fragments";
 	  public static final String COLUMN_FTITLE = "Title";
@@ -34,14 +35,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MTYPE = "Type";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 6;
+	  private static final int DATABASE_VERSION = 7;
 
 	  // Database creation sql statement
 	  
 	  private static final String DATABASE_CREATE_STORY = "create table "
 		  + TABLE_STORIES + "(" + COLUMN_SID
 		  + " text primary key, " + COLUMN_STITLE
-		  + " text not null," + COLUMN_UNAME +" text not null);";
+		  + " text not null," + COLUMN_UNAME +" text not null, "
+		  + COLUMN_SYN + " text);";
 	  
 	  private static final String DATABASE_CREATE_STORY_FRAG = "create table "
 		  + TABLE_STORY_FRAGS + "(" + COLUMN_SID

@@ -33,9 +33,9 @@ public final class R {
         public static final int Play=0x7f080019;
         public static final int StoryAuthor=0x7f080018;
         public static final int StoryTitle=0x7f080017;
-        public static final int action_settings=0x7f080029;
+        public static final int action_settings=0x7f08002a;
         public static final int add_story=0x7f080001;
-        public static final int author=0x7f080024;
+        public static final int author=0x7f080025;
         public static final int cachedlist=0x7f080016;
         public static final int camera=0x7f08000d;
         public static final int choice=0x7f080022;
@@ -43,13 +43,14 @@ public final class R {
         public static final int fbody=0x7f080004;
         public static final int fcamera=0x7f080007;
         public static final int flink=0x7f080008;
-        public static final int frag=0x7f080023;
+        public static final int frag=0x7f080024;
         public static final int frag_body=0x7f08000b;
         public static final int frag_title=0x7f08000a;
         public static final int fsave=0x7f080009;
         public static final int fsetillus=0x7f080006;
         public static final int ftitle=0x7f080003;
         public static final int fuploadmedia=0x7f080005;
+        public static final int image=0x7f080023;
         public static final int link=0x7f08000e;
         public static final int login=0x7f080014;
         public static final int offline_story_search=0x7f080015;
@@ -58,12 +59,12 @@ public final class R {
         public static final int registerusername=0x7f08001f;
         public static final int remove_from_cache=0x7f080021;
         public static final int save=0x7f08000f;
-        public static final int section_label=0x7f080025;
+        public static final int section_label=0x7f080026;
         public static final int story_list=0x7f080002;
         public static final int story_search=0x7f080000;
-        public static final int storyauthor=0x7f080027;
-        public static final int storyfragments=0x7f080028;
-        public static final int storytitle=0x7f080026;
+        public static final int storyauthor=0x7f080028;
+        public static final int storyfragments=0x7f080029;
+        public static final int storytitle=0x7f080027;
         public static final int upload=0x7f08000c;
         public static final int username=0x7f080013;
     }
@@ -102,6 +103,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int camera=0x7f050006;
         public static final int frag_body=0x7f050004;
+        public static final int frag_image=0x7f050016;
         public static final int frag_title=0x7f050003;
         public static final int hello_world=0x7f050002;
         public static final int link=0x7f050007;

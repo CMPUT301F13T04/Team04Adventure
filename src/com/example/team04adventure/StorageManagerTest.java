@@ -1,24 +1,47 @@
 package com.example.team04adventure;
 
-/**
- * @author Team04Adventure
- * The J-unit test for the storage manager. It tests all queries of the
- * SQL tables, as well as storing and deleting tuples.
- *
- */
+import junit.framework.TestCase;
 
-public class StorageManagerTest implements TestCase {
+public class StorageManagerTest extends TestCase {
 
-	public void setUp(){
-		
+	public StorageManagerTest(String name) {
+		super(name);
 	}
-	
-	public void tearDown() {
-		
+
+	protected void setUp() throws Exception {
+		super.setUp();
 	}
-	
-	public void run(){
-		
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
 	}
-	
+
+	public void testStorageManager() {
+		fail("Not yet implemented");
+	}
+
+	public void testStoryExists() {
+		fail("Not yet implemented");
+	}
+
+	public void testAddStory() {
+		fail("Not yet implemented");
+	}
+
+	public void testDeleteStory() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetAll() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetStory() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetFrag() {
+		fail("Not yet implemented");
+	}
+
 }

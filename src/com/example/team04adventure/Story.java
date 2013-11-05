@@ -12,11 +12,22 @@ public class Story {
 	private ArrayList<Frag> frags;
 	String id;
 	String Author;
+	String synopsis;
 	
 	public Story(){
 		
 		this.frags = new ArrayList<Frag>();
 		
+	}
+	
+	public String getSynopsis(){
+		
+		return this.synopsis;
+	}
+	
+	public void setSynopsis(String syn){
+		
+		this.synopsis = syn;
 	}
 
 	/**

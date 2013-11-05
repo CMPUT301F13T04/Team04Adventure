@@ -123,6 +123,8 @@ public class OnlineStoryIntro extends Activity {
 		StorageManager sm = new StorageManager(this);
 
 		Story s = parser.getStory(sid);
+		
+		System.out.println(s.getFrags().size());
 
 		if(sm.storyExists(s.getId()))
 			Toast.makeText(getBaseContext(), cantcache, Toast.LENGTH_LONG).show();	

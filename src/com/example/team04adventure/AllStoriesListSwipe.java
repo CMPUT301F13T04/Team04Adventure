@@ -35,8 +35,11 @@ public class AllStoriesListSwipe extends Fragment {
 		JSONparser jp = new JSONparser();
 
 		ArrayList<Story> stories = new ArrayList<Story>();
+//		stories = jp.getAll();
 		stories.add(jp.getStory("10"));
-		
+		stories.add(jp.getStory("11"));
+//		stories.addAll(jp.getAll());
+
 //		String id = "69696";
 //		
 //	    /* Simple choice */

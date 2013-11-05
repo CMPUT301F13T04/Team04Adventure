@@ -38,9 +38,7 @@ public class OnlineStoryIntro extends Activity {
 
 		Story s = jp.getStory(sid);
 
-
 		story = s;
-
 
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(s.getTitle());
@@ -67,14 +65,14 @@ public class OnlineStoryIntro extends Activity {
 		adb.setTitle("Fragment Title");
 
 
-		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
+		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
 			public void onClick(DialogInterface dialog, int whichButton) {  
 				Frag frag = new Frag();
 				frag.setTitle(input.getText().toString());
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
 
-				frag.setId(frag.getTitle()+rint);
+				frag.setId(frag.getTitle().replace(" ","")+rint);
 				frag.setAuthor(Uname);
 				story.addFragment(frag);
 
@@ -96,13 +94,24 @@ public class OnlineStoryIntro extends Activity {
 			}  
 		});  
 
-		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 
 				return;   
 			}
 		});
+		
+		adb.show();
+	
+	}
+	
+	
+	public void editStory(View view){
+		Intent intent = new Intent(this, fragList.class);
+		intent.putExtra("id", sid);
+		startActivity(intent);
+		
 	}
 
 

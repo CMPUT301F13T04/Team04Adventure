@@ -42,6 +42,7 @@ public class FragAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.fraglistlayout, null);
             holder = new ViewHolder();
             holder.fragView = (TextView) convertView.findViewById(R.id.frag);
+            holder.authorView = (TextView) convertView.findViewById(R.id.author);
         
             
             convertView.setTag(holder);
@@ -50,6 +51,7 @@ public class FragAdapter extends BaseAdapter {
         
       
         holder.fragView.setText(frags.get(position).getTitle());
+        holder.authorView.setText("By, "+frags.get(position).getAuthor());
        
         
  
@@ -60,6 +62,7 @@ public class FragAdapter extends BaseAdapter {
        
     	
         TextView fragView;
+        TextView authorView;
       
     }
 	

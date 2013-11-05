@@ -28,7 +28,6 @@ public class StoryIntro extends Activity {
 		id = extras.getString("id");
 		StorageManager sm = new StorageManager(this);
 		
-		System.out.println("ID: "+ id);
 		
 	
 		story = sm.getStory(id);
@@ -65,8 +64,7 @@ public class StoryIntro extends Activity {
 			System.out.println("empty");
 		}
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-//		System.out.println(frags.get(0).getTitle());
-//		System.out.println(frags.get(0).getId());
+
 		intent.putExtra("fid", frags.get(0).getId());
 		startActivity(intent);
 		

@@ -70,6 +70,10 @@
             android:name="com.example.team04adventure.OnlineStoryIntro"
             android:label="@string/title_activity_online_story_intro" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.fragList"
+            android:label="@string/title_activity_frag_list" >
+        </activity>
         
     </application>
 

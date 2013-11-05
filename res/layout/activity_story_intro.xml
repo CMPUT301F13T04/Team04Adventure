@@ -14,10 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
         android:maxLines="4"
         android:scrollbars="vertical"
-        android:text="" />
+        android:text=""
+        android:textSize="24sp" />
     
     <TextView
         android:id="@+id/StoryAuthor"
@@ -26,6 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/StoryTitle"
+        android:layout_centerHorizontal="true"
         android:maxLines="2"
         android:scrollbars="vertical"
         android:textSize="14sp" />

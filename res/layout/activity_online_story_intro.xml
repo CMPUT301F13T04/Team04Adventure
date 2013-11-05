@@ -59,7 +59,8 @@
         android:layout_alignLeft="@+id/StoryTitle"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/AddFrag"
-        android:text="Edit" />
+        android:text="Edit" 
+        android:onClick = "editStory"/>
     <Button
         android:id="@+id/Download"
         android:layout_width="wrap_content"

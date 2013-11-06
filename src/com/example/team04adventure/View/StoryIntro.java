@@ -18,6 +18,8 @@ import com.example.team04adventure.Model.Story;
 /**
  * StoryIntro creates the activity that the user sees when the user selects a story from the cached story list.
  * This fragment allows the user to view the story title and synopsis, and choose whether to play or delete the story.
+ * 
+ * @author Team04Adventure
  */
 public class StoryIntro extends Activity {
 

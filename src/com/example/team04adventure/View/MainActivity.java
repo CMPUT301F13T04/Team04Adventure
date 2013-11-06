@@ -16,6 +16,8 @@ import com.example.team04adventure.Controller.OnlineStoryList;
 /**
  * MainActivity is the initial login screen that the user sees upon opening the app. The user can enter his or her name to login, 
  * and this will bring the user to the swipe view containing all of the existing stories.
+ * 
+ * @author Team04Adventure
  */
 public class MainActivity extends Activity {
 	

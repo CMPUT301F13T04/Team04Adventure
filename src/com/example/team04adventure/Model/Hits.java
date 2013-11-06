@@ -2,7 +2,11 @@ package com.example.team04adventure.Model;
 
 import java.util.Collection;
 
-
+/**
+ * Hits gets the response from ElasticSearchResponse. Copied from ESDemo.
+ * @author Team04Adventure
+ * @param <T>
+ */
 
 public class Hits<T> {
     int total;

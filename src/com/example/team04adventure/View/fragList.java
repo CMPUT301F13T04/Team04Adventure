@@ -18,7 +18,10 @@ import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Story;
 
 
-
+/**
+ * fragList creates the list of fragments that exist in a story.
+ * @author Team04Adventure
+ */
 public class fragList extends Activity {
 
 	@Override

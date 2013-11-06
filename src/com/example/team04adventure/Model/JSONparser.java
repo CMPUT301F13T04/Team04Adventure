@@ -33,6 +33,12 @@ import com.google.gson.reflect.TypeToken;
 // At this point you can outline the general code but to make it specific you need to know exactly how the app will run
 // and what it will need from each method. 
 
+/**
+ * JSONparser deals with the storage on the server. It stores stories and users, is able to get stories and users and
+ * is able to search them.
+ * 
+ * @author Team04Adventure
+ */
 public class JSONparser {
 
 	private Gson gson;
@@ -49,7 +55,14 @@ public class JSONparser {
 		StrictMode.setThreadPolicy(policy);
 	}
 
-	// Assumption is that the User being stored is not in the server already. 
+	// Assumption is that the User being stored is not in the server already.
+	/**
+	 * Stores the story in the server.
+	 * @param aStory the story to be stored.
+	 * @throws ClientProtocolException
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	public void storeStory(Story aStory) throws ClientProtocolException, IllegalStateException, IOException {
 		// Check if story is already registered before storing
 //		if (!checkStory(aStory)) { // IF its true then the user exists.
@@ -97,6 +110,11 @@ public class JSONparser {
 	}
 
 	//Assume user is on the server
+	/**
+	 * Gets the story object with the same story ID.
+	 * @param Storyid Story ID of the story to be retrieved.
+	 * @return story object requested.
+	 */
 	public Story getStory(String Storyid) {
 		// Retrieve a user from the webservice, not sure why you would want to
 		// do this.
@@ -129,6 +147,11 @@ public class JSONparser {
 		return null;
 	}
 
+	/**
+	 * Checks if the story exists.
+	 * @param aStory the story to be checked.
+	 * @return boolean of whether the story exists.
+	 */
 	public boolean checkStory(Story aStory){
 			HttpGet getRequest = new HttpGet(WebService + stories + aStory.getId());
 			getRequest.addHeader("Accept", "application/json");
@@ -156,9 +179,12 @@ public class JSONparser {
 	}
 
 	/**
-	 * search by keywords
+	 * Searches for a story.
+	 * @param keywords keywords to search for.
+	 * @return array of stories that match the keywords.
+	 * @throws IOException
 	 */
-	 public ArrayList<Story> search(String[] keywords) throws IOException {
+	public ArrayList<Story> search(String[] keywords) throws IOException {
          String query_str = "";
          
          // create query string
@@ -206,6 +232,10 @@ public class JSONparser {
  }
 
 	// Not needed right now.
+	/**
+	 * Deletes the selected story.
+	 * @param S1 story to be selected.
+	 */
 	public void deleteStory(Story S1) {
 		HttpDelete httpDelete = new HttpDelete(WebService + stories + S1.getId());
 		httpDelete.addHeader("Accept", "application/json");
@@ -234,6 +264,10 @@ public class JSONparser {
 		}
 	}
 
+	/**
+	 * Gets all stories.
+	 * @return ArrayList of all stories.
+	 */
 	public ArrayList<Story> getAll(){
 		ArrayList<Story> list = new ArrayList<Story>();
 		try {
@@ -247,6 +281,9 @@ public class JSONparser {
 
 	}
 
+	/**
+	 * Caches stories into device memory.
+	 */
 	public void cacheStory() {
 		// Cache the story.
 		// Get here from user clicking on the story and hitting download. If you
@@ -259,6 +296,12 @@ public class JSONparser {
 		// frags too.
 	}
 
+	/**
+	 * Repeated code that in every insert. Copied from example.
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	public String getEntityContent(HttpResponse response) throws IOException {
 
 		// basic class, its just repeated code thats in every insert so its

@@ -16,6 +16,8 @@ import android.graphics.BitmapFactory;
 /**
  * StorageManager is meant to write data into the SQLite database. This data is meant for access in offline mode in the case
  * that the user chooses offline mode or to view stories that the user has cached in the device memory.
+ * 
+ * @author Team04Adventure
  */
 public class StorageManager {
 
@@ -39,22 +41,32 @@ public class StorageManager {
 	/**
 	 * Constructor that also creates an instance of 
 	 * SQLiteHelper for easier DB access.
-	 * @param context
+	 * @param context current context.
 	 */
 	public StorageManager(Context context) {
 		dbHelper = new SQLiteHelper(context);
 	}
 
-	
+	/**
+	 * Opens the database.
+	 * @throws SQLException
+	 */
 	private void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
 
+	/**
+	 * Closes the database.
+	 */
 	private void close() {
 		dbHelper.close();
 	}
 	
-	
+	/**
+	 * Checks if the story exists.
+	 * @param id ID of the story to check.
+	 * @return boolean of if it exists.
+	 */
 	public boolean storyExists(String id){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID};
@@ -81,10 +93,10 @@ public class StorageManager {
 	}
 	
 	/**
-	 * addEntry: Adds a Story to the DB from information 
+	 * Adds a Story to the DB from information 
 	 * contained in the object story.
 	 *
-	 * @param story
+	 * @param story story to be added.
 	 */
 	public void addStory(Story story) {
 		
@@ -115,10 +127,9 @@ public class StorageManager {
 	}
 	
 	/**
-	 * addFrags: Inserts a F object into the DB.
-	 * @param f
+	 * Inserts a F object into the DB.
+	 * @param f fragment to be added.
 	 * @return the ID of the fragment that was just added.
-	 * to
 	 */
 	private void addFrags(Frag f) {
 		
@@ -173,10 +184,9 @@ public class StorageManager {
 
 
 	/**
-	 * addMedia: Inserts a Media object into the DB.
-	 * @param m
+	 * Inserts a Media object into the DB.
+	 * @param m media object to be added.
 	 * @return the ID of the Media that was just added.
-	 * to
 	 */
 	private long addMedia(Media m) {
 		
@@ -198,6 +208,11 @@ public class StorageManager {
 		
 	}
 
+	/**
+	 * Converts bitmap to blob so that it can be stored.
+	 * @param media bitmap to be converted.
+	 * @return converted bitmap.
+	 */
 	private byte[] convertToBlob(Bitmap media) {
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
@@ -209,10 +224,9 @@ public class StorageManager {
 
 
 	/**
-	 * addChoices: Inserts a Choice object into the DB.
-	 * @param c
+	 * Inserts a Choice object into the DB.
+	 * @param c choice to add.
 	 * @return the ID of the Choice that was just added.
-	 * to
 	 */
 	private long addChoices(Choice c) {
 		ContentValues values = new ContentValues();
@@ -235,9 +249,8 @@ public class StorageManager {
 
 
 	/**
-	 * deleteEntry: Deletes a Story from the DB
-	 * 
-	 * @param story
+	 * Deletes a Story from the DB
+	 * @param story story to be deleted.
 	 */
 	public void deleteStory(Story story) {
 		
@@ -268,9 +281,8 @@ public class StorageManager {
 	}
 	
 	/**
-	 * deleteFragment: Deletes a Fragment from the DB
-	 * 
-	 * @param f
+	 * Deletes a Fragment from the DB
+	 * @param f fragment to be deleted.
 	 */
 	private void deleteFragment(Frag f) {
 		
@@ -307,9 +319,8 @@ public class StorageManager {
 	}
 
 	/**
-	 * deleteMedia: Deletes a Picture or Video from the DB
-	 * 
-	 * @param m
+	 * Deletes a Picture or Video from the DB
+	 * @param m media to be deleted.
 	 */
 	private void deleteMedia(Media m) {
 		
@@ -321,9 +332,8 @@ public class StorageManager {
 	}
 
 	/**
-	 * deleteChoice: Deletes a choice from the DB
-	 * 
-	 * @param c
+	 * Deletes a choice from the DB
+	 * @param c choice to be deleted.
 	 */
 	private void deleteChoice(Choice c) {
 		
@@ -335,9 +345,8 @@ public class StorageManager {
 
 
 	/**
-	 * getAll: Returns every Story that the user has cached.
-	 * 
-	 * @return An ArrayList containing every Story.
+	 * Returns every Story that the user has cached.
+	 * @return an ArrayList containing every Story.
 	 */
 	public ArrayList<Story> getAll() {
 		
@@ -364,12 +373,10 @@ public class StorageManager {
 	}
 	
 	/**
-	 * getInfo: Returns a single story object of the story with id
+	 * Returns a single story object of the story with id
 	 * sid.
-	 * 
-	 * @param sid
-	 * 
-	 * @return A Story to be displayed to the user.
+	 * @param sid ID of the story to get.
+	 * @return a Story to be displayed to the user.
 	 */
 	public Story getStory(String sid){
 		
@@ -399,12 +406,10 @@ public class StorageManager {
 	
 	
 	/**
-	 * getInfo: Returns a single story object stored in the
-	 * story object passed in..
-	 * 
-	 * @param story
-	 * 
-	 * @return A Story to be displayed to the user.
+	 * Returns a single story object stored in the
+	 * story object passed in.
+	 * @param story story to get info from.
+	 * @return a Story to be displayed to the user.
 	 */
 	private Story getInfo(Story story) {
 		String[] fIds = {SQLiteHelper.COLUMN_FID};
@@ -429,11 +434,9 @@ public class StorageManager {
 	}
 
 	/**
-	 * getFrag: Returns a single Fragment object.
-	 * 
-	 * @param fid
-	 * 
-	 * @return A fragment to be stored in a story.
+	 * Returns a single Fragment object.
+	 * @param fid ID of the fragment to get.
+	 * @return a fragment to be stored in a story.
 	 */
 	public Frag getFrag(String fid) {
 		
@@ -486,12 +489,11 @@ public class StorageManager {
 	}
 
 	/**
-	 * getFragMediaInfo: Returns an ArrayList of Videos or Pictures
+	 * Returns an ArrayList of Videos or Pictures
 	 * depending on the parameter type.
-	 * 
-	 * @param id, type
-	 * 
-	 * @return A list of videos or pictures.
+	 * @param fid ID of the media object to get info from.
+	 * @param type type of media object.
+	 * @return a list of videos or pictures.
 	 */
 	private ArrayList<Media> getFragMediaInfo(String fid, String type) {
 		
@@ -517,12 +519,11 @@ public class StorageManager {
 	}
 
 	/**
-	 * getMedia: Returns a single Picture or Video object depending
+	 * Returns a single Picture or Video object depending
 	 * on the value in type.
-	 * 
-	 * @param mid, type
-	 * 
-	 * @return A picture or video.
+	 * @param mid
+	 * @param type type of the media object.
+	 * @return a picture or video.
 	 */
 	private Media getMedia(long mid, String type) {
 		
@@ -542,12 +543,11 @@ public class StorageManager {
 	}
 
 	/**
-	 * cursorToMedia: Helper method that stores all the Media 
+	 * Helper method that stores all the Media 
 	 * attributes in a new Media object for addition to an
 	 * ArrayList.
 	 * @param cursor
-	 * @return the Media in the row the cursor is currently pointing
-	 * to
+	 * @return the Media in the row the cursor is currently pointing to.
 	 */
 	private Media cursorToMedia(Cursor cursor) {
 		Media med = new Media();
@@ -567,12 +567,10 @@ public class StorageManager {
 
 
 	/**
-	 * getFragChoiceInfo: Returns an ArrayList of Choices that
+	 * Returns an ArrayList of Choices that
 	 * belong to the fragment with ID of fid.
-	 * 
-	 * @param string
-	 * 
-	 * @return A list of choices.
+	 * @param fid ID of the fragment to get info from.
+	 * @return a list of choices.
 	 */
 	private ArrayList<Choice> getFragChoiceInfo(String fid) {
 		
@@ -598,12 +596,10 @@ public class StorageManager {
 	}
 
 	/**
-	 * getChoice: Returns a single Choice object with ID
+	 * Returns a single Choice object with ID
 	 * of cid.
-	 * 
-	 * @param cid
-	 * 
-	 * @return A Choice object.
+	 * @param cid ID of the choice.
+	 * @return a Choice object.
 	 */
 	private Choice getChoice(long cid) {
 		
@@ -624,12 +620,11 @@ public class StorageManager {
 
 
 	/**
-	 * cursorToChoice: Helper method that stores all the Choice 
+	 * Helper method that stores all the Choice 
 	 * attributes in a new Choice object for addition to an
 	 * ArrayList.
 	 * @param cursor
-	 * @return the Choice in the row the cursor is currently pointing
-	 * to
+	 * @return the Choice in the row the cursor is currently pointing to.
 	 */
 	private Choice cursorToChoice(Cursor cursor) {
 		Choice choice = new Choice();
@@ -642,12 +637,11 @@ public class StorageManager {
 
 
 	/**
-	 * cursorToFragment: Helper method that stores all the Fragment 
+	 * Helper method that stores all the Fragment 
 	 * attributes in a new Fragment object for addition to an
 	 * ArrayList.
 	 * @param cursor
-	 * @return the fragment in the row the cursor is currently pointing
-	 * to
+	 * @return the fragment in the row the cursor is currently pointing to.
 	 */
 	private Frag cursorToFragment(Cursor cursor) {
 		Frag frag = new Frag();
@@ -661,12 +655,11 @@ public class StorageManager {
 
 
 	/**
-	 * cursorToEntry: Helper method that stores all the Story 
+	 * Helper method that stores all the Story 
 	 * attributes in a new Story object for addition to an
 	 * ArrayList.
 	 * @param cursor
-	 * @return the story in the row the cursor is currently pointing
-	 * to
+	 * @return the story in the row the cursor is currently pointing to.
 	 */
 	private Story cursorToStory(Cursor cursor) {
 		Story story = new Story();

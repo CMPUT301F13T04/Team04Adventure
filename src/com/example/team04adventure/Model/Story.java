@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * Story is meant to create and hold the ID, title, author and all associated fragments of a story.
+ * 
+ * @author Team04Adventure
  */
 public class Story {
 	

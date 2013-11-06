@@ -9,6 +9,8 @@ import android.util.Log;
 /**
  * SQLiteHelper is meant to handle required SQLite operations that the user does not have access to. It also contains 
  * the raw queries to be accessed from StorageManager.
+ * 
+ * @author Team04Adventure
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -85,6 +87,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	  /**
 	   * Creates all the necessary tables to store data in.
+	   * @param database SQLiteDatabase to create tables into.
 	   */
 	  @Override
 	  public void onCreate(SQLiteDatabase database) {

@@ -11,6 +11,8 @@ import com.example.team04adventure.R;
 
 /**
  * Frag is meant to contain the id, title, body, and related media of a single story fragment inside a single object. 
+ * 
+ * @author Team04Adventure
  */
 
 public class Frag {
@@ -34,6 +36,9 @@ public class Frag {
 	private ArrayList<Choice> choices;
 	String Author;
 	
+	/**
+	 * Initializes a Frag object.
+	 */
 	public Frag(){
 		
 		this.setPictures(new ArrayList<Media>());

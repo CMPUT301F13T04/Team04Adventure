@@ -13,7 +13,10 @@ import android.widget.TextView;
 
 import com.example.team04adventure.R;
 
-
+/**
+ * StoryListAdapter is an adapter to get the story list.
+ * @author Team04Adventure
+ */
 public class StoryListAdapter extends BaseAdapter {
  
 		private ArrayList<Story> stories;

@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 
 /**
  * Media holds the images, videos, and sounds that can be associated to any fragment.
+ * 
+ * @author Team04Adventure
  */
 public class Media {
 	

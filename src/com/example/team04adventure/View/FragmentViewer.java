@@ -19,6 +19,10 @@ import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.StorageManager;
 
+/**
+ * FragmentViewer creates the activity that lets the user view the contents of the fragment.
+ * @author Team04Adventure
+ */
 public class FragmentViewer extends Activity {
 	// This is the title and body fields that are allocated at runtime
 	TextView 	fragTitle,

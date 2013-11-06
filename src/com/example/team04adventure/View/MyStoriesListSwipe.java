@@ -20,6 +20,8 @@ import com.example.team04adventure.Model.StoryListAdapter;
 /**
  * MyStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
  * choose one of those cached stories to view.
+ * 
+ * @author Team04Adventure
  */
 public class MyStoriesListSwipe extends Fragment {
 

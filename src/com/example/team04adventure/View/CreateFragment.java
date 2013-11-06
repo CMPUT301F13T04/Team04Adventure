@@ -9,6 +9,10 @@ import android.widget.EditText;
 
 import com.example.team04adventure.R;
 
+/**
+ * CreateFragment creates the activity that is called when the user chooses to create a new fragment.
+ * @author Team04Adventure
+ */
 public class CreateFragment extends Activity {
 
 	private EditText title, body;
@@ -26,12 +30,19 @@ public class CreateFragment extends Activity {
 		
 	}
 
-	
+	/**
+	 * Links the fragment to another fragment.
+	 * @param view current view.
+	 */
 	private void link(View view){
 		
 		
 	}
 	
+	/**
+	 * Saves the changes to the fragment.
+	 * @param view current view.
+	 */
 	private void saveFragment(View view){
 		
 		

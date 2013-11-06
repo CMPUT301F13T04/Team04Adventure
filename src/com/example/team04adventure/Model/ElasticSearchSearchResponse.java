@@ -3,6 +3,12 @@ package com.example.team04adventure.Model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * ElasticSearchSearchResponse gets the return type of ElasticSearchResponse. Copied from ESDemo.
+ * 
+ * @author Team04Adventure
+ * @param <T>
+ */
 public class ElasticSearchSearchResponse<T> {
     int took;
     boolean timed_out;

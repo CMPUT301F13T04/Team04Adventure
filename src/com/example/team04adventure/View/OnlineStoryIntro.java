@@ -26,6 +26,7 @@ import com.example.team04adventure.Model.Story;
  * OnlineStoryIntro creates the activity that the user enters when the user selects a story from the online story list.
  * This fragment allows the user to play the story, add fragments to the story, edit the story, cache the story and delete the story.
  * 
+ * @author Team04Adventure
  * @see StoryIntro.java
  */
 public class OnlineStoryIntro extends Activity {

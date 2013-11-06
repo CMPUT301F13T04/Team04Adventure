@@ -26,6 +26,8 @@ import com.example.team04adventure.Model.Media;
  * EditFragment creates the activity screen displayed when the user chooses to edit an existing fragment of the story.
  * This fragment allows the user to upload images, open the camera to take images which will be uploaded, 
  * connect the selected fragment to other existing fragments, and edit the text of a fragment.
+ * 
+ * @author Team04Adventure
  */
 
 public class EditFragment extends Activity {

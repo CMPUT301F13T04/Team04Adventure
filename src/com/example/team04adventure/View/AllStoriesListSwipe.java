@@ -17,10 +17,10 @@ import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
 
 /**
- * @author Team04Adventure
- * 
  * This class implements the first half of the "home screen". It is responsible for displaying
  * all of the stories in a listview. It represents the left half of the swipe view.
+ * 
+ * @author Team04Adventure
  */
 
 public class AllStoriesListSwipe extends Fragment {

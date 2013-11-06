@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Choice;
 
+/**
+ * FragChoiceAdapter is an adapter to get the fragment choice list. 
+ * @author Team04Adventure
+ */
 public class FragChoiceAdapter extends BaseAdapter {
 
 	

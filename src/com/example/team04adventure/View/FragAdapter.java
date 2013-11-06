@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Frag;
 
+/**
+ * FragAdapter is an adapter to get the list of fragments.
+ * @author Team04Adventure
+ */
 public class FragAdapter extends BaseAdapter {
 
 	

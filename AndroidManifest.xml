@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.team04adventure.MainActivity"
+            android:name="com.example.team04adventure.View.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,47 +31,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.team04adventure.SignUp"
-            android:label="@string/title_activity_sign_up" >
-        </activity>
-        <activity
-            android:name="com.example.team04adventure.StoryIntro"
+            android:name="com.example.team04adventure.View.StoryIntro"
             android:label="@string/title_activity_story_intro" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.FragmentViewer"
+            android:name="com.example.team04adventure.View.FragmentViewer"
             android:label="@string/title_activity_fragment_viewer" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.OfflineStoryList"
-            android:label="@string/title_activity_offline_story_list" >
-        </activity>
-        <activity
-            android:name="com.example.team04adventure.OnlineStoryList"
+            android:name="com.example.team04adventure.View.OnlineStoryList"
             android:label="@string/title_activity_online_story_list" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.EditFragment"
+            android:name="com.example.team04adventure.View.EditFragment"
             android:label="@string/title_activity_edit_fragment" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.AllStoriesListSwipe"
+            android:name="com.example.team04adventure.View.AllStoriesListSwipe"
             android:label="@string/title_activity_all_stories_list_swipe" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.MyStoriesListSwipe"
+            android:name="com.example.team04adventure.View.MyStoriesListSwipe"
             android:label="@string/title_activity_my_stories_list_swipe" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.CreateFragment"
+            android:name="com.example.team04adventure.View.CreateFragment"
             android:label="@string/title_activity_create_fragment" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.OnlineStoryIntro"
+            android:name="com.example.team04adventure.View.OnlineStoryIntro"
             android:label="@string/title_activity_online_story_intro" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.fragList"
+            android:name="com.example.team04adventure.View.fragList"
             android:label="@string/title_activity_frag_list" >
         </activity>
         

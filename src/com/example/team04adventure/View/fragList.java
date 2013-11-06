@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Frag;
+import com.example.team04adventure.Model.FragAdapter;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Story;
 

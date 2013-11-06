@@ -1,4 +1,4 @@
-package com.example.team04adventure.View;
+package com.example.team04adventure.Model;
 
 
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Frag;
 
 /**
  * FragAdapter is an adapter to get the list of fragments.

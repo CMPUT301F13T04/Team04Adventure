@@ -1,4 +1,4 @@
-package com.example.team04adventure.View;
+package com.example.team04adventure.Model;
 
 
 import java.util.ArrayList;
@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Choice;
 
 /**
  * FragChoiceAdapter is an adapter to get the fragment choice list. 

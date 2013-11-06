@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
+import com.example.team04adventure.Model.FragChoiceAdapter;
 import com.example.team04adventure.Model.StorageManager;
 
 /**

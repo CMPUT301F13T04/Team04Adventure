@@ -254,8 +254,8 @@ public class JSONparser {
 			while ((output = br.readLine()) != null) {
 				System.err.println(output);
 			}
-			EntityUtils.consume(entity);
-			httpDelete.releaseConnection();
+			//EntityUtils.consume(entity);
+			//httpDelete.releaseConnection();
 
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

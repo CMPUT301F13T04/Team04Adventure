@@ -299,7 +299,6 @@ public class JSONparser {
 	/**
 	 * Repeated code that in every insert. Copied from example.
 	 * @param response
-	 * @return
 	 * @throws IOException
 	 */
 	public String getEntityContent(HttpResponse response) throws IOException {

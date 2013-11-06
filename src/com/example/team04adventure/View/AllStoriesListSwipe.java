@@ -46,8 +46,6 @@ public class AllStoriesListSwipe extends Fragment {
 	/**
 	 * onResume method, simply assigns sets the adapter and a listener to listen
 	 * to user selections of story items.
-	 * @param void
-	 * @return void
 	 */
 	
 	public void onResume() {

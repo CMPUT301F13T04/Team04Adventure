@@ -31,6 +31,18 @@
         android:maxLines="2"
         android:scrollbars="vertical"
         android:textSize="14sp" />
+    
+    <TextView
+        android:id="@+id/StorySynop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:textSize="12sp"
+        android:maxLines="2"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/StoryAuthor"
+         />
 
     <Button
         android:id="@+id/Play"
@@ -38,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/StoryTitle"
         android:layout_alignRight="@+id/StoryAuthor"
-        android:layout_below="@+id/StoryAuthor"
+        android:layout_below="@+id/StorySynop"
         android:text="Play Story!"
         android:onClick="playStory"  />
 

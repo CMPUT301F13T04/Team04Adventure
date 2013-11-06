@@ -66,8 +66,7 @@ public class StorageManager {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
 				sId, swhere, whereargs, null, null, null);
 		
-	
-	
+
 		
 		if(cursor.moveToFirst() == false){
 			cursor.close();
@@ -375,7 +374,7 @@ public class StorageManager {
 	public Story getStory(String sid){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
-				SQLiteHelper.COLUMN_UNAME};
+				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN };
 		String swhere = "_sid = ?";
 		String[] whereargs = {""+sid};
 		

@@ -1,149 +1,55 @@
 package com.example.team04adventure.Test;
 
-import com.example.team04adventure.Model.Choice;
-import com.example.team04adventure.Model.Frag;
-import com.example.team04adventure.Model.JSONparser;
-import com.example.team04adventure.Model.Story;
+import junit.framework.TestCase;
 
-public class JSONparserTest implements TestCase{
+public class JSONparserTest extends TestCase {
 
-	Story s;
-	JSONparser jp;
-	
-	@Override
-	public void setUp() {
-		
-		/*
-		 * The below creates a new story object.
-		 */
-		
-		/* Simple id */
-		long l = 50;
-		/* Simple choice */
-		Choice c = new Choice();
-		c.setBody("My choice");
-		c.setID(l);
-		/* Simple fragment */
-		Frag f = new Frag();
-		f.setAuthor("Anthony");
-		f.setBody("This fragment sucks");
-		f.setChoice(c);
-		/* Simple story */
-		s = new Story();
-		s.setAuthor("Mike");
-		s.setTitle("Mike's Book");
-		s.addFragment(f);
-		
-		/* Set up a new JSONparser */
-		jp = new JSONparser();
-		
-		
+	public JSONparserTest(String name) {
+		super(name);
 	}
 
-	@Override
-	public void tearDown() {
-		
-		jp.deleteStory(s);
-		
-		
+	protected void setUp() throws Exception {
+		super.setUp();
 	}
 
-	@Override
-	public void run() {
-
-		testCacheStory();
-		testUpdateStory();
-		testGetStory();
-		testSearchStories();
-		testDeleteStory();
-		testAdvancedSearch();
-		testGetEntityContent();
-
+	protected void tearDown() throws Exception {
+		super.tearDown();
 	}
 
-	
-	public void testUpdateStory() {
-		
-		setUp();
-		
-		/* Ensure stored story equals s */
-		try {
-			jp.storeStory(s);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		assert(s.equals(jp.getStory(s.getTitle())));
-		/* Modify s */
-		s.setTitle("New Title");
-		s.setAuthor("New Author");
-		/* Cache new story and check equality again */
-		//jp.updateStory(s);
-		assert(s.equals(jp.getStory(s.getTitle())));
-		
-		tearDown();
-		
-		
+	public void testJSONparser() {
+		fail("Not yet implemented");
 	}
-	
+
+	public void testStoreStory() {
+		fail("Not yet implemented");
+	}
+
 	public void testGetStory() {
-		
-		setUp();
-		
-		/* Store a story online */
-		try {
-			jp.storeStory(s);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		/* Ensure s2 is an unit story */
-		Story s2 = null;
-		assert(s2 == null);
-		/* Ensure s2 equals after it loads from server */
-		s2 = jp.getStory(s.getTitle());
-		assert(s2.equals(s));
-		
-		tearDown();
-		
+		fail("Not yet implemented");
 	}
-	
-	public void testSearchStories() {
-		
+
+	public void testCheckStory() {
+		fail("Not yet implemented");
 	}
-	
+
+	public void testSearch() {
+		fail("Not yet implemented");
+	}
+
 	public void testDeleteStory() {
-		
-		setUp();
-		/* Store a story online */
-		try {
-			jp.storeStory(s);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		/* Ensure story exists on server */
-		assert(jp.getStory(s.getTitle()) != null);
-		/* Delete story */
-		jp.deleteStory(s);
-		/* Ensure story doesn't exist on server */
-		assert(jp.getStory(s.getTitle()) == null);
-		
-		tearDown();
-		
+		fail("Not yet implemented");
 	}
-	
-	public void testAdvancedSearch() {
-		
+
+	public void testGetAll() {
+		fail("Not yet implemented");
 	}
-	
+
 	public void testCacheStory() {
-		
+		fail("Not yet implemented");
 	}
-	
+
 	public void testGetEntityContent() {
-		
+		fail("Not yet implemented");
 	}
-	
 
 }

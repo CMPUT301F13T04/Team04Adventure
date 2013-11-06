@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class OnlineStoryList extends FragmentActivity implements
@@ -189,20 +190,28 @@ public class OnlineStoryList extends FragmentActivity implements
 
 	public void addStory(View view){
 
-		System.out.println("addStory in OnlineStoryList");
+		
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		final EditText input = new EditText(this); 
-		adb.setView(input);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	    final EditText titleinput = new EditText(this); 
+	    final EditText bodyinput = new EditText(this);
+	    titleinput.setHint("Enter the Title here.");
+	    bodyinput.setHint("Enter a Synopsis here.");
+	    lila1.addView(titleinput);
+	    lila1.addView(bodyinput);
+	    adb.setView(lila1);
+	
 
-		adb.setTitle("Story Title");
+		adb.setTitle("New Story");
 
 		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
 			public void onClick(DialogInterface dialog, int whichButton) {  
 				Story story = new Story();
-				story.setTitle(input.getText().toString());
+				story.setTitle(titleinput.getText().toString());
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
-
+				story.setSynopsis(bodyinput.getText().toString());
 				story.setId(story.getTitle().replace(" ", "")+rint);
 				story.setAuthor(MainActivity.username);
 				JSONparser jp = new JSONparser();

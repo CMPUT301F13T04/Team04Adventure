@@ -16,7 +16,8 @@ import android.widget.Toast;
 public class StoryIntro extends Activity {
 
 	TextView 	storyTitle,
-				storyAuthor;
+				storyAuthor,
+				storySynop;
 	String id;
 	Story story;
 	
@@ -38,6 +39,8 @@ public class StoryIntro extends Activity {
 		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
 		storyAuthor.append(story.getAuthor());
+		storySynop = (TextView) findViewById(R.id.StorySynop);
+		storySynop.append(story.getSynopsis());
 	}
 
 	public void removeFromCache(View view){

@@ -20,11 +20,19 @@ public class Story {
 		
 	}
 	
+	/**
+	 * Gets the synopsis of the story.
+	 * @return the synopsis of the story.
+	 */
 	public String getSynopsis(){
 		
 		return this.synopsis;
 	}
 	
+	/**
+	 * Sets the synopsis of the story as specified.
+	 * @param syn the synopsis of the story.
+	 */
 	public void setSynopsis(String syn){
 		
 		this.synopsis = syn;

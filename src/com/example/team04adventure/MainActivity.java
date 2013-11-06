@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * MainActivity is the initial login screen that the user sees upon opening the app. The user can enter his or her name to login, 
+ * and this will bring the user to the swipe view containing all of the existing stories.
+ */
 public class MainActivity extends Activity {
 	
 	public static String username;

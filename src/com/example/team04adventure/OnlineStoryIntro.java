@@ -15,6 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * OnlineStoryIntro creates the activity that the user enters when the user selects a story from the online story list.
+ * This fragment allows the user to play the story, add fragments to the story, edit the story, cache the story and delete the story.
+ * 
+ * @see StoryIntro.java
+ */
 public class OnlineStoryIntro extends Activity {
 
 	TextView 	storyTitle,
@@ -48,7 +54,10 @@ public class OnlineStoryIntro extends Activity {
 		
 	}
 
-
+	/**
+	 * Enters the first fragment of the story.
+	 * @param view the current view.
+	 */
 	public void playStory(View view){
 
 		ArrayList<Frag> frags = story.getFrags();
@@ -63,6 +72,10 @@ public class OnlineStoryIntro extends Activity {
 		}
 	}
 
+	/**
+	 * Adds a new fragment to the list of fragments that the story owns.
+	 * @param view the current view.
+	 */
 	public void addFragment(View view){
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -113,7 +126,10 @@ public class OnlineStoryIntro extends Activity {
 	
 	}
 	
-	
+	/**
+	 * Lets the user select a fragment to edit.
+	 * @param view the current view.
+	 */
 	public void editStory(View view){
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
@@ -121,7 +137,10 @@ public class OnlineStoryIntro extends Activity {
 		
 	}
 
-
+	/**
+	 * Caches the story in the device memory.
+	 * @param view the current view.
+	 */
 	public void cacheStory(View view) {
 
 		String cache = "Story Cached.";
@@ -144,6 +163,11 @@ public class OnlineStoryIntro extends Activity {
 	
 
 	}
+	
+	/**
+	 * Deletes the story from the server.
+	 * @param view the current view.
+	 */
 	public void deleteStory(View view){	
 		JSONparser parser = new JSONparser();
 		

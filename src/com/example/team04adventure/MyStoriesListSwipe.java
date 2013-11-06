@@ -12,6 +12,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * MyStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
+ * choose one of those cached stories to view.
+ */
 public class MyStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;

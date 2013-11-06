@@ -12,7 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * StoryIntro creates the activity that the user sees when the user selects a story from the cached story list.
+ * This fragment allows the user to view the story title and synopsis, and choose whether to play or delete the story.
+ */
 public class StoryIntro extends Activity {
 
 	TextView 	storyTitle,
@@ -43,6 +46,10 @@ public class StoryIntro extends Activity {
 		storySynop.append(story.getSynopsis());
 	}
 
+	/**
+	 * Removes the selected story from cache.
+	 * @param view the current view.
+	 */
 	public void removeFromCache(View view){
 		Intent i;
 		StorageManager sm = new StorageManager(this);
@@ -61,6 +68,10 @@ public class StoryIntro extends Activity {
 		
 	}
 	
+	/**
+	 * Enters the first fragment of the story.
+	 * @param view the current view.
+	 */
 	public void playStory(View view){
 		
 		ArrayList<Frag> frags = story.getFrags();

@@ -35,7 +35,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MTYPE = "Type";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 7;
+	  private static final int DATABASE_VERSION = 8;
 
 	  // Database creation sql statement
 	  

@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class OnlineStoryIntro extends Activity {
 
 	TextView 	storyTitle,
-	storyAuthor;
+	storyAuthor, storySynop;
 	String sid;
 	Story story;
 	String Uname;
@@ -38,12 +38,14 @@ public class OnlineStoryIntro extends Activity {
 
 		story = jp.getStory(sid);
 
-	
-
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
 		storyAuthor.append(story.getAuthor());
+		storySynop = (TextView) findViewById(R.id.StorySynop);
+		storySynop.append(story.getSynopsis());
+		
+		
 	}
 
 

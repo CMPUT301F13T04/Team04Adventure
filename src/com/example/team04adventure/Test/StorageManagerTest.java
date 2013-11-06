@@ -1,7 +1,10 @@
-package com.example.team04adventure;
+package com.example.team04adventure.Test;
 import junit.framework.TestCase;
 import android.content.Context;
-import android.test.mock.MockContext;
+
+import com.example.team04adventure.Model.Frag;
+import com.example.team04adventure.Model.StorageManager;
+import com.example.team04adventure.Model.Story;
 
 /**
  * @author Team04Adventure

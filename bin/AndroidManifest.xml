@@ -39,7 +39,7 @@
             android:label="@string/title_activity_fragment_viewer" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.View.OnlineStoryList"
+            android:name="com.example.team04adventure.Controller.OnlineStoryList"
             android:label="@string/title_activity_online_story_list" >
         </activity>
         <activity

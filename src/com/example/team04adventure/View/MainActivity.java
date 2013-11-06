@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Controller.OnlineStoryList;
 
 /**
  * MainActivity is the initial login screen that the user sees upon opening the app. The user can enter his or her name to login, 

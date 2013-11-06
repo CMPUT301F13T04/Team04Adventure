@@ -1,4 +1,4 @@
-package com.example.team04adventure.View;
+package com.example.team04adventure.Controller;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -26,6 +26,9 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Story;
+import com.example.team04adventure.View.AllStoriesListSwipe;
+import com.example.team04adventure.View.MainActivity;
+import com.example.team04adventure.View.MyStoriesListSwipe;
 
 public class OnlineStoryList extends FragmentActivity implements
 		ActionBar.TabListener {

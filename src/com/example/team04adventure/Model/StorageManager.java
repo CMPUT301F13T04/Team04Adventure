@@ -630,7 +630,7 @@ public class StorageManager {
 		Choice choice = new Choice();
 		choice.setID(cursor.getLong(0));
 		choice.setBody(cursor.getString(1));
-		choice.setChild(cursor.getLong(2));
+		choice.setChild(cursor.getString(2));
 		
 		return choice;
 	}

@@ -1,8 +1,9 @@
 package com.example.team04adventure.Test;
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
 import android.content.Context;
+import android.test.AndroidTestCase;
+import android.test.RenamingDelegatingContext;
 
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.StorageManager;
@@ -12,16 +13,17 @@ import com.example.team04adventure.Model.Story;
  * @author Team04Adventure
  * The JUnit test class for the storage manager.
  */
-public class StorageManagerTest extends TestCase {
+public class StorageManagerTest extends AndroidTestCase {
 	/* Sample hard-coded story and fragment */
 	Story story;
 	Frag frag;
 	/* StorageManager and context used to store and delete functions */
 	StorageManager sm;
 	Context mc;
+	//ActivityInstrumentationTestCase2 aitc;
 	
-	public StorageManagerTest(String name) {
-		super(name);
+	public StorageManagerTest() {
+		super();
 	}
 	
 	/**
@@ -43,10 +45,13 @@ public class StorageManagerTest extends TestCase {
 		s.setSynopsis("This is a test story. It will be boring as hell.");
 		s.setAuthor("Story's Author");
 		s.setId("uniqueID2");
-		s.addFragment(f);
+		s.getFrags().add(f);
 		this.frag = f;
 		this.story = s;
-		this.sm = new StorageManager(mc.getApplicationContext());
+		RenamingDelegatingContext rdc = new RenamingDelegatingContext(getContext(), "team04");
+		this.sm = new StorageManager(rdc);
+		//this.sm = new StorageManager(mc.getApplicationContext());
+		
 		
 		super.setUp();
 	}
@@ -148,6 +153,9 @@ public class StorageManagerTest extends TestCase {
 	 */
 	public void testGetFrag() {
 		Frag f;
+		if (sm.storyExists(story.getId())) {
+			sm.deleteStory(story);
+		}
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */

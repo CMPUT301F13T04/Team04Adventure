@@ -228,7 +228,38 @@ public class JsonParserTest extends TestCase {
 	 * @return void
 	 */
 	public void testGetAll() {
-		
+		Story s;
+		ArrayList <Story> storyArr = new ArrayList<Story>();
+		/* Assert that story does not already exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
+		/* Add story to the server */
+		try {
+			jp.storeStory(story);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
+		}
+		/* Assert that the story story now does exist in the server */
+		Assert.assertTrue(jp.checkStory(story));
+		/* Attempt to query with bad parameters */
+		try {
+			storyArr = jp.getAll();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Query the Server");
+		}
+		/* Ensure the query did not return nothing */
+		Assert.assertFalse(storyArr.size() == 0);
+		/* Get the returned story */
+		s = storyArr.get(0);
+		/* Ensure that s actually got a story */
+		Assert.assertTrue(s != null);
+		/* Ensure that the stories are equivalent */
+		Assert.assertTrue(s.equals(story));
+		/* Clean up and delete the story */
+		jp.deleteStory(story);
 	}
 
 	/**

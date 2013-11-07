@@ -87,6 +87,8 @@ public class StoryIntro extends Activity {
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
 		
 		intent.putExtra("fid", frags.get(0).getId());
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 		startActivity(intent);
 		}
 	}

@@ -257,10 +257,12 @@ public class EditFragment extends Activity {
 		
 		Intent intent = new Intent(this, OnlineStoryIntro.class);
 		intent.putExtra("id", sid);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		
 		startActivity(intent);
 		
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

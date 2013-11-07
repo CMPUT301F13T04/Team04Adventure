@@ -58,6 +58,7 @@ public class MyStoriesListSwipe extends Fragment {
 				Intent intent = new Intent(getActivity(), StoryIntro.class);
 //				intent.putExtra("uname", Uname);
 				intent.putExtra("id", s.getId());
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 

@@ -54,6 +54,7 @@ public class fragList extends Activity {
 				intent.putExtra("fid", f.getId());
 				intent.putExtra("ftitle", f.getTitle());
 				intent.putExtra("fbody", f.getBody());
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         		startActivity(intent);
              }
 

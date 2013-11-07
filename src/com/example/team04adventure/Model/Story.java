@@ -19,6 +19,9 @@ public class Story {
 	public Story(){
 		
 		this.frags = new ArrayList<Frag>();
+		this.title = "";
+		this.Author = "";
+		this.synopsis = "";
 		
 	}
 	

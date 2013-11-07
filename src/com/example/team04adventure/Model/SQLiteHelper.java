@@ -37,14 +37,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MTYPE = "Type";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 8;
+	  private static final int DATABASE_VERSION = 12;
 
 	  // Database creation sql statement
 	  
 	  private static final String DATABASE_CREATE_STORY = "create table "
 		  + TABLE_STORIES + "(" + COLUMN_SID
 		  + " text primary key, " + COLUMN_STITLE
-		  + " text not null," + COLUMN_UNAME +" text not null, "
+		  + " text," + COLUMN_UNAME +" text, "
 		  + COLUMN_SYN + " text);";
 	  
 	  private static final String DATABASE_CREATE_STORY_FRAG = "create table "
@@ -55,7 +55,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  private static final String DATABASE_CREATE_FRAGS = "create table "
 		  + TABLE_FRAGS + "(" + COLUMN_FID
 		  + " text primary key, " + COLUMN_FTITLE
-		  + " text not null, " + COLUMN_AUT + " text not null, "+
+		  + " text, " + COLUMN_AUT + " text, "+
 		   COLUMN_BODY + " text);";
 	  
 	  
@@ -71,13 +71,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  private static final String DATABASE_CREATE_MEDIA = "create table "
 		  + TABLE_MEDIA + "(" + COLUMN_MID 
 		  + " integer primary key autoincrement, " + COLUMN_CONTENT
-		  + " blob not null, " + COLUMN_MTYPE + " text not null);";
+		  + " blob, " + COLUMN_MTYPE + " text);";
 	  
 	  
 	  private static final String DATABASE_CREATE_CHOICE = "create table "
 		  + TABLE_CHOICE + "(" + COLUMN_CID
 		  + " integer primary key autoincrement, " + COLUMN_CONTENT 
-		  + " text not null, " + COLUMN_CHILD_FID + " text);";
+		  + " text, " + COLUMN_CHILD_FID + " text);";
 	
 
 	  public SQLiteHelper(Context context) {

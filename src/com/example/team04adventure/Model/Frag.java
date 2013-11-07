@@ -51,6 +51,8 @@ public class Frag {
 		
 		this.profile.setContent(bm);
 		this.body = "";
+		this.Author = "";
+		this.title = "";
 	
 	}
 	

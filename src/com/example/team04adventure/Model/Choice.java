@@ -18,6 +18,7 @@ public class Choice {
 		/** a childID of -1 signifies that the choice 
 		 * does not yet have a child **/
 		this.childID = "";
+		this.body = "";
 		
 	}
 	

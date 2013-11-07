@@ -77,7 +77,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  private static final String DATABASE_CREATE_CHOICE = "create table "
 		  + TABLE_CHOICE + "(" + COLUMN_CID
 		  + " integer primary key autoincrement, " + COLUMN_CONTENT 
-		  + " text not null, " + COLUMN_CHILD_FID + " integer);";
+		  + " text not null, " + COLUMN_CHILD_FID + " text);";
 	
 
 	  public SQLiteHelper(Context context) {

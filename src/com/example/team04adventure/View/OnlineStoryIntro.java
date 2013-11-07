@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,34 +87,36 @@ public class OnlineStoryIntro extends Activity {
 	public void addFragment(View view){
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		final EditText input = new EditText(this); 
-		adb.setView(input);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	   
+	    final EditText titleinput = new EditText(this); 
+	    final EditText bodyinput = new EditText(this);
+	    titleinput.setHint("Title");
+	    bodyinput.setHint("Fragment body text");
+	    lila1.addView(titleinput);
+	    lila1.addView(bodyinput);
+	    adb.setView(lila1);
 
-		adb.setTitle("Fragment Title");
+		adb.setTitle("New Fragment");
 
 
 		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
 			public void onClick(DialogInterface dialog, int whichButton) {  
-				Frag frag = new Frag();
-				frag.setTitle(input.getText().toString());
+				
+				String ftitle = titleinput.getText().toString();
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
+				String fbody = bodyinput.getText().toString();
+				String fid = ftitle.replace(" ","")+rint;
 
-				frag.setId(frag.getTitle().replace(" ","")+rint);
-				frag.setAuthor(Uname);
-				story.addFragment(frag);
-
-				JSONparser jp = new JSONparser();
-
-				try {
-					jp.storeStory(story);
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Intent intent = new Intent(OnlineStoryIntro.this, EditFragment.class);
+				intent.putExtra("sid", story.getId());
+				intent.putExtra("fid", fid);
+				intent.putExtra("ftitle", ftitle);
+				intent.putExtra("fbody", fbody);
+				
+				startActivity(intent);
 
 
 

@@ -50,7 +50,10 @@ public class fragList extends Activity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Frag f = (Frag) fragListView.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), EditFragment.class);
-        		intent.putExtra("id", f.getId());
+                intent.putExtra("sid", story.getId());
+				intent.putExtra("fid", f.getId());
+				intent.putExtra("ftitle", f.getTitle());
+				intent.putExtra("fbody", f.getBody());
         		startActivity(intent);
              }
 

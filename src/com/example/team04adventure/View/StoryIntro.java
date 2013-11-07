@@ -65,9 +65,8 @@ public class StoryIntro extends Activity {
 		sm.deleteStory(story);
 		
 		
-		i = new Intent();
-		i.setClassName("com.example.team04adventure",
-		               "com.example.team04adventure.OnlineStoryList");
+		i = new Intent(StoryIntro.this, OnlineStoryList.class);
+		
 		startActivity(i);
 		
 		

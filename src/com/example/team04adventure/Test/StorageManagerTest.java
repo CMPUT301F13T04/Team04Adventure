@@ -1,4 +1,6 @@
 package com.example.team04adventure.Test;
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 import android.content.Context;
 
@@ -109,7 +111,17 @@ public class StorageManagerTest extends TestCase {
 	 * @return void
 	 */
 	public void testGetAll() {
-		fail("Not yet implemented");
+		ArrayList<Story> storyArr = new ArrayList<Story>();
+		/* Assert that story does not already exist in the SQL database */
+		assertFalse(sm.storyExists(story.getId()));
+		/* Add story to the SQL database */
+		sm.addStory(story);
+		/* Get all of the stories from the DB */
+		storyArr = sm.getAll();
+		/* Assert that at least one story was returned by the method */
+		assertTrue(storyArr.size()!=0);
+		/* Clean up and delete the story */
+		sm.deleteStory(story);
 	}
 	
 	/** 

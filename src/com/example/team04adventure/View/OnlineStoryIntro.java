@@ -184,16 +184,15 @@ public class OnlineStoryIntro extends Activity {
 
 		Story s = parser.getStory(sid);
 		
-		System.out.println(s.getFrags().size());
-
-		if(sm.storyExists(s.getId()))
-			Toast.makeText(getBaseContext(), cantcache, Toast.LENGTH_LONG).show();	
-
-		else{ 
+		if(sm.storyExists(s.getId())){
+			sm.deleteStory(s);
+			sm.addStory(s);
+			Toast.makeText(getBaseContext(), recache, Toast.LENGTH_LONG).show();
+		}
+		else{
 			sm.addStory(s);
 			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
-
 	
 
 	}

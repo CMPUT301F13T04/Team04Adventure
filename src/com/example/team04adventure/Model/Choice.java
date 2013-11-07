@@ -11,13 +11,13 @@ public class Choice {
 	
 	String body;
 	long id;
-	long childID;
+	String childID;
 	
 	public Choice(){
 		
 		/** a childID of -1 signifies that the choice 
 		 * does not yet have a child **/
-		this.childID = -1;
+		this.childID = "";
 		
 	}
 	
@@ -50,7 +50,7 @@ public class Choice {
 	 * Sets the child of the choice as the specified ID.
 	 * @param id ID of the choice.
 	 */
-	public void setChild(long id){
+	public void setChild(String id){
 		
 		this.childID = id;
 		
@@ -60,7 +60,7 @@ public class Choice {
 	 * Gets the child of the choice.
 	 * @return ID of the child of the choice.
 	 */
-	public long getChild(){
+	public String getChild(){
 	
 		return this.childID;
 	

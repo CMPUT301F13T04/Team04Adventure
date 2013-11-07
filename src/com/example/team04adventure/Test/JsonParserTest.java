@@ -1,10 +1,13 @@
 package com.example.team04adventure.Test;
 
+import java.util.ArrayList;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Story;
-
-import junit.framework.TestCase;
 
 /**
  * @author Team04Adventure
@@ -60,47 +63,192 @@ public class JsonParserTest extends TestCase {
 	 */
 	public void testStoreStory() {
 		/* Assert that story does not already exist in the server */
-		assertFalse(jp.checkStory(story));
+		Assert.assertFalse(jp.checkStory(story));
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
 		}
 		/* Assert that the story story now does exist in the server */
-		assertTrue(jp.checkStory(story));
+		Assert.assertTrue(jp.checkStory(story));
+		/* Clean up and delete the story */
+		jp.deleteStory(story);
+	}
+
+	/**
+	 * Tests the getStory() method. Ensures that the parser actually
+	 * gets a story from the server. It also ensures that the story is the
+	 * correct one and not an arbitrary story.
+	 * @param void
+	 * @return void
+	 */
+	public void testGetStory() {
+		Story s;
+		/* Assert that story does not already exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
+		/* Add story to the server */
+		try {
+			jp.storeStory(story);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
+		}
+		/* Assert that the story story now does exist in the server */
+		Assert.assertTrue(jp.checkStory(story));
+		/* Get the recently inserted story from the server */
+		s = jp.getStory(story.getId());
+		/* Ensure that s actually got a story */
+		Assert.assertTrue(s != null);
+		/* Ensure that the stories are equivalent */
+		Assert.assertTrue(s.equals(story));
+		/* Clean up and delete the story */
+		jp.deleteStory(story);
+	}
+
+	/**
+	 * Tests the checkStory() method. Ensures that the parser actually
+	 * checks the server for a story. It also ensures that the story is the
+	 * correct one and not an arbitrary story.
+	 * @param void
+	 * @return void
+	 */
+	public void testCheckStory() {
+		Story s;
+		/* Assert that story does not already exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
+		/* Add story to the server */
+		try {
+			jp.storeStory(story);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
+		}
+		/* Assert that the story story now does exist in the server */
+		Assert.assertTrue(jp.checkStory(story));
+		/* Get the recently inserted story from the server */
+		s = jp.getStory(story.getId());
+		/* Ensure that s actually got a story */
+		Assert.assertTrue(s != null);
+		/* Ensure that the stories are equivalent */
+		Assert.assertTrue(s.equals(story));
 		/* Clean up and delete the story */
 		jp.deleteStory(story);
 		
 	}
 
-	public void testGetStory() {
-		fail("Not yet implemented");
-	}
-
-	public void testCheckStory() {
-		fail("Not yet implemented");
-	}
-
+	/**
+	 * Tests the search() method. Ensures that the parser actually
+	 * checks the server for a story that matches the search criteria and returns
+	 * all stories that satisfy it. It also ensures that the story is the
+	 * correct one and not an arbitrary story.
+	 * @param void
+	 * @return void
+	 */
 	public void testSearch() {
-		fail("Not yet implemented");
+		Story s;
+		ArrayList <Story> storyArr = new ArrayList<Story>();
+		String[] badQuery = {"Leg", "Day"};
+		String[] goodQuery = {"unique", "story"};
+		/* Assert that story does not already exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
+		/* Add story to the server */
+		try {
+			jp.storeStory(story);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
+		}
+		/* Assert that the story story now does exist in the server */
+		Assert.assertTrue(jp.checkStory(story));
+		/* Attempt to query with bad parameters */
+		try {
+			storyArr = jp.search(badQuery);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Query the Server");
+		}
+		/* Ensure the query returned nothing */
+		Assert.assertEquals(0, storyArr.size());
+		/* Attempt to query with good parameters */
+		try {
+			storyArr = jp.search(goodQuery);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Query the Server");
+		}
+		/* Ensure the query returned nothing */
+		Assert.assertFalse(storyArr.size() == 0);
+		/* Get the returned story */
+		s = storyArr.get(0);
+		/* Ensure that s actually got a story */
+		Assert.assertTrue(s != null);
+		/* Ensure that the stories are equivalent */
+		Assert.assertTrue(s.equals(story));
+		/* Clean up and delete the story */
+		jp.deleteStory(story);
 	}
 
+	/**
+	 * Tests the delete() method. Ensures that the parser actually
+	 * deletes the right story from the server.
+	 * @param void
+	 * @return void
+	 */
 	public void testDeleteStory() {
-		fail("Not yet implemented");
+		/* Assert that story does not already exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
+		/* Add story to the server */
+		try {
+			jp.storeStory(story);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("Cannot Store the Story to Server");
+		}
+		/* Assert that the story story now does exist in the server */
+		Assert.assertTrue(jp.checkStory(story));
+		/* Delete the story */
+		jp.deleteStory(story);
+		/* Assert that story does not exist in the server */
+		Assert.assertFalse(jp.checkStory(story));
 	}
 
+	/**
+	 * This method tests the 'getAll()' method. It ensures that the
+	 * method returns all of the stories stored in the server.
+	 * @param void
+	 * @return void
+	 */
 	public void testGetAll() {
-		fail("Not yet implemented");
+		
 	}
 
+	/**
+	 * This method is useless. Thought I'd keep the test case in case
+	 * it gets implemented later.
+	 * @param void
+	 * @return void
+	 */
 	public void testCacheStory() {
-		fail("Not yet implemented");
+		fail("This method doesn't do anything...");
 	}
 
+	/**
+	 * This method is internal to the JSONparser class. Should probably
+	 * be private but just in case, I kept the test. Looking at you Hassaan.
+	 * @param void
+	 * @return void
+	 */
 	public void testGetEntityContent() {
-		fail("Not yet implemented");
+		fail("Method should be private. No test implemented.");
 	}
 
 }

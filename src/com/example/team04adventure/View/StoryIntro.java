@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Controller.OnlineStoryList;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;

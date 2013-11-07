@@ -178,7 +178,7 @@ public class OnlineStoryIntro extends Activity {
 	public void cacheStory(View view) {
 
 		String cache = "Story Cached.";
-		String cantcache = "This Story is already cached!";
+		String recache = "Your cached version of this story has been updated.";
 		JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 

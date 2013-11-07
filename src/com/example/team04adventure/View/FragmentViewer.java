@@ -27,6 +27,7 @@ import com.example.team04adventure.Model.StorageManager;
 public class FragmentViewer extends Activity {
 	// This is the title and body fields that are allocated at runtime
 	TextView 	fragTitle,
+				fragAuthor,
 				fragBody;
 	// The list of next choices
 	ArrayList<Choice> choices;
@@ -56,6 +57,8 @@ public class FragmentViewer extends Activity {
 		// Set the title and body fields in the XML file
 		fragTitle = (TextView) findViewById(R.id.FragTitle);
 		fragTitle.append(f.getTitle());
+		fragAuthor = (TextView) findViewById(R.id.FragAuthor);
+		fragAuthor.append(f.getAuthor());
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
 		

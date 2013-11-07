@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragChoiceAdapter;
+import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 
 /**
@@ -32,6 +36,8 @@ public class FragmentViewer extends Activity {
 	// The list of next choices
 	ArrayList<Choice> choices;
 	// The adapter for choices
+	ArrayList<Media> fragImages;
+	LinearLayout imageLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,7 @@ public class FragmentViewer extends Activity {
 		// Extract the supplied IDs from the intent. These are supplied
 		// when a choice is selected from another fragment, or from the
 		// StoryIntro.java class. They have to be supplied again before
-		// you can go to another frament.
+		// you can go to another fragment.
 		Bundle extras = getIntent().getExtras();
 		String fragID = extras.getString("fid");
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
@@ -61,6 +67,16 @@ public class FragmentViewer extends Activity {
 		fragAuthor.append(f.getAuthor());
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
+		
+		fragImages = f.getImages();
+		imageLayout = (LinearLayout) findViewById(R.id.image_layout);
+		for (int i=0; i < fragImages.size(); i++) {
+			ImageView image = new ImageView(FragmentViewer.this);
+			Media mediaImage = fragImages.get(i);
+			Bitmap bitmap = mediaImage.getMedia();
+			image.setImageBitmap(bitmap);
+			imageLayout.addView(image);
+		}
 		
 		choiceListView.setAdapter(new FragChoiceAdapter(this, choices));
 		

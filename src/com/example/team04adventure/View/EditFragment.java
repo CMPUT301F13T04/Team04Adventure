@@ -4,6 +4,7 @@ package com.example.team04adventure.View;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 import org.apache.http.client.ClientProtocolException;
 
@@ -140,10 +141,29 @@ public class EditFragment extends Activity {
 			// Saves the bitmap result from the camera into the frag object
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+				Random rg = new Random();
+				long rlong = rg.nextLong();
 				Media media = new Media();
 				media.setContent(bitmap);
 				media.setType("pic");
+				media.setID(rlong);
 				fragment.addPicture(media);
+				
+				story.addFragment(fragment);
+				
+				JSONparser jp = new JSONparser();
+				try {
+					jp.storeStory(story);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -156,10 +176,30 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+				Random rg = new Random();
+				long rlong = rg.nextLong();
 				Media media = new Media();
 				media.setContent(bitmap);
 				media.setType("pic");
+				media.setID(rlong);
+				
 				fragment.addPicture(media);
+				
+				story.addFragment(fragment);
+				
+				JSONparser jp = new JSONparser();
+				try {
+					jp.storeStory(story);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

@@ -16,7 +16,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import android.os.StrictMode;
 
@@ -254,8 +253,8 @@ public class JSONparser {
 			while ((output = br.readLine()) != null) {
 				System.err.println(output);
 			}
-			//EntityUtils.consume(entity);
-			//httpDelete.releaseConnection();
+//			EntityUtils.consume(entity);
+//			httpDelete.releaseConnection();
 
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

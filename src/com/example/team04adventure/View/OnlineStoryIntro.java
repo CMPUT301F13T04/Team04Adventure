@@ -1,6 +1,5 @@
 package com.example.team04adventure.View;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -109,6 +108,28 @@ public class OnlineStoryIntro extends Activity {
 				int rint = rg.nextInt(100);
 				String fbody = bodyinput.getText().toString();
 				String fid = ftitle.replace(" ","")+rint;
+				
+//				Frag fragment = new Frag();
+//				fragment.setTitle(ftitle);
+//				fragment.setBody(fbody);
+//				fragment.setAuthor(MainActivity.username);
+//				fragment.setId(fid);
+//				
+//				story.addFragment(fragment);
+//				
+//				JSONparser jp = new JSONparser();
+//				try {
+//					jp.storeStory(story);
+//				} catch (ClientProtocolException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalStateException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 				Intent intent = new Intent(OnlineStoryIntro.this, EditFragment.class);
 				intent.putExtra("sid", story.getId());

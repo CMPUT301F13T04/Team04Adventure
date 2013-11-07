@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +23,7 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
+import com.example.team04adventure.Model.Story;
 
 /**
  * EditFragment creates the activity screen displayed when the user chooses to edit an existing fragment of the story.
@@ -44,9 +47,10 @@ public class EditFragment extends Activity {
 	
     private static final int SELECT_PICTURE = 1;
 	
-	String id;
-	Uri imageFileUri;
-	Frag fragment;
+	private String sid;
+	private Uri imageFileUri;
+	private Frag fragment = new Frag();
+	private Story story = new Story();
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +58,14 @@ public class EditFragment extends Activity {
 		setContentView(R.layout.activity_edit_fragment);
 		
 		Bundle extras = getIntent().getExtras();
-		id = extras.getString("id");
+		sid = extras.getString("sid");
+		fragment.setId(extras.getString("fid"));
+		fragment.setTitle(extras.getString("ftitle"));
+		fragment.setBody(extras.getString("fbody"));
+		
 		JSONparser jp = new JSONparser();
 		
-		//fragment = jp.g.getFrag(id);
+		story = jp.getStory(sid);
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
@@ -98,6 +106,8 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
+				
+				
 				saveFrag();
 			}
 		});
@@ -187,6 +197,29 @@ public class EditFragment extends Activity {
 		String fragBodyString = fragBody.getText().toString();
 		fragment.setTitle(fragTitleString);
 		fragment.setBody(fragBodyString);
+		fragment.setAuthor(MainActivity.username);
+		
+		story.addFragment(fragment);
+		
+		JSONparser jp = new JSONparser();
+		try {
+			jp.storeStory(story);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Intent intent = new Intent(this, OnlineStoryIntro.class);
+		intent.putExtra("id", sid);
+		
+		startActivity(intent);
+		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

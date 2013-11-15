@@ -389,9 +389,7 @@ public class MainActivity extends Activity {
 				else {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
 				username = Uname;
-				startActivity(i);
-				
-				
+				startActivity(i);				
 				}
 			}
 		});

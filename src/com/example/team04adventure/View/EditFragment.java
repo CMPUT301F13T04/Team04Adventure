@@ -361,6 +361,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Frag;
@@ -599,6 +600,7 @@ public class EditFragment extends Activity {
 			e.printStackTrace();
 		}
 		
+		Toast.makeText(getApplicationContext(), "Fragment saved!", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, OnlineStoryIntro.class);
 		intent.putExtra("id", sid);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

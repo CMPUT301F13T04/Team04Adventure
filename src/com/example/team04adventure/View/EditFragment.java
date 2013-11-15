@@ -364,6 +364,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
@@ -381,6 +382,7 @@ import com.example.team04adventure.Model.Story;
 public class EditFragment extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int CREATE_CHOICE = 999;
 	
 	private Button uploadButton;
 	private Button cameraButton;
@@ -396,6 +398,9 @@ public class EditFragment extends Activity {
 	private Uri imageFileUri;
 	private Frag fragment = new Frag();
 	private Story story = new Story();
+	
+	// "Add New Choice" Flag
+	int nc = 0;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -403,6 +408,7 @@ public class EditFragment extends Activity {
 		setContentView(R.layout.activity_edit_fragment);
 		
 		Bundle extras = getIntent().getExtras();
+		nc = extras.getInt("nc");
 		sid = extras.getString("sid");
 		fragment.setId(extras.getString("fid"));
 		fragment.setTitle(extras.getString("ftitle"));
@@ -443,7 +449,11 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				linkFrag();				
+				Intent intent = new Intent(getApplicationContext(), fragList.class);
+	        	intent.putExtra("id", sid);
+	    		intent.putExtra("link", 0);
+	        	intent.putExtra("link", 1);
+	       		startActivityForResult(intent, CREATE_CHOICE);				
 			}
 		});
 		
@@ -550,6 +560,12 @@ public class EditFragment extends Activity {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		else if (requestCode == CREATE_CHOICE && resultCode == RESULT_OK) {
+			Choice c = new Choice();
+			c.setBody("NEW CHOICE!!!");
+			c.setChild(data.getStringExtra("linkThis"));
+			fragment.setChoice(c);
 		}
 		
 	}

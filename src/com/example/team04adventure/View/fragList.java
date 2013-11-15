@@ -355,6 +355,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragAdapter;
 import com.example.team04adventure.Model.JSONparser;
@@ -366,14 +367,19 @@ import com.example.team04adventure.Model.Story;
  * @author Team04Adventure
  */
 public class fragList extends Activity {
+	
+	String id;
+	int link = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_frag_list);
 		
-	  Bundle extras = getIntent().getExtras();
-		String id = extras.getString("id");
+		Bundle extras = getIntent().getExtras();
+		id = extras.getString("id");
+		/* Should probs add a try catch right here. I'm sensing problems later */
+		link = extras.getInt("link");
 		
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
@@ -392,12 +398,19 @@ public class fragList extends Activity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Frag f = (Frag) fragListView.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), EditFragment.class);
-                intent.putExtra("sid", story.getId());
-				intent.putExtra("fid", f.getId());
-				intent.putExtra("ftitle", f.getTitle());
-				intent.putExtra("fbody", f.getBody());
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        		startActivity(intent);
+                if (link == 0) {
+                	intent.putExtra("sid", story.getId());
+                	intent.putExtra("fid", f.getId());
+                	intent.putExtra("ftitle", f.getTitle());
+                	intent.putExtra("fbody", f.getBody());
+                	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                	startActivity(intent);
+                }
+                else {
+                	intent.putExtra("linkThis", f.getId());
+                	setResult(Activity.RESULT_OK, intent);
+                	finish();
+                }
              }
 
         });

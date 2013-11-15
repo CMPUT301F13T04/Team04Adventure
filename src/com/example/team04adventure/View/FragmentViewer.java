@@ -291,7 +291,7 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    
+
     Copyright (C) 2013  CMPUT301F13T04
 
     This program is free software; you can redistribute it and/or modify
@@ -345,6 +345,7 @@ package com.example.team04adventure.View;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -373,8 +374,8 @@ import com.example.team04adventure.Model.StorageManager;
 public class FragmentViewer extends Activity {
 	// This is the title and body fields that are allocated at runtime
 	TextView 	fragTitle,
-				fragAuthor,
-				fragBody;
+	fragAuthor,
+	fragBody;
 	// The list of next choices
 	ArrayList<Choice> choices;
 	// The adapter for choices
@@ -393,15 +394,35 @@ public class FragmentViewer extends Activity {
 		Bundle extras = getIntent().getExtras();
 		String fragID = extras.getString("fid");
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
-		
+
 		// Initialize the list of choices for that frag
 		choices = new ArrayList<Choice>();
 		// Get the fragment, and then assign the choices
 		StorageManager sm = new StorageManager(this);
-		
+
 		Frag f = sm.getFrag(fragID);
 
+		// Populate the choice list with the fragments choices
 		choices = f.getChoices();
+
+		if (choices.size() > 0) {
+			// Create a list of possible child IDs
+			String childIds[] = new String[choices.size()];
+			// Populate the list with possible IDs
+			for (int i = 0; i < choices.size(); i++) {
+				childIds[i] = choices.get(i).getChild();
+			}
+			Random r = new Random();
+			int ranId = r.nextInt(childIds.length);
+			// Create the random choice
+			Choice ranChoice = new Choice();
+			ranChoice.setID(-1);
+			ranChoice.setChild(choices.get(ranId).getChild());
+			ranChoice.setBody("Random Choice?");
+
+			// Append the random Choice to the end of the list
+			choices.add(ranChoice);
+		}
 		// Set the title and body fields in the XML file
 		fragTitle = (TextView) findViewById(R.id.FragTitle);
 		fragTitle.append(f.getTitle());
@@ -409,7 +430,7 @@ public class FragmentViewer extends Activity {
 		fragAuthor.append(f.getAuthor());
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
-		
+
 		fragImages = f.getImages();
 		imageLayout = (LinearLayout) findViewById(R.id.image_layout);
 		for (int i=0; i < fragImages.size(); i++) {
@@ -420,28 +441,28 @@ public class FragmentViewer extends Activity {
 			image.setImageBitmap(bitmap);
 			imageLayout.addView(image);
 		}
-		
+
 		choiceListView.setAdapter(new FragChoiceAdapter(this, choices));
-		
+
 		choiceListView.setOnItemClickListener(new OnItemClickListener() {
-        
+
 			/** When a story is selected **/
 			@Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Choice c = (Choice) choiceListView.getItemAtPosition(position);
-               /** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
+				/** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
 				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-        		intent.putExtra("fid", c.getChild());
-        		startActivity(intent);
-             }
+				intent.putExtra("fid", c.getChild());
+				startActivity(intent);
+			}
 
-			
-        });
-	
+
+		});
+
 
 	}
-	
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

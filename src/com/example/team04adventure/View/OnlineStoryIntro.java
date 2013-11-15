@@ -370,6 +370,7 @@ import com.example.team04adventure.Model.Story;
  * 
  * @author Team04Adventure
  */
+
 public class OnlineStoryIntro extends Activity {
 
 	TextView 	storyTitle,
@@ -507,6 +508,7 @@ public class OnlineStoryIntro extends Activity {
 	public void editStory(View view){
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
+		intent.putExtra("link", 0);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		startActivity(intent);

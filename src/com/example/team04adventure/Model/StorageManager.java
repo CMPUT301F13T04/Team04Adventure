@@ -377,7 +377,7 @@ public class StorageManager implements Storage {
 			SQLiteHelper.COLUMN_CONTENT, SQLiteHelper.COLUMN_MTYPE
 			};
 	private String[] allChoice = { SQLiteHelper.COLUMN_CID,
-			SQLiteHelper.COLUMN_TEXT, SQLiteHelper.COLUMN_CHILD_FID
+			SQLiteHelper.COLUMN_CONTENT, SQLiteHelper.COLUMN_CHILD_FID
 			};
 	
 	/**

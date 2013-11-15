@@ -526,7 +526,7 @@ public class OnlineStoryIntro extends Activity {
 
 		Story s = parser.getStory(sid);
 		
-		if(sm.storyExists(s.getId())){
+		if(sm.checkStory(s.getId())){
 			sm.deleteStory(s);
 			sm.addStory(s);
 			Toast.makeText(getBaseContext(), recache, Toast.LENGTH_LONG).show();

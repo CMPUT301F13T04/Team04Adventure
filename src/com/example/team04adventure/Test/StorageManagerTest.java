@@ -68,11 +68,11 @@ public class StorageManagerTest extends AndroidTestCase {
 	 */
 	public void testStoryExists() {
 		/* Assert that a non-existent story does not exist in the SQL db */
-		assertFalse(sm.storyExists("thisStoryShouldNotExist"));
+		assertFalse(sm.checkStory("thisStoryShouldNotExist"));
 		/* Add story to the database */
 		sm.addStory(story);
 		/* Assert that the story exists in the SQL db after the addStory command */
-		assertTrue(sm.storyExists(story.getId()));
+		assertTrue(sm.checkStory(story.getId()));
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
 		assertTrue(true);
@@ -85,11 +85,11 @@ public class StorageManagerTest extends AndroidTestCase {
 	 */
 	public void testAddStory() {
 		/* Assert that story does not already exist in the SQL database */
-		assertFalse(sm.storyExists(story.getId()));
+		assertFalse(sm.checkStory(story.getId()));
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */
-		assertTrue(sm.storyExists(story.getId()));
+		assertTrue(sm.checkStory(story.getId()));
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
 	}
@@ -103,11 +103,11 @@ public class StorageManagerTest extends AndroidTestCase {
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */
-		assertTrue(sm.storyExists(story.getId()));
+		assertTrue(sm.checkStory(story.getId()));
 		/* Attempt to delete the story */
 		sm.deleteStory(story);
 		/* Assert that story no longer exists in the SQL database */
-		assertFalse(sm.storyExists(story.getId()));
+		assertFalse(sm.checkStory(story.getId()));
 	}
 
 	/** 
@@ -118,7 +118,7 @@ public class StorageManagerTest extends AndroidTestCase {
 	public void testGetAll() {
 		ArrayList<Story> storyArr = new ArrayList<Story>();
 		/* Assert that story does not already exist in the SQL database */
-		assertFalse(sm.storyExists(story.getId()));
+		assertFalse(sm.checkStory(story.getId()));
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Get all of the stories from the DB */
@@ -139,7 +139,7 @@ public class StorageManagerTest extends AndroidTestCase {
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */
-		assertTrue(sm.storyExists(story.getId()));
+		assertTrue(sm.checkStory(story.getId()));
 		s = sm.getStory(story.getId());
 		/* Assert the story in the database is equivalent to the original story */
 		assert(s.equals(story));
@@ -156,11 +156,11 @@ public class StorageManagerTest extends AndroidTestCase {
 	public void testGetFrag() {
 		Frag f;
 		/* Assert that story does not already exist in the SQL database */
-		assertFalse(sm.storyExists(story.getId()));
+		assertFalse(sm.checkStory(story.getId()));
 		/* Add story to the SQL database */
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */
-		assertTrue(sm.storyExists(story.getId()));
+		assertTrue(sm.checkStory(story.getId()));
 		//f = sm.getFrag("uniqueID1");
 		/* Assert the story in the database is equivalent to the original story */
 		//assert(f.equals(frag));

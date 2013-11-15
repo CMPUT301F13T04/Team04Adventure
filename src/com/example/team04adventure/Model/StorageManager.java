@@ -361,7 +361,7 @@ import android.graphics.BitmapFactory;
  * 
  * @author Team04Adventure
  */
-public class StorageManager {
+public class StorageManager implements Storage {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
@@ -409,7 +409,7 @@ public class StorageManager {
 	 * @param id ID of the story to check.
 	 * @return boolean of if it exists.
 	 */
-	public boolean storyExists(String id){
+	public boolean checkStory(String id){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID};
 		String swhere = "_sid = ?";

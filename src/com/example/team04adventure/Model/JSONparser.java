@@ -380,7 +380,7 @@ import com.google.gson.reflect.TypeToken;
  * 
  * @author Team04Adventure
  */
-public class JSONparser {
+public class JSONparser implements Storage {
 
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();
@@ -396,6 +396,15 @@ public class JSONparser {
 		StrictMode.setThreadPolicy(policy);
 	}
 
+	public void addStory(Story s) {
+		try {
+			storeStory(s);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// Assumption is that the User being stored is not in the server already.
 	/**
 	 * Stores the story in the server.

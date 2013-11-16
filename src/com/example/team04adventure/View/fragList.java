@@ -345,6 +345,7 @@ package com.example.team04adventure.View;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -370,7 +371,6 @@ public class fragList extends Activity {
 	
 	String id;
 	int link = 0;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -386,34 +386,45 @@ public class fragList extends Activity {
 		
 		JSONparser jp = new JSONparser();
 		
-		final Story story = jp.getStory(id);
-		
-		fraglist = story.getFrags();
-		
-		fragListView.setAdapter(new FragAdapter(this, fraglist));
-		fragListView.setOnItemClickListener(new OnItemClickListener() {
-        
-			/** When a story is selected **/
-			@Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-				Frag f = (Frag) fragListView.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), EditFragment.class);
-                if (link == 0) {
-                	intent.putExtra("sid", story.getId());
-                	intent.putExtra("fid", f.getId());
-                	intent.putExtra("ftitle", f.getTitle());
-                	intent.putExtra("fbody", f.getBody());
-                	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                	startActivity(intent);
-                }
-                else {
-                	intent.putExtra("linkThis", f.getId());
-                	setResult(Activity.RESULT_OK, intent);
-                	finish();
-                }
-             }
 
-        });
-	
-	}
+		Integer index = Integer.valueOf(-2);
+		
+		try {
+			final Story story = new JSONparser().execute(index, id).get().get(0);
+			fraglist = story.getFrags();
+			
+			fragListView.setAdapter(new FragAdapter(this, fraglist));
+			fragListView.setOnItemClickListener(new OnItemClickListener() {
+	        
+				/** When a story is selected **/
+				@Override
+	            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+					Frag f = (Frag) fragListView.getItemAtPosition(position);
+	                Intent intent = new Intent(getApplicationContext(), EditFragment.class);
+	                if (link == 0) {
+	                	intent.putExtra("sid", story.getId());
+	                	intent.putExtra("fid", f.getId());
+	                	intent.putExtra("ftitle", f.getTitle());
+	                	intent.putExtra("fbody", f.getBody());
+	                	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	                	startActivity(intent);
+	                }
+	                else {
+	                	intent.putExtra("linkThis", f.getId());
+	                	setResult(Activity.RESULT_OK, intent);
+	                	finish();
+	                }
+	             }
+
+	        });
+		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+}
 }

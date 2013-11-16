@@ -359,6 +359,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.os.AsyncTask;
 import android.os.StrictMode;
 
 import com.google.gson.Gson;
@@ -380,7 +381,7 @@ import com.google.gson.reflect.TypeToken;
  * 
  * @author Team04Adventure
  */
-public class JSONparser implements Storage {
+public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> implements Storage {
 
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();
@@ -483,10 +484,7 @@ public class JSONparser implements Storage {
 			// Now we expect to get a User response
 			ElasticSearchResponse<Story> esResponse = gson.fromJson(json,elasticSearchResponseType);
 			Story s1 = esResponse.getSource();
-			
-			
-			
-			
+				
 		//	getRequest.releaseConnection();
 			return s1;
 		} catch (ClientProtocolException e) {
@@ -669,4 +667,41 @@ public class JSONparser implements Storage {
 		System.err.println("JSON:" + json);
 		return json;
 	}
-}
+
+		protected ArrayList<Story> doInBackground(Object... params) {
+			int count = params.length;
+			for (int i=0;i<count;i+=2) {
+				Integer index = (Integer) params[i];
+				if (index == -1) {
+					try {
+						storeStory((Story) params[i+1]);
+					} catch (ClientProtocolException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (index == -2) {
+					ArrayList<Story> al = new ArrayList<Story>();
+					al.add(getStory((String) params[i+1]));
+					return al;
+				}
+				if (index == -3) {
+					checkStory((Story) params[i+1]);
+				}
+				if (index == -4) {
+					deleteStory((Story) params[i+1]);
+				}
+				if (index == -5) {
+					return getAll();
+				}
+			}
+			
+			return null;
+		}
+	}

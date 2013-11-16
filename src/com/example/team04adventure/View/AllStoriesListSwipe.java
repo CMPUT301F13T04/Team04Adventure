@@ -342,6 +342,7 @@ Public License instead of this License.
  */
 package com.example.team04adventure.View;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -394,11 +395,21 @@ public class AllStoriesListSwipe extends Fragment {
 //		ArrayList<Story> ostorylist = new ArrayList<Story>();
 
 
-		JSONparser jp = new JSONparser();
+//		JSONparser jp = new JSONparser();
 
 		ArrayList<Story> stories = new ArrayList<Story>();
-		stories = jp.getAll();
+//		stories = jp.getAll();
 		
+		Integer index = Integer.valueOf(-5);
+		try {
+			stories = new JSONparser().execute(index).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//stories.add(jp.getStory("10"));
 		
 		/*
@@ -435,7 +446,7 @@ public class AllStoriesListSwipe extends Fragment {
 				Story s = (Story) storyListView.getItemAtPosition(position);
 				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
 				intent.putExtra("id", s.getId());
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(intent);
 			}
 

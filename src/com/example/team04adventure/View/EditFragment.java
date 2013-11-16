@@ -347,6 +347,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.client.ClientProtocolException;
 
@@ -414,9 +415,19 @@ public class EditFragment extends Activity {
 		fragment.setTitle(extras.getString("ftitle"));
 		fragment.setBody(extras.getString("fbody"));
 		
-		JSONparser jp = new JSONparser();
+//		JSONparser jp = new JSONparser();
+//		story = jp.getStory(sid)
+		Integer index = Integer.valueOf(-2);
+		try {
+			story = new JSONparser().execute(index, sid).get().get(0);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		story = jp.getStory(sid);
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
@@ -506,19 +517,19 @@ public class EditFragment extends Activity {
 				
 				story.addFragment(fragment);
 				
-				JSONparser jp = new JSONparser();
-				try {
-					jp.storeStory(story);
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				JSONparser jp = new JSONparser();
+//				try {
+//					jp.storeStory(story);
+//				} catch (ClientProtocolException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalStateException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -542,19 +553,19 @@ public class EditFragment extends Activity {
 				
 				story.addFragment(fragment);
 				
-				JSONparser jp = new JSONparser();
-				try {
-					jp.storeStory(story);
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				JSONparser jp = new JSONparser();
+//				try {
+//					jp.storeStory(story);
+//				} catch (ClientProtocolException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalStateException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -602,19 +613,23 @@ public class EditFragment extends Activity {
 		
 		story.addFragment(fragment);
 		
-		JSONparser jp = new JSONparser();
-		try {
-			jp.storeStory(story);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Integer index = Integer.valueOf(-1);
+		new JSONparser().execute(index, story);
+
+		
+//		JSONparser jp = new JSONparser();
+//		try {
+//			jp.storeStory(story);
+//		} catch (ClientProtocolException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalStateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		Toast.makeText(getApplicationContext(), "Fragment saved!", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, OnlineStoryIntro.class);

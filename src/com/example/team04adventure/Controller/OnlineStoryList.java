@@ -564,22 +564,25 @@ public class OnlineStoryList extends FragmentActivity implements
 				story.setSynopsis(bodyinput.getText().toString());
 				story.setId(story.getTitle().replace(" ", "")+rint);
 				story.setAuthor(MainActivity.username);
-				JSONparser jp = new JSONparser();
 				
+				Integer index = Integer.valueOf(-1);
+//				JSONparser jp = new JSONparser();
 
 				try {
-					jp.storeStory(story);
+//					jp.storeStory(story);
+					new JSONparser().execute(index,story);
+
 				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
 				
+				Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				finish();
 				startActivity(intent);
+				
 			}  
 		});  
 

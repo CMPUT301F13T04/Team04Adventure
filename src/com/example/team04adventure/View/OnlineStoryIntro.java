@@ -344,6 +344,7 @@ package com.example.team04adventure.View;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -389,10 +390,19 @@ public class OnlineStoryIntro extends Activity {
 		Uname = MainActivity.username;
 
 
-		JSONparser jp = new JSONparser();
+//		JSONparser jp = new JSONparser();
 
-
-		story = jp.getStory(sid);
+//		story = jp.getStory(sid);
+		Integer index = Integer.valueOf(-2);
+		try {
+			story = new JSONparser().execute(index, sid).get().get(0);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(story.getTitle());
@@ -546,14 +556,16 @@ public class OnlineStoryIntro extends Activity {
 	 * @param view the current view.
 	 */
 	public void deleteStory(View view){	
-		JSONparser parser = new JSONparser();
-		
-		parser.deleteStory(story);
+//		JSONparser parser = new JSONparser();
+//		
+//		parser.deleteStory(story);
+		Integer index = Integer.valueOf(-4);
+		new JSONparser().execute(index,story);
 		Intent intent = new Intent(this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
-		
+		finish();
+
 		
 	}
 

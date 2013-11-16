@@ -715,6 +715,44 @@ public class StorageManager implements Storage {
 	}
 	
 	/**
+	 * Returns a list of stories that belong to
+	 * the author parameter 'usr'.
+	 * @param The author who's stories you want.
+	 * @return an arraylist of stories.
+	 */
+	public ArrayList<Story> getMyStories(){
+		
+		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
+				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN };
+		String swhere = "UName = ?";
+		String[] whereargs = {MainActivity.username};
+		
+		ArrayList<Story> storyarr = new ArrayList<Story>();
+		
+		this.open();
+		
+		
+		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
+				sId, swhere, whereargs, null, null, null);
+		
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Story story = cursorToStory(cursor);
+			story = getInfo(story);
+			storyarr.add(story);
+			cursor.moveToNext();
+		}
+		
+		cursor.close();
+		
+		this.close();
+		
+		return storyarr;
+		
+		
+	}
+	
+	/**
 	 * Returns a single story object of the story with id
 	 * sid.
 	 * @param sid ID of the story to get.

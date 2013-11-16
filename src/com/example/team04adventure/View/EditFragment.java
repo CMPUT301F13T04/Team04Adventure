@@ -352,6 +352,8 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -362,9 +364,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Controller.OnlineStoryList;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
@@ -501,7 +505,7 @@ public class EditFragment extends Activity {
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 			// Saves the bitmap result from the camera into the frag object
 			try {
@@ -573,10 +577,39 @@ public class EditFragment extends Activity {
 			}
 		}
 		else if (requestCode == CREATE_CHOICE && resultCode == RESULT_OK) {
-			Choice c = new Choice();
-			c.setBody("NEW CHOICE!!!");
-			c.setChild(data.getStringExtra("linkThis"));
-			fragment.setChoice(c);
+			
+			AlertDialog.Builder adb = new AlertDialog.Builder(this);
+			LinearLayout lila1= new LinearLayout(this);
+		    lila1.setOrientation(1);
+		    final EditText choiceTitle = new EditText(this); 
+		    choiceTitle.setHint("Enter the Title here.");
+		    lila1.addView(choiceTitle);
+		    adb.setView(lila1);
+		    
+			adb.setTitle("New Choice");
+
+			adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
+				
+				public void onClick(DialogInterface dialog, int whichButton) {  
+					
+					Choice c = new Choice();
+					c.setBody(choiceTitle.getText().toString());
+					c.setChild(data.getStringExtra("linkThis"));
+					fragment.setChoice(c);
+					
+				}  
+			});  
+
+			adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int which) {
+
+					return;   
+				}
+			});
+			
+			adb.show();
+			
 		}
 		
 	}

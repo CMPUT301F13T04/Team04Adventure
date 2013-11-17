@@ -343,7 +343,6 @@ Public License instead of this License.
 
 package com.example.team04adventure.Controller;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
 
@@ -367,9 +366,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.JSONparser;
+import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.View.AllStoriesListSwipe;
+import com.example.team04adventure.View.CachedStoriesListSwipe;
 import com.example.team04adventure.View.MainActivity;
 import com.example.team04adventure.View.MyStoriesListSwipe;
 
@@ -485,6 +485,8 @@ public class OnlineStoryList extends FragmentActivity implements
 				return new AllStoriesListSwipe();
 			case 1:
 				return new MyStoriesListSwipe();
+			case 2:
+				return new CachedStoriesListSwipe();
 			}
 			
 			
@@ -494,7 +496,7 @@ public class OnlineStoryList extends FragmentActivity implements
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 2;
+			return 3;
 		}
 
 		@Override
@@ -505,6 +507,8 @@ public class OnlineStoryList extends FragmentActivity implements
 				return getString(R.string.title_section1).toUpperCase(l);
 			case 1:
 				return getString(R.string.title_section2).toUpperCase(l);
+			case 2:
+				return getString(R.string.title_section3).toUpperCase(l);
 			}
 			return null;
 		}
@@ -565,12 +569,15 @@ public class OnlineStoryList extends FragmentActivity implements
 				story.setId(story.getTitle().replace(" ", "")+rint);
 				story.setAuthor(MainActivity.username);
 				
-				Integer index = Integer.valueOf(-1);
+	//			Integer index = Integer.valueOf(-1);
 //				JSONparser jp = new JSONparser();
+				
+				StorageManager sm = new StorageManager(getBaseContext());
 
 				try {
 //					jp.storeStory(story);
-					new JSONparser().execute(index,story);
+					//new JSONparser().execute(index,story);
+					sm.addStory(story);
 
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block

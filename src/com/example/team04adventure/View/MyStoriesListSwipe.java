@@ -344,6 +344,7 @@ package com.example.team04adventure.View;
 
 import java.util.ArrayList;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -374,7 +375,7 @@ public class MyStoriesListSwipe extends Fragment {
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.activity_my_stories_list_swipe, container, false);
-		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
+		storyListView = (ListView) rootView.findViewById(R.id.mylist);
 
 		return rootView;
 	}
@@ -386,7 +387,7 @@ public class MyStoriesListSwipe extends Fragment {
 		/** Open DB connection and retrieve all of 
     	the cached stories. **/
 		
-		storylist = sm.getAll();
+		storylist = sm.getMyStories();
 
 
 		storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
@@ -397,8 +398,8 @@ public class MyStoriesListSwipe extends Fragment {
 			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Story s = (Story) storyListView.getItemAtPosition(position);
 
-				Intent intent = new Intent(getActivity(), StoryIntro.class);
-//				intent.putExtra("uname", Uname);
+				Intent intent = new Intent(getActivity(), MyStoryIntro.class);
+
 				intent.putExtra("id", s.getId());
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);

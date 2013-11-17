@@ -413,7 +413,7 @@ public class FragmentViewer extends Activity {
 				childIds[i] = choices.get(i).getChild();
 			}
 			Random r = new Random();
-			int ranId = r.nextInt(childIds.length);
+			int ranId = r.nextInt(choices.size());
 			// Create the random choice
 			Choice ranChoice = new Choice();
 			ranChoice.setID(-1);
@@ -454,6 +454,11 @@ public class FragmentViewer extends Activity {
 				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
 				intent.putExtra("fid", c.getChild());
 				startActivity(intent);
+				/* This line terminates the last fragment so that you
+				 * can't "cheat" and go back to the previous fragment.
+				 * Do we want this feature?
+				 */
+				finish();
 			}
 
 

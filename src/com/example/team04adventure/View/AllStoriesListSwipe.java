@@ -291,7 +291,7 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    
+
     Copyright (C) 2013  CMPUT301F13T04
 
     This program is free software; you can redistribute it and/or modify
@@ -342,6 +342,7 @@ Public License instead of this License.
  */
 package com.example.team04adventure.View;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import android.content.Intent;
@@ -352,6 +353,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.team04adventure.R;
@@ -370,7 +372,10 @@ public class AllStoriesListSwipe extends Fragment {
 
 	// ListView representing the list of stories
 	ListView storyListView;
+	Button randomButton;
 	
+	ArrayList<Story> stories;
+
 	/**
 	 * onCreate method, simply assigns the ListView variables to the necessary variables
 	 * and returns it to the caller
@@ -382,6 +387,7 @@ public class AllStoriesListSwipe extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.activity_all_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.story_list);
+		randomButton = (Button) rootView.findViewById(R.id.randomAllStories);
 
 		return rootView;
 	}
@@ -390,16 +396,16 @@ public class AllStoriesListSwipe extends Fragment {
 	 * onResume method, simply assigns sets the adapter and a listener to listen
 	 * to user selections of story items.
 	 */
-	
+
 	public void onResume() {
-//		ArrayList<Story> ostorylist = new ArrayList<Story>();
+		//		ArrayList<Story> ostorylist = new ArrayList<Story>();
 
 
-//		JSONparser jp = new JSONparser();
+		//		JSONparser jp = new JSONparser();
 
-		ArrayList<Story> stories = new ArrayList<Story>();
-//		stories = jp.getAll();
-		
+		stories = new ArrayList<Story>();
+		//		stories = jp.getAll();
+
 		Integer index = Integer.valueOf(-5);
 		try {
 			stories = new JSONparser().execute(index).get();
@@ -411,27 +417,27 @@ public class AllStoriesListSwipe extends Fragment {
 			e.printStackTrace();
 		}
 		//stories.add(jp.getStory("10"));
-		
+
 		/*
 		 * Code used for testing. Hard-coded story that can be added into the list.
 		 * Side-steps the need to use a JSONparser.
 		 */
-		
-//		String id = "69696";
-//	    /* Simple fragment */
-//	    Frag f = new Frag();
-//	    f.setTitle("title");
-//	    f.setAuthor("Frag authored by " + id);
-//	    f.setBody("This fragment body belongs to frag " + id);
-//	    f.setId(id);
-//	    /* Simple story */
-//	    Story s = new Story();
-//	    s.setAuthor("Story authored by " + id);
-//	    s.setTitle("Title " + id);
-//	    s.setId(id);
-//	    s.addFragment(f);
-//	    ArrayList<Story> stories = new ArrayList<Story>();
-//	    stories.add(s);
+
+		//		String id = "69696";
+		//	    /* Simple fragment */
+		//	    Frag f = new Frag();
+		//	    f.setTitle("title");
+		//	    f.setAuthor("Frag authored by " + id);
+		//	    f.setBody("This fragment body belongs to frag " + id);
+		//	    f.setId(id);
+		//	    /* Simple story */
+		//	    Story s = new Story();
+		//	    s.setAuthor("Story authored by " + id);
+		//	    s.setTitle("Title " + id);
+		//	    s.setId(id);
+		//	    s.addFragment(f);
+		//	    ArrayList<Story> stories = new ArrayList<Story>();
+		//	    stories.add(s);
 
 		storyListView.setAdapter(new StoryListAdapter(getActivity(), stories));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
@@ -451,8 +457,31 @@ public class AllStoriesListSwipe extends Fragment {
 			}
 
 		});
-		
+
+		randomButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				//goToStory(id);
+				Story s = (Story) stories.get(chooseRandom());
+				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
+				intent.putExtra("id", s.getId());
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(intent);
+				
+			}
+		});
+
 		super.onResume();
+	}
+	
+	private int chooseRandom() {
+		Random ran = new Random();
+		return ran.nextInt(stories.size());
+	}
+	
+	private void goToStory(int id) {
+		
 	}
 
 

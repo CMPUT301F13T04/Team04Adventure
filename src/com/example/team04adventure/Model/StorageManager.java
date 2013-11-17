@@ -344,6 +344,7 @@ package com.example.team04adventure.Model;
 
 
 import java.io.ByteArrayInputStream;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
@@ -356,6 +357,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.example.team04adventure.View.MainActivity;
 
 /**
  * StorageManager is meant to write data into the SQLite database. This data is meant for access in offline mode in the case

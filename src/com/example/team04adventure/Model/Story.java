@@ -414,6 +414,14 @@ public class Story {
 		this.frags.add(frag);
 	
 	}
+
+	public void deleteFrag(String id) {
+		for (int i = 0; i < frags.size(); i++) {
+			if (frags.get(i).getId().equals(id)) {
+				frags.remove(i);
+			}
+		}
+	}
 	
 	/**
 	 * Gets the title of the story.

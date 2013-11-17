@@ -400,6 +400,7 @@ public class EditFragment extends Activity {
     private static final int SELECT_PICTURE = 1;
 	
 	private String sid;
+	private String origFrag;
 	private Uri imageFileUri;
 	private Frag fragment = new Frag();
 	private Story story = new Story();
@@ -413,6 +414,9 @@ public class EditFragment extends Activity {
 		setContentView(R.layout.activity_edit_fragment);
 		
 		Bundle extras = getIntent().getExtras();
+		
+		origFrag = extras.getString("ftitle");
+		
 		nc = extras.getInt("nc");
 		sid = extras.getString("sid");
 		fragment.setId(extras.getString("fid"));
@@ -644,6 +648,7 @@ public class EditFragment extends Activity {
 		fragment.setBody(fragBodyString);
 		fragment.setAuthor(MainActivity.username);
 		
+		story.deleteFrag(fragment.getId());
 		story.addFragment(fragment);
 		
 		Integer index = Integer.valueOf(-1);

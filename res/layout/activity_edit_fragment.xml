@@ -31,6 +31,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/camera" />
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Fragment Illustration" />
     <Button 
         android:id="@+id/link"
         android:layout_width="fill_parent"

@@ -346,6 +346,7 @@ package com.example.team04adventure.Model;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -397,8 +398,13 @@ public class FragAdapter extends BaseAdapter {
         } else 
             holder = (ViewHolder) convertView.getTag();
         
-        holder.profile.setImageResource(R.drawable.ic_launcher);
-        //holder.profile.setImageBitmap(frags.get(position).getProfile().getMedia());
+        if (frags.get(position).getProfile().getMedia() == null) {
+            holder.profile.setImageResource(R.drawable.ic_launcher);
+        } else {
+        	String encodedString = frags.get(position).getProfile().getMedia();
+        	Bitmap bm = Media.decodeBase64(encodedString);
+        	holder.profile.setImageBitmap(bm);
+        }
         holder.fragView.setText(frags.get(position).getTitle());
         holder.authorView.setText("By, "+frags.get(position).getAuthor());
         

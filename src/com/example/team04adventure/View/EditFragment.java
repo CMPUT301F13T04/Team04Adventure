@@ -346,10 +346,7 @@ package com.example.team04adventure.View;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
-
-import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -368,7 +365,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Controller.OnlineStoryList;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
@@ -388,16 +384,18 @@ public class EditFragment extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int CREATE_CHOICE = 999;
+    private static final int SELECT_PICTURE = 1;
+	private static final int SELECT_PROFILE = 101;
 	
 	private Button uploadButton;
 	private Button cameraButton;
+	private Button profileButton;
 	private Button linkButton;
 	private Button saveButton;
 	
 	private EditText fragTitle;
 	private EditText fragBody;
 	
-    private static final int SELECT_PICTURE = 1;
 	
 	private String sid;
 	private String origFrag;
@@ -439,6 +437,7 @@ public class EditFragment extends Activity {
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
+		profileButton = (Button) findViewById(R.id.profile);
 		linkButton = (Button) findViewById(R.id.link);
 		saveButton = (Button) findViewById(R.id.save);
 		
@@ -461,6 +460,14 @@ public class EditFragment extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				openCamera();
+			}
+		});
+		
+		profileButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setProfile();	
 			}
 		});
 		
@@ -514,30 +521,13 @@ public class EditFragment extends Activity {
 			// Saves the bitmap result from the camera into the frag object
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-				Random rg = new Random();
-				long rlong = rg.nextLong();
 				Media media = new Media();
 				String convertedString = Media.encodeTobase64(bitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				media.setID(rlong);
 				fragment.addPicture(media);
 				
 				story.addFragment(fragment);
-				
-//				JSONparser jp = new JSONparser();
-//				try {
-//					jp.storeStory(story);
-//				} catch (ClientProtocolException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalStateException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -550,30 +540,32 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-				Random rg = new Random();
-				long rlong = rg.nextLong();
 				Media media = new Media();
 				String convertedString = Media.encodeTobase64(bitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				media.setID(rlong);
 				fragment.addPicture(media);
 				
 				story.addFragment(fragment);
 				
-//				JSONparser jp = new JSONparser();
-//				try {
-//					jp.storeStory(story);
-//				} catch (ClientProtocolException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalStateException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if (requestCode == SELECT_PROFILE && resultCode == RESULT_OK) {
+			Uri selectedImageUri = data.getData();
+			try {
+				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+				Media media = new Media();
+				String convertedString = Media.encodeTobase64(bitmap);
+				media.setContent(convertedString);
+				media.setType("pic");
+				fragment.setIllustration(media);
+				
+				story.addFragment(fragment);
+				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -592,7 +584,7 @@ public class EditFragment extends Activity {
 		    
 			adb.setTitle("New Choice");
 
-			adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
+			adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
 				
 				public void onClick(DialogInterface dialog, int whichButton) {  
 					
@@ -604,7 +596,7 @@ public class EditFragment extends Activity {
 				}  
 			});  
 
-			adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+			adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int which) {
 
@@ -633,6 +625,14 @@ public class EditFragment extends Activity {
 	 * Opens the activity that contains all existing fragments to allow the user to choose one to make
 	 * a connection to.
 	 */
+	
+	public void setProfile() {
+		Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Profile"), SELECT_PROFILE);
+	}
+	
 	public void linkFrag() {
 		
 	}

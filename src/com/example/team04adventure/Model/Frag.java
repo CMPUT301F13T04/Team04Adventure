@@ -389,7 +389,7 @@ public class Frag {
 		this.profile = new Media();
 		this.profile.type = "pic";
 		
-		Bitmap bm = BitmapFactory.decodeResource(null, R.drawable.ic_launcher);
+//		Bitmap bm = BitmapFactory.decodeResource(null, R.drawable.ic_launcher);
 //		String convertedString = Media.encodeTobase64(bm);
 		
 //		this.profile.setContent(convertedString);

@@ -346,6 +346,7 @@ package com.example.team04adventure.View;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
@@ -406,6 +407,7 @@ public class EditFragment extends Activity {
 	private StorageManager sm;
 	private Frag fragment = new Frag();
 	private Story story = new Story();
+	private ArrayList<String> idList = new ArrayList<String>();
 	
 	// "Add New Choice" Flag
 	int nc = 0;
@@ -440,6 +442,8 @@ public class EditFragment extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		refreshIdList();
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
@@ -546,9 +550,32 @@ public class EditFragment extends Activity {
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				fragment.addPicture(media);
 				
-				story.addFragment(fragment);
+				if (story.getFrags().isEmpty()) {
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.addPicture(media);
+					story.addFragment(fragment);	
+				} else {
+					int listIndex = idList.indexOf(fragment.getId());
+					fragment = story.getFrags().get(listIndex);
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.addPicture(media);
+					story.deleteFrag(fragment.getId());
+					story.addFragment(fragment, listIndex);	
+				}
+				refreshIdList();
+				
+				Integer index = Integer.valueOf(-1);
+				new JSONparser().execute(index, story);
+				
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -580,9 +607,27 @@ public class EditFragment extends Activity {
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				fragment.addPicture(media);
-				
-				story.addFragment(fragment);
+				if (story.getFrags().isEmpty()) {
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.addPicture(media);
+					story.addFragment(fragment);	
+				} else {
+					int listIndex = idList.indexOf(fragment.getId());
+					fragment = story.getFrags().get(listIndex);
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.addPicture(media);
+					story.deleteFrag(fragment.getId());
+					story.addFragment(fragment, listIndex);	
+				}
+				refreshIdList();
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -613,9 +658,28 @@ public class EditFragment extends Activity {
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				fragment.setIllustration(media);
 				
-				story.addFragment(fragment);
+				if (story.getFrags().isEmpty()) {
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.setIllustration(media);
+					story.addFragment(fragment);
+				} else {
+					int listIndex = idList.indexOf(fragment.getId());
+					fragment = story.getFrags().get(listIndex);
+					String fragTitleString = fragTitle.getText().toString();
+					String fragBodyString = fragBody.getText().toString();
+					fragment.setTitle(fragTitleString);
+					fragment.setBody(fragBodyString);
+					fragment.setAuthor(MainActivity.username);
+					fragment.setIllustration(media);
+					story.deleteFrag(fragment.getId());
+					story.addFragment(fragment, listIndex);	
+				}
+				refreshIdList();
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -692,32 +756,29 @@ public class EditFragment extends Activity {
 	 */
 	public void saveFrag() {
 		// Saves the changes to the fragment text
-		String fragTitleString = fragTitle.getText().toString();
-		String fragBodyString = fragBody.getText().toString();
-		fragment.setTitle(fragTitleString);
-		fragment.setBody(fragBodyString);
-		fragment.setAuthor(MainActivity.username);
-				
-		story.deleteFrag(fragment.getId());
-		story.addFragment(fragment);
+		System.out.println(story.getFrags().get(0).getTitle());
+		if (story.getFrags().isEmpty()) {
+			String fragTitleString = fragTitle.getText().toString();
+			String fragBodyString = fragBody.getText().toString();
+			fragment.setTitle(fragTitleString);
+			fragment.setBody(fragBodyString);
+			fragment.setAuthor(MainActivity.username);
+			story.addFragment(fragment);	
+		} else {
+			int listIndex = idList.indexOf(fragment.getId());
+			fragment = story.getFrags().get(listIndex);
+			String fragTitleString = fragTitle.getText().toString();
+			String fragBodyString = fragBody.getText().toString();
+			fragment.setTitle(fragTitleString);
+			fragment.setBody(fragBodyString);
+			fragment.setAuthor(MainActivity.username);
+			story.deleteFrag(fragment.getId());
+			story.addFragment(fragment, listIndex);
+		}
 		
+		refreshIdList();
 		Integer index = Integer.valueOf(-1);
 		new JSONparser().execute(index, story);
-
-		
-//		JSONparser jp = new JSONparser();
-//		try {
-//			jp.storeStory(story);
-//		} catch (ClientProtocolException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalStateException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		Toast.makeText(getApplicationContext(), "Fragment saved!", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, OnlineStoryIntro.class);
@@ -726,6 +787,14 @@ public class EditFragment extends Activity {
 		
 		startActivity(intent);
 		
+	}
+	
+	public void refreshIdList() {
+		ArrayList<Frag> a = story.getFrags();
+		int b = a.size();
+		for (int i = 0; i<b; i++){
+			idList.add(a.get(i).getId());
+		}
 	}
 	
 	@Override

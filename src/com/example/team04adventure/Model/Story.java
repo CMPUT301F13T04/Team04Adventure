@@ -414,6 +414,10 @@ public class Story {
 		this.frags.add(frag);
 	
 	}
+	
+	public void addFragment(Frag frag, int position) {
+		this.frags.add(position, frag);
+	}
 
 	public void deleteFrag(String id) {
 		for (int i = 0; i < frags.size(); i++) {

@@ -378,6 +378,7 @@ public class FragmentViewer extends Activity {
 	TextView 	fragTitle,
 	fragAuthor,
 	fragBody;
+	ImageView profilePic;
 	// The list of next choices
 	ArrayList<Choice> choices;
 	// The adapter for choices
@@ -449,6 +450,14 @@ public class FragmentViewer extends Activity {
 		fragAuthor.append(f.getAuthor());
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
+		profilePic = (ImageView) findViewById(R.id.profile_pic);
+		
+		if (f.getProfile().getMedia() != null) {
+			Media fragProfile = f.getProfile();
+			String cString = fragProfile.getMedia();
+			Bitmap bm = Media.decodeBase64(cString);
+			profilePic.setImageBitmap(bm);
+		}
 
 		fragImages = f.getImages();
 		imageLayout = (LinearLayout) findViewById(R.id.image_layout);

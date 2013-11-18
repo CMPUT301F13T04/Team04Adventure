@@ -428,6 +428,8 @@ public class OnlineStoryIntro extends Activity {
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
 		
 		intent.putExtra("fid", frags.get(0).getId());
+		intent.putExtra("flag", "online");
+		intent.putExtra("sid", sid);
 		startActivity(intent);
 		}
 	}

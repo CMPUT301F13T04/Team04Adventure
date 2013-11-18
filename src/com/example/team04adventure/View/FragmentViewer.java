@@ -364,8 +364,10 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragChoiceAdapter;
+import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
+import com.example.team04adventure.Model.Story;
 
 /**
  * FragmentViewer creates the activity that lets the user view the contents of the fragment.
@@ -381,6 +383,8 @@ public class FragmentViewer extends Activity {
 	// The adapter for choices
 	ArrayList<Media> fragImages;
 	LinearLayout imageLayout;
+	String flag;
+	String storyID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -393,14 +397,29 @@ public class FragmentViewer extends Activity {
 		// you can go to another fragment.
 		Bundle extras = getIntent().getExtras();
 		String fragID = extras.getString("fid");
+		flag = extras.getString("flag");
+		JSONparser jp = new JSONparser(); 
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
-
+		
 		// Initialize the list of choices for that frag
 		choices = new ArrayList<Choice>();
-		// Get the fragment, and then assign the choices
+		// Get the fragment, and then assign the choice
+		Frag f = new Frag();
 		StorageManager sm = new StorageManager(this);
-
-		Frag f = sm.getFrag(fragID);
+		if (flag.equals("online")){
+			storyID = extras.getString("sid");
+			Story s = jp.getStory(storyID);
+			ArrayList<Frag> frags = s.getFrags();
+			for(Frag fr: frags){
+				if (fr.getId().equals(fragID)){
+					f = fr;
+					break;
+				}
+			}
+		}
+		else{
+		f = sm.getFrag(fragID);
+		}
 
 		// Populate the choice list with the fragments choices
 		choices = f.getChoices();
@@ -452,6 +471,12 @@ public class FragmentViewer extends Activity {
 				Choice c = (Choice) choiceListView.getItemAtPosition(position);
 				/** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
 				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+				if(flag.equals("online")){
+					intent.putExtra("flag", "online");
+					intent.putExtra("sid", storyID); 
+				}else{
+					intent.putExtra("flag", "offline");
+				}
 				intent.putExtra("fid", c.getChild());
 				startActivity(intent);
 				/* This line terminates the last fragment so that you

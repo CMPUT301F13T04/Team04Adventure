@@ -422,6 +422,7 @@ public class MyStoryIntro extends Activity {
 		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
 		
 		intent.putExtra("fid", frags.get(0).getId());
+		intent.putExtra("flag", "my");
 		startActivity(intent);
 		}
 	}

@@ -358,7 +358,7 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
-
+ 
 /**
  * MyStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
  * choose one of those cached stories to view.

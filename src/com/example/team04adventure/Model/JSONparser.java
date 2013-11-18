@@ -510,7 +510,7 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 			String notFound = "HTTP/1.1 404 Not Found";
 			String status = response.getStatusLine().toString();
 			System.out.println(status);
-			getRequest.releaseConnection();
+//			getRequest.releaseConnection();
 
 			if (status.equals(notFound)){
 				return false; // User is not there.

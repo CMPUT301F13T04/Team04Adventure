@@ -447,7 +447,7 @@ public class MyStoryIntro extends Activity {
 		adb.setTitle("New Fragment");
 
 
-		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
+		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
 			public void onClick(DialogInterface dialog, int whichButton) {  
 				
 				String ftitle = titleinput.getText().toString();
@@ -473,7 +473,7 @@ public class MyStoryIntro extends Activity {
 			}  
 		});  
 
-		adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 

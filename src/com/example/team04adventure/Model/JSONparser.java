@@ -668,40 +668,40 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 		return json;
 	}
 
-		protected ArrayList<Story> doInBackground(Object... params) {
-			int count = params.length;
-			for (int i=0;i<count;i+=2) {
-				Integer index = (Integer) params[i];
-				if (index == -1) {
-					try {
-						storeStory((Story) params[i+1]);
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				if (index == -2) {
-					ArrayList<Story> al = new ArrayList<Story>();
-					al.add(getStory((String) params[i+1]));
-					return al;
-				}
-				if (index == -3) {
-					checkStory((Story) params[i+1]);
-				}
-				if (index == -4) {
-					deleteStory((Story) params[i+1]);
-				}
-				if (index == -5) {
-					return getAll();
+	protected ArrayList<Story> doInBackground(Object... params) {
+		int count = params.length;
+		for (int i=0;i<count;i+=2) {
+			Integer index = (Integer) params[i];
+			if (index == -1) {
+				try {
+					storeStory((Story) params[i+1]);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-			
-			return null;
+			if (index == -2) {
+				ArrayList<Story> al = new ArrayList<Story>();
+				al.add(getStory((String) params[i+1]));
+				return al;
+			}
+			if (index == -3) {
+				checkStory((Story) params[i+1]);
+			}
+			if (index == -4) {
+				deleteStory((Story) params[i+1]);
+			}
+			if (index == -5) {
+				return getAll();
+			}
 		}
+
+		return null;
 	}
+}

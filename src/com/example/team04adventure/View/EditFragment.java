@@ -369,6 +369,7 @@ import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
+import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
@@ -387,6 +388,8 @@ public class EditFragment extends Activity {
     private static final int SELECT_PICTURE = 1;
 	private static final int SELECT_PROFILE = 101;
 	
+	private static final int IMAGE_MAX = 100;
+	
 	private Button uploadButton;
 	private Button cameraButton;
 	private Button profileButton;
@@ -400,6 +403,7 @@ public class EditFragment extends Activity {
 	private String sid;
 	private String origFrag;
 	private Uri imageFileUri;
+	private StorageManager sm;
 	private Frag fragment = new Frag();
 	private Story story = new Story();
 	
@@ -426,6 +430,9 @@ public class EditFragment extends Activity {
 		Integer index = Integer.valueOf(-2);
 		try {
 			story = new JSONparser().execute(index, sid).get().get(0);
+			if (story == null) {
+				story = sm.getStory(sid);
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -433,7 +440,6 @@ public class EditFragment extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		uploadButton = (Button) findViewById(R.id.upload);
 		cameraButton = (Button) findViewById(R.id.camera);
@@ -521,8 +527,23 @@ public class EditFragment extends Activity {
 			// Saves the bitmap result from the camera into the frag object
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+				
+				float width = bitmap.getWidth();
+				float height = bitmap.getHeight();
+				float scale = 1;
+				if (width >= height) {
+					scale = IMAGE_MAX/width;
+				} else if (width < height) {
+					scale = IMAGE_MAX/height;
+				}
+				float newWidth = width * scale;
+				float newHeight = height * scale;
+				int newWidthInt = (int) newWidth;
+				int newHeightInt = (int) newHeight;
+				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(bitmap);
+				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				fragment.addPicture(media);
@@ -540,8 +561,23 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+				
+				float width = bitmap.getWidth();
+				float height = bitmap.getHeight();
+				float scale = 1;
+				if (width >= height) {
+					scale = IMAGE_MAX/width;
+				} else if (width < height) {
+					scale = IMAGE_MAX/height;
+				}
+				float newWidth = width * scale;
+				float newHeight = height * scale;
+				int newWidthInt = (int) newWidth;
+				int newHeightInt = (int) newHeight;
+				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(bitmap);
+				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				fragment.addPicture(media);
@@ -558,8 +594,23 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+				
+				float width = bitmap.getWidth();
+				float height = bitmap.getHeight();
+				float scale = 1;
+				if (width >= height) {
+					scale = IMAGE_MAX/width;
+				} else if (width < height) {
+					scale = IMAGE_MAX/height;
+				}
+				float newWidth = width * scale;
+				float newHeight = height * scale;
+				int newWidthInt = (int) newWidth;
+				int newHeightInt = (int) newHeight;
+				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(bitmap);
+				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				fragment.setIllustration(media);
@@ -625,7 +676,6 @@ public class EditFragment extends Activity {
 	 * Opens the activity that contains all existing fragments to allow the user to choose one to make
 	 * a connection to.
 	 */
-	
 	public void setProfile() {
 		Intent intent = new Intent();
         intent.setType("image/*");
@@ -647,7 +697,7 @@ public class EditFragment extends Activity {
 		fragment.setTitle(fragTitleString);
 		fragment.setBody(fragBodyString);
 		fragment.setAuthor(MainActivity.username);
-		
+				
 		story.deleteFrag(fragment.getId());
 		story.addFragment(fragment);
 		

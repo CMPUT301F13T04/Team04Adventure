@@ -399,7 +399,7 @@ public class StoryListAdapter extends BaseAdapter {
 	            holder = (ViewHolder) convertView.getTag();
 	        
 	        holder.titleView.setText(stories.get(position).getTitle());
-	        holder.authorView.setText("By, " + stories.get(position).getAuthor());
+	        holder.authorView.setText("By: " + stories.get(position).getAuthor());
 	        holder.fragmentView.setText("Fragments: " + stories.get(position).getFrags().size());
 	        
 	 

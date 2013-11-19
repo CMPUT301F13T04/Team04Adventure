@@ -29,8 +29,7 @@
         android:textSize="14sp"
         android:maxLines="2"
         android:scrollbars="vertical"
-        android:layout_below="@+id/StoryTitle"
-        android:text="By, " />
+        android:layout_below="@+id/StoryTitle" />
    
     <TextView
         android:id="@+id/StorySynop"

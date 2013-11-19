@@ -407,7 +407,7 @@ public class OnlineStoryIntro extends Activity {
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
-		storyAuthor.append(story.getAuthor());
+		storyAuthor.append("By: " + story.getAuthor());
 		storySynop = (TextView) findViewById(R.id.StorySynop);
 		storySynop.append(story.getSynopsis());
 		

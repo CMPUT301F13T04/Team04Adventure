@@ -447,7 +447,7 @@ public class FragmentViewer extends Activity {
 		fragTitle = (TextView) findViewById(R.id.FragTitle);
 		fragTitle.append(f.getTitle());
 		fragAuthor = (TextView) findViewById(R.id.FragAuthor);
-		fragAuthor.append(f.getAuthor());
+		fragAuthor.append("By: " + f.getAuthor());
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
 		profilePic = (ImageView) findViewById(R.id.profile_pic);

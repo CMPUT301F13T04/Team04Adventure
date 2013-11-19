@@ -18,8 +18,7 @@
       <Button
         android:id="@+id/add_story"
         style="?android:attr/buttonStyleSmall"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="+" 
         android:onClick = "addStory"/>

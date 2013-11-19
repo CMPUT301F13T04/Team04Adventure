@@ -389,7 +389,7 @@ public class EditFragment extends Activity {
     private static final int SELECT_PICTURE = 1;
 	private static final int SELECT_PROFILE = 101;
 	
-	private static final int IMAGE_MAX = 100;
+	private static final int IMAGE_MAX = 250;
 	
 	private Button uploadButton;
 	private Button cameraButton;
@@ -551,7 +551,8 @@ public class EditFragment extends Activity {
 				media.setContent(convertedString);
 				media.setType("pic");
 				
-				if (story.getFrags().isEmpty()) {
+				int listIndex = idList.indexOf(fragment.getId());
+				if (listIndex==-1) {
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
 					fragment.setTitle(fragTitleString);
@@ -560,7 +561,6 @@ public class EditFragment extends Activity {
 					fragment.addPicture(media);
 					story.addFragment(fragment);	
 				} else {
-					int listIndex = idList.indexOf(fragment.getId());
 					fragment = story.getFrags().get(listIndex);
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
@@ -607,7 +607,9 @@ public class EditFragment extends Activity {
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
-				if (story.getFrags().isEmpty()) {
+				
+				int listIndex = idList.indexOf(fragment.getId());
+				if (listIndex==-1) {
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
 					fragment.setTitle(fragTitleString);
@@ -616,7 +618,6 @@ public class EditFragment extends Activity {
 					fragment.addPicture(media);
 					story.addFragment(fragment);	
 				} else {
-					int listIndex = idList.indexOf(fragment.getId());
 					fragment = story.getFrags().get(listIndex);
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
@@ -659,7 +660,8 @@ public class EditFragment extends Activity {
 				media.setContent(convertedString);
 				media.setType("pic");
 				
-				if (story.getFrags().isEmpty()) {
+				int listIndex = idList.indexOf(fragment.getId());
+				if (listIndex==-1) {
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
 					fragment.setTitle(fragTitleString);
@@ -668,7 +670,6 @@ public class EditFragment extends Activity {
 					fragment.setIllustration(media);
 					story.addFragment(fragment);
 				} else {
-					int listIndex = idList.indexOf(fragment.getId());
 					fragment = story.getFrags().get(listIndex);
 					String fragTitleString = fragTitle.getText().toString();
 					String fragBodyString = fragBody.getText().toString();
@@ -706,7 +707,12 @@ public class EditFragment extends Activity {
 					Choice c = new Choice();
 					c.setBody(choiceTitle.getText().toString());
 					c.setChild(data.getStringExtra("linkThis"));
+					int listIndex = idList.indexOf(fragment.getId());
+					fragment = story.getFrags().get(listIndex);
 					fragment.setChoice(c);
+					story.deleteFrag(fragment.getId());
+					story.addFragment(fragment, listIndex);	
+					refreshIdList();
 					
 				}  
 			});  
@@ -757,7 +763,10 @@ public class EditFragment extends Activity {
 	public void saveFrag() {
 		// Saves the changes to the fragment text
 		System.out.println(story.getFrags().get(0).getTitle());
-		if (story.getFrags().isEmpty()) {
+
+		refreshIdList();
+		int listIndex = idList.indexOf(fragment.getId());
+		if (listIndex==-1) {
 			String fragTitleString = fragTitle.getText().toString();
 			String fragBodyString = fragBody.getText().toString();
 			fragment.setTitle(fragTitleString);
@@ -765,7 +774,6 @@ public class EditFragment extends Activity {
 			fragment.setAuthor(MainActivity.username);
 			story.addFragment(fragment);	
 		} else {
-			int listIndex = idList.indexOf(fragment.getId());
 			fragment = story.getFrags().get(listIndex);
 			String fragTitleString = fragTitle.getText().toString();
 			String fragBodyString = fragBody.getText().toString();
@@ -792,6 +800,7 @@ public class EditFragment extends Activity {
 	public void refreshIdList() {
 		ArrayList<Frag> a = story.getFrags();
 		int b = a.size();
+		idList.clear();
 		for (int i = 0; i<b; i++){
 			idList.add(a.get(i).getId());
 		}

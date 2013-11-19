@@ -347,6 +347,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -364,11 +365,12 @@ public class FragAdapter extends BaseAdapter {
 
 	
 	private ArrayList<Frag> frags;
-	 
+	private Context context;
     private LayoutInflater layoutInflater;
  
     public FragAdapter(Context context, ArrayList<Frag> frag) {
         this.frags = frag;
+        this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
  
@@ -399,7 +401,9 @@ public class FragAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         
         if (frags.get(position).getProfile().getMedia() == null) {
-            holder.profile.setImageResource(R.drawable.ic_launcher);
+        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, false);
+            holder.profile.setImageBitmap(scaledBitmap);
         } else {
         	String encodedString = frags.get(position).getProfile().getMedia();
         	Bitmap bm = Media.decodeBase64(encodedString);

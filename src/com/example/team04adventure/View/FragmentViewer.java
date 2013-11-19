@@ -351,6 +351,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -467,6 +468,7 @@ public class FragmentViewer extends Activity {
 			String convertedString = mediaImage.getMedia();
 			Bitmap bitmap = Media.decodeBase64(convertedString);
 			image.setImageBitmap(bitmap);
+			imageLayout.setGravity(Gravity.CENTER);
 			imageLayout.addView(image);
 		}
 

@@ -362,7 +362,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
@@ -400,6 +402,10 @@ public class EditFragment extends Activity {
 	private EditText fragTitle;
 	private EditText fragBody;
 	
+	private TextView uploadTextView;
+	private ImageView uploadImageView;
+	private TextView illustrationTextView;
+	private ImageView illustrationImageView;
 	
 	private String sid;
 	private String origFrag;
@@ -453,6 +459,11 @@ public class EditFragment extends Activity {
 		
 		fragTitle = (EditText) findViewById(R.id.frag_title);
 		fragBody = (EditText) findViewById(R.id.frag_body);
+		
+		uploadTextView = (TextView) findViewById(R.id.upload_image_text);
+		uploadImageView = (ImageView) findViewById(R.id.upload_image_pic);
+		illustrationTextView = (TextView) findViewById(R.id.upload_illustration_text);
+		illustrationImageView = (ImageView) findViewById(R.id.upload_illustration_pic);
 		
 		fragTitle.setText(fragment.getTitle());
 		fragBody.setText(fragment.getBody());
@@ -546,6 +557,9 @@ public class EditFragment extends Activity {
 				int newHeightInt = (int) newHeight;
 				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
 				
+				uploadTextView.setText("Image you just added:");
+				uploadImageView.setImageBitmap(resizedBitmap);
+				
 				Media media = new Media();
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
@@ -603,6 +617,9 @@ public class EditFragment extends Activity {
 				int newHeightInt = (int) newHeight;
 				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
 				
+				uploadTextView.setText("Image you just added:");
+				uploadImageView.setImageBitmap(resizedBitmap);
+				
 				Media media = new Media();
 				String convertedString = Media.encodeTobase64(resizedBitmap);
 				media.setContent(convertedString);
@@ -654,6 +671,9 @@ public class EditFragment extends Activity {
 				int newWidthInt = (int) newWidth;
 				int newHeightInt = (int) newHeight;
 				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				
+				illustrationTextView.setText("Profile picture you just set:");
+				illustrationImageView.setImageBitmap(resizedBitmap);
 				
 				Media media = new Media();
 				String convertedString = Media.encodeTobase64(resizedBitmap);

@@ -368,6 +368,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_AUT = "Author";
 	  public static final String TABLE_FRAGS_MEDIA = "FragsMedia";
 	  public static final String TABLE_FRAGS_CHOICE = "FragsChoices";
+	  public static final String TABLE_FRAGS_ANNOTS = "FragsAnnots";
+	  public static final String TABLE_ANNOTS = "Annotations";
 	  public static final String COLUMN_BODY = "Body";
 	  public static final String TABLE_CHOICE = "Choices";
 	  public static final String COLUMN_CID = "_cid";
@@ -377,9 +379,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_MID = "_mid";
 	  public static final String COLUMN_CONTENT = "Content";
 	  public static final String COLUMN_MTYPE = "Type";
+	  public static final String COLUMN_AID = "_aid";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 12;
+	  private static final int DATABASE_VERSION = 13;
 
 	  // Database creation sql statement
 	  
@@ -405,10 +408,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		  + TABLE_FRAGS_MEDIA + "(" + COLUMN_FID
 		  + " text, " + COLUMN_MID + " integer);";
 	  
+	  private static final String DATABASE_CREATE_FRAGS_ANNOTS = "create table "
+			  + TABLE_FRAGS_ANNOTS + "(" + COLUMN_FID
+			  + " text, " + COLUMN_AID + " integer);";
+	  
 	  
 	  private static final String DATABASE_CREATE_FRAGS_CHOICE = "create table "
 		  + TABLE_FRAGS_CHOICE + "(" + COLUMN_FID 
 		  + " text, " + COLUMN_CID + " integer);";
+	  
+	  private static final String DATABASE_CREATE_ANNOTS = "create table "
+			  + TABLE_ANNOTS + "(" + COLUMN_AID 
+			  + " integer primary key autoincrement, " + COLUMN_BODY
+			  + " text, " + COLUMN_AUT + " text, "+ COLUMN_CONTENT +" text);";
 	  
 	  private static final String DATABASE_CREATE_MEDIA = "create table "
 		  + TABLE_MEDIA + "(" + COLUMN_MID 
@@ -440,6 +452,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	    database.execSQL(DATABASE_CREATE_CHOICE);
 	    database.execSQL(DATABASE_CREATE_FRAGS_MEDIA);
 	    database.execSQL(DATABASE_CREATE_FRAGS_CHOICE);
+	    database.execSQL(DATABASE_CREATE_FRAGS_ANNOTS);
+	    database.execSQL(DATABASE_CREATE_ANNOTS);
 	    
 	  }
 	  
@@ -458,6 +472,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	    db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRAGS_CHOICE);
 	    db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIA);
 	    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHOICE);
+	    db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRAGS_ANNOTS);
+	    db.execSQL("DROP TABLE IF EXISTS " + TABLE_ANNOTS);
 	    
 	    onCreate(db);
 	  }

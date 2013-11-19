@@ -344,7 +344,6 @@ package com.example.team04adventure.Model;
 
 
 import java.io.ByteArrayInputStream;
-
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
@@ -383,6 +382,11 @@ public class StorageManager implements Storage {
 			};
 	private String[] allChoice = { SQLiteHelper.COLUMN_CID,
 			SQLiteHelper.COLUMN_CONTENT, SQLiteHelper.COLUMN_CHILD_FID
+			};
+	
+	private String[] allAnnots = { SQLiteHelper.COLUMN_AID,
+			SQLiteHelper.COLUMN_BODY, SQLiteHelper.COLUMN_AUT,
+			SQLiteHelper.COLUMN_CONTENT
 			};
 	
 	/**
@@ -491,6 +495,16 @@ public class StorageManager implements Storage {
 		database.insert(SQLiteHelper.TABLE_FRAGS, null,
 	    		values);
 		
+		if(!f.getAnnotations().isEmpty()){
+			for (Annotation a : f.getAnnotations()){
+				lastid = addAnnots(a);
+				values.clear();
+				values.put(SQLiteHelper.COLUMN_FID, f.getId());
+				values.put(SQLiteHelper.COLUMN_AID, lastid);
+				database.insert(SQLiteHelper.TABLE_FRAGS_ANNOTS, null,
+		    		values);
+			}
+		}
 		
 		
 		if(!f.getChoices().isEmpty()){
@@ -593,6 +607,31 @@ public class StorageManager implements Storage {
 		return lastId;
 		
 	}
+	
+	/**
+	 * Inserts a Choice object into the DB.
+	 * @param c choice to add.
+	 * @return the ID of the Choice that was just added.
+	 */
+	private long addAnnots(Annotation a) {
+		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COLUMN_BODY, a.getReview());
+		values.put(SQLiteHelper.COLUMN_AUT, a.getAuthor());
+		values.put(SQLiteHelper.COLUMN_CONTENT, a.getImage());
+		database.insert(SQLiteHelper.TABLE_ANNOTS, null,
+	    		values);
+		
+		long lastId = -1;
+		
+		String query = "SELECT _aid from Annotations order by _aid DESC limit 1";
+		Cursor cursor = database.rawQuery(query, null);
+		if (cursor != null && cursor.moveToFirst()) {
+		    lastId = cursor.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+		}
+		
+		return lastId;
+		
+	}
 
 
 	/**
@@ -643,6 +682,9 @@ public class StorageManager implements Storage {
 		
 		database.delete(SQLiteHelper.TABLE_FRAGS_CHOICE, SQLiteHelper.COLUMN_FID
 				+ " = ?", fragargs);
+		
+		database.delete(SQLiteHelper.TABLE_FRAGS_ANNOTS, SQLiteHelper.COLUMN_FID
+				+ " = ?", fragargs);
 			
 		if(!f.getChoices().isEmpty()){
 			for (Choice c : f.getChoices())
@@ -660,6 +702,12 @@ public class StorageManager implements Storage {
 		if(!f.getVids().isEmpty()){
 			for (Media m : f.getVids())
 				deleteMedia(m);
+			
+		}
+		
+		if(!f.getAnnotations().isEmpty()){
+			for (Annotation a : f.getAnnotations())
+				deleteAnnotation(a);
 			
 		}
 	
@@ -688,6 +736,18 @@ public class StorageManager implements Storage {
 		
 		database.delete(SQLiteHelper.TABLE_CHOICE, SQLiteHelper.COLUMN_CID
 				+ " = ?", choiargs);		
+	}
+	
+	/**
+	 * Deletes a choice from the DB
+	 * @param c choice to be deleted.
+	 */
+	private void deleteAnnotation(Annotation a) {
+		
+		String[] annoargs = {""+a.getId()};
+		
+		database.delete(SQLiteHelper.TABLE_ANNOTS, SQLiteHelper.COLUMN_AID
+				+ " = ?", annoargs);		
 	}
 
 
@@ -850,6 +910,14 @@ public class StorageManager implements Storage {
 				frag.setChoice(c);
 			}
 		
+		ArrayList<Annotation> annotarr = getFragAnnotInfo(frag.getId());
+		
+		
+		if (!annotarr.isEmpty()){
+			for(Annotation a : annotarr)
+				frag.addAnnotations(a);
+			}
+		
 		ArrayList<Media> picsarr = getFragMediaInfo(frag.getId(), "pic");
 		
 		if (!picsarr.isEmpty()){
@@ -871,6 +939,29 @@ public class StorageManager implements Storage {
 		
 		return frag;
 		
+	}
+
+	private ArrayList<Annotation> getFragAnnotInfo(String fid) {
+		
+		String[] aIds = {SQLiteHelper.COLUMN_AID};
+		String awhere = "_fid = ?";
+		String[] whereargs = {""+fid};
+		ArrayList<Annotation> annotarr = new ArrayList<Annotation>();
+		
+		Cursor cursor = database.query(SQLiteHelper.TABLE_FRAGS_ANNOTS,
+				aIds, awhere, whereargs, null, null, null);
+		
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Annotation annot = new Annotation();
+			annot = getAnnotation(cursor.getLong(0));
+			annotarr.add(annot);
+			cursor.moveToNext();
+		}
+		
+		cursor.close();
+			
+		return annotarr;
 	}
 
 	/**
@@ -1005,7 +1096,40 @@ public class StorageManager implements Storage {
 		
 		return choice;
 	}
+	
+	/**
+	 * Returns a single Annotation object with ID
+	 * of aid.
+	 * @param aid ID of the choice.
+	 * @return a Annotation object.
+	 */
+	private Annotation getAnnotation(long aid) {
+		
+		String fwhere = "_aid = ?";
+		String[] whereargs = {""+aid};
+		Annotation annot = null;
+		
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ANNOTS,
+				allAnnots, fwhere, whereargs, null, null, null);
+		
+		cursor.moveToFirst();
+		annot = cursorToAnnotation(cursor);
+		
+		cursor.close();
+		
+		return annot;
+	}
 
+
+	private Annotation cursorToAnnotation(Cursor cursor) {
+		Annotation annot = new Annotation();
+		annot.setId(cursor.getLong(0));
+		annot.setReview(cursor.getString(1));
+		annot.setAuthor(cursor.getString(2));
+		annot.setImage(cursor.getString(3));
+		
+		return annot;
+	}
 
 	/**
 	 * Helper method that stores all the Choice 

@@ -551,11 +551,16 @@ public class EditFragment extends Activity {
 				} else if (width < height) {
 					scale = IMAGE_MAX/height;
 				}
-				float newWidth = width * scale;
-				float newHeight = height * scale;
-				int newWidthInt = (int) newWidth;
-				int newHeightInt = (int) newHeight;
-				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				Bitmap resizedBitmap = null;
+				if (scale >= 1) {
+					float newWidth = width * scale;
+					float newHeight = height * scale;
+					int newWidthInt = (int) newWidth;
+					int newHeightInt = (int) newHeight;
+					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				} else {
+					resizedBitmap = bitmap;
+				}
 				
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
@@ -611,11 +616,16 @@ public class EditFragment extends Activity {
 				} else if (width < height) {
 					scale = IMAGE_MAX/height;
 				}
-				float newWidth = width * scale;
-				float newHeight = height * scale;
-				int newWidthInt = (int) newWidth;
-				int newHeightInt = (int) newHeight;
-				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				Bitmap resizedBitmap;
+				if (scale >= 1) {
+					float newWidth = width * scale;
+					float newHeight = height * scale;
+					int newWidthInt = (int) newWidth;
+					int newHeightInt = (int) newHeight;
+					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				} else {
+					resizedBitmap = bitmap;
+				}
 				
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
@@ -666,11 +676,16 @@ public class EditFragment extends Activity {
 				} else if (width < height) {
 					scale = IMAGE_MAX/height;
 				}
-				float newWidth = width * scale;
-				float newHeight = height * scale;
-				int newWidthInt = (int) newWidth;
-				int newHeightInt = (int) newHeight;
-				Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				Bitmap resizedBitmap = null;
+				if (scale >= 1) {
+					float newWidth = width * scale;
+					float newHeight = height * scale;
+					int newWidthInt = (int) newWidth;
+					int newHeightInt = (int) newHeight;
+					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+				} else {
+					resizedBitmap = bitmap;
+				}
 				
 				illustrationTextView.setText("Profile picture you just set:");
 				illustrationImageView.setImageBitmap(resizedBitmap);

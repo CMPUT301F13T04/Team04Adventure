@@ -77,6 +77,10 @@
             android:name="com.example.team04adventure.View.MyStoryIntro"
             android:label="@string/title_activity_my_story_intro" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.View.AnnotViewer"
+            android:label="@string/title_activity_annot_viewer" >
+        </activity>
     </application>
 
 </manifest>

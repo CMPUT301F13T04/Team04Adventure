@@ -291,7 +291,7 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-
+    
     Copyright (C) 2013  CMPUT301F13T04
 
     This program is free software; you can redistribute it and/or modify
@@ -340,185 +340,92 @@ library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 
  */
-package com.example.team04adventure.View;
-
+package com.example.team04adventure.Model;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
+import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Choice;
-import com.example.team04adventure.Model.Frag;
-import com.example.team04adventure.Model.FragChoiceAdapter;
-import com.example.team04adventure.Model.JSONparser;
-import com.example.team04adventure.Model.Media;
-import com.example.team04adventure.Model.StorageManager;
-import com.example.team04adventure.Model.Story;
+import com.example.team04adventure.Model.FragAdapter.ViewHolder;
 
 /**
- * FragmentViewer creates the activity that lets the user view the contents of the fragment.
+ * StoryListAdapter is an adapter to get the story list.
  * @author Team04Adventure
  */
-public class FragmentViewer extends Activity {
-	// This is the title and body fields that are allocated at runtime
-	TextView 	fragTitle,
-	fragAuthor,
-	fragBody;
-	ImageView profilePic;
-	// The list of next choices
-	ArrayList<Choice> choices;
-	// The adapter for choices
-	ArrayList<Media> fragImages;
-	LinearLayout imageLayout;
-	String flag;
-	String storyID;
-	String fragID;
+public class AnnotationAdapter extends BaseAdapter {
+ 
+		private ArrayList<Annotation> annots;
+		private Context context;
+	    private LayoutInflater layoutInflater;
+	 
+	    public AnnotationAdapter(Context context, ArrayList<Annotation> annots) {
+	        this.annots = annots;
+	        layoutInflater = LayoutInflater.from(context);
+	        this.context = context;
+	    }
+	 
+	    @Override
+	    public int getCount() {
+	    	return annots.size();
+	    }
+	 
+	    @Override
+	    public Object getItem(int position) {
+	        return annots.get(position);
+	    }
+	 
+	    @Override
+	    public long getItemId(int position) {
+	        return position;
+	    }
+	 
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ViewHolder holder;
+	        if (convertView == null) {
+	            convertView = layoutInflater.inflate(R.layout.annotlistlayout, null);
+	            holder = new ViewHolder();
+	            holder.image = (ImageView) convertView.findViewById(R.id.image);
+	            holder.authorView = (TextView) convertView.findViewById(R.id.author);
+	            holder.reviewView = (TextView) convertView.findViewById(R.id.review);
+	        
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fragment_viewer);
-
-		// Extract the supplied IDs from the intent. These are supplied
-		// when a choice is selected from another fragment, or from the
-		// StoryIntro.java class. They have to be supplied again before
-		// you can go to another fragment.
-		Bundle extras = getIntent().getExtras();
-		fragID = extras.getString("fid");
-		flag = extras.getString("flag");
-		JSONparser jp = new JSONparser(); 
-		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
-		
-		// Initialize the list of choices for that frag
-		choices = new ArrayList<Choice>();
-		// Get the fragment, and then assign the choice
-		Frag f = new Frag();
-		StorageManager sm = new StorageManager(this);
-		if (flag.equals("online")){
-			storyID = extras.getString("sid");
-			Story s = jp.getStory(storyID);
-			ArrayList<Frag> frags = s.getFrags();
-			for(Frag fr: frags){
-				if (fr.getId().equals(fragID)){
-					f = fr;
-					break;
-				}
-			}
-		}
-		else{
-		f = sm.getFrag(fragID);
-		}
-
-		// Populate the choice list with the fragments choices
-		choices = f.getChoices();
-
-		if (choices.size() > 0) {
-			// Create a list of possible child IDs
-			String childIds[] = new String[choices.size()];
-			// Populate the list with possible IDs
-			for (int i = 0; i < choices.size(); i++) {
-				childIds[i] = choices.get(i).getChild();
-			}
-			Random r = new Random();
-			int ranId = r.nextInt(choices.size());
-			// Create the random choice
-			Choice ranChoice = new Choice();
-			ranChoice.setID(-1);
-			ranChoice.setChild(choices.get(ranId).getChild());
-			ranChoice.setBody("Random Choice?");
-
-			// Append the random Choice to the end of the list
-			choices.add(ranChoice);
-		}
-		// Set the title and body fields in the XML file
-		fragTitle = (TextView) findViewById(R.id.FragTitle);
-		fragTitle.append(f.getTitle());
-		fragAuthor = (TextView) findViewById(R.id.FragAuthor);
-		fragAuthor.append("By: " + f.getAuthor());
-		fragBody = (TextView) findViewById(R.id.FragBody);
-		fragBody.append(f.getBody());
-		profilePic = (ImageView) findViewById(R.id.profile_pic);
-		
-		if (f.getProfile().getMedia() != null) {
-			Media fragProfile = f.getProfile();
-			String cString = fragProfile.getMedia();
-			Bitmap bm = Media.decodeBase64(cString);
-			profilePic.setImageBitmap(bm);
-		}
-
-		fragImages = f.getImages();
-		imageLayout = (LinearLayout) findViewById(R.id.image_layout);
-		for (int i=0; i < fragImages.size(); i++) {
-			ImageView image = new ImageView(FragmentViewer.this);
-			Media mediaImage = fragImages.get(i);
-			String convertedString = mediaImage.getMedia();
-			Bitmap bitmap = Media.decodeBase64(convertedString);
-			image.setImageBitmap(bitmap);
-			imageLayout.setGravity(Gravity.CENTER);
-			imageLayout.addView(image);
-		}
-
-		choiceListView.setAdapter(new FragChoiceAdapter(this, choices));
-
-		choiceListView.setOnItemClickListener(new OnItemClickListener() {
-
-			/** When a story is selected **/
-			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-				Choice c = (Choice) choiceListView.getItemAtPosition(position);
-				/** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
-				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-				if(flag.equals("online")){
-					intent.putExtra("flag", "online");
-					intent.putExtra("sid", storyID); 
-				}else{
-					intent.putExtra("flag", "offline");
-				}
-				intent.putExtra("fid", c.getChild());
-				startActivity(intent);
-				/* This line terminates the last fragment so that you
-				 * can't "cheat" and go back to the previous fragment.
-				 * Do we want this feature?
-				 */
-				finish();
-			}
-
-
-		});
-
-
-	}
-	
-	public void showAnnots(View view) {
-		Intent intent = new Intent(getApplicationContext(), AnnotViewer.class);
-		intent.putExtra("sid", storyID);
-		intent.putExtra("fid", fragID);
-		intent.putExtra("online", "online");
-		startActivity(intent);
-	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.fragment_viewer, menu);
-		return true;
-	}
-
-
+	            convertView.setTag(holder);
+	        } else 
+	            holder = (ViewHolder) convertView.getTag();
+	        
+	        if (annots.get(position).getImage() == null) {
+	        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+	        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
+	            holder.image.setImageBitmap(scaledBitmap);
+	        } else {
+	        	String encodedString = annots.get(position).getImage();
+	        	Bitmap bm = Media.decodeBase64(encodedString);
+	        	holder.image.setImageBitmap(bm);
+	        }
+	        holder.authorView.setText(annots.get(position).getAuthor());
+	        holder.reviewView.setText(annots.get(position).getReview());
+	        
+	        
+	 
+	        return convertView;
+	    }
+	 
+	    static class ViewHolder {
+	       
+	    	ImageView image;
+	        TextView authorView;
+	        TextView reviewView;
+	      
+	    }
+	 
 }

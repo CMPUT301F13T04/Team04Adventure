@@ -26,5 +26,6 @@
     <string name="title_activity_frag_list">Story Fragments</string>
     <string name="frag_image">Image</string>
     <string name="title_activity_my_story_intro">MyStoryIntro</string>
+    <string name="title_activity_annot_viewer">AnnotViewer</string>
 
 </resources>

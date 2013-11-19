@@ -376,6 +376,7 @@ public class Frag {
 	private ArrayList<Media> pictures;
 	private ArrayList<Media> vids;
 	private ArrayList<Choice> choices;
+	private ArrayList<Annotation> annotations;
 	String Author;
 	
 	/**
@@ -388,6 +389,7 @@ public class Frag {
 		this.choices = new ArrayList<Choice>();
 		this.profile = new Media();
 		this.profile.type = "pic";
+		this.annotations = new ArrayList<Annotation>();
 		
 //		Bitmap bm = BitmapFactory.decodeResource(null, R.drawable.ic_launcher);
 //		String convertedString = Media.encodeTobase64(bm);
@@ -399,6 +401,14 @@ public class Frag {
 	
 	}
 	
+	public ArrayList<Annotation> getAnnotations() {
+		return annotations;
+	}
+
+	public void addAnnotations(Annotation a) {
+		this.annotations.add(a);
+	}
+
 	/**
 	 * Sets the author of the fragment as specified.
 	 * @param author the author of the fragment.

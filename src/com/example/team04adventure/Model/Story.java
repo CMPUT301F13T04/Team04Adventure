@@ -427,6 +427,15 @@ public class Story {
 		}
 	}
 	
+	public Frag getFrag(String fid) {
+		for (int i = 0; i < frags.size(); i++) {
+			if (frags.get(i).getId().equals(fid)) {
+				return frags.get(i);
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Gets the title of the story.
 	 * @return title of the story.

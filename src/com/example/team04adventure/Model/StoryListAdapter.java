@@ -362,12 +362,15 @@ import com.example.team04adventure.R;
 public class StoryListAdapter extends BaseAdapter {
  
 		private ArrayList<Story> stories;
+    	ArrayList<Story> storiesClone;
 	 
 	    private LayoutInflater layoutInflater;
 	 
 	    public StoryListAdapter(Context context, ArrayList<Story> stories) {
 	        this.stories = stories;
 	        layoutInflater = LayoutInflater.from(context);
+	        storiesClone = new ArrayList<Story>();
+	        storiesClone.addAll(stories);
 	    }
 	 
 	    @Override
@@ -414,5 +417,19 @@ public class StoryListAdapter extends BaseAdapter {
 	        TextView fragmentView;
 	      
 	    }
+	    
+	    public void filter(String query) {
+            if (query != null) {
+                    stories.clear();
+                    for (Story s : storiesClone) {
+                            String searchString = s.getTitle().concat(s.getAuthor().toString());
+                            if(searchString.matches("(?i)(.*)"+query+"(.*)")) {
+                                    this.stories.add(s);
+                            }
+                            }
+                    this.notifyDataSetChanged();
+            }
+    }
+
 	 
 }

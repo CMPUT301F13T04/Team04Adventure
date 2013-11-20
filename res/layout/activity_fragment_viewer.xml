@@ -79,7 +79,7 @@
 		        android:layout_alignParentRight="true"
 		        android:layout_alignParentTop="true"
 		        android:text="Reviews"
-				android:onClick="showAnnots" />
+				android:onClick = "showAnnots" />
 		</RelativeLayout>
 	</ScrollView>
     

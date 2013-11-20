@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Annotation;
-import com.example.team04adventure.Model.AnnotationAdapter;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
@@ -25,12 +26,13 @@ public class AnnotViewer extends Activity {
 	StorageManager sm;
 	ArrayList <Frag> fragList = new ArrayList <Frag>();
 
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_annot_viewer);
 
 		Bundle extras = getIntent().getExtras();
+		
 		fid = extras.getString("fid");
 		sid = extras.getString("sid");
 		online = extras.getString("online");
@@ -60,9 +62,22 @@ public class AnnotViewer extends Activity {
 			annotList = f.getAnnotations();
 			
 		}
-		
-		annotListView.setAdapter(new AnnotationAdapter(this, annotList));
+		//******
+//		Annotation a = new Annotation();
+//		a.setAuthor(MainActivity.username);
+//		a.setReview("THIS IS THE SAMPLE REVIEW");
+//		annotList.add(a);
+		//****** WE NEED THIS LINE -->
+		//annotListView.setAdapter(new AnnotationAdapter(this, annotList));
 
+	}
+	
+	public void addAnnot(View view) {
+		Intent intent = new Intent(getApplicationContext(), EditCreateAnnot.class);
+		intent.putExtra("sid", sid);
+		intent.putExtra("fid", fid);
+		intent.putExtra("online", online);
+		startActivity(intent);
 	}
 
 	@Override

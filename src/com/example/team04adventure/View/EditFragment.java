@@ -737,19 +737,36 @@ public class EditFragment extends Activity {
 
 			adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
 				
-				public void onClick(DialogInterface dialog, int whichButton) {  
+				public void onClick(DialogInterface dialog, int whichButton) { 
 					
-					Choice c = new Choice();
-					c.setBody(choiceTitle.getText().toString());
-					c.setChild(data.getStringExtra("linkThis"));
 					int listIndex = idList.indexOf(fragment.getId());
-					fragment = story.getFrags().get(listIndex);
-					fragment.setChoice(c);
-					story.deleteFrag(fragment.getId());
-					story.addFragment(fragment, listIndex);	
+
+					if (listIndex==-1) {
+						Choice c = new Choice();
+						c.setBody(choiceTitle.getText().toString());
+						c.setChild(data.getStringExtra("linkThis"));
+						String fragTitleString = fragTitle.getText().toString();
+						String fragBodyString = fragBody.getText().toString();
+						fragment.setTitle(fragTitleString);
+						fragment.setBody(fragBodyString);
+						fragment.setAuthor(MainActivity.username);
+						fragment.setChoice(c);
+						story.addFragment(fragment);
+					}
+					else{
+
+						Choice c = new Choice();
+						c.setBody(choiceTitle.getText().toString());
+						c.setChild(data.getStringExtra("linkThis"));
+						fragment = story.getFrags().get(listIndex);
+						fragment.setChoice(c);
+						story.deleteFrag(fragment.getId());
+						story.addFragment(fragment, listIndex);	
+						
+					}
 					refreshIdList();
 					
-				}  
+				}
 			});  
 
 			adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -797,7 +814,7 @@ public class EditFragment extends Activity {
 	 */
 	public void saveFrag() {
 		// Saves the changes to the fragment text
-		System.out.println(story.getFrags().get(0).getTitle());
+		//		System.out.println(story.getFrags().get(0).getTitle());
 
 		refreshIdList();
 		int listIndex = idList.indexOf(fragment.getId());

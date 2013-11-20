@@ -402,6 +402,9 @@ public class Frag {
 	}
 	
 	public ArrayList<Annotation> getAnnotations() {
+		if (this.annotations == null) {
+			this.annotations = new ArrayList<Annotation>();
+		}
 		return annotations;
 	}
 

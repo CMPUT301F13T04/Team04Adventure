@@ -569,9 +569,9 @@ public class OnlineStoryList extends FragmentActivity implements
 				story.setId(story.getTitle().replace(" ", "")+rint);
 				story.setAuthor(MainActivity.username);
 				
-	//			Integer index = Integer.valueOf(-1);
+//				Integer index = Integer.valueOf(-1);
 //				JSONparser jp = new JSONparser();
-				
+
 				StorageManager sm = new StorageManager(getBaseContext());
 
 				try {

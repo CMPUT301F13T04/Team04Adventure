@@ -81,6 +81,10 @@
             android:name="com.example.team04adventure.View.AnnotViewer"
             android:label="@string/title_activity_annot_viewer" >
         </activity>
+        <activity
+            android:name="com.example.team04adventure.View.EditCreateAnnot"
+            android:label="@string/title_activity_edit_create_annot" >
+        </activity>
     </application>
 
 </manifest>

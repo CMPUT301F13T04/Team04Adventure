@@ -389,6 +389,21 @@ public class AllStoriesListSwipe extends Fragment {
 		storyListView = (ListView) rootView.findViewById(R.id.story_list);
 		randomButton = (Button) rootView.findViewById(R.id.randomAllStories);
 
+		stories = new ArrayList<Story>();
+		//		stories = jp.getAll();
+
+		Integer index = Integer.valueOf(-5);
+		try {
+			stories = new JSONparser().execute(index).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return rootView;
 	}
 
@@ -403,19 +418,7 @@ public class AllStoriesListSwipe extends Fragment {
 
 		//		JSONparser jp = new JSONparser();
 
-		stories = new ArrayList<Story>();
-		//		stories = jp.getAll();
-
-		Integer index = Integer.valueOf(-5);
-		try {
-			stories = new JSONparser().execute(index).get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		//stories.add(jp.getStory("10"));
 
 		/*

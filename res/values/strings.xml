@@ -27,5 +27,6 @@
     <string name="frag_image">Image</string>
     <string name="title_activity_my_story_intro">MyStoryIntro</string>
     <string name="title_activity_annot_viewer">AnnotViewer</string>
+    <string name="title_activity_edit_create_annot">EditCreateAnnot</string>
 
 </resources>

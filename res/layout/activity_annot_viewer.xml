@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/middle"
     tools:context=".AnnotViewer" >
 
     <TextView
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1" >
+        android:layout_below="@+id/addAnnot" >
 
     </ListView>
 
@@ -33,9 +34,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/annotListView"
-        android:text="Add"
-        android:onClick="addAnnot" />
+        android:onClick="addAnnot"
+        android:text="Add" />
 
 </RelativeLayout>

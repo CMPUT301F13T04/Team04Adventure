@@ -355,6 +355,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.JSONparser;
@@ -373,7 +374,9 @@ public class AllStoriesListSwipe extends Fragment {
 	// ListView representing the list of stories
 	ListView storyListView;
 	Button randomButton;
-	
+	SearchView searchView;
+	StoryListAdapter allAdapter;
+
 	ArrayList<Story> stories;
 
 	/**
@@ -389,6 +392,39 @@ public class AllStoriesListSwipe extends Fragment {
 		storyListView = (ListView) rootView.findViewById(R.id.story_list);
 		randomButton = (Button) rootView.findViewById(R.id.randomAllStories);
 
+		searchView = (SearchView) rootView.findViewById(R.id.story_search);
+		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// Do something
+				allAdapter.filter(newText);
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// Do something
+				allAdapter.filter(query);
+				return true;
+			}
+		};
+		searchView.setOnQueryTextListener(queryTextListener);
+
+		return rootView;
+	}
+
+	/**
+	 * onResume method, simply assigns sets the adapter and a listener to listen
+	 * to user selections of story items.
+	 */
+
+	public void onResume() {
+		super.onResume();
+		//		ArrayList<Story> ostorylist = new ArrayList<Story>();
+
+
+		//		JSONparser jp = new JSONparser();
+
 		stories = new ArrayList<Story>();
 		//		stories = jp.getAll();
 
@@ -402,23 +438,9 @@ public class AllStoriesListSwipe extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		return rootView;
-	}
-
-	/**
-	 * onResume method, simply assigns sets the adapter and a listener to listen
-	 * to user selections of story items.
-	 */
-
-	public void onResume() {
-		//		ArrayList<Story> ostorylist = new ArrayList<Story>();
 
 
-		//		JSONparser jp = new JSONparser();
 
-		
 		//stories.add(jp.getStory("10"));
 
 		/*
@@ -442,7 +464,8 @@ public class AllStoriesListSwipe extends Fragment {
 		//	    ArrayList<Story> stories = new ArrayList<Story>();
 		//	    stories.add(s);
 
-		storyListView.setAdapter(new StoryListAdapter(getActivity(), stories));
+		allAdapter = new StoryListAdapter(getActivity(), stories);
+		storyListView.setAdapter(allAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
 			/** When a story is selected, bundle the necessary vars into an intent and begin the
@@ -471,21 +494,18 @@ public class AllStoriesListSwipe extends Fragment {
 				intent.putExtra("id", s.getId());
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(intent);
-				
+
 			}
 		});
 
-		super.onResume();
-	}
-	
+
+
+
+		
+
+	}	
 	private int chooseRandom() {
 		Random ran = new Random();
 		return ran.nextInt(stories.size());
 	}
-	
-	private void goToStory(int id) {
-		
-	}
-
-
-}	
+}

@@ -496,11 +496,7 @@ public class EditFragment extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(getApplicationContext(), fragList.class);
-	        	intent.putExtra("id", sid);
-	    		intent.putExtra("link", 0);
-	        	intent.putExtra("link", 1);
-	       		startActivityForResult(intent, CREATE_CHOICE);				
+				linkFrag();			
 			}
 		});
 		
@@ -515,85 +511,24 @@ public class EditFragment extends Activity {
 		});
 	}
 	
-	/**
-	 *  Opens the camera application and prepares to store the captured image in a file.
-	 */
-	public void openCamera() {
-		// Opens the camera app and stores the resulting image as a jpg file in the /team04adventure in the external memory.
-		
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        
-        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/team04adventure/pic";
-        File folderF = new File(folder);
-        if (!folderF.exists()) {
-            folderF.mkdir();
-        }
-        
-        String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        File imageFile = new File(imageFilePath);
-        imageFileUri = Uri.fromFile(imageFile);
-                
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-	}
-	
 	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 			// Saves the bitmap result from the camera into the frag object
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-				
-				float width = bitmap.getWidth();
-				float height = bitmap.getHeight();
-				float scale = 1;
-				if (width >= height) {
-					scale = IMAGE_MAX/width;
-				} else if (width < height) {
-					scale = IMAGE_MAX/height;
-				}
-				Bitmap resizedBitmap = null;
-				if (scale >= 1) {
-					float newWidth = width * scale;
-					float newHeight = height * scale;
-					int newWidthInt = (int) newWidth;
-					int newHeightInt = (int) newHeight;
-					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
-				} else {
-					resizedBitmap = bitmap;
-				}
+				Bitmap resizedBitmap = resizeImage(bitmap);
 				
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
 				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(resizedBitmap);
+				String convertedString = Media.encodeToBase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				
-				int listIndex = idList.indexOf(fragment.getId());
-				if (listIndex==-1) {
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.addPicture(media);
-					story.addFragment(fragment);	
-				} else {
-					fragment = story.getFrags().get(listIndex);
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.addPicture(media);
-					story.deleteFrag(fragment.getId());
-					story.addFragment(fragment, listIndex);	
-				}
-				refreshIdList();
-				
-				Integer index = Integer.valueOf(-1);
-				new JSONparser().execute(index, story);
+				fragSetText();
+				fragment.addPicture(media);
+				saveToStory();
 				
 				
 			} catch (FileNotFoundException e) {
@@ -607,55 +542,19 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-				
-				float width = bitmap.getWidth();
-				float height = bitmap.getHeight();
-				float scale = 1;
-				if (width >= height) {
-					scale = IMAGE_MAX/width;
-				} else if (width < height) {
-					scale = IMAGE_MAX/height;
-				}
-				Bitmap resizedBitmap;
-				if (scale >= 1) {
-					float newWidth = width * scale;
-					float newHeight = height * scale;
-					int newWidthInt = (int) newWidth;
-					int newHeightInt = (int) newHeight;
-					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
-				} else {
-					resizedBitmap = bitmap;
-				}
+				Bitmap resizedBitmap = resizeImage(bitmap);
 				
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
 				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(resizedBitmap);
+				String convertedString = Media.encodeToBase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				
-				int listIndex = idList.indexOf(fragment.getId());
-				if (listIndex==-1) {
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.addPicture(media);
-					story.addFragment(fragment);	
-				} else {
-					fragment = story.getFrags().get(listIndex);
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.addPicture(media);
-					story.deleteFrag(fragment.getId());
-					story.addFragment(fragment, listIndex);	
-				}
-				refreshIdList();
+				fragSetText();
+				fragment.addPicture(media);
+				saveToStory();
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -667,55 +566,19 @@ public class EditFragment extends Activity {
 			Uri selectedImageUri = data.getData();
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-				
-				float width = bitmap.getWidth();
-				float height = bitmap.getHeight();
-				float scale = 1;
-				if (width >= height) {
-					scale = IMAGE_MAX/width;
-				} else if (width < height) {
-					scale = IMAGE_MAX/height;
-				}
-				Bitmap resizedBitmap = null;
-				if (scale >= 1) {
-					float newWidth = width * scale;
-					float newHeight = height * scale;
-					int newWidthInt = (int) newWidth;
-					int newHeightInt = (int) newHeight;
-					resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
-				} else {
-					resizedBitmap = bitmap;
-				}
+				Bitmap resizedBitmap = resizeImage(bitmap);
 				
 				illustrationTextView.setText("Profile picture you just set:");
 				illustrationImageView.setImageBitmap(resizedBitmap);
 				
 				Media media = new Media();
-				String convertedString = Media.encodeTobase64(resizedBitmap);
+				String convertedString = Media.encodeToBase64(resizedBitmap);
 				media.setContent(convertedString);
 				media.setType("pic");
 				
-				int listIndex = idList.indexOf(fragment.getId());
-				if (listIndex==-1) {
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.setIllustration(media);
-					story.addFragment(fragment);
-				} else {
-					fragment = story.getFrags().get(listIndex);
-					String fragTitleString = fragTitle.getText().toString();
-					String fragBodyString = fragBody.getText().toString();
-					fragment.setTitle(fragTitleString);
-					fragment.setBody(fragBodyString);
-					fragment.setAuthor(MainActivity.username);
-					fragment.setIllustration(media);
-					story.deleteFrag(fragment.getId());
-					story.addFragment(fragment, listIndex);	
-				}
-				refreshIdList();
+				fragSetText();
+				fragment.setIllustration(media);
+				saveToStory();
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -784,6 +647,28 @@ public class EditFragment extends Activity {
 	}
 	
 	/**
+	 *  Opens the camera application and prepares to store the captured image in a file.
+	 */
+	public void openCamera() {
+		// Opens the camera app and stores the resulting image as a jpg file in the /team04adventure in the external memory.
+		
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        
+        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/team04adventure/pic";
+        File folderF = new File(folder);
+        if (!folderF.exists()) {
+            folderF.mkdir();
+        }
+        
+        String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + ".jpg";
+        File imageFile = new File(imageFilePath);
+        imageFileUri = Uri.fromFile(imageFile);
+                
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+	
+	/**
 	 * Opens the image picker for the user to add to the fragment.
 	 */
 	public void uploadImage() {
@@ -806,7 +691,11 @@ public class EditFragment extends Activity {
 	}
 	
 	public void linkFrag() {
-		
+		Intent intent = new Intent(getApplicationContext(), fragList.class);
+    	intent.putExtra("id", sid);
+		intent.putExtra("link", 0);
+    	intent.putExtra("link", 1);
+   		startActivityForResult(intent, CREATE_CHOICE);	
 	}
 	
 	/**
@@ -814,32 +703,11 @@ public class EditFragment extends Activity {
 	 */
 	public void saveFrag() {
 		// Saves the changes to the fragment text
-		//		System.out.println(story.getFrags().get(0).getTitle());
 
 		refreshIdList();
-		int listIndex = idList.indexOf(fragment.getId());
-		if (listIndex==-1) {
-			String fragTitleString = fragTitle.getText().toString();
-			String fragBodyString = fragBody.getText().toString();
-			fragment.setTitle(fragTitleString);
-			fragment.setBody(fragBodyString);
-			fragment.setAuthor(MainActivity.username);
-			story.addFragment(fragment);	
-		} else {
-			fragment = story.getFrags().get(listIndex);
-			String fragTitleString = fragTitle.getText().toString();
-			String fragBodyString = fragBody.getText().toString();
-			fragment.setTitle(fragTitleString);
-			fragment.setBody(fragBodyString);
-			fragment.setAuthor(MainActivity.username);
-			story.deleteFrag(fragment.getId());
-			story.addFragment(fragment, listIndex);
-		}
-		
-		refreshIdList();
-		Integer index = Integer.valueOf(-1);
-		new JSONparser().execute(index, story);
-		
+		fragSetText();
+		saveToStory();
+
 		Toast.makeText(getApplicationContext(), "Fragment saved!", Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, OnlineStoryIntro.class);
 		intent.putExtra("id", sid);
@@ -848,6 +716,50 @@ public class EditFragment extends Activity {
 		startActivity(intent);
 		
 	}
+	
+	public Bitmap resizeImage(Bitmap bitmap) {
+		float width = bitmap.getWidth();
+		float height = bitmap.getHeight();
+		float scale = 1;	
+		if (width >= height) {
+			scale = IMAGE_MAX/width;
+		} else if (width < height) {
+			scale = IMAGE_MAX/height;
+		}
+		Bitmap resizedBitmap = null;
+		if (scale >= 1) {
+			float newWidth = width * scale;
+			float newHeight = height * scale;
+			int newWidthInt = (int) newWidth;
+			int newHeightInt = (int) newHeight;
+			resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt, newHeightInt, false);
+		} else {
+			resizedBitmap = bitmap;
+		}
+		return resizedBitmap;
+	}
+	
+	public void fragSetText() {
+		String fragTitleString = fragTitle.getText().toString();
+		String fragBodyString = fragBody.getText().toString();
+		fragment.setTitle(fragTitleString);
+		fragment.setBody(fragBodyString);
+		fragment.setAuthor(MainActivity.username);
+		}
+ 
+	public void saveToStory() {
+	    int listIndex = idList.indexOf(fragment.getId());
+	    if (listIndex==-1) {
+	    	story.addFragment(fragment);  
+		   } else {
+		     fragment = story.getFrags().get(listIndex);
+		     story.deleteFrag(fragment.getId());
+		     story.addFragment(fragment, listIndex);  
+		   }
+		   refreshIdList();
+		   Integer index = Integer.valueOf(-1);
+		   new JSONparser().execute(index, story);
+		   }
 	
 	public void refreshIdList() {
 		ArrayList<Frag> a = story.getFrags();

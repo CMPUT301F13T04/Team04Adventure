@@ -424,8 +424,7 @@ public class Media {
 	 * @param bm bitmap to be encoded.
 	 * @return encoded string.
 	 */
-	public static String encodeTobase64(Bitmap bm)
-	{
+	public static String encodeToBase64(Bitmap bm) {
 	    ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 	    bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 	    byte[] bArray = baos.toByteArray();
@@ -439,8 +438,7 @@ public class Media {
 	 * @param bArray encoded string.
 	 * @return decoded bitmap.
 	 */
-	public static Bitmap decodeBase64(String bArray) 
-	{
+	public static Bitmap decodeBase64(String bArray) {
 	    byte[] decodedByte = Base64.decode(bArray, 0);
 	    return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length); 
 	}

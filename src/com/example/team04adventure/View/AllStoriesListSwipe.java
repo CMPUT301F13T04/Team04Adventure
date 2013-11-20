@@ -392,7 +392,7 @@ public class AllStoriesListSwipe extends Fragment {
 		stories = new ArrayList<Story>();
 		//		stories = jp.getAll();
 
-		Integer index = Integer.valueOf(-5);
+		Integer index = Integer.valueOf(-6);
 		try {
 			stories = new JSONparser().execute(index).get();
 		} catch (InterruptedException e) {

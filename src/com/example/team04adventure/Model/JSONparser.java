@@ -388,6 +388,7 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 	private final String WebService = "http://cmput301.softwareprocess.es:8080/cmput301f13t04/";
 //	private final String users = "users/";
 	private final String stories = "story/";
+	private final String compstories = "compstories/";
 //	private final String frags = "fragments/";
 
 	// Just the generic constructor
@@ -418,19 +419,27 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 		// Check if story is already registered before storing
 //		if (!checkStory(aStory)) { // IF its true then the user exists.
 			HttpPost httpPost = new HttpPost(WebService + stories+ aStory.getId());
+			HttpPost httpPost2 = new HttpPost(WebService + compstories + aStory.getId());
 			StringEntity stringentity = null;
+			StringEntity compEntity = null;
 			try {
 				stringentity = new StringEntity(gson.toJson(aStory));
+				compEntity = new StringEntity(gson.toJson(new compressedStory(aStory)));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 
 			httpPost.setHeader("Accept", "application/json");
 			httpPost.setEntity(stringentity);
+			httpPost2.setHeader("Accept", "application/json");
+			httpPost2.setEntity(compEntity);
+			
+			
 			HttpResponse response = null;
-
 			try {
 				response = client.execute(httpPost);
+				response = client.execute(httpPost2);
+				
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -455,9 +464,6 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 			//}
 
 			//httpPost.releaseConnection();
-//		} else {
-//			// TELL THE USER THEY ARE ALREADY IN THE SYSTEM.!>!!
-//		}
 	}
 
 	//Assume user is on the server
@@ -578,18 +584,62 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
          
          return abc;
  }
+	public ArrayList<compressedStory> searchcompressed(String[] keywords) throws IOException {
+		 String query_str = "";
+         // create query string
+         for (int i = 0; i < keywords.length; i++) {
+                 query_str += keywords[i] + " OR ";
+         }
+         query_str = query_str.substring(0, query_str.length() - 4);        
+         
+         HttpPost searchRequest = new HttpPost(WebService + compstories + "/_search?pretty=1");
+         String query = "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \"" + query_str + "\"}}}";
+         
+         StringEntity stringentity = null;                
+         try {
+                 stringentity = new StringEntity(query);
+         } catch (UnsupportedEncodingException e) {
+                 e.printStackTrace();
+         }
+         
+         searchRequest.setHeader("Accept","application/json");
+         searchRequest.setEntity(stringentity);
+         
+         HttpResponse response = null;
+         try {
+                 response = client.execute(searchRequest);
+         } catch (ClientProtocolException e) {
+                 e.printStackTrace();
+         }
+         
+         String json = getEntityContent(response);
+         
+         Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<compressedStory>>(){}.getType();
+         ElasticSearchSearchResponse<compressedStory> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+         
+		// return 
+		ArrayList<compressedStory> abc = new ArrayList<compressedStory>();
+		for (ElasticSearchResponse<compressedStory> r : esResponse.getHits()) {
+			abc.add(r.getSource());
+         }
+         
+         return abc;
+	}
 
-	// Not needed right now.
-	/**
+		/**
 	 * Deletes the selected story.
 	 * @param S1 story to be selected.
 	 */
 	public void deleteStory(Story S1) {
 		HttpDelete httpDelete = new HttpDelete(WebService + stories + S1.getId());
+		HttpDelete compDelete = new HttpDelete(WebService + compstories + S1.getId());
 		httpDelete.addHeader("Accept", "application/json");
+		compDelete.addHeader("Accept", "application/json");
+
 		HttpResponse response;
 		try {
 			response = client.execute(httpDelete);
+			response = client.execute(compDelete);
 
 			String status = response.getStatusLine().toString();
 			System.out.println(status);
@@ -626,23 +676,19 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 				e.printStackTrace();
 			}
 		return list;
-
+	}
+	public ArrayList<compressedStory> getAllcompressed(){
+		ArrayList<compressedStory> list = new ArrayList<compressedStory>();
+		try {
+			String[] a = new String[1];
+			a[0] = "*";
+			list = searchcompressed(a);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	return list;
 	}
 
-	/**
-	 * Caches stories into device memory.
-	 */
-	public void cacheStory() {
-		// Cache the story.
-		// Get here from user clicking on the story and hitting download. If you
-		// get here from that screen you will probably have
-		// the id so take the ID as the argument. Void return type is fine.
-		// This method basically just stores the story and all its fragments
-		// into SQL.
-
-		// Get it then give it to Chris' SQL code. Might have to get all the
-		// frags too.
-	}
 
 	/**
 	 * Repeated code that in every insert. Copied from example.
@@ -699,6 +745,15 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 			}
 			if (index == -5) {
 				return getAll();
+			}
+			if (index == -6){
+				ArrayList<compressedStory> a = getAllcompressed();
+				ArrayList<Story> tempList = new ArrayList<Story>();
+				int q = a.size();
+				for (int b = 0; b<q;b++){
+					tempList.add(a.get(b).toStory());
+				}
+				return tempList;
 			}
 		}
 

@@ -384,7 +384,7 @@ public class fragList extends Activity {
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
 		
-		JSONparser jp = new JSONparser();
+//		JSONparser jp = new JSONparser();
 		
 
 		Integer index = Integer.valueOf(-2);

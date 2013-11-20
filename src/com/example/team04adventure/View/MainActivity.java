@@ -345,6 +345,8 @@ package com.example.team04adventure.View;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -371,8 +373,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		SharedPreferences prefs = getSharedPreferences("prefs",0);
+		String prevUsername = prefs.getString("uname", "");
+		
 		UsernameText = (EditText) findViewById(R.id.username);
 		Button Login = (Button) findViewById(R.id.login);
+		UsernameText.setText(prevUsername);
 		Login.setOnClickListener(new View.OnClickListener() 
 		{
 				
@@ -389,6 +395,11 @@ public class MainActivity extends Activity {
 				else {
 				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
 				username = Uname;
+				SharedPreferences prefs = getSharedPreferences("prefs",0);
+				Editor editor = prefs.edit();
+				editor.putString("uname",  username);
+				editor.commit();
+				
 				startActivity(i);				
 				}
 			}

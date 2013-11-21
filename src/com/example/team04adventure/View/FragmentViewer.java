@@ -419,9 +419,8 @@ public class FragmentViewer extends Activity {
 					break;
 				}
 			}
-		}
-		else{
-		f = sm.getFrag(fragID);
+		} else {
+			f = sm.getFrag(fragID);
 		}
 
 		// Populate the choice list with the fragments choices
@@ -464,13 +463,15 @@ public class FragmentViewer extends Activity {
 		fragImages = f.getImages();
 		imageLayout = (LinearLayout) findViewById(R.id.image_layout);
 		for (int i=0; i < fragImages.size(); i++) {
-			ImageView image = new ImageView(FragmentViewer.this);
 			Media mediaImage = fragImages.get(i);
 			String convertedString = mediaImage.getMedia();
-			Bitmap bitmap = Media.decodeBase64(convertedString);
-			image.setImageBitmap(bitmap);
-			imageLayout.setGravity(Gravity.CENTER);
-			imageLayout.addView(image);
+			if (convertedString != null) {
+				ImageView image = new ImageView(FragmentViewer.this);
+				Bitmap bitmap = Media.decodeBase64(convertedString);
+				image.setImageBitmap(bitmap);
+				imageLayout.setGravity(Gravity.CENTER);
+				imageLayout.addView(image);
+			}
 		}
 
 		choiceListView.setAdapter(new FragChoiceAdapter(this, choices));

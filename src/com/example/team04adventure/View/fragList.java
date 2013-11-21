@@ -291,7 +291,7 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    
+
     Copyright (C) 2013  CMPUT301F13T04
 
     This program is free software; you can redistribute it and/or modify
@@ -356,10 +356,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragAdapter;
 import com.example.team04adventure.Model.JSONparser;
+import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 
@@ -368,63 +368,72 @@ import com.example.team04adventure.Model.Story;
  * @author Team04Adventure
  */
 public class fragList extends Activity {
-	
+
 	String id;
+	String flag;
+	Story story;
 	int link = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_frag_list);
-		
+
 		Bundle extras = getIntent().getExtras();
 		id = extras.getString("id");
 		/* Should probs add a try catch right here. I'm sensing problems later */
 		link = extras.getInt("link");
-		
+		flag = extras.getString("flag");
+
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
-		
-//		JSONparser jp = new JSONparser();
-		
 
-		Integer index = Integer.valueOf(-2);
-		
-		try {
-			final Story story = new JSONparser().execute(index, id).get().get(0);
-			fraglist = story.getFrags();
-			
-			fragListView.setAdapter(new FragAdapter(this, fraglist));
-			fragListView.setOnItemClickListener(new OnItemClickListener() {
-	        
-				/** When a story is selected **/
-				@Override
-	            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-					Frag f = (Frag) fragListView.getItemAtPosition(position);
-	                Intent intent = new Intent(getApplicationContext(), EditFragment.class);
-	                if (link == 0) {
-	                	intent.putExtra("sid", story.getId());
-	                	intent.putExtra("fid", f.getId());
-	                	intent.putExtra("ftitle", f.getTitle());
-	                	intent.putExtra("fbody", f.getBody());
-	                	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                	startActivity(intent);
-	                }
-	                else {
-	                	intent.putExtra("linkThis", f.getId());
-	                	setResult(Activity.RESULT_OK, intent);
-	                	finish();
-	                }
-	             }
+		//		JSONparser jp = new JSONparser();
 
-	        });
-		
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		if (flag.equals("online")) {
+			Integer index = Integer.valueOf(-2);
+			try {
+				story = new JSONparser().execute(index, id).get().get(0);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			StorageManager sm = new StorageManager(this);
+			story = sm.getStory(id);
 		}
-		
-}
+
+		fraglist = story.getFrags();
+
+		fragListView.setAdapter(new FragAdapter(this, fraglist));
+		fragListView.setOnItemClickListener(new OnItemClickListener() {
+
+			/** When a story is selected **/
+			@Override
+			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+				Frag f = (Frag) fragListView.getItemAtPosition(position);
+				Intent intent = new Intent(getApplicationContext(), EditFragment.class);
+				if (link == 0) {
+					intent.putExtra("sid", story.getId());
+					intent.putExtra("fid", f.getId());
+					intent.putExtra("ftitle", f.getTitle());
+					intent.putExtra("fbody", f.getBody());
+					intent.putExtra("flag", flag);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
+				else {
+					intent.putExtra("linkThis", f.getId());
+					setResult(Activity.RESULT_OK, intent);
+					finish();
+				}
+			}
+
+		});
+
+	}
 }

@@ -491,6 +491,7 @@ public class OnlineStoryIntro extends Activity {
 				intent.putExtra("fid", fid);
 				intent.putExtra("ftitle", ftitle);
 				intent.putExtra("fbody", fbody);
+				intent.putExtra("flag", "online");
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				
 				startActivity(intent);
@@ -521,6 +522,7 @@ public class OnlineStoryIntro extends Activity {
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
 		intent.putExtra("link", 0);
+		intent.putExtra("flag", "online");
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		startActivity(intent);

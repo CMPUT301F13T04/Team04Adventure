@@ -409,15 +409,17 @@ public class EditFragment extends Activity {
 	private ImageView illustrationImageView;
 
 	private String sid;
-	private String origFrag;
 	private Uri imageFileUri;
 	private StorageManager sm;
 	private Frag fragment = new Frag();
+	private Story origStory;
 	private Story story = new Story();
 	private ArrayList<String> idList = new ArrayList<String>();
 
 	// "Add New Choice" Flag
 	int nc = 0;
+	
+	String flag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -426,29 +428,31 @@ public class EditFragment extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 
-		origFrag = extras.getString("ftitle");
-
 		nc = extras.getInt("nc");
 		sid = extras.getString("sid");
+		flag = extras.getString("flag");
 		fragment.setId(extras.getString("fid"));
 		fragment.setTitle(extras.getString("ftitle"));
 		fragment.setBody(extras.getString("fbody"));
 
-		// JSONparser jp = new JSONparser();
-		// story = jp.getStory(sid)
-		Integer index = Integer.valueOf(-2);
-		try {
-			story = new JSONparser().execute(index, sid).get().get(0);
-			if (story == null) {
-				story = sm.getStory(sid);
+		sm = new StorageManager(this);
+		
+		if (flag.equals("online")) {
+			Integer index = Integer.valueOf(-2);
+			try {
+				story = new JSONparser().execute(index, sid).get().get(0);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+			story = sm.getStory(sid);
 		}
+		
+		origStory = story;
 
 		refreshIdList();
 
@@ -607,22 +611,14 @@ public class EditFragment extends Activity {
 								int whichButton) {
 
 							int listIndex = idList.indexOf(fragment.getId());
-
 							if (listIndex == -1) {
 								Choice c = new Choice();
 								c.setBody(choiceTitle.getText().toString());
 								c.setChild(data.getStringExtra("linkThis"));
-								String fragTitleString = fragTitle.getText()
-										.toString();
-								String fragBodyString = fragBody.getText()
-										.toString();
-								fragment.setTitle(fragTitleString);
-								fragment.setBody(fragBodyString);
-								fragment.setAuthor(MainActivity.username);
+								fragSetText();
 								fragment.setChoice(c);
 								story.addFragment(fragment);
 							} else {
-
 								Choice c = new Choice();
 								c.setBody(choiceTitle.getText().toString());
 								c.setChild(data.getStringExtra("linkThis"));
@@ -708,6 +704,7 @@ public class EditFragment extends Activity {
 		intent.putExtra("id", sid);
 		intent.putExtra("link", 0);
 		intent.putExtra("link", 1);
+		intent.putExtra("flag", flag);
 		startActivityForResult(intent, CREATE_CHOICE);
 	}
 
@@ -724,7 +721,12 @@ public class EditFragment extends Activity {
 
 		Toast.makeText(getApplicationContext(), "Fragment saved!",
 				Toast.LENGTH_LONG).show();
-		Intent intent = new Intent(this, OnlineStoryIntro.class);
+		Intent intent = new Intent();
+		if (flag.equals("online")) {
+			intent = new Intent(this, OnlineStoryIntro.class);
+		} else {
+			intent = new Intent(this, MyStoryIntro.class);
+		}
 		intent.putExtra("id", sid);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -768,14 +770,19 @@ public class EditFragment extends Activity {
 		if (listIndex == -1) {
 			story.addFragment(fragment);
 		} else {
-			fragment = story.getFrags().get(listIndex);
-			story.deleteFrag(fragment.getId());
+			Frag oldFragment = story.getFrags().get(listIndex);
+			story.deleteFrag(oldFragment.getId());
 			story.addFragment(fragment, listIndex);
 		}
 		refreshIdList();
 		
-		Integer index = Integer.valueOf(-1);
-		new JSONparser().execute(index, story);
+		if (flag.equals("online")) {
+			Integer index = Integer.valueOf(-1);
+			new JSONparser().execute(index, story);	
+		} else {
+			sm.deleteStory(origStory);
+			sm.addStory(story);
+		}
 	}
 
 	public void refreshIdList() {

@@ -11,7 +11,7 @@
     tools:context=".OwnedStories" >
 
     <SearchView
-        android:id="@+id/offline_story_search"
+        android:id="@+id/cached_story_search"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

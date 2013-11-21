@@ -352,6 +352,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -369,6 +370,8 @@ import com.example.team04adventure.Model.StoryListAdapter;
 public class MyStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;
+	SearchView searchView;
+	StoryListAdapter offlineAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -377,6 +380,24 @@ public class MyStoriesListSwipe extends Fragment {
 		View rootView = inflater.inflate(R.layout.activity_my_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.mylist);
 
+		searchView = (SearchView) rootView.findViewById(R.id.offline_story_search);
+		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// Do something
+				offlineAdapter.filter(newText);
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// Do something
+				offlineAdapter.filter(query);
+				return true;
+			}
+		};
+		searchView.setOnQueryTextListener(queryTextListener);
+		
 		return rootView;
 	}
 
@@ -390,7 +411,8 @@ public class MyStoriesListSwipe extends Fragment {
 		storylist = sm.getMyStories();
 
 
-		storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
+		offlineAdapter = new StoryListAdapter(getActivity(), storylist);
+		storyListView.setAdapter(offlineAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
 			/** When a story is selected **/

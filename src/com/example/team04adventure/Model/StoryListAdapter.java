@@ -422,7 +422,7 @@ public class StoryListAdapter extends BaseAdapter {
             if (query != null) {
                     stories.clear();
                     for (Story s : storiesClone) {
-                            String searchString = s.getTitle().concat(s.getAuthor().toString());
+                            String searchString = s.getTitle().concat(" ").concat(s.getAuthor());
                             if(searchString.matches("(?i)(.*)"+query+"(.*)")) {
                                     this.stories.add(s);
                             }

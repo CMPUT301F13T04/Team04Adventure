@@ -351,6 +351,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -368,7 +369,9 @@ import com.example.team04adventure.Model.StoryListAdapter;
 public class CachedStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;
-
+	SearchView searchView;
+	StoryListAdapter cacheAdapter;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -376,6 +379,24 @@ public class CachedStoriesListSwipe extends Fragment {
 		View rootView = inflater.inflate(R.layout.activity_cached_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
 
+		searchView = (SearchView) rootView.findViewById(R.id.cached_story_search);
+		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// Do something
+				cacheAdapter.filter(newText);
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// Do something
+				cacheAdapter.filter(query);
+				return true;
+			}
+		};
+		searchView.setOnQueryTextListener(queryTextListener);
+		
 		return rootView;
 	}
 
@@ -388,8 +409,9 @@ public class CachedStoriesListSwipe extends Fragment {
 		
 		storylist = sm.getAll();
 
-
-		storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
+		cacheAdapter = new StoryListAdapter(getActivity(), storylist);
+		storyListView.setAdapter(cacheAdapter);
+		//allAdapter = storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
 			/** When a story is selected **/

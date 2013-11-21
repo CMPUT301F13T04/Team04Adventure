@@ -157,12 +157,8 @@ public class FragmentViewer extends Activity {
 				Choice c = (Choice) choiceListView.getItemAtPosition(position);
 				/** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
 				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-				if(flag.equals("online")){
-					intent.putExtra("flag", "online");
-					intent.putExtra("sid", storyID); 
-				}else{
-					intent.putExtra("flag", "offline");
-				}
+				intent.putExtra("flag", flag);
+				intent.putExtra("sid", storyID); 
 				intent.putExtra("fid", c.getChild());
 				startActivity(intent);
 				/* This line terminates the last fragment so that you

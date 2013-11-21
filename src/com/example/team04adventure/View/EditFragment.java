@@ -124,7 +124,6 @@ public class EditFragment extends Activity {
 		} else {
 			story = sm.getStory(sid);
 		}
-		
 		origStory = story;
 
 		refreshIdList();
@@ -145,7 +144,7 @@ public class EditFragment extends Activity {
 
 		fragTitle.setText(fragment.getTitle());
 		fragBody.setText(fragment.getBody());
-
+		
 		uploadButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -206,7 +205,7 @@ public class EditFragment extends Activity {
 				media.setContent(convertedString);
 				media.setType("pic");
 
-				fragSetText();
+				fragSaveText();
 				fragment.addPicture(media);
 				saveToStory();
 
@@ -232,7 +231,7 @@ public class EditFragment extends Activity {
 				media.setContent(convertedString);
 				media.setType("pic");
 
-				fragSetText();
+				fragSaveText();
 				fragment.addPicture(media);
 				saveToStory();
 
@@ -256,7 +255,7 @@ public class EditFragment extends Activity {
 				media.setContent(convertedString);
 				media.setType("pic");
 
-				fragSetText();
+				fragSaveText();
 				fragment.setIllustration(media);
 				saveToStory();
 
@@ -288,7 +287,7 @@ public class EditFragment extends Activity {
 								Choice c = new Choice();
 								c.setBody(choiceTitle.getText().toString());
 								c.setChild(data.getStringExtra("linkThis"));
-								fragSetText();
+								fragSaveText();
 								fragment.setChoice(c);
 								story.addFragment(fragment);
 							} else {
@@ -389,7 +388,7 @@ public class EditFragment extends Activity {
 		// Saves the changes to the fragment text
 
 		refreshIdList();
-		fragSetText();
+		fragSaveText();
 		saveToStory();
 
 		Toast.makeText(getApplicationContext(), "Fragment saved!",
@@ -430,7 +429,7 @@ public class EditFragment extends Activity {
 		return resizedBitmap;
 	}
 
-	public void fragSetText() {
+	public void fragSaveText() {
 		String fragTitleString = fragTitle.getText().toString();
 		String fragBodyString = fragBody.getText().toString();
 		fragment.setTitle(fragTitleString);
@@ -447,6 +446,7 @@ public class EditFragment extends Activity {
 			story.deleteFrag(oldFragment.getId());
 			story.addFragment(fragment, listIndex);
 		}
+		
 		refreshIdList();
 		
 		if (flag.equals("online")) {
@@ -456,6 +456,7 @@ public class EditFragment extends Activity {
 			sm.deleteStory(origStory);
 			sm.addStory(story);
 		}
+		origStory = story;
 	}
 
 	public void refreshIdList() {

@@ -74,7 +74,6 @@ public class EditCreateAnnot extends Activity {
 		
 		review = reviewIn.getText().toString();
 		author = "Default";
-		image = "";
 		
 		Annotation a = new Annotation();
 		

@@ -73,6 +73,7 @@ public class FragmentViewer extends Activity {
 		// you can go to another fragment.
 		Bundle extras = getIntent().getExtras();
 		fragID = extras.getString("fid");
+		storyID = extras.getString("sid");
 		flag = extras.getString("flag");
 		JSONparser jp = new JSONparser(); 
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
@@ -83,7 +84,6 @@ public class FragmentViewer extends Activity {
 		Frag f = new Frag();
 		StorageManager sm = new StorageManager(this);
 		if (flag.equals("online")){
-			storyID = extras.getString("sid");
 			Story s = jp.getStory(storyID);
 			ArrayList<Frag> frags = s.getFrags();
 			for(Frag fr: frags){
@@ -182,7 +182,7 @@ public class FragmentViewer extends Activity {
 		Intent intent = new Intent(getApplicationContext(), AnnotViewer.class);
 		intent.putExtra("sid", storyID);
 		intent.putExtra("fid", fragID);
-		intent.putExtra("online", "online");
+		intent.putExtra("online", flag);
 		startActivity(intent);
 	}
 

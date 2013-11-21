@@ -27,6 +27,7 @@ import android.widget.ListView;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Annotation;
+import com.example.team04adventure.Model.AnnotationAdapter;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
@@ -83,7 +84,7 @@ public class AnnotViewer extends Activity {
 //		a.setReview("THIS IS THE SAMPLE REVIEW");
 //		annotList.add(a);
 		//****** WE NEED THIS LINE -->
-		//annotListView.setAdapter(new AnnotationAdapter(this, annotList));
+		annotListView.setAdapter(new AnnotationAdapter(this, annotList));
 
 	}
 	

@@ -53,7 +53,7 @@ public class AnnotViewer extends Activity {
 		sid = extras.getString("sid");
 		online = extras.getString("online");
 
-		final ListView annotListView = (ListView) findViewById(android.R.id.list);
+		final ListView annotListView = (ListView) findViewById(R.id.annotListView);
 		ArrayList<Annotation> annotList = new ArrayList<Annotation>();
 
 		if (online.equals("online")) {

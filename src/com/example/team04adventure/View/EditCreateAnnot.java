@@ -73,7 +73,7 @@ public class EditCreateAnnot extends Activity {
 	public void saveAnnot(View view) {
 		
 		review = reviewIn.getText().toString();
-		author = "Default";
+		author = MainActivity.username;
 		
 		Annotation a = new Annotation();
 		

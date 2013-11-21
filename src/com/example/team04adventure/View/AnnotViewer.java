@@ -35,12 +35,15 @@ import com.example.team04adventure.Model.Story;
 
 public class AnnotViewer extends Activity {
 
-	String 	fid, 
-	sid;
-	String 	online;
-	JSONparser jp;
-	StorageManager sm;
-	ArrayList <Frag> fragList = new ArrayList <Frag>();
+	String 			fid, 
+					sid;
+	String 			online;
+	JSONparser 		jp;
+	StorageManager 	sm;
+	ArrayList<Frag> fragList = new ArrayList <Frag>();
+	ListView annotListView;
+	ArrayList<Annotation> annotList;
+	Integer index;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,18 +51,21 @@ public class AnnotViewer extends Activity {
 		setContentView(R.layout.activity_annot_viewer);
 
 		Bundle extras = getIntent().getExtras();
-		
 		fid = extras.getString("fid");
 		sid = extras.getString("sid");
 		online = extras.getString("online");
 
-		final ListView annotListView = (ListView) findViewById(R.id.annotListView);
-		ArrayList<Annotation> annotList = new ArrayList<Annotation>();
+		annotListView = (ListView) findViewById(R.id.annotListView);
+		annotList = new ArrayList<Annotation>();
 
+	}
+	
+	public void onResume() {
+		super.onResume();
 		if (online.equals("online")) {
-			Integer index = Integer.valueOf(-2);
-			jp = new JSONparser();
 			try {
+				index = Integer.valueOf(-2);
+				jp = new JSONparser();
 				final Story story = new JSONparser().execute(index, sid).get().get(0);
 				Frag f = story.getFrag(fid);
 				annotList = f.getAnnotations();
@@ -73,19 +79,11 @@ public class AnnotViewer extends Activity {
 			}
 		} else {
 			sm = new StorageManager(this);
-			
 			Frag f = sm.getFrag(fid);
 			annotList = f.getAnnotations();
-			
 		}
-		//******
-//		Annotation a = new Annotation();
-//		a.setAuthor(MainActivity.username);
-//		a.setReview("THIS IS THE SAMPLE REVIEW");
-//		annotList.add(a);
-		//****** WE NEED THIS LINE -->
-		annotListView.setAdapter(new AnnotationAdapter(this, annotList));
 
+		annotListView.setAdapter(new AnnotationAdapter(this, annotList));
 	}
 	
 	public void addAnnot(View view) {

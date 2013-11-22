@@ -74,7 +74,7 @@ public class FragAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         
         if (frags.get(position).getProfile().getMedia() == null) {
-        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.defaultprofile);
         	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, false);
             holder.profile.setImageBitmap(scaledBitmap);
         } else {

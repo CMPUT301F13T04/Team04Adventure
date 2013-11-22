@@ -25,11 +25,12 @@ import java.util.ArrayList;
  */
 public class Story {
 	
-	String title;
+	private String title;
 	private ArrayList<Frag> frags;
-	String id;
-	String Author;
-	String synopsis;
+	private String id;
+	private String Author;
+	private String synopsis;
+	private int version;
 	
 	public Story(){
 		
@@ -37,6 +38,7 @@ public class Story {
 		this.title = "";
 		this.Author = "";
 		this.synopsis = "";
+		this.setVersion(0);
 		
 	}
 	
@@ -157,6 +159,14 @@ public class Story {
 		
 		this.id = id;
 	
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 		
 }

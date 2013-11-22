@@ -38,7 +38,7 @@ public class StorageManager implements Storage {
 	private SQLiteHelper dbHelper;
 	private String[] allStories = { SQLiteHelper.COLUMN_SID,
 		      SQLiteHelper.COLUMN_STITLE,SQLiteHelper.COLUMN_UNAME,
-		      SQLiteHelper.COLUMN_SYN
+		      SQLiteHelper.COLUMN_SYN, SQLiteHelper.COLUMN_VER
 		      };
 	private String[] allFrags = { SQLiteHelper.COLUMN_FID,
 			SQLiteHelper.COLUMN_FTITLE, SQLiteHelper.COLUMN_AUT,
@@ -125,6 +125,7 @@ public class StorageManager implements Storage {
 		values.put(SQLiteHelper.COLUMN_STITLE, story.getTitle());
 		values.put(SQLiteHelper.COLUMN_UNAME, story.getAuthor());
 		values.put(SQLiteHelper.COLUMN_SYN, story.getSynopsis());
+		values.put(SQLiteHelper.COLUMN_VER, story.getVersion());
 		database.insert(SQLiteHelper.TABLE_STORIES, null,
 	    		values);
 		
@@ -442,7 +443,7 @@ public class StorageManager implements Storage {
 	public ArrayList<Story> getMyStories(){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
-				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN };
+				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN, SQLiteHelper.COLUMN_VER };
 		String swhere = "UName = ?";
 		String[] whereargs = {MainActivity.username};
 		
@@ -480,7 +481,7 @@ public class StorageManager implements Storage {
 	public Story getStory(String sid){
 		
 		String[] sId = {SQLiteHelper.COLUMN_SID, SQLiteHelper.COLUMN_STITLE,
-				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN };
+				SQLiteHelper.COLUMN_UNAME,SQLiteHelper.COLUMN_SYN, SQLiteHelper.COLUMN_VER };
 		String swhere = "_sid = ?";
 		String[] whereargs = {""+sid};
 		
@@ -831,6 +832,7 @@ public class StorageManager implements Storage {
 	    story.setTitle(cursor.getString(1));
 	    story.setAuthor(cursor.getString(2));
 	    story.setSynopsis(cursor.getString(3));
+	    story.setVersion(cursor.getInt(4));
 	   
 	    return story;
 	

@@ -16,6 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:maxLines="4"
         android:scrollbars="vertical"
         android:text=""
@@ -29,12 +30,14 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/StoryTitle"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:maxLines="2"
         android:scrollbars="vertical"
         android:textSize="14sp" />
     
     <TextView
         android:id="@+id/StorySynop"
+        android:text="	"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

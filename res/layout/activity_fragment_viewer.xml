@@ -35,8 +35,7 @@
 		        android:layout_alignParentRight="true"
 		        android:layout_below="@id/FragTitle"
 		        android:maxLines="2"
-		        android:gravity="center"
-		        android:textSize="35sp" />
+		        android:textSize="14sp" />
 		    
 		    <ImageView
 		        android:id="@+id/profile_pic"
@@ -76,14 +75,15 @@
         android:layout_below="@id/frag_content" >
 
     </ListView>
-    
-     <Button
+
+     <ImageButton
          android:id="@+id/annotations"
-         style="?android:attr/buttonStyleSmall"
-         android:layout_width="fill_parent"
+         android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"
+         android:background="@android:color/transparent"
          android:onClick="showAnnots"
-         android:text="Reviews" />
+         android:src="@drawable/extrasimg" />
 
 </RelativeLayout>

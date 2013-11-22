@@ -16,14 +16,6 @@
         android:layout_height="wrap_content" >
     </SearchView>
 
-    <ImageButton
-        android:id="@+id/sync"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:onClick="sync"
-        android:src="@drawable/syncimg" />
-
     <ListView
         android:id="@+id/cachedlist"
         android:layout_width="fill_parent"

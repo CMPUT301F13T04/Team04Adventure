@@ -45,24 +45,24 @@
         android:layout_below="@+id/StoryAuthor"
          />
 
-    <Button
-        android:id="@+id/Play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignRight="@+id/StoryAuthor"
-        android:layout_below="@+id/StorySynop"
-        android:text="Play Story!"
-        android:onClick="playStory"  />
-
-    <Button
+    <ImageButton
         android:id="@+id/remove_from_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignRight="@+id/Play"
-        android:layout_below="@+id/Play"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
         android:onClick="removeFromCache"
-        android:text="Remove from Cache" />
+        android:src="@drawable/deleteimg" />
+
+    <ImageButton
+        android:id="@+id/Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/transparent"
+        android:onClick="playStory"
+        android:src="@drawable/playimg" />
 
 </RelativeLayout>

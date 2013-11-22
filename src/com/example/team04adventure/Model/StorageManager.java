@@ -16,8 +16,6 @@
 package com.example.team04adventure.Model;
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import com.example.team04adventure.View.MainActivity;
@@ -27,10 +25,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.team04adventure.View.MainActivity;
 
 /**
  * StorageManager is meant to write data into the SQLite database. This data is meant for access in offline mode in the case
@@ -48,7 +42,7 @@ public class StorageManager implements Storage {
 		      };
 	private String[] allFrags = { SQLiteHelper.COLUMN_FID,
 			SQLiteHelper.COLUMN_FTITLE, SQLiteHelper.COLUMN_AUT,
-			SQLiteHelper.COLUMN_BODY
+			SQLiteHelper.COLUMN_BODY, SQLiteHelper.COLUMN_ILL
 			};
 	private String[] allMedia = { SQLiteHelper.COLUMN_MID,
 			SQLiteHelper.COLUMN_CONTENT, SQLiteHelper.COLUMN_MTYPE
@@ -165,6 +159,8 @@ public class StorageManager implements Storage {
 		values.put(SQLiteHelper.COLUMN_FTITLE, f.getTitle());
 		values.put(SQLiteHelper.COLUMN_AUT, f.getAuthor());
 		values.put(SQLiteHelper.COLUMN_BODY, f.getBody());
+		values.put(SQLiteHelper.COLUMN_ILL, f.getProfile().getMedia());
+		
 		database.insert(SQLiteHelper.TABLE_FRAGS, null,
 	    		values);
 		
@@ -242,20 +238,6 @@ public class StorageManager implements Storage {
 		
 	}
 
-	/**
-	 * Converts bitmap to blob so that it can be stored.
-	 * @param media bitmap to be converted.
-	 * @return converted bitmap.
-	 */
-	private byte[] convertToBlob(Bitmap media) {
-		
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-		media.compress(Bitmap.CompressFormat.PNG, 100, baos);   
-		byte[] photo = baos.toByteArray(); 
-		
-		return photo;
-	}
-
 
 	/**
 	 * Inserts a Choice object into the DB.
@@ -329,7 +311,6 @@ public class StorageManager implements Storage {
 			for(Frag f : story.getFrags()){
 				
 				deleteFragment(f);
-				
 			}
 			
 		}
@@ -710,12 +691,6 @@ public class StorageManager implements Storage {
 		return med;
 	}
 
-	private Bitmap convertToBitmap(byte[] blob) {
-		
-		ByteArrayInputStream imageStream = new ByteArrayInputStream(blob);
-	        Bitmap image = BitmapFactory.decodeStream(imageStream);
-		return image;
-	}
 
 
 	/**
@@ -834,6 +809,10 @@ public class StorageManager implements Storage {
 	    frag.setTitle(cursor.getString(1));
 	    frag.setAuthor(cursor.getString(2));
 	    frag.setBody(cursor.getString(3));
+	   
+	    Media m = new Media();
+	    m.setContent(cursor.getString(4));
+	    frag.setIllustration(m);
 	    
 	    return frag;
 	}

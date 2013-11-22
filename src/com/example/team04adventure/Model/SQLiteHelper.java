@@ -53,9 +53,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	  public static final String COLUMN_CONTENT = "Content";
 	  public static final String COLUMN_MTYPE = "Type";
 	  public static final String COLUMN_AID = "_aid";
+	  public static final String COLUMN_ILL = "Illust";
 	  
 	  private static final String DATABASE_NAME = "team04.db";
-	  private static final int DATABASE_VERSION = 13;
+	  private static final int DATABASE_VERSION = 14;
 
 	  // Database creation sql statement
 	  
@@ -74,7 +75,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		  + TABLE_FRAGS + "(" + COLUMN_FID
 		  + " text primary key, " + COLUMN_FTITLE
 		  + " text, " + COLUMN_AUT + " text, "+
-		   COLUMN_BODY + " text);";
+		   COLUMN_BODY + " text, "+ COLUMN_ILL + " text);";
 	  
 	  
 	  private static final String DATABASE_CREATE_FRAGS_MEDIA = "create table "

@@ -43,55 +43,56 @@
         android:layout_below="@+id/StoryAuthor"
          />
 
-    <Button
-        android:id="@+id/Play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignRight="@+id/StoryAuthor"
-        android:layout_below="@+id/StorySynop"
-        android:text="Play Story!"
-        android:onClick="playStory"  />
-
-    <Button
-        android:id="@+id/AddFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Play"
-        android:text="Add Fragment" 
-        android:onClick = "addFragment"
-        />
-    	
-    <Button
-        android:id="@+id/Edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/AddFrag"
-        android:text="Edit" 
-        android:onClick = "editStory"/>
-    <Button
-        android:id="@+id/Download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StoryTitle"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit"
-        android:text="Download" 
-        android:onClick = "cacheStory"/>
-
-    <Button
+    <ImageButton
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Download"
-        android:layout_alignRight="@+id/Download"
-        android:layout_below="@+id/Download"
-        android:text="Delete" 
-        android:onClick="deleteStory" 
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="deleteStory"
+        android:background="@android:color/transparent"
+        android:src="@drawable/deleteimg" />
+
+    <ImageButton
+        android:id="@+id/Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/StorySynop"
+        android:layout_alignTop="@+id/AddFrag"
+        android:background="@android:color/transparent"
+        android:onClick="playStory"
+        android:src="@drawable/playimg" />
+
+    <ImageButton
+        android:id="@+id/AddFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Edit"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/Play"
+        android:background="@android:color/transparent"
+        android:onClick="addFragment"
+        android:src="@drawable/addfragimg" />
+
+    <ImageButton
+        android:id="@+id/Edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Download"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:onClick="editStory"
+        android:src="@drawable/editimg" />
+
+    <ImageButton
+        android:id="@+id/Download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/delete"
+        android:layout_marginRight="28dp"
+        android:layout_toLeftOf="@+id/delete"
+        android:background="@android:color/transparent"
+        android:onClick="cacheStory"
+        android:src="@drawable/downloadimg" />
 
 </RelativeLayout>

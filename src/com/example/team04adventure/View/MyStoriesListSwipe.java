@@ -58,8 +58,11 @@ public class MyStoriesListSwipe extends Fragment {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// Do something
-				offlineAdapter.filter(newText);
-				return true;
+				//if (newText.length() > 0) {
+					offlineAdapter.filter(newText);
+					return true;
+				//}
+				//return false;
 			}
 
 			@Override

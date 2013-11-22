@@ -70,8 +70,11 @@ public class AllStoriesListSwipe extends Fragment {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// Do something
-				allAdapter.filter(newText);
-				return true;
+				//if (newText.length() > 0) {
+					allAdapter.filter(newText);
+					return true;
+				//} 
+				//return false;
 			}
 
 			@Override

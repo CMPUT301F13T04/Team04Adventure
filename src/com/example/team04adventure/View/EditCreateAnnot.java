@@ -26,6 +26,7 @@ import android.widget.EditText;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Annotation;
+import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
@@ -86,22 +87,33 @@ public class EditCreateAnnot extends Activity {
 			
 			Story s;
 			try {
+				System.out.println("BEGINS ONLINE");
 				s = new JSONparser().execute(index, sid).get().get(0);
-				s.getFrag(fid).addAnnotations(a);
-				index = Integer.valueOf(-4);
-				new JSONparser().execute(index,sid);
+				Frag f = s.getFrag(fid);
+				f.addAnnotations(a);
+				s.deleteFrag(fid);
+				s.addFragment(f);
 				index = Integer.valueOf(-1);
-				new JSONparser().execute(index,sid);
+				new JSONparser().execute(index,s);
+				System.out.println("IT SAVED ONLINE");
 				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("INTERRUPTED EXCEPTION");
 			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("EXECUTION EXCEPTION");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("GENERAL EXCEPTION");
 			}
 			
 		} else {
+			
+			System.out.println("SAVED OFFLINE");
 			sm = new StorageManager(this);
 			Story s = sm.getStory(sid);
 			sm.deleteStory(s);
@@ -109,6 +121,8 @@ public class EditCreateAnnot extends Activity {
 			s.getFrag(fid).addAnnotations(a);
 			
 			sm.addStory(s);
+			
+			
 			
 			
 		}

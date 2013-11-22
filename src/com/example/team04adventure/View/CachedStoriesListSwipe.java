@@ -57,8 +57,11 @@ public class CachedStoriesListSwipe extends Fragment {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// Do something
-				cacheAdapter.filter(newText);
-				return true;
+				//if (newText.length() > 0) {
+					cacheAdapter.filter(newText);
+					return true;
+				//}
+				//return false;
 			}
 
 			@Override

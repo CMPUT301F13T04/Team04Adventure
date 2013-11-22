@@ -66,16 +66,24 @@ public class AnnotViewer extends Activity {
 			try {
 				index = Integer.valueOf(-2);
 				jp = new JSONparser();
-				final Story story = new JSONparser().execute(index, sid).get().get(0);
+				Story story = new JSONparser().execute(index, sid).get().get(0);
 				Frag f = story.getFrag(fid);
+//				Annotation a = new Annotation();
+//				a.setAuthor("DEFAULT");
+//				a.setReview("THE REVIEW");
+//				f.addAnnotations(a);
 				annotList = f.getAnnotations();
-
+				System.out.println("ITS OK");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("FUCKED UP 1");
 			} catch (ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("FUCKED UP 2");
+			} catch (Exception e) {
+				System.out.println("GENERAL ERROR");
 			}
 		} else {
 			sm = new StorageManager(this);

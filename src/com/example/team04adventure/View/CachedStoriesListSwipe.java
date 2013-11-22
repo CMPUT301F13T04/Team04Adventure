@@ -24,11 +24,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.SearchView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.CachedListAdapter;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
@@ -43,7 +44,7 @@ public class CachedStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;
 	SearchView searchView;
-	StoryListAdapter cacheAdapter;
+	CachedListAdapter cacheAdapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,7 +86,7 @@ public class CachedStoriesListSwipe extends Fragment {
 		
 		storylist = sm.getAll();
 
-		cacheAdapter = new StoryListAdapter(getActivity(), storylist);
+		cacheAdapter = new CachedListAdapter(getActivity(), storylist);
 		storyListView.setAdapter(cacheAdapter);
 		//allAdapter = storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
 		storyListView.setOnItemClickListener(new OnItemClickListener() {

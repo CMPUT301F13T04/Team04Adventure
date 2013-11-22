@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -223,8 +224,30 @@ public class MyStoryIntro extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.story_intro, menu);
+		getMenuInflater().inflate(R.menu.my_story_intro, menu);
 
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		View view = new View(this);
+		switch (item.getItemId()) {
+			case R.id.play_menu:
+				playStory(view);
+				return true;
+			case R.id.add_menu:
+				addFragment(view);
+				return true;
+			case R.id.edit_menu:
+				editStory(view);
+				return true;
+			case R.id.upload_menu:
+				publishStory(view);
+				return true;
+			case R.id.delete_menu:
+				deleteStory(view);
+				return true;
+		}
 		return true;
 	}
 

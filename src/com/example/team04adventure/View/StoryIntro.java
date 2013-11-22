@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,6 +120,17 @@ public class StoryIntro extends Activity {
 		return true;
 	}
 	
-	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		View view = new View(this);
+		switch (item.getItemId()) {
+			case R.id.play_menu:
+				playStory(view);
+				return true;
+			case R.id.delete_menu:
+				removeFromCache(view);
+				return true;
+		}
+		return true;
+	}
 
 }

@@ -106,9 +106,6 @@ public class EditFragment extends Activity {
 		sid = extras.getString("sid");
 		flag = extras.getString("flag");
 		fid = extras.getString("fid");
-//		fragment.setId(extras.getString("fid"));
-//		fragment.setTitle(extras.getString("ftitle"));
-//		fragment.setBody(extras.getString("fbody"));
 
 		sm = new StorageManager(this);
 		
@@ -128,6 +125,13 @@ public class EditFragment extends Activity {
 		}
 		origStory = story;
 		fragment = story.getFrag(fid);
+		if (fragment == null) {
+			fragment = new Frag();
+			fragment.setId(fid);
+			fragment.setTitle(extras.getString("ftitle"));
+			fragment.setBody(extras.getString("fbody"));
+			fragment.setAuthor(MainActivity.username);
+		}
 
 		refreshIdList();
 

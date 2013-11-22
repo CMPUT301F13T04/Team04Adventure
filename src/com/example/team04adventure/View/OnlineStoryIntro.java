@@ -21,8 +21,11 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,18 +66,12 @@ public class OnlineStoryIntro extends Activity {
 		sid = extras.getString("id");
 		Uname = MainActivity.username;
 
-
-//		JSONparser jp = new JSONparser();
-
-//		story = jp.getStory(sid);
 		Integer index = Integer.valueOf(-2);
 		try {
 			story = new JSONparser().execute(index, sid).get().get(0);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -138,28 +135,6 @@ public class OnlineStoryIntro extends Activity {
 				String fbody = bodyinput.getText().toString();
 				String fid = ftitle.replace(" ","")+rint;
 				
-//				Frag fragment = new Frag();
-//				fragment.setTitle(ftitle);
-//				fragment.setBody(fbody);
-//				fragment.setAuthor(MainActivity.username);
-//				fragment.setId(fid);
-//				
-//				story.addFragment(fragment);
-//				
-//				JSONparser jp = new JSONparser();
-//				try {
-//					jp.storeStory(story);
-//				} catch (ClientProtocolException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IllegalStateException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-
 				Intent intent = new Intent(OnlineStoryIntro.this, EditFragment.class);
 				intent.putExtra("sid", story.getId());
 				intent.putExtra("fid", fid);
@@ -169,9 +144,6 @@ public class OnlineStoryIntro extends Activity {
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				
 				startActivity(intent);
-
-
-
 
 			}  
 		});  
@@ -277,3 +249,4 @@ public class OnlineStoryIntro extends Activity {
 		return true;
 	}
 }
+ 

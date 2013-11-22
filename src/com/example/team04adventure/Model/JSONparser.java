@@ -32,6 +32,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 
@@ -54,7 +56,7 @@ import com.google.gson.reflect.TypeToken;
  * 
  * @author Team04Adventure
  */
-public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> implements Storage {
+public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> implements Storage{
 
 	private Gson gson;
 	private HttpClient client = new DefaultHttpClient();
@@ -63,6 +65,8 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 	private final String stories = "story/";
 	private final String compstories = "compstories/";
 //	private final String frags = "fragments/";
+	private Context context;
+	private ProgressDialog mDialog;
 
 	// Just the generic constructor
 	public JSONparser() {
@@ -70,7 +74,7 @@ public class JSONparser  extends AsyncTask <Object,Integer,ArrayList<Story>> imp
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 	}
-
+	
 	public void addStory(Story s) {
 		try {
 			storeStory(s);

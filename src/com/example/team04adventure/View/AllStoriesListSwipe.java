@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,7 +50,7 @@ public class AllStoriesListSwipe extends Fragment {
 	Button randomButton;
 	SearchView searchView;
 	StoryListAdapter allAdapter;
-
+	ProgressDialog mDialog;
 	ArrayList<Story> stories;
 
 	/**
@@ -116,30 +117,6 @@ public class AllStoriesListSwipe extends Fragment {
 		}
 
 
-
-		//stories.add(jp.getStory("10"));
-
-		/*
-		 * Code used for testing. Hard-coded story that can be added into the list.
-		 * Side-steps the need to use a JSONparser.
-		 */
-
-		//		String id = "69696";
-		//	    /* Simple fragment */
-		//	    Frag f = new Frag();
-		//	    f.setTitle("title");
-		//	    f.setAuthor("Frag authored by " + id);
-		//	    f.setBody("This fragment body belongs to frag " + id);
-		//	    f.setId(id);
-		//	    /* Simple story */
-		//	    Story s = new Story();
-		//	    s.setAuthor("Story authored by " + id);
-		//	    s.setTitle("Title " + id);
-		//	    s.setId(id);
-		//	    s.addFragment(f);
-		//	    ArrayList<Story> stories = new ArrayList<Story>();
-		//	    stories.add(s);
-
 		allAdapter = new StoryListAdapter(getActivity(), stories);
 		storyListView.setAdapter(allAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
@@ -150,7 +127,10 @@ public class AllStoriesListSwipe extends Fragment {
 			 * @return void
 			 */
 			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> a, View v, int position, long id ) {
+				mDialog = new ProgressDialog(v.getContext());
+		        mDialog.setMessage("Please wait...");
+		        mDialog.show();
 				Story s = (Story) storyListView.getItemAtPosition(position);
 				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
 				intent.putExtra("id", s.getId());
@@ -172,16 +152,15 @@ public class AllStoriesListSwipe extends Fragment {
 				startActivity(intent);
 
 			}
-		});
-
-
-
-
-		
+		});		
 
 	}	
 	private int chooseRandom() {
 		Random ran = new Random();
 		return ran.nextInt(stories.size());
+	}
+	public void onStop(){
+		super.onStop();
+		mDialog.dismiss();
 	}
 }

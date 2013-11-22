@@ -83,7 +83,7 @@ public class FragAdapter extends BaseAdapter {
         	holder.profile.setImageBitmap(bm);
         }
         holder.fragView.setText(frags.get(position).getTitle());
-        holder.authorView.setText("By, "+frags.get(position).getAuthor());
+        holder.authorView.setText("By: "+frags.get(position).getAuthor());
         
         
  

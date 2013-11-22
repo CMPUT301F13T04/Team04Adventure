@@ -93,7 +93,8 @@ public class EditFragment extends Activity {
 	int nc = 0;
 	
 	String flag;
-
+	String fid;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,9 +105,10 @@ public class EditFragment extends Activity {
 		nc = extras.getInt("nc");
 		sid = extras.getString("sid");
 		flag = extras.getString("flag");
-		fragment.setId(extras.getString("fid"));
-		fragment.setTitle(extras.getString("ftitle"));
-		fragment.setBody(extras.getString("fbody"));
+		fid = extras.getString("fid");
+//		fragment.setId(extras.getString("fid"));
+//		fragment.setTitle(extras.getString("ftitle"));
+//		fragment.setBody(extras.getString("fbody"));
 
 		sm = new StorageManager(this);
 		
@@ -125,6 +127,7 @@ public class EditFragment extends Activity {
 			story = sm.getStory(sid);
 		}
 		origStory = story;
+		fragment = story.getFrag(fid);
 
 		refreshIdList();
 
@@ -434,7 +437,6 @@ public class EditFragment extends Activity {
 		String fragBodyString = fragBody.getText().toString();
 		fragment.setTitle(fragTitleString);
 		fragment.setBody(fragBodyString);
-		fragment.setAuthor(MainActivity.username);
 	}
 
 	public void saveToStory() {

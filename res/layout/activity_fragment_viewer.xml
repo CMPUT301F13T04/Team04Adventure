@@ -12,6 +12,7 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         android:id="@+id/frag_content" >
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -19,10 +20,8 @@
 
 		    <TextView
 		        android:id="@+id/FragTitle"
-		        android:layout_width="wrap_content"
+		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignParentLeft="true"
-		        android:layout_toLeftOf="@+id/button1"
 		        android:gravity="center"
 		        android:maxLines="2"
 		        android:scrollbars="vertical"
@@ -37,7 +36,6 @@
 		        android:layout_below="@id/FragTitle"
 		        android:maxLines="2"
 		        android:gravity="center"
-		        android:scrollbars="vertical"
 		        android:textSize="35sp" />
 		    
 		    <ImageView
@@ -54,8 +52,6 @@
 		        android:layout_alignParentLeft="true"
 		        android:layout_alignParentRight="true"
 		        android:layout_below="@id/profile_pic"
-		        android:maxLines="8"
-		        android:scrollbars="vertical"
 		        android:textSize="20sp" />
 		
 		    <HorizontalScrollView
@@ -65,21 +61,11 @@
 		        android:layout_height="wrap_content" >
 		        <LinearLayout
 		            android:id="@+id/image_layout"
-		            android:layout_width="fill_parent"
+		            android:layout_width="wrap_content"
 		            android:layout_height="fill_parent"
 		            android:layout_gravity="center"
 		            android:orientation="horizontal" />
 		    </HorizontalScrollView>
-
-		    <Button
-		        android:id="@+id/annotations"
-		        style="?android:attr/buttonStyleSmall"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentRight="true"
-		        android:layout_alignParentTop="true"
-		        android:text="Reviews"
-				android:onClick = "showAnnots" />
 		</RelativeLayout>
 	</ScrollView>
     
@@ -87,9 +73,18 @@
         android:id="@+id/ChoiceList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/frag_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true" >
+        android:layout_above="@+id/annotations"
+        android:layout_below="@id/frag_content" >
+
     </ListView>
+    
+     <Button
+         android:id="@+id/annotations"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:onClick="showAnnots"
+         android:text="Reviews" />
 
 </RelativeLayout>

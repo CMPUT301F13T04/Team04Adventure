@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         android:onClick="deleteStory"
         android:src="@drawable/deleteimg" />
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/Publish"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         android:onClick="editStory"
         android:src="@drawable/editimg" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         android:onClick="playStory"
         android:src="@drawable/playimg" />
 
@@ -83,7 +83,7 @@
         android:layout_alignTop="@+id/Edit"
         android:layout_marginRight="26dp"
         android:layout_toLeftOf="@+id/Edit"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         android:onClick="addFragment"
         android:src="@drawable/addfragimg" />
 
@@ -94,7 +94,7 @@
         android:layout_alignTop="@+id/delete"
         android:layout_marginLeft="32dp"
         android:layout_toRightOf="@+id/Edit"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         android:onClick="publishStory"
         android:src="@drawable/uploadimg" />
 

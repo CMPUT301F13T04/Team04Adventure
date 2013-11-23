@@ -15,13 +15,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint=""
+        android:maxLines="2"
+        android:scrollbars="vertical"
         android:text="@string/frag_title" />
+
     <EditText
         android:id="@+id/frag_body"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint=""
+        android:maxLines="8"
+        android:scrollbars="vertical"
         android:text="@string/frag_body" />
+
     <Button 
         android:id="@+id/upload"
         android:layout_width="fill_parent"

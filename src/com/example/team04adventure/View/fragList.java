@@ -27,6 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragAdapter;
 import com.example.team04adventure.Model.JSONparser;
@@ -62,16 +63,16 @@ public class fragList extends Activity {
 
 
 		if (flag.equals("online")) {
-			Integer index = Integer.valueOf(-2);
-			try {
-				story = new JSONparser().execute(index, id).get().get(0);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			Integer index = Integer.valueOf(-2);
+//			try {
+				AdventureApp Adventure = (AdventureApp)getApplicationContext();
+				story = Adventure.getCurrentStory();
+//				story = new JSONparser().execute(index, id).get().get(0);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			} catch (ExecutionException e) {
+//				e.printStackTrace();
+//			}
 		} else {
 			StorageManager sm = new StorageManager(this);
 			story = sm.getStory(id);

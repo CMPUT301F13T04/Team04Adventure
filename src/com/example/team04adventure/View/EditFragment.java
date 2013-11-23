@@ -19,10 +19,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
@@ -88,7 +89,7 @@ public class EditFragment extends Activity {
 	private Story origStory;
 	private Story story = new Story();
 	private ArrayList<String> idList = new ArrayList<String>();
-
+	ProgressDialog mDialog;
 	// "Add New Choice" Flag
 	int nc = 0;
 	
@@ -110,16 +111,17 @@ public class EditFragment extends Activity {
 		sm = new StorageManager(this);
 		
 		if (flag.equals("online")) {
-			Integer index = Integer.valueOf(-2);
-			try {
-				story = new JSONparser().execute(index, sid).get().get(0);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			Integer index = Integer.valueOf(-2);
+//			try {
+				AdventureApp Adventure = (AdventureApp)getApplicationContext();
+				story = Adventure.getCurrentStory();
+
+//				story = new JSONparser().execute(index, sid).get().get(0);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			} catch (ExecutionException e) {
+//				e.printStackTrace();
+//			}
 		} else {
 			story = sm.getStory(sid);
 		}
@@ -188,7 +190,9 @@ public class EditFragment extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-
+				mDialog = new ProgressDialog(arg0.getContext());
+		        mDialog.setMessage("Please wait...");
+		        mDialog.show();
 				saveFrag();
 			}
 		});
@@ -480,5 +484,11 @@ public class EditFragment extends Activity {
 		getMenuInflater().inflate(R.menu.edit, menu);
 		return true;
 	}
-
+	public void onStop(){
+		super.onStop();
+		
+		if (mDialog!=null){
+		mDialog.dismiss();
+		}
+	}
 }

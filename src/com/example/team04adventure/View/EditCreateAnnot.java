@@ -15,9 +15,8 @@
 
 package com.example.team04adventure.View;
 
-import java.util.concurrent.ExecutionException;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -25,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Annotation;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
@@ -44,7 +44,7 @@ public class EditCreateAnnot extends Activity {
 			image;
 	
 	EditText reviewIn;
-	
+	ProgressDialog mDialog;
 	Button saveButton;
 	
 	@Override
@@ -72,7 +72,9 @@ public class EditCreateAnnot extends Activity {
 	
 	
 	public void saveAnnot(View view) {
-		
+		mDialog = new ProgressDialog(view.getContext());
+        mDialog.setMessage("Please wait...");
+        mDialog.show();
 		review = reviewIn.getText().toString();
 		author = MainActivity.username;
 		
@@ -86,30 +88,32 @@ public class EditCreateAnnot extends Activity {
 			Integer index = Integer.valueOf(-2);
 			
 			Story s;
-			try {
+//			try {
 				System.out.println("BEGINS ONLINE");
-				s = new JSONparser().execute(index, sid).get().get(0);
+//				s = new JSONparser().execute(index, sid).get().get(0);
+				AdventureApp Adventure = (AdventureApp)getApplicationContext();
+				s = Adventure.getCurrentStory();
+
 				Frag f = s.getFrag(fid);
 				f.addAnnotations(a);
 				s.deleteFrag(fid);
 				s.addFragment(f);
+				
 				index = Integer.valueOf(-1);
 				new JSONparser().execute(index,s);
 				System.out.println("IT SAVED ONLINE");
 				
-			} catch (InterruptedException e) {
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//				System.out.println("INTERRUPTED EXCEPTION");
+//			} catch (ExecutionException e) {
+//				e.printStackTrace();
+//				System.out.println("EXECUTION EXCEPTION");
+//			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("INTERRUPTED EXCEPTION");
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("EXECUTION EXCEPTION");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("GENERAL EXCEPTION");
-			}
+//				e.printStackTrace();
+//				System.out.println("GENERAL EXCEPTION");
+//			}
 			
 		} else {
 			
@@ -128,6 +132,13 @@ public class EditCreateAnnot extends Activity {
 		}
 			
 		finish();
+	}
+	public void onStop(){
+		super.onStop();
+		
+		if (mDialog!=null){
+		mDialog.dismiss();
+		}
 	}
 
 }

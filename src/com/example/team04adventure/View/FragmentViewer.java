@@ -35,6 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragChoiceAdapter;
@@ -75,7 +76,7 @@ public class FragmentViewer extends Activity {
 		fragID = extras.getString("fid");
 		storyID = extras.getString("sid");
 		flag = extras.getString("flag");
-		JSONparser jp = new JSONparser(); 
+//		JSONparser jp = new JSONparser(); 
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
 		
 		// Initialize the list of choices for that frag
@@ -84,7 +85,10 @@ public class FragmentViewer extends Activity {
 		Frag f = new Frag();
 		StorageManager sm = new StorageManager(this);
 		if (flag.equals("online")){
-			Story s = jp.getStory(storyID);
+			AdventureApp Adventure = (AdventureApp)getApplicationContext();
+			Story s = Adventure.getCurrentStory();
+
+//			Story s = jp.getStory(storyID);
 			ArrayList<Frag> frags = s.getFrags();
 			for(Frag fr: frags){
 				if (fr.getId().equals(fragID)){

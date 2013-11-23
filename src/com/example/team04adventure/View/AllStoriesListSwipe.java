@@ -145,6 +145,10 @@ public class AllStoriesListSwipe extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				//goToStory(id);
+				mDialog = new ProgressDialog(arg0.getContext());
+		        mDialog.setMessage("Opening Random Story...");
+		        mDialog.show();
+				
 				Story s = (Story) stories.get(chooseRandom());
 				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
 				intent.putExtra("id", s.getId());

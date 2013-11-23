@@ -21,11 +21,8 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +34,7 @@ import android.widget.Toast;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Controller.OnlineStoryList;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
@@ -69,6 +67,8 @@ public class OnlineStoryIntro extends Activity {
 		Integer index = Integer.valueOf(-2);
 		try {
 			story = new JSONparser().execute(index, sid).get().get(0);
+			AdventureApp Adventure = (AdventureApp)getApplicationContext();
+			Adventure.setCurrentStory(story);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
@@ -165,6 +165,7 @@ public class OnlineStoryIntro extends Activity {
 	 * @param view the current view.
 	 */
 	public void editStory(View view){
+		
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
 		intent.putExtra("link", 0);
@@ -183,11 +184,11 @@ public class OnlineStoryIntro extends Activity {
 
 		String cache = "Story Cached.";
 		String recache = "Your cached version of this story has been updated.";
-		JSONparser parser = new JSONparser();
+//		JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 
-		Story s = parser.getStory(sid);
-		
+//		Story s = parser.getStory(sid);
+		Story s = story;
 		if(sm.checkStory(s.getId())){
 			sm.deleteStory(s);
 			sm.addStory(s);
@@ -198,7 +199,6 @@ public class OnlineStoryIntro extends Activity {
 			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
 	
-
 	}
 	
 	/**
@@ -206,9 +206,7 @@ public class OnlineStoryIntro extends Activity {
 	 * @param view the current view.
 	 */
 	public void deleteStory(View view){	
-//		JSONparser parser = new JSONparser();
-//		
-//		parser.deleteStory(story);
+
 		Integer index = Integer.valueOf(-4);
 		new JSONparser().execute(index,story);
 		Intent intent = new Intent(this, OnlineStoryList.class);
@@ -216,7 +214,6 @@ public class OnlineStoryIntro extends Activity {
 		startActivity(intent);
 		finish();
 
-		
 	}
 
 	@Override

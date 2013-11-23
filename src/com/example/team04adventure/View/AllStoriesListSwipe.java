@@ -161,6 +161,9 @@ public class AllStoriesListSwipe extends Fragment {
 	}
 	public void onStop(){
 		super.onStop();
+		
+		if (mDialog!=null){
 		mDialog.dismiss();
+		}
 	}
 }

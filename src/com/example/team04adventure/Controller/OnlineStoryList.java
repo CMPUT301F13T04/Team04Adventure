@@ -267,4 +267,46 @@ public class OnlineStoryList extends FragmentActivity implements
 
 
 	}
+	
+	public void sync(View view){
+		
+	
+		StorageManager sm = new StorageManager(this);
+		
+		Integer tempIndex = Integer.valueOf(-5);
+		ArrayList<Story> onlines = null;
+		try {
+			onlines = new JSONparser().execute(tempIndex).get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<Story> offlines = sm.getAll();
+		
+		
+		
+		for(Story s : onlines){
+			for(Story ss : offlines){
+				if(s.getId().equals(ss.getId())){
+					if(s.getVersion()>ss.getVersion()){
+						sm.deleteStory(ss);
+						sm.addStory(s);
+						
+					}
+
+				}					
+				
+			}
+			
+		}
+		
+		Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		
+		
+	}
 }

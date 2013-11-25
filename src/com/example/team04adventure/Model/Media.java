@@ -122,11 +122,9 @@ public class Media {
 		float width = bitmap.getWidth();
 		float height = bitmap.getHeight();
 		float scale = 1;
-		if (width >= height) {
-			scale = IMAGE_MAX / width;
-		} else if (width < height) {
-			scale = IMAGE_MAX / height;
-		}
+		
+		scale = IMAGE_MAX / height;
+		
 		float newWidth = width * scale;
 		float newHeight = height * scale;
 		int newWidthInt = (int) newWidth;

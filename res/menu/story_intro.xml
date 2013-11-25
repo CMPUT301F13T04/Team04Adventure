@@ -3,9 +3,11 @@
     <item
         android:id="@+id/play_menu"
         android:title="Play story"/>
-
     <item
         android:id="@+id/delete_menu"
         android:title="Remove story from cache"/>
+    <item
+        android:id="@+id/help"
+        android:title="Help" />
 
 </menu>

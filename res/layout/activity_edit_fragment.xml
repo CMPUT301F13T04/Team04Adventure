@@ -30,6 +30,7 @@
         android:text="@string/frag_body" />
 
     <LinearLayout
+        android:id="@+id/edit_frag_texts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/frag_body" >
@@ -51,7 +52,8 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_frag_texts" >
 
         <ImageView
             android:id="@+id/upload_image_pic"

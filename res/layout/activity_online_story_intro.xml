@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/middle"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/middle"
     tools:context=".StoryIntro" >
 
     <TextView
@@ -15,87 +15,87 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:textSize="45sp"
         android:gravity="center"
         android:maxLines="4"
         android:scrollbars="vertical"
-        android:text="" />
-    
+        android:text=""
+        android:textSize="45sp" />
+
     <TextView
         android:id="@+id/StoryAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/StoryTitle"
         android:gravity="center"
-        android:textSize="25sp"
         android:maxLines="2"
         android:scrollbars="vertical"
-        android:layout_below="@+id/StoryTitle" />
-   
+        android:textSize="25sp" />
+
     <TextView
         android:id="@+id/StorySynop"
-        android:text="	"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:textSize="20sp"
+        android:layout_below="@+id/StoryAuthor"
         android:maxLines="12"
         android:scrollbars="vertical"
-        android:layout_below="@+id/StoryAuthor"
-         />
+        android:text="	"
+        android:textSize="20sp" />
 
-    <ImageButton
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="deleteStory"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/deleteimg" />
+        android:orientation="horizontal" >
+        
+        <ImageButton
+            android:id="@+id/Play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="playStory"
+            android:layout_weight="1"
+            android:src="@drawable/playimg" />
+        
+        <ImageButton
+            android:id="@+id/AddFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="addFragment"
+            android:layout_weight="1"
+            android:src="@drawable/addfragimg" />
 
-    <ImageButton
-        android:id="@+id/Play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StorySynop"
-        android:layout_alignTop="@+id/AddFrag"
-        android:background="?android:selectableItemBackground"
-        android:onClick="playStory"
-        android:src="@drawable/playimg" />
+        <ImageButton
+            android:id="@+id/Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="editStory"
+            android:layout_weight="1"
+            android:src="@drawable/editimg" />
 
-    <ImageButton
-        android:id="@+id/Edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/Download"
-        android:layout_centerHorizontal="true"
-        android:background="?android:selectableItemBackground"
-        android:onClick="editStory"
-        android:src="@drawable/editimg" />
-
-    <ImageButton
-        android:id="@+id/AddFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/Edit"
-        android:layout_marginRight="24dp"
-        android:layout_toLeftOf="@+id/Edit"
-        android:background="?android:selectableItemBackground"
-        android:onClick="addFragment"
-        android:src="@drawable/addfragimg" />
-
-    <ImageButton
-        android:id="@+id/Download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/delete"
-        android:layout_marginRight="32dp"
-        android:layout_toLeftOf="@+id/delete"
-        android:background="?android:selectableItemBackground"
-        android:onClick="cacheStory"
-        android:src="@drawable/downloadimg" />
+        <ImageButton
+            android:id="@+id/Download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="cacheStory"
+            android:layout_weight="1"
+            android:src="@drawable/downloadimg" />
+        
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="deleteStory"
+            android:layout_weight="1"
+            android:src="@drawable/deleteimg" />
+        
+    </LinearLayout>
 
 </RelativeLayout>

@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/middle"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/middle"
     tools:context=".StoryIntro" >
 
     <TextView
@@ -21,7 +21,7 @@
         android:scrollbars="vertical"
         android:text=""
         android:textSize="45sp" />
-    
+
     <TextView
         android:id="@+id/StoryAuthor"
         android:layout_width="wrap_content"
@@ -34,38 +34,43 @@
         android:maxLines="2"
         android:scrollbars="vertical"
         android:textSize="25sp" />
-    
+
     <TextView
         android:id="@+id/StorySynop"
-        android:text="	"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:textSize="20sp"
+        android:layout_below="@+id/StoryAuthor"
         android:maxLines="2"
         android:scrollbars="vertical"
-        android:layout_below="@+id/StoryAuthor"
-         />
+        android:text="	"
+        android:textSize="20sp" />
 
-    <ImageButton
-        android:id="@+id/remove_from_cache"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="?android:selectableItemBackground"
-        android:onClick="removeFromCache"
-        android:src="@drawable/deleteimg" />
+        android:orientation="horizontal" >
 
-    <ImageButton
-        android:id="@+id/Play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="?android:selectableItemBackground"
-        android:onClick="playStory"
-        android:src="@drawable/playimg" />
+        <ImageButton
+            android:id="@+id/Play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="playStory"
+            android:layout_weight="1"
+            android:src="@drawable/playimg" />
+
+        <ImageButton
+            android:id="@+id/remove_from_cache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:onClick="removeFromCache"
+            android:layout_weight="1"
+            android:src="@drawable/deleteimg" />
+        
+    </LinearLayout>
 
 </RelativeLayout>

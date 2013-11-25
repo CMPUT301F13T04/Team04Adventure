@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
             android:onClick="saveAnnot"
-            android:src="@drawable/saveimg" />
+            android:src="@drawable/save_black" />
 
         <ImageButton
             android:id="@+id/upload_image_annot"
@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
             android:onClick="uploadImage"
-            android:src="@drawable/newpicimg" />
+            android:src="@drawable/newpic_black" />
 
         <ImageButton
             android:id="@+id/camera_annot"
@@ -48,7 +48,7 @@
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
             android:onClick="uploadCamera"
-            android:src="@drawable/cameraimg" />
+            android:src="@drawable/camera_black" />
     </LinearLayout>
 
     

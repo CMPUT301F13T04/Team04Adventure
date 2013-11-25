@@ -216,6 +216,7 @@ public class EditFragment extends Activity {
 		Intent intent = new Intent();
 		if (flag.equals("online")) {
 			intent = new Intent(this, OnlineStoryIntro.class);
+			
 		} else {
 			intent = new Intent(this, MyStoryIntro.class);
 		}
@@ -237,10 +238,12 @@ public class EditFragment extends Activity {
 		int listIndex = idList.indexOf(fragment.getId());
 		if (listIndex == -1) {
 			story.addFragment(fragment);
+			story.incVersion();
 		} else {
 			Frag oldFragment = story.getFrags().get(listIndex);
 			story.deleteFrag(oldFragment.getId());
 			story.addFragment(fragment, listIndex);
+			story.incVersion();
 		}
 		
 		refreshIdList();

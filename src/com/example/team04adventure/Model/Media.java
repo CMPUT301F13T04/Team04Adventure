@@ -127,17 +127,12 @@ public class Media {
 		} else if (width < height) {
 			scale = IMAGE_MAX / height;
 		}
-		Bitmap resizedBitmap = null;
-		if (scale <= 1) {
-			float newWidth = width * scale;
-			float newHeight = height * scale;
-			int newWidthInt = (int) newWidth;
-			int newHeightInt = (int) newHeight;
-			resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt,
-					newHeightInt, false);
-		} else {
-			resizedBitmap = bitmap;
-		}
+		float newWidth = width * scale;
+		float newHeight = height * scale;
+		int newWidthInt = (int) newWidth;
+		int newHeightInt = (int) newHeight;
+		Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt,
+				newHeightInt, false);
 		return resizedBitmap;
 	}
 

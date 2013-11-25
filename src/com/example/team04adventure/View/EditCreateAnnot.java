@@ -97,20 +97,19 @@ public class EditCreateAnnot extends Activity {
 		a.setAuthor(author);
 		a.setReview(review);
 		
-		if (online.equals("online")) {
-			Integer index = Integer.valueOf(-2);
-			
+		if (online.equals("online")) {			
 				Story s;
 				System.out.println("BEGINS ONLINE");
 				AdventureApp Adventure = (AdventureApp)getApplicationContext();
 				s = Adventure.getCurrentStory();
 
 				Frag f = s.getFrag(fid);
+				int index2 = s.getFrags().indexOf(f);
 				f.addAnnotations(a);
 				s.deleteFrag(fid);
-				s.addFragment(f);
+				s.addFragment(f,index2);
 				
-				index = Integer.valueOf(-1);
+				Integer index = Integer.valueOf(-1);
 				new JSONparser().execute(index,s);
 				System.out.println("IT SAVED ONLINE");
 							

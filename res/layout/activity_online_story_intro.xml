@@ -58,7 +58,7 @@
             android:background="?android:selectableItemBackground"
             android:onClick="playStory"
             android:layout_weight="1"
-            android:src="@drawable/playimg" />
+            android:src="@drawable/play_black" />
         
         <ImageButton
             android:id="@+id/AddFrag"
@@ -67,7 +67,7 @@
             android:background="?android:selectableItemBackground"
             android:onClick="addFragment"
             android:layout_weight="1"
-            android:src="@drawable/addfragimg" />
+            android:src="@drawable/addfrag_black" />
 
         <ImageButton
             android:id="@+id/Edit"
@@ -76,7 +76,7 @@
             android:background="?android:selectableItemBackground"
             android:onClick="editStory"
             android:layout_weight="1"
-            android:src="@drawable/editimg" />
+            android:src="@drawable/edit_black" />
 
         <ImageButton
             android:id="@+id/Download"
@@ -85,7 +85,7 @@
             android:background="?android:selectableItemBackground"
             android:onClick="cacheStory"
             android:layout_weight="1"
-            android:src="@drawable/downloadimg" />
+            android:src="@drawable/download_black" />
         
         <ImageButton
             android:id="@+id/delete"
@@ -94,7 +94,7 @@
             android:background="?android:selectableItemBackground"
             android:onClick="deleteStory"
             android:layout_weight="1"
-            android:src="@drawable/deleteimg" />
+            android:src="@drawable/delete_black" />
         
     </LinearLayout>
 

@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="uploadImage"
-            android:src="@drawable/newpicimg"
+            android:src="@drawable/newpic_black"
             android:background="?android:selectableItemBackground"
             android:layout_weight="1" />
 
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="openCamera"
-            android:src="@drawable/cameraimg"
+            android:src="@drawable/camera_black"
             android:background="?android:selectableItemBackground"
             android:layout_weight="1" />
 
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setProfile"
-            android:src="@drawable/profileimg"
+            android:src="@drawable/profile_black"
             android:background="?android:selectableItemBackground"
             android:layout_weight="1" />
 
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="linkFrag"
-            android:src="@drawable/linkimg"
+            android:src="@drawable/link_black"
             android:background="?android:selectableItemBackground"
             android:layout_weight="1" />
 
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="saveFrag"
-            android:src="@drawable/saveimg"
+            android:src="@drawable/save_black"
             android:background="?android:selectableItemBackground"
             android:layout_weight="1" />
     </LinearLayout>

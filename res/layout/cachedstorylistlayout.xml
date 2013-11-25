@@ -40,7 +40,7 @@
 		android:layout_centerVertical="true"
         android:background="?android:selectableItemBackground"
         android:onClick="sync"
-        android:src="@drawable/syncimg" />
+        android:src="@drawable/sync_black" />
  
  
 </RelativeLayout>

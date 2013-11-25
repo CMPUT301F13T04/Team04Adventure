@@ -81,6 +81,6 @@
          android:background="?android:selectableItemBackground"
          android:onClick="showAnnots"
          android:layout_gravity="right|bottom"
-         android:src="@drawable/extrasimg" />
+         android:src="@drawable/extras_black" />
 
 </LinearLayout>

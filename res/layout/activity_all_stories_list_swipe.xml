@@ -23,8 +23,9 @@
         android:paddingBottom="5dp"
         android:text="No Stories" />
 
-    <Button
+    <Button 
         android:id="@+id/randomAllStories"
+        android:background="?android:selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="I&apos;m Feeling Lucky!" />

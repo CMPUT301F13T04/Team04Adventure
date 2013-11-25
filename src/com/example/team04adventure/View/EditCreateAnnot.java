@@ -74,7 +74,6 @@ public class EditCreateAnnot extends Activity {
 		fid = extras.getString("fid");
 		online = extras.getString("online");
 		reviewIn = (EditText) findViewById(R.id.annotBody);
-		saveButton = (Button) findViewById(R.id.save);
 		a = new Annotation();
 		
 	}

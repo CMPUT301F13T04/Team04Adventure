@@ -15,9 +15,18 @@
 
 package com.example.team04adventure.View;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -28,11 +37,15 @@ import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Annotation;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
+import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 public class EditCreateAnnot extends Activity {
 
+	private static final int SELECT_PICTURE = 1;
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	
 	String	sid,
 			fid;
 	String 	online;
@@ -46,6 +59,10 @@ public class EditCreateAnnot extends Activity {
 	EditText reviewIn;
 	ProgressDialog mDialog;
 	Button saveButton;
+	Annotation a;
+	
+	private Uri imageFileUri;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +77,8 @@ public class EditCreateAnnot extends Activity {
 		
 		reviewIn = (EditText) findViewById(R.id.annotBody);
 		saveButton = (Button) findViewById(R.id.save);
+		
+		a = new Annotation();
 		
 	}
 
@@ -77,12 +96,9 @@ public class EditCreateAnnot extends Activity {
         mDialog.show();
 		review = reviewIn.getText().toString();
 		author = MainActivity.username;
-		
-		Annotation a = new Annotation();
-		
+				
 		a.setAuthor(author);
 		a.setReview(review);
-		a.setImage(image);
 		
 		if (online.equals("online")) {
 			Integer index = Integer.valueOf(-2);
@@ -133,6 +149,71 @@ public class EditCreateAnnot extends Activity {
 			
 		finish();
 	}
+	
+	public void uploadImage(View view) {
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+				SELECT_PICTURE);
+	}
+	
+	public void uploadCamera(View view) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+		String folder = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/team04adventure/pic";
+		File folderF = new File(folder);
+		if (!folderF.exists()) {
+			folderF.mkdir();
+		}
+
+		String imageFilePath = folder + "/"
+				+ String.valueOf(System.currentTimeMillis()) + ".jpg";
+		File imageFile = new File(imageFilePath);
+		imageFileUri = Uri.fromFile(imageFile);
+
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode,
+			final Intent data) {
+		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
+				&& resultCode == RESULT_OK) {
+			try {
+				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+						this.getContentResolver(), imageFileUri);
+				Bitmap resizedBitmap = Media.resizeImage(bitmap);
+				String convertedString = Media.encodeToBase64(resizedBitmap);
+				a.setImage(convertedString);
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+			Uri selectedImageUri = data.getData();
+			try {
+				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+						this.getContentResolver(), selectedImageUri);
+				Bitmap resizedBitmap = Media.resizeImage(bitmap);
+				String convertedString = Media.encodeToBase64(resizedBitmap);
+				a.setImage(convertedString);
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void onStop(){
 		super.onStop();
 		

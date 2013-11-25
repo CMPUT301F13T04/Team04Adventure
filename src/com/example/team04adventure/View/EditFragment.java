@@ -67,8 +67,6 @@ public class EditFragment extends Activity {
 	private static final int SELECT_PICTURE = 1;
 	private static final int SELECT_PROFILE = 101;
 
-	private static final int IMAGE_MAX = 250;
-
 	private Button uploadButton;
 	private Button cameraButton;
 	private Button profileButton;
@@ -207,7 +205,7 @@ public class EditFragment extends Activity {
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
 						this.getContentResolver(), imageFileUri);
-				Bitmap resizedBitmap = resizeImage(bitmap);
+				Bitmap resizedBitmap = Media.resizeImage(bitmap);
 
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
@@ -233,7 +231,7 @@ public class EditFragment extends Activity {
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
 						this.getContentResolver(), selectedImageUri);
-				Bitmap resizedBitmap = resizeImage(bitmap);
+				Bitmap resizedBitmap = Media.resizeImage(bitmap);
 
 				uploadTextView.setText("Image you just added:");
 				uploadImageView.setImageBitmap(resizedBitmap);
@@ -257,7 +255,7 @@ public class EditFragment extends Activity {
 			try {
 				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
 						this.getContentResolver(), selectedImageUri);
-				Bitmap resizedBitmap = resizeImage(bitmap);
+				Bitmap resizedBitmap = Media.resizeImage(bitmap);
 
 				illustrationTextView.setText("Profile picture you just set:");
 				illustrationImageView.setImageBitmap(resizedBitmap);
@@ -416,29 +414,6 @@ public class EditFragment extends Activity {
 
 		startActivity(intent);
 
-	}
-
-	public Bitmap resizeImage(Bitmap bitmap) {
-		float width = bitmap.getWidth();
-		float height = bitmap.getHeight();
-		float scale = 1;
-		if (width >= height) {
-			scale = IMAGE_MAX / width;
-		} else if (width < height) {
-			scale = IMAGE_MAX / height;
-		}
-		Bitmap resizedBitmap = null;
-		if (scale <= 1) {
-			float newWidth = width * scale;
-			float newHeight = height * scale;
-			int newWidthInt = (int) newWidth;
-			int newHeightInt = (int) newHeight;
-			resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt,
-					newHeightInt, false);
-		} else {
-			resizedBitmap = bitmap;
-		}
-		return resizedBitmap;
 	}
 
 	public void fragSaveText() {

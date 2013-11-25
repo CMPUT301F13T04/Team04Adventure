@@ -77,8 +77,8 @@ public class AnnotationAdapter extends BaseAdapter {
 	            holder = (ViewHolder) convertView.getTag();
 	        
 	        if (annots.get(position).getImage() == null) {
-	        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
-	        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
+	        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.defaultprofile);
+	        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, false);
 	            holder.image.setImageBitmap(scaledBitmap);
 	        } else {
 	        	String encodedString = annots.get(position).getImage();

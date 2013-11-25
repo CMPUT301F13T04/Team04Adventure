@@ -29,6 +29,8 @@ import android.util.Base64;
  */
 public class Media {
 	
+	private static final int IMAGE_MAX = 250;
+	
 	long id;
 	String content;
 	String type;
@@ -114,6 +116,29 @@ public class Media {
 	public static Bitmap decodeBase64(String bArray) {
 	    byte[] decodedByte = Base64.decode(bArray, 0);
 	    return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length); 
+	}
+	
+	public static Bitmap resizeImage(Bitmap bitmap) {
+		float width = bitmap.getWidth();
+		float height = bitmap.getHeight();
+		float scale = 1;
+		if (width >= height) {
+			scale = IMAGE_MAX / width;
+		} else if (width < height) {
+			scale = IMAGE_MAX / height;
+		}
+		Bitmap resizedBitmap = null;
+		if (scale <= 1) {
+			float newWidth = width * scale;
+			float newHeight = height * scale;
+			int newWidthInt = (int) newWidth;
+			int newHeightInt = (int) newHeight;
+			resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidthInt,
+					newHeightInt, false);
+		} else {
+			resizedBitmap = bitmap;
+		}
+		return resizedBitmap;
 	}
 
 

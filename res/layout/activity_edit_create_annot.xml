@@ -22,7 +22,19 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:onClick="saveAnnot"/>
-    
+    <Button
+        android:id="@+id/upload_image_annot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload image from memory"
+        android:onClick="uploadImage"/>
+    <Button
+        android:id="@+id/camera_annot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload image from camera"
+        android:onClick="uploadCamera"/>
+        
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >

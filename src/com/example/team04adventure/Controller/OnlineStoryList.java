@@ -16,7 +16,7 @@ package com.example.team04adventure.Controller;
 
 import java.util.Locale;
 import java.util.Random;
-
+import java.util.ArrayList;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.StorageManager;

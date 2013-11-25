@@ -97,25 +97,15 @@ public class AllStoriesListSwipe extends Fragment {
 
 	public void onResume() {
 		super.onResume();
-		//		ArrayList<Story> ostorylist = new ArrayList<Story>();
-
-
-		//		JSONparser jp = new JSONparser();
-
 		stories = new ArrayList<Story>();
-		//		stories = jp.getAll();
-
 		Integer index = Integer.valueOf(-6);
 		try {
 			stories = new JSONparser().execute(index).get();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 		allAdapter = new StoryListAdapter(getActivity(), stories);
 		storyListView.setAdapter(allAdapter);

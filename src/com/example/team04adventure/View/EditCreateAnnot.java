@@ -68,16 +68,13 @@ public class EditCreateAnnot extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_create_annot);
-		
 		Bundle extras = getIntent().getExtras();
 		
 		sid = extras.getString("sid");
 		fid = extras.getString("fid");
 		online = extras.getString("online");
-		
 		reviewIn = (EditText) findViewById(R.id.annotBody);
 		saveButton = (Button) findViewById(R.id.save);
-		
 		a = new Annotation();
 		
 	}
@@ -103,10 +100,8 @@ public class EditCreateAnnot extends Activity {
 		if (online.equals("online")) {
 			Integer index = Integer.valueOf(-2);
 			
-			Story s;
-//			try {
+				Story s;
 				System.out.println("BEGINS ONLINE");
-//				s = new JSONparser().execute(index, sid).get().get(0);
 				AdventureApp Adventure = (AdventureApp)getApplicationContext();
 				s = Adventure.getCurrentStory();
 
@@ -118,33 +113,16 @@ public class EditCreateAnnot extends Activity {
 				index = Integer.valueOf(-1);
 				new JSONparser().execute(index,s);
 				System.out.println("IT SAVED ONLINE");
-				
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//				System.out.println("INTERRUPTED EXCEPTION");
-//			} catch (ExecutionException e) {
-//				e.printStackTrace();
-//				System.out.println("EXECUTION EXCEPTION");
-//			} catch (Exception e) {
-				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				System.out.println("GENERAL EXCEPTION");
-//			}
-			
+							
 		} else {
 			
 			System.out.println("SAVED OFFLINE");
 			sm = new StorageManager(this);
 			Story s = sm.getStory(sid);
 			sm.deleteStory(s);
-			
-			s.getFrag(fid).addAnnotations(a);
-			
+			s.getFrag(fid).addAnnotations(a);	
 			sm.addStory(s);
-			
-			
-			
-			
+						
 		}
 			
 		finish();

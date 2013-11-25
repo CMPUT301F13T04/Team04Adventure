@@ -44,7 +44,7 @@ public class CachedStoriesListSwipe extends Fragment {
 
 	private ListView storyListView;
 	SearchView searchView;
-	CachedListAdapter cacheAdapter;
+	StoryListAdapter storyAdapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,18 +57,16 @@ public class CachedStoriesListSwipe extends Fragment {
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
-				// Do something
-				//if (newText.length() > 0) {
-					cacheAdapter.filter(newText);
+				
+					storyAdapter.filter(newText);
 					return true;
-				//}
-				//return false;
+				
 			}
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				// Do something
-				cacheAdapter.filter(query);
+				
+				storyAdapter.filter(query);
 				return true;
 			}
 		};
@@ -86,9 +84,8 @@ public class CachedStoriesListSwipe extends Fragment {
 		
 		storylist = sm.getAll();
 
-		cacheAdapter = new CachedListAdapter(getActivity(), storylist);
-		storyListView.setAdapter(cacheAdapter);
-		//allAdapter = storyListView.setAdapter(new StoryListAdapter(getActivity(), storylist));
+		storyAdapter = new StoryListAdapter(getActivity(), storylist);
+		storyListView.setAdapter(storyAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
 			/** When a story is selected **/

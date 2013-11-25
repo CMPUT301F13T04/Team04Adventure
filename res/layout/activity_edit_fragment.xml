@@ -1,13 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/middle"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    android:background="@drawable/middle"
     tools:context=".EditFragment" >
 
     <EditText
@@ -23,70 +23,101 @@
         android:id="@+id/frag_body"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/frag_title"
         android:hint=""
         android:maxLines="8"
         android:scrollbars="vertical"
         android:text="@string/frag_body" />
 
-    <Button 
-        android:id="@+id/upload"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/upload" />
-    <Button 
-        android:id="@+id/camera"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/camera" />
-    <Button
-        android:id="@+id/profile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Change Fragment Illustration" />
-    <Button 
-        android:id="@+id/link"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/link"/>
-    <Button 
-        android:id="@+id/save"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"/>
-    
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_below="@id/frag_body" >
 
         <TextView
             android:id="@+id/upload_image_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:text="" />
+
         <TextView
             android:id="@+id/upload_illustration_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:text="" />
     </LinearLayout>
-        
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
+
         <ImageView
             android:id="@+id/upload_image_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription=""
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:contentDescription="" />
+
         <ImageView
             android:id="@+id/upload_illustration_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription=""
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:contentDescription="" />
     </LinearLayout>
-    
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="uploadImage"
+            android:src="@drawable/newpicimg"
+            android:background="?android:selectableItemBackground"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="openCamera"
+            android:src="@drawable/cameraimg"
+            android:background="?android:selectableItemBackground"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="setProfile"
+            android:src="@drawable/profileimg"
+            android:background="?android:selectableItemBackground"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="linkFrag"
+            android:src="@drawable/linkimg"
+            android:background="?android:selectableItemBackground"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="saveFrag"
+            android:src="@drawable/saveimg"
+            android:background="?android:selectableItemBackground"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</RelativeLayout>

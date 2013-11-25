@@ -33,7 +33,6 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -66,12 +65,6 @@ public class EditFragment extends Activity {
 	private static final int CREATE_CHOICE = 999;
 	private static final int SELECT_PICTURE = 1;
 	private static final int SELECT_PROFILE = 101;
-
-	private Button uploadButton;
-	private Button cameraButton;
-	private Button profileButton;
-	private Button linkButton;
-	private Button saveButton;
 
 	private EditText fragTitle;
 	private EditText fragBody;
@@ -136,12 +129,6 @@ public class EditFragment extends Activity {
 
 		refreshIdList();
 
-		uploadButton = (Button) findViewById(R.id.upload);
-		cameraButton = (Button) findViewById(R.id.camera);
-		profileButton = (Button) findViewById(R.id.profile);
-		linkButton = (Button) findViewById(R.id.link);
-		saveButton = (Button) findViewById(R.id.save);
-
 		fragTitle = (EditText) findViewById(R.id.frag_title);
 		fragBody = (EditText) findViewById(R.id.frag_body);
 
@@ -152,51 +139,132 @@ public class EditFragment extends Activity {
 
 		fragTitle.setText(fragment.getTitle());
 		fragBody.setText(fragment.getBody());
-		
-		uploadButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				uploadImage();
-			}
-		});
-
-		cameraButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				openCamera();
-			}
-		});
-
-		profileButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				setProfile();
-			}
-		});
-
-		linkButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				linkFrag();
-			}
-		});
-
-		saveButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				mDialog = new ProgressDialog(arg0.getContext());
-		        mDialog.setMessage("Please wait...");
-		        mDialog.show();
-				saveFrag();
-			}
-		});
 	}
 
+	public void openCamera(View view) {
+		// Opens the camera app and stores the resulting image as a jpg file in
+		// the /team04adventure in the external memory.
+
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+		String folder = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/team04adventure/pic";
+		File folderF = new File(folder);
+		if (!folderF.exists()) {
+			folderF.mkdir();
+		}
+
+		String imageFilePath = folder + "/"
+				+ String.valueOf(System.currentTimeMillis()) + ".jpg";
+		File imageFile = new File(imageFilePath);
+		imageFileUri = Uri.fromFile(imageFile);
+
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+
+	/**
+	 * Opens the image picker for the user to add to the fragment.
+	 */
+	public void uploadImage(View view) {
+		// Starts the image picker for the user to choose a picture to add to
+		// the fragment
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+				SELECT_PICTURE);
+	}
+
+	/**
+	 * Opens the activity that contains all existing fragments to allow the user
+	 * to choose one to make a connection to.
+	 */
+	public void setProfile(View view) {
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(intent, "Select Profile"),
+				SELECT_PROFILE);
+	}
+
+	public void linkFrag(View view) {
+		Intent intent = new Intent(getApplicationContext(), fragList.class);
+		intent.putExtra("id", sid);
+		intent.putExtra("link", 0);
+		intent.putExtra("link", 1);
+		intent.putExtra("flag", flag);
+		startActivityForResult(intent, CREATE_CHOICE);
+	}
+
+	/**
+	 * Saves the current text in the main TextView as the body text of the
+	 * fragment.
+	 */
+	public void saveFrag(View view) {
+		// Saves the changes to the fragment text
+		mDialog = new ProgressDialog(view.getContext());
+        mDialog.setMessage("Please wait...");
+        mDialog.show();
+        
+		refreshIdList();
+		fragSaveText();
+		saveToStory();
+
+		Toast.makeText(getApplicationContext(), "Fragment saved!",
+				Toast.LENGTH_LONG).show();
+		Intent intent = new Intent();
+		if (flag.equals("online")) {
+			intent = new Intent(this, OnlineStoryIntro.class);
+		} else {
+			intent = new Intent(this, MyStoryIntro.class);
+		}
+		intent.putExtra("id", sid);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+		startActivity(intent);
+
+	}
+
+	public void fragSaveText() {
+		String fragTitleString = fragTitle.getText().toString();
+		String fragBodyString = fragBody.getText().toString();
+		fragment.setTitle(fragTitleString);
+		fragment.setBody(fragBodyString);
+	}
+
+	public void saveToStory() {
+		int listIndex = idList.indexOf(fragment.getId());
+		if (listIndex == -1) {
+			story.addFragment(fragment);
+		} else {
+			Frag oldFragment = story.getFrags().get(listIndex);
+			story.deleteFrag(oldFragment.getId());
+			story.addFragment(fragment, listIndex);
+		}
+		
+		refreshIdList();
+		
+		if (flag.equals("online")) {
+			Integer index = Integer.valueOf(-1);
+			new JSONparser().execute(index, story);	
+		} else {
+			sm.deleteStory(origStory);
+			sm.addStory(story);
+		}
+		origStory = story;
+	}
+
+	public void refreshIdList() {
+		ArrayList<Frag> a = story.getFrags();
+		int b = a.size();
+		idList.clear();
+		for (int i = 0; i < b; i++) {
+			idList.add(a.get(i).getId());
+		}
+	}
+
+	
 	protected void onActivityResult(int requestCode, int resultCode,
 			final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
@@ -334,126 +402,7 @@ public class EditFragment extends Activity {
 	 * Opens the camera application and prepares to store the captured image in
 	 * a file.
 	 */
-	public void openCamera() {
-		// Opens the camera app and stores the resulting image as a jpg file in
-		// the /team04adventure in the external memory.
-
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-		String folder = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/team04adventure/pic";
-		File folderF = new File(folder);
-		if (!folderF.exists()) {
-			folderF.mkdir();
-		}
-
-		String imageFilePath = folder + "/"
-				+ String.valueOf(System.currentTimeMillis()) + ".jpg";
-		File imageFile = new File(imageFilePath);
-		imageFileUri = Uri.fromFile(imageFile);
-
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-	}
-
-	/**
-	 * Opens the image picker for the user to add to the fragment.
-	 */
-	public void uploadImage() {
-		// Starts the image picker for the user to choose a picture to add to
-		// the fragment
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		startActivityForResult(Intent.createChooser(intent, "Select Picture"),
-				SELECT_PICTURE);
-	}
-
-	/**
-	 * Opens the activity that contains all existing fragments to allow the user
-	 * to choose one to make a connection to.
-	 */
-	public void setProfile() {
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		startActivityForResult(Intent.createChooser(intent, "Select Profile"),
-				SELECT_PROFILE);
-	}
-
-	public void linkFrag() {
-		Intent intent = new Intent(getApplicationContext(), fragList.class);
-		intent.putExtra("id", sid);
-		intent.putExtra("link", 0);
-		intent.putExtra("link", 1);
-		intent.putExtra("flag", flag);
-		startActivityForResult(intent, CREATE_CHOICE);
-	}
-
-	/**
-	 * Saves the current text in the main TextView as the body text of the
-	 * fragment.
-	 */
-	public void saveFrag() {
-		// Saves the changes to the fragment text
-
-		refreshIdList();
-		fragSaveText();
-		saveToStory();
-
-		Toast.makeText(getApplicationContext(), "Fragment saved!",
-				Toast.LENGTH_LONG).show();
-		Intent intent = new Intent();
-		if (flag.equals("online")) {
-			intent = new Intent(this, OnlineStoryIntro.class);
-		} else {
-			intent = new Intent(this, MyStoryIntro.class);
-		}
-		intent.putExtra("id", sid);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-		startActivity(intent);
-
-	}
-
-	public void fragSaveText() {
-		String fragTitleString = fragTitle.getText().toString();
-		String fragBodyString = fragBody.getText().toString();
-		fragment.setTitle(fragTitleString);
-		fragment.setBody(fragBodyString);
-	}
-
-	public void saveToStory() {
-		int listIndex = idList.indexOf(fragment.getId());
-		if (listIndex == -1) {
-			story.addFragment(fragment);
-		} else {
-			Frag oldFragment = story.getFrags().get(listIndex);
-			story.deleteFrag(oldFragment.getId());
-			story.addFragment(fragment, listIndex);
-		}
-		
-		refreshIdList();
-		
-		if (flag.equals("online")) {
-			Integer index = Integer.valueOf(-1);
-			new JSONparser().execute(index, story);	
-		} else {
-			sm.deleteStory(origStory);
-			sm.addStory(story);
-		}
-		origStory = story;
-	}
-
-	public void refreshIdList() {
-		ArrayList<Frag> a = story.getFrags();
-		int b = a.size();
-		idList.clear();
-		for (int i = 0; i < b; i++) {
-			idList.add(a.get(i).getId());
-		}
-	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -462,21 +411,22 @@ public class EditFragment extends Activity {
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
+		View view = new View(this);
 		switch (item.getItemId()) {
 			case R.id.upload_image_menu:
-				uploadImage();
+				uploadImage(view);
 				return true;
 			case R.id.camera_menu:
-				openCamera();
+				openCamera(view);
 				return true;
 			case R.id.upload_profile_menu:
-				setProfile();
+				setProfile(view);
 				return true;
 			case R.id.link_menu:
-				linkFrag();
+				linkFrag(view);
 				return true;
 			case R.id.save_menu:
-				saveFrag();
+				saveFrag(view);
 				return true;
 		}
 		return true;

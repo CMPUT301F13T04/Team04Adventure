@@ -30,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.JSONparser;
@@ -72,8 +73,8 @@ public class AllStoriesListSwipe extends Fragment {
 			public boolean onQueryTextChange(String newText) {
 				// Do something
 				//if (newText.length() > 0) {
-					allAdapter.filter(newText);
-					return true;
+				allAdapter.filter(newText);
+				return true;
 				//} 
 				//return false;
 			}
@@ -119,8 +120,8 @@ public class AllStoriesListSwipe extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position, long id ) {
 				mDialog = new ProgressDialog(v.getContext());
-		        mDialog.setMessage("Please wait...");
-		        mDialog.show();
+				mDialog.setMessage("Please wait...");
+				mDialog.show();
 				Story s = (Story) storyListView.getItemAtPosition(position);
 				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
 				intent.putExtra("id", s.getId());
@@ -135,15 +136,19 @@ public class AllStoriesListSwipe extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				//goToStory(id);
-				mDialog = new ProgressDialog(arg0.getContext());
-		        mDialog.setMessage("Opening Random Story...");
-		        mDialog.show();
-				
-				Story s = (Story) stories.get(chooseRandom());
-				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
-				intent.putExtra("id", s.getId());
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-				startActivity(intent);
+				if (stories.size() > 0) {
+					mDialog = new ProgressDialog(arg0.getContext());
+					mDialog.setMessage("Opening Random Story...");
+					mDialog.show();
+					Story s = (Story) stories.get(chooseRandom());
+					Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
+					intent.putExtra("id", s.getId());
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					startActivity(intent);
+				} else {
+					String validun = "No Online Stories!";
+					Toast.makeText(arg0.getContext(), validun, Toast.LENGTH_LONG).show();
+				}
 
 			}
 		});		
@@ -155,9 +160,9 @@ public class AllStoriesListSwipe extends Fragment {
 	}
 	public void onStop(){
 		super.onStop();
-		
+
 		if (mDialog!=null){
-		mDialog.dismiss();
+			mDialog.dismiss();
 		}
 	}
 }

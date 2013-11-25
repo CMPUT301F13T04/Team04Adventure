@@ -2,12 +2,10 @@
 
     <item
         android:id="@+id/play_menu"
-        android:showAsAction="never"
         android:title="Play story"/>
 
     <item
         android:id="@+id/delete_menu"
-        android:showAsAction="never"
         android:title="Remove story from cache"/>
 
 </menu>

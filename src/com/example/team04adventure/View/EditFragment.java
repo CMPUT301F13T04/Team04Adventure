@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -484,6 +485,28 @@ public class EditFragment extends Activity {
 		getMenuInflater().inflate(R.menu.edit, menu);
 		return true;
 	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.upload_image_menu:
+				uploadImage();
+				return true;
+			case R.id.camera_menu:
+				openCamera();
+				return true;
+			case R.id.upload_profile_menu:
+				setProfile();
+				return true;
+			case R.id.link_menu:
+				linkFrag();
+				return true;
+			case R.id.save_menu:
+				saveFrag();
+				return true;
+		}
+		return true;
+	}
+	
 	public void onStop(){
 		super.onStop();
 		

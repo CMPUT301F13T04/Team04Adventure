@@ -2,24 +2,18 @@
 
     <item
         android:id="@+id/play_menu"
-        android:showAsAction="never"
         android:title="Play story"/>
-
     <item
         android:id="@+id/add_menu"
-        android:showAsAction="never"
         android:title="Add fragment"/>
     <item
         android:id="@+id/edit_menu"
-        android:showAsAction="never"
         android:title="Edit a fragment"/>
     <item
         android:id="@+id/upload_menu"
-        android:showAsAction="never"
         android:title="Upload story"/>
     <item
         android:id="@+id/delete_menu"
-        android:showAsAction="never"
         android:title="Delete story"/>
 
 </menu>

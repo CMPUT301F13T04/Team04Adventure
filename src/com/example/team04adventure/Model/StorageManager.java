@@ -297,28 +297,19 @@ public class StorageManager implements Storage {
 	public void deleteStory(Story story) {
 		
 		this.open();
-		
 		String[] storyargs = {story.getId()};
-		
 		database.delete(SQLiteHelper.TABLE_STORIES, SQLiteHelper.COLUMN_SID
 				+ " = ?" , storyargs);
 	
 		database.delete(SQLiteHelper.TABLE_STORY_FRAGS, SQLiteHelper.COLUMN_SID
 				+ " = ?", storyargs);
 		
-	
-		
 		if(!story.getFrags().isEmpty()){
 			for(Frag f : story.getFrags()){
-				
 				deleteFragment(f);
 			}
-			
 		}
-	
 		this.close();
-		
-		
 	}
 	
 	/**
@@ -343,29 +334,23 @@ public class StorageManager implements Storage {
 			
 		if(!f.getChoices().isEmpty()){
 			for (Choice c : f.getChoices())
-				deleteChoice(c);
-			
+				deleteChoice(c);	
 		}
 		
 		if(!f.getPictures().isEmpty()){
 			for (Media m : f.getPictures())
 				deleteMedia(m);
-			
-			
 		}
 		
 		if(!f.getVids().isEmpty()){
 			for (Media m : f.getVids())
 				deleteMedia(m);
-			
 		}
 		
 		if(!f.getAnnotations().isEmpty()){
 			for (Annotation a : f.getAnnotations())
 				deleteAnnotation(a);
-			
 		}
-	
 	}
 
 	/**
@@ -375,7 +360,6 @@ public class StorageManager implements Storage {
 	private void deleteMedia(Media m) {
 		
 		String[] medargs = {""+m.getID()};
-		
 		database.delete(SQLiteHelper.TABLE_MEDIA, SQLiteHelper.COLUMN_MID
 				+ " = ?", medargs);
 		
@@ -388,7 +372,6 @@ public class StorageManager implements Storage {
 	private void deleteChoice(Choice c) {
 		
 		String[] choiargs = {""+c.getID()};
-		
 		database.delete(SQLiteHelper.TABLE_CHOICE, SQLiteHelper.COLUMN_CID
 				+ " = ?", choiargs);		
 	}
@@ -400,7 +383,6 @@ public class StorageManager implements Storage {
 	private void deleteAnnotation(Annotation a) {
 		
 		String[] annoargs = {""+a.getId()};
-		
 		database.delete(SQLiteHelper.TABLE_ANNOTS, SQLiteHelper.COLUMN_AID
 				+ " = ?", annoargs);		
 	}
@@ -413,9 +395,7 @@ public class StorageManager implements Storage {
 	public ArrayList<Story> getAll() {
 		
 		ArrayList<Story> storyarr = new ArrayList<Story>();
-		
 		this.open();
-		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
 				allStories, null, null, null, null, null);
 		
@@ -428,9 +408,7 @@ public class StorageManager implements Storage {
 		}
 		
 		cursor.close();
-		
 		this.close();
-		
 		return storyarr;
 	}
 	
@@ -448,9 +426,7 @@ public class StorageManager implements Storage {
 		String[] whereargs = {MainActivity.username};
 		
 		ArrayList<Story> storyarr = new ArrayList<Story>();
-		
 		this.open();
-		
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
 				sId, swhere, whereargs, null, null, null);
@@ -462,14 +438,9 @@ public class StorageManager implements Storage {
 			storyarr.add(story);
 			cursor.moveToNext();
 		}
-		
 		cursor.close();
-		
 		this.close();
-		
 		return storyarr;
-		
-		
 	}
 	
 	/**
@@ -487,7 +458,6 @@ public class StorageManager implements Storage {
 		
 		this.open();
 		
-		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_STORIES,
 				sId, swhere, whereargs, null, null, null);
 		
@@ -496,12 +466,8 @@ public class StorageManager implements Storage {
 		story = getInfo(story);
 		
 		cursor.close();
-		
 		this.close();
-		
 		return story;
-		
-		
 	}
 	
 	
@@ -528,9 +494,7 @@ public class StorageManager implements Storage {
 		}
 		
 		cursor.close();
-		
 		return story;
-		
 	}
 
 	/**
@@ -547,7 +511,6 @@ public class StorageManager implements Storage {
 
 
 		if (database == null) {
-
 			this.open();
 			flag = 1;
 		}	
@@ -559,14 +522,12 @@ public class StorageManager implements Storage {
 		
 		ArrayList<Choice> choicearr = getFragChoiceInfo(frag.getId());
 		
-		
 		if (!choicearr.isEmpty()){
 			for(Choice c : choicearr)
 				frag.setChoice(c);
 			}
 		
 		ArrayList<Annotation> annotarr = getFragAnnotInfo(frag.getId());
-		
 		
 		if (!annotarr.isEmpty()){
 			for(Annotation a : annotarr)
@@ -588,12 +549,9 @@ public class StorageManager implements Storage {
 			}
 		
 		cursor.close();
-		
 		if(flag == 1)
 			this.close();
-		
 		return frag;
-		
 	}
 
 	private ArrayList<Annotation> getFragAnnotInfo(String fid) {
@@ -615,7 +573,6 @@ public class StorageManager implements Storage {
 		}
 		
 		cursor.close();
-			
 		return annotarr;
 	}
 
@@ -645,7 +602,6 @@ public class StorageManager implements Storage {
 		}
 		
 		cursor.close();
-		
 		return medarr;
 	}
 
@@ -664,12 +620,11 @@ public class StorageManager implements Storage {
 		
 		Cursor cursor = database.query(SQLiteHelper.TABLE_MEDIA,
 				allMedia, fwhere, whereargs, null, null, null);
-		
+	
 		cursor.moveToFirst();
 		med = cursorToMedia(cursor);
 		
 		cursor.close();
-
 		return med;
 	}
 
@@ -688,10 +643,8 @@ public class StorageManager implements Storage {
 			med.setContent(convertedString);
 			med.setType(cursor.getString(2));
 		}
-
 		return med;
 	}
-
 
 
 	/**
@@ -718,8 +671,7 @@ public class StorageManager implements Storage {
 			cursor.moveToNext();
 		}
 		
-		cursor.close();
-			
+		cursor.close();			
 		return choicearr;
 	}
 
@@ -742,7 +694,6 @@ public class StorageManager implements Storage {
 		choice = cursorToChoice(cursor);
 		
 		cursor.close();
-		
 		return choice;
 	}
 	
@@ -765,7 +716,6 @@ public class StorageManager implements Storage {
 		annot = cursorToAnnotation(cursor);
 		
 		cursor.close();
-		
 		return annot;
 	}
 
@@ -835,8 +785,5 @@ public class StorageManager implements Storage {
 	    story.setVersion(cursor.getInt(4));
 	   
 	    return story;
-	
 	}
-
-	
 }

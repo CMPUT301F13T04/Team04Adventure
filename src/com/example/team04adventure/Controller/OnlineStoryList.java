@@ -304,6 +304,14 @@ public class OnlineStoryList extends FragmentActivity implements
 		
 	
 		StorageManager sm = new StorageManager(this);
+		ArrayList<Story> offlines = sm.getAll();
+		
+		if(offlines.isEmpty()){
+			Toast.makeText(getBaseContext(), "You have no stories to sync..", Toast.LENGTH_LONG).show();	
+			
+		}
+		else{
+			
 		
 		Integer tempIndex = Integer.valueOf(-5);
 		ArrayList<Story> onlines = null;
@@ -316,7 +324,7 @@ public class OnlineStoryList extends FragmentActivity implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ArrayList<Story> offlines = sm.getAll();
+		
 		
 		
 		
@@ -338,7 +346,7 @@ public class OnlineStoryList extends FragmentActivity implements
 		Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
-		
+		}	
 		
 	}
 }

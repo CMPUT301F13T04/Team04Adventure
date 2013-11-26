@@ -47,7 +47,6 @@ public class Story {
 	 * @return the synopsis of the story.
 	 */
 	public String getSynopsis(){
-		
 		return this.synopsis;
 	}
 	
@@ -56,7 +55,6 @@ public class Story {
 	 * @param syn the synopsis of the story.
 	 */
 	public void setSynopsis(String syn){
-		
 		this.synopsis = syn;
 	}
 
@@ -65,9 +63,7 @@ public class Story {
 	 * @param title the title of the story.
 	 */
 	public void setTitle(String title){
-		
 		this.title = title;
-		
 	}
 	
 	/**
@@ -75,9 +71,7 @@ public class Story {
 	 * @param author the author of the story.
 	 */
 	public void setAuthor(String author){
-		
 		this.Author = author;
-		
 	}
 	
 	/**
@@ -85,9 +79,7 @@ public class Story {
 	 * @param frag the fragment to add.
 	 */
 	public void addFragment(Frag frag){
-		
 		this.frags.add(frag);
-	
 	}
 	
 	public void addFragment(Frag frag, int position) {
@@ -116,19 +108,15 @@ public class Story {
 	 * @return title of the story.
 	 */
 	public String getTitle(){
-		
 		return this.title;
-	
 	}
 	
 	/**
 	 * Gets the author of the story.
 	 * @return author of the story.
 	 */
-	public String getAuthor(){
-		
+	public String getAuthor(){	
 		return this.Author;
-	
 	}
 	
 	/**
@@ -136,9 +124,7 @@ public class Story {
 	 * @return array of fragments.
 	 */
 	public ArrayList<Frag> getFrags(){
-		
 		return this.frags;
-	
 	}
 	
 	/**
@@ -146,9 +132,7 @@ public class Story {
 	 * @return the ID of the story.
 	 */
 	public String getId(){
-		
 		return this.id;
-	
 	}
 	
 	/**
@@ -156,9 +140,7 @@ public class Story {
 	 * @param id the ID of the story.
 	 */
 	public void setId(String id){
-		
 		this.id = id;
-	
 	}
 	
 	public int getVersion() {
@@ -170,10 +152,8 @@ public class Story {
 	}
 	
 	public void incVersion(){
-		
 		(this.version)++;
 	}
-		
 }
 
 

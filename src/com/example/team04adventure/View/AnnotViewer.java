@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
+import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Annotation;
 import com.example.team04adventure.Model.AnnotationAdapter;
 import com.example.team04adventure.Model.Frag;
@@ -67,28 +68,12 @@ public class AnnotViewer extends Activity {
 	public void onResume() {
 		super.onResume();
 		if (online.equals("online")) {
-			try {
-				index = Integer.valueOf(-2);
-				jp = new JSONparser();
-				Story story = new JSONparser().execute(index, sid).get().get(0);
+
+				AdventureApp Adventure = (AdventureApp)getApplicationContext();
+				Story story = Adventure.getCurrentStory();				
 				Frag f = story.getFrag(fid);
-//				Annotation a = new Annotation();
-//				a.setAuthor("DEFAULT");
-//				a.setReview("THE REVIEW");
-//				f.addAnnotations(a);
 				annotList = f.getAnnotations();
-				System.out.println("ITS OK");
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("FUCKED UP 1");
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("FUCKED UP 2");
-			} catch (Exception e) {
-				System.out.println("GENERAL ERROR");
-			}
+				
 		} else {
 			sm = new StorageManager(this);
 			Frag f = sm.getFrag(fid);

@@ -152,7 +152,7 @@ public class EditFragment extends Activity {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		String folder = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/team04adventure/pic";
+				.getAbsolutePath() + "/team04adventure";
 		File folderF = new File(folder);
 		if (!folderF.exists()) {
 			folderF.mkdir();

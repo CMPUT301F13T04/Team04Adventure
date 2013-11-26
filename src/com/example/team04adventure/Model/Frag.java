@@ -32,16 +32,6 @@ import com.example.team04adventure.R;
 
 public class Frag {
 	
-	/*
-	 * I dont know who made this class so I wasn't sure if there was
-	 * supposed to be a "body" variable that held the frags description.
-	 * I added one because it seemed like it needed one, and I added the
-	 * appropriate getters and setters too. If this was done on purpose,
-	 * just delete it but let me know because frag.java uses these
-	 * fields.
-	 * - Mike
-	 */
-	
 	String title;
 	String body;
 	String id;
@@ -65,9 +55,9 @@ public class Frag {
 		this.annotations = new ArrayList<Annotation>();
 		
 //		Bitmap bm = BitmapFactory.decodeResource(null, R.drawable.ic_launcher);
-//		String convertedString = Media.encodeTobase64(bm);
-		
+//		String convertedString = Media.encodeTobase64(bm);	
 //		this.profile.setContent(convertedString);
+		
 		this.body = "";
 		this.Author = "";
 		this.title = "";

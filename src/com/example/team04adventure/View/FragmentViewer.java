@@ -74,11 +74,11 @@ public class FragmentViewer extends Activity {
 		// when a choice is selected from another fragment, or from the
 		// StoryIntro.java class. They have to be supplied again before
 		// you can go to another fragment.
+		
 		Bundle extras = getIntent().getExtras();
 		fragID = extras.getString("fid");
 		storyID = extras.getString("sid");
 		flag = extras.getString("flag");
-//		JSONparser jp = new JSONparser(); 
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
 		
 		// Initialize the list of choices for that frag
@@ -90,7 +90,6 @@ public class FragmentViewer extends Activity {
 			AdventureApp Adventure = (AdventureApp)getApplicationContext();
 			Story s = Adventure.getCurrentStory();
 
-//			Story s = jp.getStory(storyID);
 			ArrayList<Frag> frags = s.getFrags();
 			for(Frag fr: frags){
 				if (fr.getId().equals(fragID)){
@@ -104,7 +103,6 @@ public class FragmentViewer extends Activity {
 
 		// Populate the choice list with the fragments choices
 		choices = f.getChoices();
-
 		if (choices.size() > 0) {
 			// Create a list of possible child IDs
 			String childIds[] = new String[choices.size()];
@@ -112,16 +110,9 @@ public class FragmentViewer extends Activity {
 			for (int i = 0; i < choices.size(); i++) {
 				childIds[i] = choices.get(i).getChild();
 			}
-			Random r = new Random();
-			int ranId = r.nextInt(choices.size());
-			// Create the random choice
-			Choice ranChoice = new Choice();
-			ranChoice.setID(-1);
-			ranChoice.setChild(choices.get(ranId).getChild());
-			ranChoice.setBody("Random Choice?");
-
-			// Append the random Choice to the end of the list
-			choices.add(ranChoice);
+			if (!hasRandom()){
+				addRandom();
+			}
 		}
 		// Set the title and body fields in the XML file
 		fragTitle = (TextView) findViewById(R.id.FragTitle);
@@ -154,7 +145,6 @@ public class FragmentViewer extends Activity {
 		}
 
 		choiceListView.setAdapter(new FragChoiceAdapter(this, choices));
-
 		choiceListView.setOnItemClickListener(new OnItemClickListener() {
 
 			/** When a story is selected **/
@@ -173,11 +163,7 @@ public class FragmentViewer extends Activity {
 				 */
 				finish();
 			}
-
-
 		});
-
-
 	}
 	
 	public void showAnnots(View view) {
@@ -221,5 +207,26 @@ public class FragmentViewer extends Activity {
 		return true;
 	}
 
+	public void addRandom(){
+		Random r = new Random();
+		int ranId = r.nextInt(choices.size());
+		// Create the random choice
+		Choice ranChoice = new Choice();
+		ranChoice.setID(-1);
+		ranChoice.setChild(choices.get(ranId).getChild());
+		ranChoice.setBody("Random Choice?");
+
+		// Append the random Choice to the end of the list
+		choices.add(ranChoice);
+	}
+	public boolean hasRandom(){
+		boolean hasRandom = false;
+		for (Choice c : choices){
+			if (c.getBody().equals("Random Choice?")){
+				hasRandom = true;
+			}
+		}
+		return hasRandom;
+	}
 
 }

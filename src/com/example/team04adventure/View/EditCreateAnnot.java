@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,9 +29,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.AdventureApp;
@@ -77,14 +81,6 @@ public class EditCreateAnnot extends Activity {
 		a = new Annotation();
 		
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_create_annot, menu);
-		return true;
-	}
-	
 	
 	public void saveAnnot(View view) {
 		mDialog = new ProgressDialog(view.getContext());
@@ -196,6 +192,36 @@ public class EditCreateAnnot extends Activity {
 		if (mDialog!=null){
 		mDialog.dismiss();
 		}
+	}
+	
+	private void help() {
+		String helpText = "Test";
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	    
+	    final TextView helpTextView = new TextView(this);
+	    helpTextView.setText(helpText);
+	    lila1.addView(helpTextView);
+	    adb.setView(lila1);
+	    adb.setTitle("Help");
+	    
+	    adb.show();
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.help:
+				help();
+				return true;
+		}
+		return true;
 	}
 
 }

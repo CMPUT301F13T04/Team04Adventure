@@ -17,14 +17,18 @@ package com.example.team04adventure.View;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.team04adventure.R;
@@ -80,10 +84,34 @@ public class MainActivity extends Activity {
 		
 				
 	}
+	
+	private void help() {
+		String helpText = "Test";
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	    
+	    final TextView helpTextView = new TextView(this);
+	    helpTextView.setText(helpText);
+	    lila1.addView(helpTextView);
+	    adb.setView(lila1);
+	    adb.setTitle("Help");
+	    
+	    adb.show();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.help:
+				help();
+				return true;
+		}
 		return true;
 	}
 }

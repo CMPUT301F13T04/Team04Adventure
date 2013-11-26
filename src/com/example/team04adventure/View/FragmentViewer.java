@@ -21,11 +21,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -187,10 +189,33 @@ public class FragmentViewer extends Activity {
 	}
 
 
+	private void help() {
+		String helpText = "Test";
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	    
+	    final TextView helpTextView = new TextView(this);
+	    helpTextView.setText(helpText);
+	    lila1.addView(helpTextView);
+	    adb.setView(lila1);
+	    adb.setTitle("Help");
+	    
+	    adb.show();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.fragment_viewer, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.help:
+				help();
+				return true;
+		}
 		return true;
 	}
 

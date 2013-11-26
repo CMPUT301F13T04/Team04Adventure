@@ -406,10 +406,24 @@ public class EditFragment extends Activity {
 	 * a file.
 	 */
 	
+	private void help() {
+		String helpText = "Test";
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1);
+	    
+	    final TextView helpTextView = new TextView(this);
+	    helpTextView.setText(helpText);
+	    lila1.addView(helpTextView);
+	    adb.setView(lila1);
+	    adb.setTitle("Help");
+	    
+	    adb.show();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
@@ -430,6 +444,9 @@ public class EditFragment extends Activity {
 				return true;
 			case R.id.save_menu:
 				saveFrag(view);
+				return true;
+			case R.id.help:
+				help();
 				return true;
 		}
 		return true;

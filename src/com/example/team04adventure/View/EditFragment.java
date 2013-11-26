@@ -140,7 +140,11 @@ public class EditFragment extends Activity {
 		fragTitle.setText(fragment.getTitle());
 		fragBody.setText(fragment.getBody());
 	}
-
+	
+	/**
+	 * Opens the camera application and prepares to store the captured image in
+	 * a file.
+	 */
 	public void openCamera(View view) {
 		// Opens the camera app and stores the resulting image as a jpg file in
 		// the /team04adventure in the external memory.
@@ -400,14 +404,11 @@ public class EditFragment extends Activity {
 		}
 
 	}
-
-	/**
-	 * Opens the camera application and prepares to store the captured image in
-	 * a file.
-	 */
 	
 	private void help() {
-		String helpText = "Test";
+		String helpText = "Add or make changes to a fragment. You can add images from memory or from the camera to" +
+				"the fragment, change the profile image of the fragment, and link the current fragment to another " +
+				"one to create a possible choice in the story.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

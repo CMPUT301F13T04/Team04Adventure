@@ -190,7 +190,9 @@ public class FragmentViewer extends Activity {
 
 
 	private void help() {
-		String helpText = "Test";
+		String helpText = "This displays the fragment's images and text. Existing choices are at the bottom of the screen" +
+				"and the 'Random Choice?' button chooses a random existing choice. Annotations can be made by pressing the" +
+				"paperclip button on the bottom right corner.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

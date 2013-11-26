@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void help() {
-		String helpText = "Test";
+		String helpText = "Please enter a username and press the login button to proceed.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

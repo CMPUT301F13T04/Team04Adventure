@@ -195,7 +195,8 @@ public class EditCreateAnnot extends Activity {
 	}
 	
 	private void help() {
-		String helpText = "Test";
+		String helpText = "Enter a review, or attach images from memory or from the camera. Press the save button " +
+				"to save the annotation";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

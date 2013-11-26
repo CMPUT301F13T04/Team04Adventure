@@ -111,7 +111,13 @@ public class OnlineStoryList extends FragmentActivity implements
 		
 		
 	private void help() {
-		String helpText = "Test";
+		String helpText = "All stories are displayed here. Press a story to read it. Online stories contains all" +
+				"the stories on the server. My stories contains all the stories written by you." +
+				"Cached stories contains all the stories downloaded on your phone that aren't written by you. " +
+				"The 'I'm Feeling Lucky!' button chooses a random story for you from the existing online stories." +
+				"The 'Add Story' button lets you create a new story, and new stories can only be published by creating a" +
+				"new story from here. The 'Sync' button locally mirrors the cached stories with the online stories so that" +
+				"the cached stories are updated.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

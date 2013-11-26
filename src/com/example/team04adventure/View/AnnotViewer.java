@@ -107,7 +107,7 @@ public class AnnotViewer extends Activity {
 	}
 
 	private void help() {
-		String helpText = "Test";
+		String helpText = "View added annotations or add a new one with the add button";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

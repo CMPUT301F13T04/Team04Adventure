@@ -222,7 +222,8 @@ public class MyStoryIntro extends Activity {
 	}
 
 	private void help() {
-		String helpText = "Test";
+		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
+				"'Add new fragment', 'Edit a fragment', 'Publish story', and 'Delete story'.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);

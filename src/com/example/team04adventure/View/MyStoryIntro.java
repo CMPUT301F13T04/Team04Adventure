@@ -17,7 +17,6 @@ package com.example.team04adventure.View;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,10 +37,6 @@ import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
-import com.example.team04adventure.View.EditFragment;
-import com.example.team04adventure.View.FragmentViewer;
-import com.example.team04adventure.View.MainActivity;
-import com.example.team04adventure.View.fragList;
 
 /**
  * MyStoryIntro creates the activity that the user enters when the user selects a story from the online story list.
@@ -122,7 +117,6 @@ public class MyStoryIntro extends Activity {
 
 		adb.setTitle("New Fragment");
 
-
 		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
 			public void onClick(DialogInterface dialog, int whichButton) {  
 				
@@ -132,8 +126,6 @@ public class MyStoryIntro extends Activity {
 				String fbody = bodyinput.getText().toString();
 				String fid = ftitle.replace(" ","")+rint;
 				
-
-
 				Intent intent = new Intent(MyStoryIntro.this, EditFragment.class);
 				intent.putExtra("sid", story.getId());
 				intent.putExtra("fid", fid);
@@ -143,10 +135,6 @@ public class MyStoryIntro extends Activity {
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				
 				startActivity(intent);
-
-
-
-
 			}  
 		});  
 
@@ -159,7 +147,6 @@ public class MyStoryIntro extends Activity {
 		});
 		
 		adb.show();
-	
 	}
 	
 	/**
@@ -178,7 +165,7 @@ public class MyStoryIntro extends Activity {
 	}
 
 	/**
-	 * Caches the story in the device memory.
+	 * Uploads the story onto the server.
 	 * @param view the current view.
 	 */
 	public void publishStory(View view) {
@@ -221,6 +208,9 @@ public class MyStoryIntro extends Activity {
 		
 	}
 
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
 				"'Add new fragment', 'Edit a fragment', 'Publish story', and 'Delete story'.";

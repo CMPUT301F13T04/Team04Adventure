@@ -32,7 +32,7 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.FragAdapter.ViewHolder;
 
 /**
- * StoryListAdapter is an adapter to get the story list.
+ * AnnotationAdapter is a custom adapter for the list of annotations.
  * @author Team04Adventure
  */
 public class AnnotationAdapter extends BaseAdapter {

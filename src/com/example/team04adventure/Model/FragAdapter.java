@@ -31,11 +31,11 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 
 /**
- * FragAdapter is an adapter to get the list of fragments.
+ * FragAdapter is a custom adapter for the list of fragments.
+ * 
  * @author Team04Adventure
  */
 public class FragAdapter extends BaseAdapter {
-
 	
 	private ArrayList<Frag> frags;
 	private Context context;

@@ -28,7 +28,7 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 
 /**
- * StoryListAdapter is an adapter to get the story list.
+ * StoryListAdapter is a custom adapter for the list of stories.
  * 
  * @author Team04Adventure
  */
@@ -95,6 +95,11 @@ public class StoryListAdapter extends BaseAdapter {
 
 	}
 
+	/**
+     * Filters the list based on the query.
+     * 
+     * @param query string that is being searched.
+     */
 	public void filter(String query) {
 		if (query != null) {
 			stories.clear();

@@ -29,13 +29,12 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.CachedListAdapter;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
  
 /**
- * MyStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
+ * CachedStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
  * choose one of those cached stories to view.
  * 
  * @author Team04Adventure
@@ -79,8 +78,8 @@ public class CachedStoriesListSwipe extends Fragment {
 		ArrayList<Story> storylist = new ArrayList<Story>();
 		StorageManager sm = new StorageManager(getActivity());
 
-		/** Open DB connection and retrieve all of 
-    	the cached stories. **/
+		/* Open DB connection and retrieve all of 
+    	the cached stories. */
 		
 		storylist = sm.getAll();
 
@@ -88,7 +87,7 @@ public class CachedStoriesListSwipe extends Fragment {
 		storyListView.setAdapter(storyAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
-			/** When a story is selected **/
+			/* When a story is selected */
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Story s = (Story) storyListView.getItemAtPosition(position);

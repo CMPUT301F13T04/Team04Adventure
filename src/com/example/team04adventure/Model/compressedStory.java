@@ -15,6 +15,11 @@
 
 package com.example.team04adventure.Model;
 
+/**
+ * compressedStory holds the title, id, author, and the number of fragments stored inside a story.
+ * 
+ * @author Team04Adventure
+ */
 public class compressedStory {
 
 	String title;
@@ -31,6 +36,11 @@ public class compressedStory {
 		this.numfrags = aStory.getFrags().size();
 	}
 
+	/**
+	 * Converts a compressedStory to a Story.
+	 * 
+	 * @return a Story object with the information from compressedStory.
+	 */
 	public Story toStory(){
 		Story tempStory = new Story();
 		tempStory.setTitle(this.title);

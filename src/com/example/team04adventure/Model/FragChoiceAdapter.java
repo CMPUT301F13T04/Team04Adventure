@@ -28,7 +28,8 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 
 /**
- * FragChoiceAdapter is an adapter to get the fragment choice list. 
+ * FragChoiceAdapter is a custom adapter for the list of fragment choices.
+ * 
  * @author Team04Adventure
  */
 public class FragChoiceAdapter extends BaseAdapter {

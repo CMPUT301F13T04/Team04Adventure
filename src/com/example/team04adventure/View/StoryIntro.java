@@ -56,11 +56,8 @@ public class StoryIntro extends Activity {
 		Bundle extras = getIntent().getExtras();
 		id = extras.getString("id");
 		StorageManager sm = new StorageManager(this);
-		
-		
 	
 		story = sm.getStory(id);
-		
 		
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(story.getTitle());
@@ -78,11 +75,10 @@ public class StoryIntro extends Activity {
 		Intent i;
 		StorageManager sm = new StorageManager(this);
 		
-		/** Open DB connection and deletes 
-	     the note. **/
+		/* Open DB connection and deletes 
+	     the note. */
 		story = sm.getStory(id);
 		sm.deleteStory(story);
-		
 		
 		i = new Intent(StoryIntro.this, OnlineStoryList.class);
 		
@@ -113,7 +109,9 @@ public class StoryIntro extends Activity {
 		}
 	}
 	
-	
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
 				"and 'Delete story'.";

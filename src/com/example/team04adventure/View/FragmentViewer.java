@@ -41,7 +41,6 @@ import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragChoiceAdapter;
-import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
@@ -51,14 +50,11 @@ import com.example.team04adventure.Model.Story;
  * @author Team04Adventure
  */
 public class FragmentViewer extends Activity {
-	// This is the title and body fields that are allocated at runtime
 	TextView 	fragTitle,
 	fragAuthor,
 	fragBody;
 	ImageView profilePic;
-	// The list of next choices
 	ArrayList<Choice> choices;
-	// The adapter for choices
 	ArrayList<Media> fragImages;
 	LinearLayout imageLayout;
 	String flag;
@@ -165,7 +161,12 @@ public class FragmentViewer extends Activity {
 			}
 		});
 	}
-	
+
+	/**
+	 * Starts the activity that displays the annotations of the fragment.
+	 * 
+	 * @param view the current view.
+	 */
 	public void showAnnots(View view) {
 		Intent intent = new Intent(getApplicationContext(), AnnotViewer.class);
 		intent.putExtra("sid", storyID);
@@ -174,7 +175,9 @@ public class FragmentViewer extends Activity {
 		startActivity(intent);
 	}
 
-
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "This displays the fragment's images and text. Existing choices are at the bottom of the screen" +
 				"and the 'Random Choice?' button chooses a random existing choice. Annotations can be made by pressing the" +
@@ -207,6 +210,9 @@ public class FragmentViewer extends Activity {
 		return true;
 	}
 
+	/**
+	 * Adds a new choice that allows the user to make a random choice.
+	 */
 	public void addRandom(){
 		Random r = new Random();
 		int ranId = r.nextInt(choices.size());
@@ -219,6 +225,11 @@ public class FragmentViewer extends Activity {
 		// Append the random Choice to the end of the list
 		choices.add(ranChoice);
 	}
+	
+	/**
+	 * Checks if the choice selected is asking for a random choice.
+	 * @return boolean of whether the next fragment should be chosen randomly or not.
+	 */
 	public boolean hasRandom(){
 		boolean hasRandom = false;
 		for (Choice c : choices){

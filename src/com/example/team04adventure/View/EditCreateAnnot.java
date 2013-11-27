@@ -45,6 +45,11 @@ import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
+/**
+ * EditCreateAnnot opens the activity that allows the user to create new annotations for a fragment.
+ * 
+ * @author Team04Adventure
+ */
 public class EditCreateAnnot extends Activity {
 
 	private static final int SELECT_PICTURE = 1;
@@ -82,6 +87,11 @@ public class EditCreateAnnot extends Activity {
 		
 	}
 	
+	/**
+	 * Saves the entered information as a new annotation.
+	 * 
+	 * @param view the current view.
+	 */
 	public void saveAnnot(View view) {
 		mDialog = new ProgressDialog(view.getContext());
         mDialog.setMessage("Please wait...");
@@ -122,6 +132,11 @@ public class EditCreateAnnot extends Activity {
 		finish();
 	}
 	
+	/**
+	 * Opens the file picker to select an image.
+	 * 
+	 * @param view the current view.
+	 */
 	public void uploadImage(View view) {
 		Intent intent = new Intent();
 		intent.setType("image/*");
@@ -130,6 +145,11 @@ public class EditCreateAnnot extends Activity {
 				SELECT_PICTURE);
 	}
 	
+	/**
+	 * Opens the camera application and prepares a file for the image to be stored into.
+	 * 
+	 * @param view the current view.
+	 */
 	public void uploadCamera(View view) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -194,6 +214,9 @@ public class EditCreateAnnot extends Activity {
 		}
 	}
 	
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Enter a review, or attach images from memory or from the camera. Press the save button " +
 				"to save the annotation";

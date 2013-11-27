@@ -16,7 +16,6 @@
 package com.example.team04adventure.View;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,7 +29,6 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragAdapter;
-import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
@@ -52,27 +50,17 @@ public class fragList extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		id = extras.getString("id");
-		/* Should probs add a try catch right here. I'm sensing problems later */
 		link = extras.getInt("link");
 		flag = extras.getString("flag");
 
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
 
-		//		JSONparser jp = new JSONparser();
 
 
 		if (flag.equals("online")) {
-//			Integer index = Integer.valueOf(-2);
-//			try {
 				AdventureApp Adventure = (AdventureApp)getApplicationContext();
 				story = Adventure.getCurrentStory();
-//				story = new JSONparser().execute(index, id).get().get(0);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			} catch (ExecutionException e) {
-//				e.printStackTrace();
-//			}
 		} else {
 			StorageManager sm = new StorageManager(this);
 			story = sm.getStory(id);
@@ -83,7 +71,7 @@ public class fragList extends Activity {
 		fragListView.setAdapter(new FragAdapter(this, fraglist));
 		fragListView.setOnItemClickListener(new OnItemClickListener() {
 
-			/** When a story is selected **/
+			/* When a story is selected */
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 				Frag f = (Frag) fragListView.getItemAtPosition(position);

@@ -144,7 +144,6 @@ public class OnlineStoryIntro extends Activity {
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				
 				startActivity(intent);
-
 			}  
 		});  
 
@@ -172,8 +171,7 @@ public class OnlineStoryIntro extends Activity {
 		intent.putExtra("flag", "online");
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-		startActivity(intent);
-		
+		startActivity(intent);	
 	}
 
 	/**
@@ -216,6 +214,9 @@ public class OnlineStoryIntro extends Activity {
 
 	}
 
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
 				"'Add new fragment', 'Edit a fragment', 'Download story', and 'Delete story'.";

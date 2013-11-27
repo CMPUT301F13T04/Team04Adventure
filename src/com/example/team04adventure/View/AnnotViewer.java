@@ -16,7 +16,6 @@
 package com.example.team04adventure.View;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,6 +37,11 @@ import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
+/**
+ * AnnotViewer which is meant to display the list of annotations and their corresponding information.
+ * 
+ * @author Team04Adventure
+ */
 public class AnnotViewer extends Activity {
 
 	String 			fid, 
@@ -68,7 +72,6 @@ public class AnnotViewer extends Activity {
 	public void onResume() {
 		super.onResume();
 		if (online.equals("online")) {
-
 				AdventureApp Adventure = (AdventureApp)getApplicationContext();
 				Story story = Adventure.getCurrentStory();				
 				Frag f = story.getFrag(fid);
@@ -83,6 +86,11 @@ public class AnnotViewer extends Activity {
 		annotListView.setAdapter(new AnnotationAdapter(this, annotList));
 	}
 	
+	/**
+	 * Allows the user to add a new annotation.
+	 * 
+	 * @param view the current view.
+	 */
 	public void addAnnot(View view) {
 		Intent intent = new Intent(getApplicationContext(), EditCreateAnnot.class);
 		intent.putExtra("sid", sid);
@@ -91,6 +99,9 @@ public class AnnotViewer extends Activity {
 		startActivity(intent);
 	}
 
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "View added annotations or add a new one with the add button";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);

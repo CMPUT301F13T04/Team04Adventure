@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.JSONparser;
@@ -106,10 +107,10 @@ public class OnlineStoryList extends FragmentActivity implements
 					.setTabListener(this));
 		}
 	}
-		
-
-		
-		
+	
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "All stories are displayed here. Press a story to read it. Online stories contains all" +
 				"the stories on the server. My stories contains all the stories written by you." +
@@ -245,9 +246,12 @@ public class OnlineStoryList extends FragmentActivity implements
 		}
 	}
 
+	/**
+	 * Starts a dialog box which allows the user to create a new story.
+	 * 
+	 * @param view the current view.
+	 */
 	public void addStory(View view){
-
-		
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		LinearLayout lila1= new LinearLayout(this);
 	    lila1.setOrientation(1);
@@ -273,17 +277,14 @@ public class OnlineStoryList extends FragmentActivity implements
 				story.setAuthor(MainActivity.username);
 				story.setVersion(1);
 
-
 				StorageManager sm = new StorageManager(getBaseContext());
 
-				
 				sm.addStory(story);
 
 				Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-				startActivity(intent);
-				
+				startActivity(intent);				
 			}  
 		});  
 
@@ -300,9 +301,12 @@ public class OnlineStoryList extends FragmentActivity implements
 
 	}
 	
+	/**
+	 * Updates the cached stories with the stories of their online versions.
+	 * 
+	 * @param view the current view.
+	 */
 	public void sync(View view){
-		
-	
 		StorageManager sm = new StorageManager(this);
 		ArrayList<Story> offlines = sm.getAll();
 		
@@ -325,28 +329,20 @@ public class OnlineStoryList extends FragmentActivity implements
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 		for(Story s : onlines){
 			for(Story ss : offlines){
 				if(s.getId().equals(ss.getId())){
 					if(s.getVersion()>ss.getVersion()){
 						sm.deleteStory(ss);
-						sm.addStory(s);
-						
+						sm.addStory(s);				
 					}
-
 				}					
-				
 			}
-			
 		}
 		
 		Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		}	
-		
 	}
 }

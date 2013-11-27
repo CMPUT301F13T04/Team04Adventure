@@ -154,10 +154,19 @@ public class AllStoriesListSwipe extends Fragment {
 		});		
 
 	}	
+	
+	/**
+	 * Chooses a random number that is within the range of the size of the list of stories.
+	 * @return a random number.
+	 */
 	private int chooseRandom() {
 		Random ran = new Random();
 		return ran.nextInt(stories.size());
 	}
+	
+	/**
+	 * onStop method which closes the loading spinner.
+	 */
 	public void onStop(){
 		super.onStop();
 

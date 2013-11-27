@@ -56,7 +56,6 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 	private final String stories = "story/";
 	private final String compstories = "compstories/";
 
-	// Just the generic constructor
 	public JSONparser() {
 		this.gson = new Gson();
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -64,6 +63,11 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		StrictMode.setThreadPolicy(policy);
 	}
 
+	/**
+	 * Adds a story to the server.
+	 * 
+	 * @param s Story to be stored.
+	 */
 	public void addStory(Story s) {
 		try {
 			storeStory(s);
@@ -72,7 +76,6 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		}
 	}
 
-	// Assumption is that the User being stored is not in the server already.
 	/**
 	 * Stores the story in the server.
 	 * 
@@ -128,7 +131,6 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 
 	}
 
-	// Assume user is on the server
 	/**
 	 * Gets the story object with the same story ID.
 	 * 
@@ -256,6 +258,13 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		return abc;
 	}
 
+	/**
+	 * Searches through the compressed stories based on the keywords.
+	 * 
+	 * @param keywords keywords to search with.
+	 * @return ArrayList of compressedStories that satisfy the keywords.
+	 * @throws IOException
+	 */
 	public ArrayList<compressedStory> searchcompressed(String[] keywords)
 			throws IOException {
 		String query_str = "";

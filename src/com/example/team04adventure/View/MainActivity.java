@@ -58,10 +58,8 @@ public class MainActivity extends Activity {
 		UsernameText.setText(prevUsername);
 		Login.setOnClickListener(new View.OnClickListener() 
 		{
-				
 			public void onClick(View v)
 			{
-				
 				String Uname = UsernameText.getText().toString();
 
 				if ((Uname.equals("")) || Uname.equals(null)){
@@ -80,11 +78,12 @@ public class MainActivity extends Activity {
 				startActivity(i);				
 				}
 			}
-		});
-		
-				
+		});	
 	}
 	
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Please enter a username and press the login button to proceed.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);

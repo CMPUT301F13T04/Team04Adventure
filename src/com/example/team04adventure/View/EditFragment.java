@@ -103,17 +103,8 @@ public class EditFragment extends Activity {
 		sm = new StorageManager(this);
 		
 		if (flag.equals("online")) {
-//			Integer index = Integer.valueOf(-2);
-//			try {
 				AdventureApp Adventure = (AdventureApp)getApplicationContext();
 				story = Adventure.getCurrentStory();
-
-//				story = new JSONparser().execute(index, sid).get().get(0);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			} catch (ExecutionException e) {
-//				e.printStackTrace();
-//			}
 		} else {
 			story = sm.getStory(sid);
 		}
@@ -144,10 +135,10 @@ public class EditFragment extends Activity {
 	/**
 	 * Opens the camera application and prepares to store the captured image in
 	 * a file.
+	 * 
+	 * @param view the current view.
 	 */
 	public void openCamera(View view) {
-		// Opens the camera app and stores the resulting image as a jpg file in
-		// the /team04adventure in the external memory.
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -169,10 +160,10 @@ public class EditFragment extends Activity {
 
 	/**
 	 * Opens the image picker for the user to add to the fragment.
+	 * 
+	 * @param view the current view.
 	 */
 	public void uploadImage(View view) {
-		// Starts the image picker for the user to choose a picture to add to
-		// the fragment
 		Intent intent = new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -181,8 +172,9 @@ public class EditFragment extends Activity {
 	}
 
 	/**
-	 * Opens the activity that contains all existing fragments to allow the user
-	 * to choose one to make a connection to.
+	 * Opens the image picker for the user to change the fragment profile image.
+	 * 
+	 * @param view the current view.
 	 */
 	public void setProfile(View view) {
 		Intent intent = new Intent();
@@ -191,7 +183,13 @@ public class EditFragment extends Activity {
 		startActivityForResult(Intent.createChooser(intent, "Select Profile"),
 				SELECT_PROFILE);
 	}
-
+	
+	/**
+	 * Opens the activity that contains all existing fragments to allow the user
+	 * to choose one to make a connection to.
+	 * 
+	 * @param view the current view.
+	 */
 	public void linkFrag(View view) {
 		Intent intent = new Intent(getApplicationContext(), fragList.class);
 		intent.putExtra("id", sid);
@@ -204,6 +202,8 @@ public class EditFragment extends Activity {
 	/**
 	 * Saves the current text in the main TextView as the body text of the
 	 * fragment.
+	 * 
+	 * @param view the current view.
 	 */
 	public void saveFrag(View view) {
 		// Saves the changes to the fragment text
@@ -231,6 +231,9 @@ public class EditFragment extends Activity {
 
 	}
 
+	/**
+	 * Saves the information from the EditTexts into the fragment.
+	 */
 	public void fragSaveText() {
 		String fragTitleString = fragTitle.getText().toString();
 		String fragBodyString = fragBody.getText().toString();
@@ -238,6 +241,9 @@ public class EditFragment extends Activity {
 		fragment.setBody(fragBodyString);
 	}
 
+	/**
+	 * Saves the story into the correct storage.
+	 */
 	public void saveToStory() {
 		int listIndex = idList.indexOf(fragment.getId());
 		if (listIndex == -1) {
@@ -262,6 +268,9 @@ public class EditFragment extends Activity {
 		origStory = story;
 	}
 
+	/**
+	 * Refreshes the list of fragment IDs.
+	 */
 	public void refreshIdList() {
 		ArrayList<Frag> a = story.getFrags();
 		int b = a.size();
@@ -405,6 +414,9 @@ public class EditFragment extends Activity {
 
 	}
 	
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Add or make changes to a fragment. You can add images from memory or from the camera to" +
 				"the fragment, change the profile image of the fragment, and link the current fragment to another " +

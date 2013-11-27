@@ -554,6 +554,11 @@ public class StorageManager implements Storage {
 		return frag;
 	}
 
+	/**
+	 * Returns the annotation information in a fragment.
+	 * @param fid the fragment id to get the annotation of.
+	 * @return ArrayList of Annotations.
+	 */
 	private ArrayList<Annotation> getFragAnnotInfo(String fid) {
 		
 		String[] aIds = {SQLiteHelper.COLUMN_AID};
@@ -719,7 +724,12 @@ public class StorageManager implements Storage {
 		return annot;
 	}
 
-
+	/**
+	 * Helper method that stores all the Annotation attributes in
+	 * a new Annotation object for addition to an ArrayList.
+	 * @param cursor
+	 * @return the Annotation in the row the cursor is currently pointing to.
+	 */
 	private Annotation cursorToAnnotation(Cursor cursor) {
 		Annotation annot = new Annotation();
 		annot.setId(cursor.getLong(0));

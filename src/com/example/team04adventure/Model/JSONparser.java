@@ -206,37 +206,9 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 	 * @throws IOException
 	 */
 	public ArrayList<Story> search(String[] keywords) throws IOException {
-		String query_str = "";
 
-		// create query string
-		for (int i = 0; i < keywords.length; i++) {
-			query_str += keywords[i] + " OR ";
-		}
-
-		query_str = query_str.substring(0, query_str.length() - 4);
-
-		HttpPost searchRequest = new HttpPost(WebService + stories
-				+ "/_search?pretty=1");
-		String query = "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \""
-				+ query_str + "\"}}}";
-
-		StringEntity stringentity = null;
-		try {
-			stringentity = new StringEntity(query);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		searchRequest.setHeader("Accept", "application/json");
-		searchRequest.setEntity(stringentity);
-
-		HttpResponse response = null;
-		try {
-			response = client.execute(searchRequest);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		}
-
+		HttpResponse response = searchWebservice(2,keywords);
+		
 		String status = response.getStatusLine().toString();
 		System.out.println(status);
 
@@ -255,28 +227,31 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 
 		return abc;
 	}
-
 	/**
-	 * Searches through the compressed stories based on the keywords.
-	 * 
+	 * searchWebservice takes a search code and keywords.
+	 * The search code determines whether it is searching from compressed stories or regular stories. 
+	 * @param searchcode
+	 * 				determines whether it is searching from compressed stories or regular stories.
 	 * @param keywords
-	 *            keywords to search with.
-	 * @return ArrayList of compressedStories that satisfy the keywords.
-	 * @throws IOException
+	 * 				keywords to search for.
+	 * @return 
+	 * 				response from the server.
 	 */
-	public ArrayList<compressedStory> searchcompressed(String[] keywords)
-			throws IOException {
+	
+	public HttpResponse searchWebservice(int searchcode, String[] keywords){
 		String query_str = "";
 		// create query string
 		for (int i = 0; i < keywords.length; i++) {
 			query_str += keywords[i] + " OR ";
 		}
 		query_str = query_str.substring(0, query_str.length() - 4);
-
-		HttpPost searchRequest = new HttpPost(WebService + compstories
-				+ "/_search?pretty=1");
-		String query = "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \""
-				+ query_str + "\"}}}";
+		HttpPost searchRequest;
+		if (searchcode== 1){
+			searchRequest = new HttpPost(WebService + compstories + "/_search?pretty=1");
+		} else{
+			searchRequest = new HttpPost(WebService + stories + "/_search?pretty=1");
+		}
+		String query = "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \"" + query_str + "\"}}}";
 
 		StringEntity stringentity = null;
 		try {
@@ -293,8 +268,24 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 			response = client.execute(searchRequest);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
+		return response;
+	}
+	
+	/**
+	 * Searches through the compressed stories based on the keywords.
+	 * 
+	 * @param keywords
+	 *            keywords to search with.
+	 * @return ArrayList of compressedStories that satisfy the keywords.
+	 * @throws IOException
+	 */
+	public ArrayList<compressedStory> searchcompressed(String[] keywords)
+			throws IOException {
+		HttpResponse response = searchWebservice(1,keywords);
+		
 		String json = getEntityContent(response);
 
 		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<compressedStory>>() {
@@ -307,7 +298,6 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		for (ElasticSearchResponse<compressedStory> r : esResponse.getHits()) {
 			abc.add(r.getSource());
 		}
-
 		return abc;
 	}
 
@@ -385,13 +375,13 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(response.getEntity().getContent())));
 		String output;
-		System.err.println("Output from Server -> ");
+//		System.err.println("Output from Server -> ");
 		String json = "";
 		while ((output = br.readLine()) != null) {
-			System.err.println(output);
+//			System.err.println(output);
 			json += output;
 		}
-		System.err.println("JSON:" + json);
+//		System.err.println("JSON:" + json);
 		return json;
 	}
 

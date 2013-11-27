@@ -31,7 +31,7 @@ import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragAdapter;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
-
+ 
 /**
  * fragList creates the list of fragments that exist in a story.
  * 

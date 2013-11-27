@@ -285,83 +285,96 @@ public class EditFragment extends Activity {
 		}
 	}
 
+	public void saveCameraRequest() {
+		// Saves the bitmap result from the camera into the frag object
+		try {
+			Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+					this.getContentResolver(), imageFileUri);
+			Bitmap resizedBitmap = Media.resizeImage(bitmap);
+
+			uploadTextView.setText("Image you just added:");
+			uploadImageView.setImageBitmap(resizedBitmap);
+
+			Media media = new Media();
+			String convertedString = Media.encodeToBase64(resizedBitmap);
+			media.setContent(convertedString);
+			media.setType("pic");
+
+			fragSaveText();
+			fragment.addPicture(media);
+			saveToStory();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Bitmap getBitmap(Uri selectedImageUri) {
+		Bitmap bitmap;
+		Bitmap resizedBitmap = null;
+		try {
+			bitmap = MediaStore.Images.Media.getBitmap(
+					this.getContentResolver(), selectedImageUri);
+			resizedBitmap = Media.resizeImage(bitmap);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return resizedBitmap;
+	}
+
+	public void saveSelectRequest(Intent data) {
+		// Saves the bitmap from the selected image to be uploaded into the
+		// frag object
+		Uri selectedImageUri = data.getData();
+		Bitmap resizedBitmap = getBitmap(selectedImageUri);
+
+		uploadTextView.setText("Image you just added:");
+		uploadImageView.setImageBitmap(resizedBitmap);
+
+		Media media = new Media();
+		String convertedString = Media.encodeToBase64(resizedBitmap);
+		media.setContent(convertedString);
+		media.setType("pic");
+
+		fragSaveText();
+		fragment.addPicture(media);
+		saveToStory();
+
+	}
+
+	public void saveProfileRequest(Intent data) {
+		Uri selectedImageUri = data.getData();
+		Bitmap resizedBitmap = getBitmap(selectedImageUri);
+
+		illustrationTextView.setText("Profile picture you just set:");
+		illustrationImageView.setImageBitmap(resizedBitmap);
+
+		Media media = new Media();
+		String convertedString = Media.encodeToBase64(resizedBitmap);
+		media.setContent(convertedString);
+		media.setType("pic");
+
+		fragSaveText();
+		fragment.setIllustration(media);
+		saveToStory();
+	}
+
 	protected void onActivityResult(int requestCode, int resultCode,
 			final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
 				&& resultCode == RESULT_OK) {
-			// Saves the bitmap result from the camera into the frag object
-			try {
-				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-						this.getContentResolver(), imageFileUri);
-				Bitmap resizedBitmap = Media.resizeImage(bitmap);
+			saveCameraRequest();
 
-				uploadTextView.setText("Image you just added:");
-				uploadImageView.setImageBitmap(resizedBitmap);
-
-				Media media = new Media();
-				String convertedString = Media.encodeToBase64(resizedBitmap);
-				media.setContent(convertedString);
-				media.setType("pic");
-
-				fragSaveText();
-				fragment.addPicture(media);
-				saveToStory();
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
-			// Saves the bitmap from the selected image to be uploaded into the
-			// frag object
-			Uri selectedImageUri = data.getData();
-			try {
-				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-						this.getContentResolver(), selectedImageUri);
-				Bitmap resizedBitmap = Media.resizeImage(bitmap);
+			saveSelectRequest(data);
 
-				uploadTextView.setText("Image you just added:");
-				uploadImageView.setImageBitmap(resizedBitmap);
-
-				Media media = new Media();
-				String convertedString = Media.encodeToBase64(resizedBitmap);
-				media.setContent(convertedString);
-				media.setType("pic");
-
-				fragSaveText();
-				fragment.addPicture(media);
-				saveToStory();
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} else if (requestCode == SELECT_PROFILE && resultCode == RESULT_OK) {
-			Uri selectedImageUri = data.getData();
-			try {
-				Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-						this.getContentResolver(), selectedImageUri);
-				Bitmap resizedBitmap = Media.resizeImage(bitmap);
+			saveProfileRequest(data);
 
-				illustrationTextView.setText("Profile picture you just set:");
-				illustrationImageView.setImageBitmap(resizedBitmap);
-
-				Media media = new Media();
-				String convertedString = Media.encodeToBase64(resizedBitmap);
-				media.setContent(convertedString);
-				media.setType("pic");
-
-				fragSaveText();
-				fragment.setIllustration(media);
-				saveToStory();
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} else if (requestCode == CREATE_CHOICE && resultCode == RESULT_OK) {
 
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -377,40 +390,40 @@ public class EditFragment extends Activity {
 			adb.setPositiveButton("Create",
 					new DialogInterface.OnClickListener() {
 
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
 
-							int listIndex = idList.indexOf(fragment.getId());
-							if (listIndex == -1) {
-								Choice c = new Choice();
-								c.setBody(choiceTitle.getText().toString());
-								c.setChild(data.getStringExtra("linkThis"));
-								fragSaveText();
-								fragment.setChoice(c);
-								story.addFragment(fragment);
-							} else {
-								Choice c = new Choice();
-								c.setBody(choiceTitle.getText().toString());
-								c.setChild(data.getStringExtra("linkThis"));
-								fragment = story.getFrags().get(listIndex);
-								fragment.setChoice(c);
-								story.deleteFrag(fragment.getId());
-								story.addFragment(fragment, listIndex);
+					int listIndex = idList.indexOf(fragment.getId());
+					if (listIndex == -1) {
+						Choice c = new Choice();
+						c.setBody(choiceTitle.getText().toString());
+						c.setChild(data.getStringExtra("linkThis"));
+						fragSaveText();
+						fragment.setChoice(c);
+						story.addFragment(fragment);
+					} else {
+						Choice c = new Choice();
+						c.setBody(choiceTitle.getText().toString());
+						c.setChild(data.getStringExtra("linkThis"));
+						fragment = story.getFrags().get(listIndex);
+						fragment.setChoice(c);
+						story.deleteFrag(fragment.getId());
+						story.addFragment(fragment, listIndex);
 
-							}
-							refreshIdList();
+					}
+					refreshIdList();
 
-						}
-					});
+				}
+			});
 
 			adb.setNegativeButton("Cancel",
 					new DialogInterface.OnClickListener() {
 
-						public void onClick(DialogInterface dialog, int which) {
+				public void onClick(DialogInterface dialog, int which) {
 
-							return;
-						}
-					});
+					return;
+				}
+			});
 
 			adb.show();
 

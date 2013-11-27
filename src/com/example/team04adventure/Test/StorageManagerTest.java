@@ -1,4 +1,5 @@
 package com.example.team04adventure.Test;
+
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -10,8 +11,7 @@ import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
- * @author Team04Adventure
- * The JUnit test class for the storage manager.
+ * @author Team04Adventure The JUnit test class for the storage manager.
  */
 public class StorageManagerTest extends AndroidTestCase {
 	/* Sample hard-coded story and fragment */
@@ -20,16 +20,16 @@ public class StorageManagerTest extends AndroidTestCase {
 	/* StorageManager and context used to store and delete functions */
 	StorageManager sm;
 	Context mc;
-	//ActivityInstrumentationTestCase2 aitc;
-	
+
+	// ActivityInstrumentationTestCase2 aitc;
+
 	public StorageManagerTest() {
 		super();
 	}
-	
+
 	/**
-	 * @author Team04Adventure
-	 * Create the default story and fragment. Also create the new 
-	 * StorageManager object.
+	 * @author Team04Adventure Create the default story and fragment. Also
+	 *         create the new StorageManager object.
 	 * @param void
 	 * @return void
 	 */
@@ -48,11 +48,11 @@ public class StorageManagerTest extends AndroidTestCase {
 		s.addFragment(f);
 		this.frag = f;
 		this.story = s;
-		RenamingDelegatingContext rdc = new RenamingDelegatingContext(getContext(), "team04");
+		RenamingDelegatingContext rdc = new RenamingDelegatingContext(
+				getContext(), "team04");
 		this.sm = new StorageManager(rdc);
-		//this.sm = new StorageManager(mc.getApplicationContext());
-		
-		
+		// this.sm = new StorageManager(mc.getApplicationContext());
+
 		super.setUp();
 	}
 
@@ -60,9 +60,10 @@ public class StorageManagerTest extends AndroidTestCase {
 		super.tearDown();
 	}
 
-	/** 
-	 * Tests the 'storyExists()' method that checks if a story exists. The function tests
-	 * for a non-existent story and an existent story.
+	/**
+	 * Tests the 'storyExists()' method that checks if a story exists. The
+	 * function tests for a non-existent story and an existent story.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -78,8 +79,9 @@ public class StorageManagerTest extends AndroidTestCase {
 		assertTrue(true);
 	}
 
-	/** 
+	/**
 	 * Tests the 'addStory()' method that adds a story to the SQL database.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -93,9 +95,11 @@ public class StorageManagerTest extends AndroidTestCase {
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
 	}
-	
-	/** 
-	 * Tests the 'deleteStory()' method that deletes a story from the SQL database.
+
+	/**
+	 * Tests the 'deleteStory()' method that deletes a story from the SQL
+	 * database.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -110,8 +114,9 @@ public class StorageManagerTest extends AndroidTestCase {
 		assertFalse(sm.checkStory(story.getId()));
 	}
 
-	/** 
+	/**
 	 * Tests the 'getAll()' method that gets all stories from the SQL database.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -124,13 +129,15 @@ public class StorageManagerTest extends AndroidTestCase {
 		/* Get all of the stories from the DB */
 		storyArr = sm.getAll();
 		/* Assert that at least one story was returned by the method */
-		assertTrue(storyArr.size()!=0);
+		assertTrue(storyArr.size() != 0);
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
 	}
-	
-	/** 
-	 * Tests the 'getStory()' method that gets a single story from the SQL database.
+
+	/**
+	 * Tests the 'getStory()' method that gets a single story from the SQL
+	 * database.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -142,14 +149,15 @@ public class StorageManagerTest extends AndroidTestCase {
 		assertTrue(sm.checkStory(story.getId()));
 		s = sm.getStory(story.getId());
 		/* Assert the story in the database is equivalent to the original story */
-		assert(s.equals(story));
+		assert (s.equals(story));
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
 	}
 
-	/** 
-	 * Tests the 'getFrag()' method that gets a single story fragment from the 
+	/**
+	 * Tests the 'getFrag()' method that gets a single story fragment from the
 	 * SQL database.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -161,12 +169,12 @@ public class StorageManagerTest extends AndroidTestCase {
 		sm.addStory(story);
 		/* Assert that the story story now does exist in the SQL database */
 		assertTrue(sm.checkStory(story.getId()));
-		//f = sm.getFrag("uniqueID1");
+		// f = sm.getFrag("uniqueID1");
 		/* Assert the story in the database is equivalent to the original story */
-		//assert(f.equals(frag));
+		// assert(f.equals(frag));
 		/* Clean up and delete the story */
 		sm.deleteStory(story);
-		
+
 	}
 
 }

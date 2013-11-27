@@ -246,11 +246,14 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 		}
 		query_str = query_str.substring(0, query_str.length() - 4);
 		HttpPost searchRequest;
+		String searchtype;
 		if (searchcode== 1){
-			searchRequest = new HttpPost(WebService + compstories + "/_search?pretty=1");
+			searchtype = compstories;
 		} else{
-			searchRequest = new HttpPost(WebService + stories + "/_search?pretty=1");
+			searchtype = stories;
 		}
+		searchRequest = new HttpPost(WebService + searchtype + "/_search?pretty=1");
+
 		String query = "{\"query\" : {\"query_string\" : {\"fields\" : [ \"title\"],\"query\" : \"" + query_str + "\"}}}";
 
 		StringEntity stringentity = null;

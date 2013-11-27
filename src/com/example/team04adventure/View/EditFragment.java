@@ -284,6 +284,21 @@ public class EditFragment extends Activity {
 			idList.add(a.get(i).getId());
 		}
 	}
+	
+	/**
+	 * Creates a new media object with the contents of the resized bitmap.
+	 * @param resizedBitmap
+	 * 			the bitmap to store inside the Media object.
+	 * @return
+	 * 			the created Media object.
+	 */
+	public Media createMedia(Bitmap resizedBitmap) {
+		Media media = new Media();
+		String convertedString = Media.encodeToBase64(resizedBitmap);
+		media.setContent(convertedString);
+		media.setType("pic");
+		return media;
+	}
 
 	/**
 	 * Saves the bitmap result from the camera into the story.
@@ -297,10 +312,7 @@ public class EditFragment extends Activity {
 			uploadTextView.setText("Image you just added:");
 			uploadImageView.setImageBitmap(resizedBitmap);
 
-			Media media = new Media();
-			String convertedString = Media.encodeToBase64(resizedBitmap);
-			media.setContent(convertedString);
-			media.setType("pic");
+			Media media = createMedia(resizedBitmap);
 
 			fragSaveText();
 			fragment.addPicture(media);
@@ -349,10 +361,7 @@ public class EditFragment extends Activity {
 		uploadTextView.setText("Image you just added:");
 		uploadImageView.setImageBitmap(resizedBitmap);
 
-		Media media = new Media();
-		String convertedString = Media.encodeToBase64(resizedBitmap);
-		media.setContent(convertedString);
-		media.setType("pic");
+		Media media = createMedia(resizedBitmap);
 
 		fragSaveText();
 		fragment.addPicture(media);
@@ -372,10 +381,7 @@ public class EditFragment extends Activity {
 		illustrationTextView.setText("Profile picture you just set:");
 		illustrationImageView.setImageBitmap(resizedBitmap);
 
-		Media media = new Media();
-		String convertedString = Media.encodeToBase64(resizedBitmap);
-		media.setContent(convertedString);
-		media.setType("pic");
+		Media media = createMedia(resizedBitmap);
 
 		fragSaveText();
 		fragment.setIllustration(media);

@@ -73,10 +73,6 @@
             android:label="@string/title_activity_my_stories_list_swipe" >
         </activity>
         <activity
-            android:name="com.example.team04adventure.View.CreateFragment"
-            android:label="@string/title_activity_create_fragment" >
-        </activity>
-        <activity
             android:name="com.example.team04adventure.View.OnlineStoryIntro"
             android:label="@string/title_activity_online_story_intro" >
         </activity>

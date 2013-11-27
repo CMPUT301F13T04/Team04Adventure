@@ -54,9 +54,13 @@ public class AnnotViewer extends Activity {
 	ArrayList<Annotation> annotList;
 	Integer index;
 
+	/**
+	 * Get the extras from the bundle, create the activity and set the view.
+	 * 
+	 */
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_annot_viewer);
 
 		Bundle extras = getIntent().getExtras();

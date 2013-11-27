@@ -102,7 +102,7 @@ public class EditCreateAnnot extends Activity {
 
 		if (online.equals("online")) {
 			Story s;
-			System.out.println("BEGINS ONLINE");
+//			System.out.println("BEGINS ONLINE");
 			AdventureApp Adventure = (AdventureApp) getApplicationContext();
 			s = Adventure.getCurrentStory();
 
@@ -114,11 +114,11 @@ public class EditCreateAnnot extends Activity {
 
 			Integer index = Integer.valueOf(-1);
 			new JSONparser().execute(index, s);
-			System.out.println("IT SAVED ONLINE");
+//			System.out.println("IT SAVED ONLINE");
 
 		} else {
 
-			System.out.println("SAVED OFFLINE");
+//			System.out.println("SAVED OFFLINE");
 			sm = new StorageManager(this);
 			Story s = sm.getStory(sid);
 			sm.deleteStory(s);
@@ -126,7 +126,6 @@ public class EditCreateAnnot extends Activity {
 			sm.addStory(s);
 
 		}
-
 		finish();
 	}
 
@@ -182,10 +181,8 @@ public class EditCreateAnnot extends Activity {
 				a.setImage(convertedString);
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
@@ -198,10 +195,8 @@ public class EditCreateAnnot extends Activity {
 				a.setImage(convertedString);
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

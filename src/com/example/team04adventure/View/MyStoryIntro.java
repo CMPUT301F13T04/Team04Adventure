@@ -144,9 +144,7 @@ public class MyStoryIntro extends Activity {
 		});
 
 		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
 			public void onClick(DialogInterface dialog, int which) {
-
 				return;
 			}
 		});
@@ -188,9 +186,7 @@ public class MyStoryIntro extends Activity {
 		Story s = sm.getStory(sid);
 
 		if (parser.checkStory(s)) {
-
-			Toast.makeText(getBaseContext(), republish, Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(getBaseContext(), republish, Toast.LENGTH_LONG).show();
 		} else {
 			parser.addStory(s);
 			Toast.makeText(getBaseContext(), publish, Toast.LENGTH_LONG).show();
@@ -207,12 +203,10 @@ public class MyStoryIntro extends Activity {
 	public void deleteStory(View view) {
 
 		StorageManager sm = new StorageManager(this);
-
 		sm.deleteStory(story);
 
 		Intent intent = new Intent(this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 

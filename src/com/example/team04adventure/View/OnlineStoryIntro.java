@@ -155,13 +155,10 @@ public class OnlineStoryIntro extends Activity {
 		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
-
 				return;
 			}
 		});
-
 		adb.show();
-
 	}
 
 	/**
@@ -204,7 +201,6 @@ public class OnlineStoryIntro extends Activity {
 			sm.addStory(s);
 			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	/**
@@ -218,8 +214,7 @@ public class OnlineStoryIntro extends Activity {
 		Integer index = Integer.valueOf(-4);
 		new JSONparser().execute(index, story);
 		Intent intent = new Intent(this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 

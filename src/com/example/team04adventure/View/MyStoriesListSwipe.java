@@ -50,32 +50,24 @@ public class MyStoriesListSwipe extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(
-				R.layout.activity_my_stories_list_swipe, container, false);
+		View rootView = inflater.inflate(R.layout.activity_my_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.mylist);
 
-		searchView = (SearchView) rootView
-				.findViewById(R.id.offline_story_search);
+		searchView = (SearchView) rootView.findViewById(R.id.offline_story_search);
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
-				// Do something
-				// if (newText.length() > 0) {
 				offlineAdapter.filter(newText);
 				return true;
-				// }
-				// return false;
 			}
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				// Do something
 				offlineAdapter.filter(query);
 				return true;
 			}
 		};
 		searchView.setOnQueryTextListener(queryTextListener);
-
 		return rootView;
 	}
 

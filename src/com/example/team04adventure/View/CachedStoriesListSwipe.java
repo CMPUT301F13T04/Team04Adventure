@@ -50,30 +50,24 @@ public class CachedStoriesListSwipe extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(
-				R.layout.activity_cached_stories_list_swipe, container, false);
+		View rootView = inflater.inflate(R.layout.activity_cached_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
 
-		searchView = (SearchView) rootView
-				.findViewById(R.id.cached_story_search);
+		searchView = (SearchView) rootView.findViewById(R.id.cached_story_search);
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
-
 				storyAdapter.filter(newText);
 				return true;
-
 			}
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-
 				storyAdapter.filter(query);
 				return true;
 			}
 		};
 		searchView.setOnQueryTextListener(queryTextListener);
-
 		return rootView;
 	}
 

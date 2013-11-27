@@ -83,9 +83,7 @@ public class StoryIntro extends Activity {
 		sm.deleteStory(story);
 
 		i = new Intent(StoryIntro.this, OnlineStoryList.class);
-
 		startActivity(i);
-
 	}
 
 	/**

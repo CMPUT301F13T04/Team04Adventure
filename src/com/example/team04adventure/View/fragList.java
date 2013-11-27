@@ -37,7 +37,6 @@ import com.example.team04adventure.Model.Story;
  * 
  * @author Team04Adventure
  */
-
 public class fragList extends Activity {
 
 	String id;

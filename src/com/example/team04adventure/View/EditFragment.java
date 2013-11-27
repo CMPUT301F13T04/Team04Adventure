@@ -285,8 +285,10 @@ public class EditFragment extends Activity {
 		}
 	}
 
+	/**
+	 * Saves the bitmap result from the camera into the story.
+	 */
 	public void saveCameraRequest() {
-		// Saves the bitmap result from the camera into the frag object
 		try {
 			Bitmap bitmap = MediaStore.Images.Media.getBitmap(
 					this.getContentResolver(), imageFileUri);
@@ -311,6 +313,13 @@ public class EditFragment extends Activity {
 		}
 	}
 
+	/**
+	 * Gets the bitmap from the Uri and returns the resized bitmap.
+	 * @param selectedImageUri
+	 * 			Uri of the bitmap.
+	 * @return
+	 * 			resized bitmap.
+	 */
 	public Bitmap getBitmap(Uri selectedImageUri) {
 		Bitmap bitmap;
 		Bitmap resizedBitmap = null;
@@ -326,6 +335,11 @@ public class EditFragment extends Activity {
 		return resizedBitmap;
 	}
 
+	/**
+	 * Saves the bitmap result from the image picker into the story.
+	 * @param data
+	 * 			the data from the image picker.
+	 */
 	public void saveSelectRequest(Intent data) {
 		// Saves the bitmap from the selected image to be uploaded into the
 		// frag object
@@ -346,6 +360,11 @@ public class EditFragment extends Activity {
 
 	}
 
+	/**
+	 * Saves the bitmap result from the image picker as a profile image.
+	 * @param data
+	 * 			the data from the image picker.
+	 */
 	public void saveProfileRequest(Intent data) {
 		Uri selectedImageUri = data.getData();
 		Bitmap resizedBitmap = getBitmap(selectedImageUri);
@@ -376,15 +395,14 @@ public class EditFragment extends Activity {
 			saveProfileRequest(data);
 
 		} else if (requestCode == CREATE_CHOICE && resultCode == RESULT_OK) {
-
 			AlertDialog.Builder adb = new AlertDialog.Builder(this);
 			LinearLayout lila1 = new LinearLayout(this);
 			lila1.setOrientation(1);
+			
 			final EditText choiceTitle = new EditText(this);
 			choiceTitle.setHint("Enter the Title here.");
 			lila1.addView(choiceTitle);
 			adb.setView(lila1);
-
 			adb.setTitle("New Choice");
 
 			adb.setPositiveButton("Create",
@@ -409,10 +427,8 @@ public class EditFragment extends Activity {
 						fragment.setChoice(c);
 						story.deleteFrag(fragment.getId());
 						story.addFragment(fragment, listIndex);
-
 					}
 					refreshIdList();
-
 				}
 			});
 
@@ -420,15 +436,11 @@ public class EditFragment extends Activity {
 					new DialogInterface.OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int which) {
-
 					return;
 				}
 			});
-
 			adb.show();
-
 		}
-
 	}
 
 	/**

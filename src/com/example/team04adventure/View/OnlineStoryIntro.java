@@ -41,16 +41,17 @@ import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
- * OnlineStoryIntro creates the activity that the user enters when the user selects a story from the online story list.
- * This fragment allows the user to play the story, add fragments to the story, edit the story, cache the story and delete the story.
+ * OnlineStoryIntro creates the activity that the user enters when the user
+ * selects a story from the online story list. This fragment allows the user to
+ * play the story, add fragments to the story, edit the story, cache the story
+ * and delete the story.
  * 
  * @author Team04Adventure
  */
 
 public class OnlineStoryIntro extends Activity {
 
-	TextView 	storyTitle,
-	storyAuthor, storySynop;
+	TextView storyTitle, storyAuthor, storySynop;
 	String sid;
 	Story story;
 	String Uname;
@@ -67,7 +68,7 @@ public class OnlineStoryIntro extends Activity {
 		Integer index = Integer.valueOf(-2);
 		try {
 			story = new JSONparser().execute(index, sid).get().get(0);
-			AdventureApp Adventure = (AdventureApp)getApplicationContext();
+			AdventureApp Adventure = (AdventureApp) getApplicationContext();
 			Adventure.setCurrentStory(story);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -81,134 +82,144 @@ public class OnlineStoryIntro extends Activity {
 		storyAuthor.append("By: " + story.getAuthor());
 		storySynop = (TextView) findViewById(R.id.StorySynop);
 		storySynop.append(story.getSynopsis());
-		
-		
+
 	}
 
 	/**
 	 * Enters the first fragment of the story.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void playStory(View view){
+	public void playStory(View view) {
 
 		ArrayList<Frag> frags = story.getFrags();
 		if (story.getFrags().isEmpty()) {
-			Toast.makeText(getBaseContext(), "This story has no fragments", Toast.LENGTH_LONG).show();
-			}
-		else {
-		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-		
-		intent.putExtra("fid", frags.get(0).getId());
-		intent.putExtra("flag", "online");
-		intent.putExtra("sid", sid);
-		startActivity(intent);
+			Toast.makeText(getBaseContext(), "This story has no fragments",
+					Toast.LENGTH_LONG).show();
+		} else {
+			Intent intent = new Intent(getApplicationContext(),
+					FragmentViewer.class);
+
+			intent.putExtra("fid", frags.get(0).getId());
+			intent.putExtra("flag", "online");
+			intent.putExtra("sid", sid);
+			startActivity(intent);
 		}
 	}
 
 	/**
 	 * Adds a new fragment to the list of fragments that the story owns.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void addFragment(View view){
+	public void addFragment(View view) {
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	   
-	    final EditText titleinput = new EditText(this); 
-	    final EditText bodyinput = new EditText(this);
-	    titleinput.setHint("Title");
-	    bodyinput.setHint("Fragment body text");
-	    lila1.addView(titleinput);
-	    lila1.addView(bodyinput);
-	    adb.setView(lila1);
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final EditText titleinput = new EditText(this);
+		final EditText bodyinput = new EditText(this);
+		titleinput.setHint("Title");
+		bodyinput.setHint("Fragment body text");
+		lila1.addView(titleinput);
+		lila1.addView(bodyinput);
+		adb.setView(lila1);
 
 		adb.setTitle("New Fragment");
 
+		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
 
-		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
-			public void onClick(DialogInterface dialog, int whichButton) {  
-				
 				String ftitle = titleinput.getText().toString();
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
 				String fbody = bodyinput.getText().toString();
-				String fid = ftitle.replace(" ","")+rint;
-				
-				Intent intent = new Intent(OnlineStoryIntro.this, EditFragment.class);
+				String fid = ftitle.replace(" ", "") + rint;
+
+				Intent intent = new Intent(OnlineStoryIntro.this,
+						EditFragment.class);
 				intent.putExtra("sid", story.getId());
 				intent.putExtra("fid", fid);
 				intent.putExtra("ftitle", ftitle);
 				intent.putExtra("fbody", fbody);
 				intent.putExtra("flag", "online");
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				
+
 				startActivity(intent);
-			}  
-		});  
+			}
+		});
 
 		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 
-				return;   
+				return;
 			}
 		});
-		
+
 		adb.show();
-	
+
 	}
-	
+
 	/**
 	 * Lets the user select a fragment to edit.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void editStory(View view){
-		
+	public void editStory(View view) {
+
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
 		intent.putExtra("link", 0);
 		intent.putExtra("flag", "online");
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-		startActivity(intent);	
+		startActivity(intent);
 	}
 
 	/**
 	 * Caches the story in the device memory.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void cacheStory(View view) {
 
 		String cache = "Story Cached.";
 		String recache = "Your cached version of this story has been updated.";
-//		JSONparser parser = new JSONparser();
+		// JSONparser parser = new JSONparser();
 		StorageManager sm = new StorageManager(this);
 
-//		Story s = parser.getStory(sid);
+		// Story s = parser.getStory(sid);
 		Story s = story;
-		if(sm.checkStory(s.getId())){
+		if (sm.checkStory(s.getId())) {
 			sm.deleteStory(s);
 			sm.addStory(s);
 			Toast.makeText(getBaseContext(), recache, Toast.LENGTH_LONG).show();
-		}
-		else{
+		} else {
 			sm.addStory(s);
 			Toast.makeText(getBaseContext(), cache, Toast.LENGTH_LONG).show();
 		}
-	
+
 	}
-	
+
 	/**
 	 * Deletes the story from the server.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void deleteStory(View view){	
+	public void deleteStory(View view) {
 
 		Integer index = Integer.valueOf(-4);
-		new JSONparser().execute(index,story);
+		new JSONparser().execute(index, story);
 		Intent intent = new Intent(this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 
@@ -218,50 +229,50 @@ public class OnlineStoryIntro extends Activity {
 	 * Shows the help information for this fragment.
 	 */
 	private void help() {
-		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
-				"'Add new fragment', 'Edit a fragment', 'Download story', and 'Delete story'.";
+		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', "
+				+ "'Add new fragment', 'Edit a fragment', 'Download story', and 'Delete story'.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.online_story_intro, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		View view = new View(this);
 		switch (item.getItemId()) {
-			case R.id.play_menu:
-				playStory(view);
-				return true;
-			case R.id.add_menu:
-				addFragment(view);
-				return true;
-			case R.id.edit_menu:
-				editStory(view);
-				return true;
-			case R.id.download_menu:
-				cacheStory(view);
-				return true;
-			case R.id.delete_menu:
-				deleteStory(view);
-				return true;
-			case R.id.help:
-				help();
-				return true;
+		case R.id.play_menu:
+			playStory(view);
+			return true;
+		case R.id.add_menu:
+			addFragment(view);
+			return true;
+		case R.id.edit_menu:
+			editStory(view);
+			return true;
+		case R.id.download_menu:
+			cacheStory(view);
+			return true;
+		case R.id.delete_menu:
+			deleteStory(view);
+			return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}
 }
- 

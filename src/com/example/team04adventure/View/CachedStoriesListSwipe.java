@@ -32,10 +32,11 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
- 
+
 /**
- * CachedStoriesListSwipe is the fragment in the swipe view that contains the cached stories. In this fragment, the user can 
- * choose one of those cached stories to view.
+ * CachedStoriesListSwipe is the fragment in the swipe view that contains the
+ * cached stories. In this fragment, the user can choose one of those cached
+ * stories to view.
  * 
  * @author Team04Adventure
  */
@@ -44,33 +45,35 @@ public class CachedStoriesListSwipe extends Fragment {
 	private ListView storyListView;
 	SearchView searchView;
 	StoryListAdapter storyAdapter;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.activity_cached_stories_list_swipe, container, false);
+		View rootView = inflater.inflate(
+				R.layout.activity_cached_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.cachedlist);
 
-		searchView = (SearchView) rootView.findViewById(R.id.cached_story_search);
+		searchView = (SearchView) rootView
+				.findViewById(R.id.cached_story_search);
 		final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextChange(String newText) {
-				
-					storyAdapter.filter(newText);
-					return true;
-				
+
+				storyAdapter.filter(newText);
+				return true;
+
 			}
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
-				
+
 				storyAdapter.filter(query);
 				return true;
 			}
 		};
 		searchView.setOnQueryTextListener(queryTextListener);
-		
+
 		return rootView;
 	}
 
@@ -78,9 +81,10 @@ public class CachedStoriesListSwipe extends Fragment {
 		ArrayList<Story> storylist = new ArrayList<Story>();
 		StorageManager sm = new StorageManager(getActivity());
 
-		/* Open DB connection and retrieve all of 
-    	the cached stories. */
-		
+		/*
+		 * Open DB connection and retrieve all of the cached stories.
+		 */
+
 		storylist = sm.getAll();
 
 		storyAdapter = new StoryListAdapter(getActivity(), storylist);
@@ -89,7 +93,8 @@ public class CachedStoriesListSwipe extends Fragment {
 
 			/* When a story is selected */
 			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> a, View v, int position,
+					long id) {
 				Story s = (Story) storyListView.getItemAtPosition(position);
 
 				Intent intent = new Intent(getActivity(), StoryIntro.class);
@@ -100,8 +105,7 @@ public class CachedStoriesListSwipe extends Fragment {
 			}
 
 		});
-		
+
 		super.onResume();
 	}
 }
-

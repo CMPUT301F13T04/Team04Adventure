@@ -34,6 +34,7 @@ import com.example.team04adventure.Model.Story;
 
 /**
  * fragList creates the list of fragments that exist in a story.
+ * 
  * @author Team04Adventure
  */
 public class fragList extends Activity {
@@ -56,11 +57,9 @@ public class fragList extends Activity {
 		final ListView fragListView = (ListView) findViewById(android.R.id.list);
 		ArrayList<Frag> fraglist = new ArrayList<Frag>();
 
-
-
 		if (flag.equals("online")) {
-				AdventureApp Adventure = (AdventureApp)getApplicationContext();
-				story = Adventure.getCurrentStory();
+			AdventureApp Adventure = (AdventureApp) getApplicationContext();
+			story = Adventure.getCurrentStory();
 		} else {
 			StorageManager sm = new StorageManager(this);
 			story = sm.getStory(id);
@@ -73,9 +72,11 @@ public class fragList extends Activity {
 
 			/* When a story is selected */
 			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> a, View v, int position,
+					long id) {
 				Frag f = (Frag) fragListView.getItemAtPosition(position);
-				Intent intent = new Intent(getApplicationContext(), EditFragment.class);
+				Intent intent = new Intent(getApplicationContext(),
+						EditFragment.class);
 				if (link == 0) {
 					intent.putExtra("sid", story.getId());
 					intent.putExtra("fid", f.getId());
@@ -84,8 +85,7 @@ public class fragList extends Activity {
 					intent.putExtra("flag", flag);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
-				}
-				else {
+				} else {
 					intent.putExtra("linkThis", f.getId());
 					setResult(Activity.RESULT_OK, intent);
 					finish();

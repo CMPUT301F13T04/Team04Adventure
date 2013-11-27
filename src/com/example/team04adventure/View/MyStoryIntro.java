@@ -39,16 +39,17 @@ import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
- * MyStoryIntro creates the activity that the user enters when the user selects a story from the online story list.
- * This fragment allows the user to play the story, add fragments to the story, edit the story, cache the story and delete the story.
+ * MyStoryIntro creates the activity that the user enters when the user selects
+ * a story from the online story list. This fragment allows the user to play the
+ * story, add fragments to the story, edit the story, cache the story and delete
+ * the story.
  * 
  * @author Team04Adventure
  */
 
 public class MyStoryIntro extends Activity {
 
-	TextView 	storyTitle,
-	storyAuthor, storySynop;
+	TextView storyTitle, storyAuthor, storySynop;
 	String sid;
 	Story story;
 	String Uname;
@@ -62,9 +63,8 @@ public class MyStoryIntro extends Activity {
 		sid = extras.getString("id");
 		Uname = MainActivity.username;
 
-
 		StorageManager sm = new StorageManager(this);
-		
+
 		story = sm.getStory(sid);
 
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
@@ -73,87 +73,94 @@ public class MyStoryIntro extends Activity {
 		storyAuthor.append(story.getAuthor());
 		storySynop = (TextView) findViewById(R.id.StorySynop);
 		storySynop.append(story.getSynopsis());
-		
-		
+
 	}
 
 	/**
 	 * Enters the first fragment of the story.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void playStory(View view){
+	public void playStory(View view) {
 
 		ArrayList<Frag> frags = story.getFrags();
 		if (story.getFrags().isEmpty()) {
-			Toast.makeText(getBaseContext(), "This story has no fragments", Toast.LENGTH_LONG).show();
-			}
-		else {
-		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-		
-		intent.putExtra("fid", frags.get(0).getId());
-		intent.putExtra("sid", story.getId());
-		intent.putExtra("flag", "my");
-		startActivity(intent);
+			Toast.makeText(getBaseContext(), "This story has no fragments",
+					Toast.LENGTH_LONG).show();
+		} else {
+			Intent intent = new Intent(getApplicationContext(),
+					FragmentViewer.class);
+
+			intent.putExtra("fid", frags.get(0).getId());
+			intent.putExtra("sid", story.getId());
+			intent.putExtra("flag", "my");
+			startActivity(intent);
 		}
 	}
 
 	/**
 	 * Adds a new fragment to the list of fragments that the story owns.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void addFragment(View view){
+	public void addFragment(View view) {
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	   
-	    final EditText titleinput = new EditText(this); 
-	    final EditText bodyinput = new EditText(this);
-	    titleinput.setHint("Title");
-	    bodyinput.setHint("Fragment body text");
-	    lila1.addView(titleinput);
-	    lila1.addView(bodyinput);
-	    adb.setView(lila1);
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final EditText titleinput = new EditText(this);
+		final EditText bodyinput = new EditText(this);
+		titleinput.setHint("Title");
+		bodyinput.setHint("Fragment body text");
+		lila1.addView(titleinput);
+		lila1.addView(bodyinput);
+		adb.setView(lila1);
 
 		adb.setTitle("New Fragment");
 
-		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {  
-			public void onClick(DialogInterface dialog, int whichButton) {  
-				
+		adb.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+
 				String ftitle = titleinput.getText().toString();
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
 				String fbody = bodyinput.getText().toString();
-				String fid = ftitle.replace(" ","")+rint;
-				
-				Intent intent = new Intent(MyStoryIntro.this, EditFragment.class);
+				String fid = ftitle.replace(" ", "") + rint;
+
+				Intent intent = new Intent(MyStoryIntro.this,
+						EditFragment.class);
 				intent.putExtra("sid", story.getId());
 				intent.putExtra("fid", fid);
 				intent.putExtra("ftitle", ftitle);
 				intent.putExtra("fbody", fbody);
 				intent.putExtra("flag", "my");
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				
+
 				startActivity(intent);
-			}  
-		});  
+			}
+		});
 
 		adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 
-				return;   
+				return;
 			}
 		});
-		
+
 		adb.show();
 	}
-	
+
 	/**
 	 * Lets the user select a fragment to edit.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void editStory(View view){
+	public void editStory(View view) {
 		Intent intent = new Intent(this, fragList.class);
 		intent.putExtra("id", sid);
 		intent.putExtra("link", 0);
@@ -161,12 +168,14 @@ public class MyStoryIntro extends Activity {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		startActivity(intent);
-		
+
 	}
 
 	/**
 	 * Uploads the story onto the server.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void publishStory(View view) {
 
@@ -175,89 +184,89 @@ public class MyStoryIntro extends Activity {
 
 		String publish = "This Story has been published.";
 		String republish = "This Story has already been published. You can access it online.";
-		
+
 		Story s = sm.getStory(sid);
-		
-		if(parser.checkStory(s)){
-			
-			Toast.makeText(getBaseContext(), republish, Toast.LENGTH_LONG).show();
-		}
-		else{
+
+		if (parser.checkStory(s)) {
+
+			Toast.makeText(getBaseContext(), republish, Toast.LENGTH_LONG)
+					.show();
+		} else {
 			parser.addStory(s);
 			Toast.makeText(getBaseContext(), publish, Toast.LENGTH_LONG).show();
 		}
-	
 
 	}
-	
+
 	/**
 	 * Deletes the story from the server.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void deleteStory(View view){	
+	public void deleteStory(View view) {
 
 		StorageManager sm = new StorageManager(this);
-		
+
 		sm.deleteStory(story);
-		
+
 		Intent intent = new Intent(this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 
-		
 	}
 
 	/**
 	 * Shows the help information for this fragment.
 	 */
 	private void help() {
-		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
-				"'Add new fragment', 'Edit a fragment', 'Publish story', and 'Delete story'.";
+		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', "
+				+ "'Add new fragment', 'Edit a fragment', 'Publish story', and 'Delete story'.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.my_story_intro, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		View view = new View(this);
 		switch (item.getItemId()) {
-			case R.id.play_menu:
-				playStory(view);
-				return true;
-			case R.id.add_menu:
-				addFragment(view);
-				return true;
-			case R.id.edit_menu:
-				editStory(view);
-				return true;
-			case R.id.upload_menu:
-				publishStory(view);
-				return true;
-			case R.id.delete_menu:
-				deleteStory(view);
-				return true;
-			case R.id.help:
-				help();
-				return true;
+		case R.id.play_menu:
+			playStory(view);
+			return true;
+		case R.id.add_menu:
+			addFragment(view);
+			return true;
+		case R.id.edit_menu:
+			editStory(view);
+			return true;
+		case R.id.upload_menu:
+			publishStory(view);
+			return true;
+		case R.id.delete_menu:
+			deleteStory(view);
+			return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}
-
-
 
 }

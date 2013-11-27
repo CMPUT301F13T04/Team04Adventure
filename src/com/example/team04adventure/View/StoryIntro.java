@@ -35,30 +35,29 @@ import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
- * StoryIntro creates the activity that the user sees when the user selects a story from the cached story list.
- * This fragment allows the user to view the story title and synopsis, and choose whether to play or delete the story.
+ * StoryIntro creates the activity that the user sees when the user selects a
+ * story from the cached story list. This fragment allows the user to view the
+ * story title and synopsis, and choose whether to play or delete the story.
  * 
  * @author Team04Adventure
  */
 public class StoryIntro extends Activity {
 
-	TextView 	storyTitle,
-				storyAuthor,
-				storySynop;
+	TextView storyTitle, storyAuthor, storySynop;
 	String id;
 	Story story;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_story_intro);
-		
+
 		Bundle extras = getIntent().getExtras();
 		id = extras.getString("id");
 		StorageManager sm = new StorageManager(this);
-	
+
 		story = sm.getStory(id);
-		
+
 		storyTitle = (TextView) findViewById(R.id.StoryTitle);
 		storyTitle.append(story.getTitle());
 		storyAuthor = (TextView) findViewById(R.id.StoryAuthor);
@@ -69,83 +68,89 @@ public class StoryIntro extends Activity {
 
 	/**
 	 * Removes the selected story from cache.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void removeFromCache(View view){
+	public void removeFromCache(View view) {
 		Intent i;
 		StorageManager sm = new StorageManager(this);
-		
-		/* Open DB connection and deletes 
-	     the note. */
+
+		/*
+		 * Open DB connection and deletes the note.
+		 */
 		story = sm.getStory(id);
 		sm.deleteStory(story);
-		
+
 		i = new Intent(StoryIntro.this, OnlineStoryList.class);
-		
+
 		startActivity(i);
-		
-		
+
 	}
-	
+
 	/**
 	 * Enters the first fragment of the story.
-	 * @param view the current view.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
-	public void playStory(View view){
-		
+	public void playStory(View view) {
+
 		ArrayList<Frag> frags = story.getFrags();
 		if (story.getFrags().isEmpty()) {
-			Toast.makeText(getBaseContext(), "This story has no fragments", Toast.LENGTH_LONG).show();
-			}
-		else {
-		Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
-		
-		intent.putExtra("fid", frags.get(0).getId());
-		intent.putExtra("sid", story.getId());
-		intent.putExtra("flag", "offline");
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			Toast.makeText(getBaseContext(), "This story has no fragments",
+					Toast.LENGTH_LONG).show();
+		} else {
+			Intent intent = new Intent(getApplicationContext(),
+					FragmentViewer.class);
 
-		startActivity(intent);
+			intent.putExtra("fid", frags.get(0).getId());
+			intent.putExtra("sid", story.getId());
+			intent.putExtra("flag", "offline");
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+			startActivity(intent);
 		}
 	}
-	
+
 	/**
 	 * Shows the help information for this fragment.
 	 */
 	private void help() {
-		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', " +
-				"and 'Delete story'.";
+		String helpText = "Shows the story's title, author and synopsis. The buttons from left to right are 'Play story', "
+				+ "and 'Delete story'.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.story_intro, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		View view = new View(this);
 		switch (item.getItemId()) {
-			case R.id.play_menu:
-				playStory(view);
-				return true;
-			case R.id.delete_menu:
-				removeFromCache(view);
-				return true;
-			case R.id.help:
-				help();
-				return true;
+		case R.id.play_menu:
+			playStory(view);
+			return true;
+		case R.id.delete_menu:
+			removeFromCache(view);
+			return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}

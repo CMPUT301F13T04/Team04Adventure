@@ -15,6 +15,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Review"
+        android:maxLines="20"
+        android:scrollbars="vertical"
         android:text="" />
 
     <LinearLayout

@@ -60,8 +60,8 @@ public class AllStoriesListSwipe extends Fragment {
 	 * onCreate method, simply assigns the ListView variables to the necessary
 	 * variables and returns it to the caller
 	 * 
-	 * @param LayoutInflator
-	 *            , ViewGroup, Bundle
+	 * @param inflater
+	 *            , container, savedInstanceState
 	 * @return View
 	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

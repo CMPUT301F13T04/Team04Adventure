@@ -418,8 +418,6 @@ public class StorageManager implements Storage {
 	/**
 	 * Returns a list of stories that belong to the author parameter 'usr'.
 	 * 
-	 * @param The
-	 *            author who's stories you want.
 	 * @return an arraylist of stories.
 	 */
 	public ArrayList<Story> getMyStories() {

@@ -15,18 +15,17 @@
 
 package com.example.team04adventure.Model;
 
-
 import java.util.ArrayList;
 
-
 /**
- * Frag is meant to contain the id, title, body, and related media of a single story fragment inside a single object. 
+ * Frag is meant to contain the id, title, body, and related media of a single
+ * story fragment inside a single object.
  * 
  * @author Team04Adventure
  */
 
 public class Frag {
-	
+
 	String title;
 	String body;
 	String id;
@@ -36,9 +35,9 @@ public class Frag {
 	private ArrayList<Choice> choices;
 	private ArrayList<Annotation> annotations;
 	String Author;
-	
-	public Frag(){
-		
+
+	public Frag() {
+
 		this.setPictures(new ArrayList<Media>());
 		this.vids = new ArrayList<Media>();
 		this.choices = new ArrayList<Choice>();
@@ -50,7 +49,7 @@ public class Frag {
 		this.Author = "";
 		this.title = "";
 	}
-	
+
 	public ArrayList<Annotation> getAnnotations() {
 		if (this.annotations == null) {
 			this.annotations = new ArrayList<Annotation>();
@@ -62,76 +61,80 @@ public class Frag {
 		this.annotations.add(a);
 	}
 
-	public void setAuthor(String author){
+	public void setAuthor(String author) {
 		this.Author = author;
 	}
-	
-	public void setTitle(String title){	
+
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public void setBody(String body){		
+	public void setBody(String body) {
 		this.body = body;
 	}
-	
-	public void setIllustration(Media pic){	
+
+	public void setIllustration(Media pic) {
 		this.profile = pic;
 	}
-	
+
 	/**
 	 * Adds the image as one of the fragment's set of images.
-	 * @param pic the picture to be added.
+	 * 
+	 * @param pic
+	 *            the picture to be added.
 	 */
-	public void addPicture(Media pic){
+	public void addPicture(Media pic) {
 		this.getPictures().add(pic);
 	}
 
 	/**
 	 * Adds the video as one of the fragment's set of videos.
-	 * @param vid the video to be added.
+	 * 
+	 * @param vid
+	 *            the video to be added.
 	 */
-	public void addVideo(Media vid){	
-		this.vids.add(vid);	
+	public void addVideo(Media vid) {
+		this.vids.add(vid);
 	}
-	
-	public String getAuthor(){	
+
+	public String getAuthor() {
 		return this.Author;
 	}
-	
-	public String getTitle(){	
+
+	public String getTitle() {
 		return this.title;
 	}
 
-	public String getBody(){		
+	public String getBody() {
 		return this.body;
 	}
 
-	public ArrayList<Media> getImages(){		
+	public ArrayList<Media> getImages() {
 		return this.getPictures();
 	}
 
-	public ArrayList<Media> getVids(){		
+	public ArrayList<Media> getVids() {
 		return this.vids;
 	}
-	
-	public Media getProfile(){	
+
+	public Media getProfile() {
 		return this.profile;
 	}
-	
-	public String getId(){	
+
+	public String getId() {
 		return this.id;
 	}
 
-	public void setChoice(Choice choice){		
-		this.choices.add(choice);	
+	public void setChoice(Choice choice) {
+		this.choices.add(choice);
 	}
-	
-	public ArrayList<Choice> getChoices(){
+
+	public ArrayList<Choice> getChoices() {
 		return this.choices;
 	}
-	
-	public void setId(String id) {	
-		this.id = id;	
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public ArrayList<Media> getPictures() {

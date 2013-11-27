@@ -15,59 +15,65 @@
 
 package com.example.team04adventure.Model;
 
-
 import java.util.ArrayList;
 
 /**
- * Story is meant to create and hold the ID, title, author and all associated fragments of a story.
+ * Story is meant to create and hold the ID, title, author and all associated
+ * fragments of a story.
  * 
  * @author Team04Adventure
  */
 public class Story {
-	
+
 	private String title;
 	private ArrayList<Frag> frags;
 	private String id;
 	private String Author;
 	private String synopsis;
 	private int version;
-	
-	public Story(){
+
+	public Story() {
 		this.frags = new ArrayList<Frag>();
 		this.title = "";
 		this.Author = "";
 		this.synopsis = "";
 		this.setVersion(0);
 	}
-	
-	public String getSynopsis(){
+
+	public String getSynopsis() {
 		return this.synopsis;
 	}
-	
-	public void setSynopsis(String syn){
+
+	public void setSynopsis(String syn) {
 		this.synopsis = syn;
 	}
 
-	public void setTitle(String title){
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public void setAuthor(String author){
+	public void setAuthor(String author) {
 		this.Author = author;
 	}
-	
+
 	/**
 	 * Adds the given fragment as one of the associated fragments of the story.
-	 * @param frag the fragment to add.
+	 * 
+	 * @param frag
+	 *            the fragment to add.
 	 */
-	public void addFragment(Frag frag){
+	public void addFragment(Frag frag) {
 		this.frags.add(frag);
 	}
-	
+
 	/**
-	 * Adds the given fragment as one of the associated fragments of the story in the set position.
-	 * @param frag the fragment to add.
-	 * @param position the position in the ArrayList of stories to add the story to.
+	 * Adds the given fragment as one of the associated fragments of the story
+	 * in the set position.
+	 * 
+	 * @param frag
+	 *            the fragment to add.
+	 * @param position
+	 *            the position in the ArrayList of stories to add the story to.
 	 */
 	public void addFragment(Frag frag, int position) {
 		this.frags.add(position, frag);
@@ -75,7 +81,9 @@ public class Story {
 
 	/**
 	 * Deletes the fragment.
-	 * @param id id of the fragment to delete.
+	 * 
+	 * @param id
+	 *            id of the fragment to delete.
 	 */
 	public void deleteFrag(String id) {
 		for (int i = 0; i < frags.size(); i++) {
@@ -84,7 +92,7 @@ public class Story {
 			}
 		}
 	}
-	
+
 	public Frag getFrag(String fid) {
 		for (int i = 0; i < frags.size(); i++) {
 			if (frags.get(i).getId().equals(fid)) {
@@ -94,26 +102,26 @@ public class Story {
 		return null;
 	}
 
-	public String getTitle(){
+	public String getTitle() {
 		return this.title;
 	}
-	
-	public String getAuthor(){	
+
+	public String getAuthor() {
 		return this.Author;
 	}
-	
-	public ArrayList<Frag> getFrags(){
+
+	public ArrayList<Frag> getFrags() {
 		return this.frags;
 	}
-	
-	public String getId(){
+
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(String id){
+	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public int getVersion() {
 		return version;
 	}
@@ -121,13 +129,11 @@ public class Story {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
+
 	/**
 	 * Increments the version of the story.
 	 */
-	public void incVersion(){
+	public void incVersion() {
 		(this.version)++;
 	}
 }
-
-

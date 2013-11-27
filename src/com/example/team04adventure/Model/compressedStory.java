@@ -16,7 +16,8 @@
 package com.example.team04adventure.Model;
 
 /**
- * compressedStory holds the title, id, author, and the number of fragments stored inside a story.
+ * compressedStory holds the title, id, author, and the number of fragments
+ * stored inside a story.
  * 
  * @author Team04Adventure
  */
@@ -26,10 +27,9 @@ public class compressedStory {
 	int numfrags;
 	String id;
 	String author;
-	
 
-	public compressedStory(Story aStory){
-		
+	public compressedStory(Story aStory) {
+
 		this.title = aStory.getTitle();
 		this.author = aStory.getAuthor();
 		this.id = aStory.getId();
@@ -41,56 +41,49 @@ public class compressedStory {
 	 * 
 	 * @return a Story object with the information from compressedStory.
 	 */
-	public Story toStory(){
+	public Story toStory() {
 		Story tempStory = new Story();
 		tempStory.setTitle(this.title);
 		tempStory.setAuthor(this.author);
 		tempStory.setId(this.id);
-		for (int b = 0; b<this.numfrags;b++){
+		for (int b = 0; b < this.numfrags; b++) {
 			Frag tempFrag = new Frag();
 			tempStory.getFrags().add(tempFrag);
 		}
 		return tempStory;
-		
+
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public int getNumfrags() {
 		return numfrags;
 	}
 
-
 	public void setNumfrags(int numfrags) {
 		this.numfrags = numfrags;
 	}
-
 
 	public String getId() {
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	public String getAuthor() {
 		return author;
 	}
 
-
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
+
 }

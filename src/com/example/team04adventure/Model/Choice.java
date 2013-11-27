@@ -23,37 +23,37 @@ package com.example.team04adventure.Model;
  * @author Team04Adventure
  */
 public class Choice {
-	
+
 	String body;
 	long id;
 	String childID;
-	
-	public Choice(){
+
+	public Choice() {
 		this.childID = "";
 		this.body = "";
 	}
-	
-	public String getBody(){
-		return this.body;	
+
+	public String getBody() {
+		return this.body;
 	}
 
-	public void setBody(String body){	
-		this.body = body;	
+	public void setBody(String body) {
+		this.body = body;
 	}
 
-	public void setChild(String id){		
+	public void setChild(String id) {
 		this.childID = id;
 	}
 
-	public String getChild(){	
+	public String getChild() {
 		return this.childID;
 	}
-	
-	public long getID(){	
+
+	public long getID() {
 		return this.id;
 	}
-	
-	public void setID(long id){	
+
+	public void setID(long id) {
 		this.id = id;
 	}
 

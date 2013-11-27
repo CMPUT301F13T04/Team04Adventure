@@ -15,7 +15,6 @@
 
 package com.example.team04adventure.Model;
 
-
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -29,76 +28,78 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.team04adventure.R;
-import com.example.team04adventure.Model.FragAdapter.ViewHolder;
 
 /**
  * AnnotationAdapter is a custom adapter for the list of annotations.
+ * 
  * @author Team04Adventure
  */
 public class AnnotationAdapter extends BaseAdapter {
- 
-		private ArrayList<Annotation> annots;
-		private Context context;
-	    private LayoutInflater layoutInflater;
-	 
-	    public AnnotationAdapter(Context context, ArrayList<Annotation> annots) {
-	        this.annots = annots;
-	        layoutInflater = LayoutInflater.from(context);
-	        this.context = context;
-	    }
-	 
-	    @Override
-	    public int getCount() {
-	    	return annots.size();
-	    }
-	 
-	    @Override
-	    public Object getItem(int position) {
-	        return annots.get(position);
-	    }
-	 
-	    @Override
-	    public long getItemId(int position) {
-	        return position;
-	    }
-	 
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ViewHolder holder;
-	        if (convertView == null) {
-	            convertView = layoutInflater.inflate(R.layout.annotlistlayout, null);
-	            holder = new ViewHolder();
-	            holder.image = (ImageView) convertView.findViewById(R.id.image);
-	            holder.authorView = (TextView) convertView.findViewById(R.id.author);
-	            holder.reviewView = (TextView) convertView.findViewById(R.id.review);
-	        
 
-	            convertView.setTag(holder);
-	        } else 
-	            holder = (ViewHolder) convertView.getTag();
-	        
-	        if (annots.get(position).getImage() == null) {
-	        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.defaultprofile);
-	        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, false);
-	            holder.image.setImageBitmap(scaledBitmap);
-	        } else {
-	        	String encodedString = annots.get(position).getImage();
-	        	Bitmap bm = Media.decodeBase64(encodedString);
-	        	holder.image.setImageBitmap(bm);
-	        }
-	        holder.authorView.setText(annots.get(position).getAuthor());
-	        holder.reviewView.setText(annots.get(position).getReview());
-	        
-	        
-	 
-	        return convertView;
-	    }
-	 
-	    static class ViewHolder {
-	       
-	    	ImageView image;
-	        TextView authorView;
-	        TextView reviewView;
-	      
-	    }
-	 
+	private ArrayList<Annotation> annots;
+	private Context context;
+	private LayoutInflater layoutInflater;
+
+	public AnnotationAdapter(Context context, ArrayList<Annotation> annots) {
+		this.annots = annots;
+		layoutInflater = LayoutInflater.from(context);
+		this.context = context;
+	}
+
+	@Override
+	public int getCount() {
+		return annots.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return annots.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			convertView = layoutInflater
+					.inflate(R.layout.annotlistlayout, null);
+			holder = new ViewHolder();
+			holder.image = (ImageView) convertView.findViewById(R.id.image);
+			holder.authorView = (TextView) convertView
+					.findViewById(R.id.author);
+			holder.reviewView = (TextView) convertView
+					.findViewById(R.id.review);
+
+			convertView.setTag(holder);
+		} else
+			holder = (ViewHolder) convertView.getTag();
+
+		if (annots.get(position).getImage() == null) {
+			Bitmap bitmap = BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.defaultprofile);
+			Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250,
+					false);
+			holder.image.setImageBitmap(scaledBitmap);
+		} else {
+			String encodedString = annots.get(position).getImage();
+			Bitmap bm = Media.decodeBase64(encodedString);
+			holder.image.setImageBitmap(bm);
+		}
+		holder.authorView.setText(annots.get(position).getAuthor());
+		holder.reviewView.setText(annots.get(position).getReview());
+
+		return convertView;
+	}
+
+	static class ViewHolder {
+
+		ImageView image;
+		TextView authorView;
+		TextView reviewView;
+
+	}
+
 }

@@ -22,7 +22,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -32,8 +31,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 
@@ -66,7 +63,8 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 	/**
 	 * Adds a story to the server.
 	 * 
-	 * @param s Story to be stored.
+	 * @param s
+	 *            Story to be stored.
 	 */
 	public void addStory(Story s) {
 		try {
@@ -261,7 +259,8 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 	/**
 	 * Searches through the compressed stories based on the keywords.
 	 * 
-	 * @param keywords keywords to search with.
+	 * @param keywords
+	 *            keywords to search with.
 	 * @return ArrayList of compressedStories that satisfy the keywords.
 	 * @throws IOException
 	 */

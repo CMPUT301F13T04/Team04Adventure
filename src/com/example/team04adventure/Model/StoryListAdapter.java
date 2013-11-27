@@ -96,10 +96,11 @@ public class StoryListAdapter extends BaseAdapter {
 	}
 
 	/**
-     * Filters the list based on the query.
-     * 
-     * @param query string that is being searched.
-     */
+	 * Filters the list based on the query.
+	 * 
+	 * @param query
+	 *            string that is being searched.
+	 */
 	public void filter(String query) {
 		if (query != null) {
 			stories.clear();

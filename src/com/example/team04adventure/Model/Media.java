@@ -15,7 +15,6 @@
 
 package com.example.team04adventure.Model;
 
-
 import java.io.ByteArrayOutputStream;
 
 import android.graphics.Bitmap;
@@ -23,77 +22,85 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 /**
- * Media holds the images, videos, and sounds that can be associated to any fragment.
+ * Media holds the images, videos, and sounds that can be associated to any
+ * fragment.
  * 
  * @author Team04Adventure
  */
 public class Media {
-	
+
 	private static final int IMAGE_MAX = 250;
 	long id;
 	String content;
 	String type;
-	
-	public long getID(){
+
+	public long getID() {
 		return this.id;
 	}
 
-	public void setContent(String content){
+	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public String getMedia(){
+
+	public String getMedia() {
 		return this.content;
 	}
-	
-	public void setID(long id){	
+
+	public void setID(long id) {
 		this.id = id;
 	}
-	
-	public void setType(String type){	
+
+	public void setType(String type) {
 		this.type = type;
 	}
-	
-	public String getType(){	
+
+	public String getType() {
 		return this.type;
 	}
-	
+
 	/**
 	 * Encodes bitmap into base64 string.
-	 * @param bm bitmap to be encoded.
+	 * 
+	 * @param bm
+	 *            bitmap to be encoded.
 	 * @return encoded string.
 	 */
 	public static String encodeToBase64(Bitmap bm) {
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-	    bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-	    byte[] bArray = baos.toByteArray();
-	    String imageEncoded = Base64.encodeToString(bArray,Base64.DEFAULT);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		byte[] bArray = baos.toByteArray();
+		String imageEncoded = Base64.encodeToString(bArray, Base64.DEFAULT);
 
-	    return imageEncoded;
+		return imageEncoded;
 	}
-	
+
 	/**
 	 * Decodes string into bitmap
-	 * @param bArray encoded string.
+	 * 
+	 * @param bArray
+	 *            encoded string.
 	 * @return decoded bitmap.
 	 */
 	public static Bitmap decodeBase64(String bArray) {
-	    byte[] decodedByte = Base64.decode(bArray, 0);
-	    return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length); 
+		byte[] decodedByte = Base64.decode(bArray, 0);
+		return BitmapFactory
+				.decodeByteArray(decodedByte, 0, decodedByte.length);
 	}
-	
+
 	/**
 	 * Rescales an image to set the height to match the max image height.
-	 * @param bitmap bitmap to be rescaled.
+	 * 
+	 * @param bitmap
+	 *            bitmap to be rescaled.
 	 * @return rescaled bitmap.
 	 */
 	public static Bitmap resizeImage(Bitmap bitmap) {
 		float width = bitmap.getWidth();
 		float height = bitmap.getHeight();
 		float scale = 1;
-		
+
 		scale = IMAGE_MAX / height;
-		
+
 		float newWidth = width * scale;
 		float newHeight = height * scale;
 		int newWidthInt = (int) newWidth;
@@ -102,6 +109,5 @@ public class Media {
 				newHeightInt, false);
 		return resizedBitmap;
 	}
-
 
 }

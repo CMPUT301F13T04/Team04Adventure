@@ -14,6 +14,7 @@
  */
 
 package com.example.team04adventure.View;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -38,8 +39,9 @@ import com.example.team04adventure.Model.Story;
 import com.example.team04adventure.Model.StoryListAdapter;
 
 /**
- * This class implements the first half of the "home screen". It is responsible for displaying
- * all of the stories in a listview. It represents the left half of the swipe view.
+ * This class implements the first half of the "home screen". It is responsible
+ * for displaying all of the stories in a listview. It represents the left half
+ * of the swipe view.
  * 
  * @author Team04Adventure
  */
@@ -55,15 +57,18 @@ public class AllStoriesListSwipe extends Fragment {
 	ArrayList<Story> stories;
 
 	/**
-	 * onCreate method, simply assigns the ListView variables to the necessary variables
-	 * and returns it to the caller
-	 * @param LayoutInflator, ViewGroup, Bundle
+	 * onCreate method, simply assigns the ListView variables to the necessary
+	 * variables and returns it to the caller
+	 * 
+	 * @param LayoutInflator
+	 *            , ViewGroup, Bundle
 	 * @return View
 	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.activity_all_stories_list_swipe, container, false);
+		View rootView = inflater.inflate(
+				R.layout.activity_all_stories_list_swipe, container, false);
 		storyListView = (ListView) rootView.findViewById(R.id.story_list);
 		randomButton = (Button) rootView.findViewById(R.id.randomAllStories);
 
@@ -72,11 +77,11 @@ public class AllStoriesListSwipe extends Fragment {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				// Do something
-				//if (newText.length() > 0) {
+				// if (newText.length() > 0) {
 				allAdapter.filter(newText);
 				return true;
-				//} 
-				//return false;
+				// }
+				// return false;
 			}
 
 			@Override
@@ -112,18 +117,24 @@ public class AllStoriesListSwipe extends Fragment {
 		storyListView.setAdapter(allAdapter);
 		storyListView.setOnItemClickListener(new OnItemClickListener() {
 
-			/** When a story is selected, bundle the necessary vars into an intent and begin the
-			 * new activity that will bring the user to the online story's intro page.
-			 * @param AdapterView, View, int, long
+			/**
+			 * When a story is selected, bundle the necessary vars into an
+			 * intent and begin the new activity that will bring the user to the
+			 * online story's intro page.
+			 * 
+			 * @param AdapterView
+			 *            , View, int, long
 			 * @return void
 			 */
 			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id ) {
+			public void onItemClick(AdapterView<?> a, View v, int position,
+					long id) {
 				mDialog = new ProgressDialog(v.getContext());
 				mDialog.setMessage("Please wait...");
 				mDialog.show();
 				Story s = (Story) storyListView.getItemAtPosition(position);
-				Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
+				Intent intent = new Intent(getActivity(),
+						OnlineStoryIntro.class);
 				intent.putExtra("id", s.getId());
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(intent);
@@ -135,33 +146,46 @@ public class AllStoriesListSwipe extends Fragment {
 
 			@Override
 			public void onClick(View arg0) {
-				//goToStory(id);
+				// goToStory(id);
 				if (stories.size() > 0) {
 					mDialog = new ProgressDialog(arg0.getContext());
 					mDialog.setMessage("Opening Random Story...");
 					mDialog.show();
 					Story s = (Story) stories.get(chooseRandom());
-					Intent intent = new Intent(getActivity(), OnlineStoryIntro.class);
+					Intent intent = new Intent(getActivity(),
+							OnlineStoryIntro.class);
 					intent.putExtra("id", s.getId());
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					startActivity(intent);
 				} else {
 					String validun = "No Online Stories!";
-					Toast.makeText(arg0.getContext(), validun, Toast.LENGTH_LONG).show();
+					Toast.makeText(arg0.getContext(), validun,
+							Toast.LENGTH_LONG).show();
 				}
 
 			}
-		});		
+		});
 
-	}	
+	}
+
+	/**
+	 * Chooses a random number that is within the range of the size of the list
+	 * of stories.
+	 * 
+	 * @return a random number.
+	 */
 	private int chooseRandom() {
 		Random ran = new Random();
 		return ran.nextInt(stories.size());
 	}
-	public void onStop(){
+
+	/**
+	 * onStop method which closes the loading spinner.
+	 */
+	public void onStop() {
 		super.onStop();
 
-		if (mDialog!=null){
+		if (mDialog != null) {
 			mDialog.dismiss();
 		}
 	}

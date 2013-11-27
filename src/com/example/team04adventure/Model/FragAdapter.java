@@ -15,7 +15,6 @@
 
 package com.example.team04adventure.Model;
 
-
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -31,71 +30,71 @@ import android.widget.TextView;
 import com.example.team04adventure.R;
 
 /**
- * FragAdapter is an adapter to get the list of fragments.
+ * FragAdapter is a custom adapter for the list of fragments.
+ * 
  * @author Team04Adventure
  */
 public class FragAdapter extends BaseAdapter {
 
-	
 	private ArrayList<Frag> frags;
 	private Context context;
-    private LayoutInflater layoutInflater;
- 
-    public FragAdapter(Context context, ArrayList<Frag> frag) {
-        this.frags = frag;
-        this.context = context;
-        layoutInflater = LayoutInflater.from(context);
-    }
- 
-    public int getCount() {
-    	return frags.size();
-    }
- 
-    public Object getItem(int position) {
-        return frags.get(position);
-    }
- 
-    public long getItemId(int position) {
-        return position;
-    }
- 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.fraglistlayout, null);
-            holder = new ViewHolder();
-            holder.profile = (ImageView) convertView.findViewById(R.id.image);
-            holder.fragView = (TextView) convertView.findViewById(R.id.frag);
-            holder.authorView = (TextView) convertView.findViewById(R.id.author);
-        
+	private LayoutInflater layoutInflater;
 
-            convertView.setTag(holder);
-        } else 
-            holder = (ViewHolder) convertView.getTag();
-        
-        if (frags.get(position).getProfile().getMedia() == null) {
-        	Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.defaultprofile);
-        	Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250, false);
-            holder.profile.setImageBitmap(scaledBitmap);
-        } else {
-        	String encodedString = frags.get(position).getProfile().getMedia();
-        	Bitmap bm = Media.decodeBase64(encodedString);
-        	holder.profile.setImageBitmap(bm);
-        }
-        holder.fragView.setText(frags.get(position).getTitle());
-        holder.authorView.setText("By: "+frags.get(position).getAuthor());
-        
-        
- 
-        return convertView;
-    }
- 
-    static class ViewHolder {
-       
-    	ImageView profile;
-        TextView fragView;
-        TextView authorView;
-      
-    }
-	
+	public FragAdapter(Context context, ArrayList<Frag> frag) {
+		this.frags = frag;
+		this.context = context;
+		layoutInflater = LayoutInflater.from(context);
+	}
+
+	public int getCount() {
+		return frags.size();
+	}
+
+	public Object getItem(int position) {
+		return frags.get(position);
+	}
+
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			convertView = layoutInflater.inflate(R.layout.fraglistlayout, null);
+			holder = new ViewHolder();
+			holder.profile = (ImageView) convertView.findViewById(R.id.image);
+			holder.fragView = (TextView) convertView.findViewById(R.id.frag);
+			holder.authorView = (TextView) convertView
+					.findViewById(R.id.author);
+
+			convertView.setTag(holder);
+		} else
+			holder = (ViewHolder) convertView.getTag();
+
+		if (frags.get(position).getProfile().getMedia() == null) {
+			Bitmap bitmap = BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.defaultprofile);
+			Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 250, 250,
+					false);
+			holder.profile.setImageBitmap(scaledBitmap);
+		} else {
+			String encodedString = frags.get(position).getProfile().getMedia();
+			Bitmap bm = Media.decodeBase64(encodedString);
+			holder.profile.setImageBitmap(bm);
+		}
+		holder.fragView.setText(frags.get(position).getTitle());
+		holder.authorView.setText("By: " + frags.get(position).getAuthor());
+
+		return convertView;
+	}
+
+	static class ViewHolder {
+
+		ImageView profile;
+		TextView fragView;
+		TextView authorView;
+
+	}
+
 }

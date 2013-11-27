@@ -15,8 +15,6 @@
 
 package com.example.team04adventure.View;
 
-
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,24 +39,20 @@ import com.example.team04adventure.Model.AdventureApp;
 import com.example.team04adventure.Model.Choice;
 import com.example.team04adventure.Model.Frag;
 import com.example.team04adventure.Model.FragChoiceAdapter;
-import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
 /**
- * FragmentViewer creates the activity that lets the user view the contents of the fragment.
+ * FragmentViewer creates the activity that lets the user view the contents of
+ * the fragment.
+ * 
  * @author Team04Adventure
  */
 public class FragmentViewer extends Activity {
-	// This is the title and body fields that are allocated at runtime
-	TextView 	fragTitle,
-	fragAuthor,
-	fragBody;
+	TextView fragTitle, fragAuthor, fragBody;
 	ImageView profilePic;
-	// The list of next choices
 	ArrayList<Choice> choices;
-	// The adapter for choices
 	ArrayList<Media> fragImages;
 	LinearLayout imageLayout;
 	String flag;
@@ -74,25 +68,25 @@ public class FragmentViewer extends Activity {
 		// when a choice is selected from another fragment, or from the
 		// StoryIntro.java class. They have to be supplied again before
 		// you can go to another fragment.
-		
+
 		Bundle extras = getIntent().getExtras();
 		fragID = extras.getString("fid");
 		storyID = extras.getString("sid");
 		flag = extras.getString("flag");
 		final ListView choiceListView = (ListView) findViewById(R.id.ChoiceList);
-		
+
 		// Initialize the list of choices for that frag
 		choices = new ArrayList<Choice>();
 		// Get the fragment, and then assign the choice
 		Frag f = new Frag();
 		StorageManager sm = new StorageManager(this);
-		if (flag.equals("online")){
-			AdventureApp Adventure = (AdventureApp)getApplicationContext();
+		if (flag.equals("online")) {
+			AdventureApp Adventure = (AdventureApp) getApplicationContext();
 			Story s = Adventure.getCurrentStory();
 
 			ArrayList<Frag> frags = s.getFrags();
-			for(Frag fr: frags){
-				if (fr.getId().equals(fragID)){
+			for (Frag fr : frags) {
+				if (fr.getId().equals(fragID)) {
 					f = fr;
 					break;
 				}
@@ -110,7 +104,7 @@ public class FragmentViewer extends Activity {
 			for (int i = 0; i < choices.size(); i++) {
 				childIds[i] = choices.get(i).getChild();
 			}
-			if (!hasRandom()){
+			if (!hasRandom()) {
 				addRandom();
 			}
 		}
@@ -122,7 +116,7 @@ public class FragmentViewer extends Activity {
 		fragBody = (TextView) findViewById(R.id.FragBody);
 		fragBody.append(f.getBody());
 		profilePic = (ImageView) findViewById(R.id.profile_pic);
-		
+
 		if (f.getProfile().getMedia() != null) {
 			Media fragProfile = f.getProfile();
 			String cString = fragProfile.getMedia();
@@ -132,7 +126,7 @@ public class FragmentViewer extends Activity {
 
 		fragImages = f.getImages();
 		imageLayout = (LinearLayout) findViewById(R.id.image_layout);
-		for (int i=0; i < fragImages.size(); i++) {
+		for (int i = 0; i < fragImages.size(); i++) {
 			Media mediaImage = fragImages.get(i);
 			String convertedString = mediaImage.getMedia();
 			if (convertedString != null) {
@@ -149,23 +143,35 @@ public class FragmentViewer extends Activity {
 
 			/** When a story is selected **/
 			@Override
-			public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> a, View v, int position,
+					long id) {
 				Choice c = (Choice) choiceListView.getItemAtPosition(position);
-				/** Need to call another instance of this class here? Just the fragmentID of the child will be brought in.*/
-				Intent intent = new Intent(getApplicationContext(), FragmentViewer.class);
+				/**
+				 * Need to call another instance of this class here? Just the
+				 * fragmentID of the child will be brought in.
+				 */
+				Intent intent = new Intent(getApplicationContext(),
+						FragmentViewer.class);
 				intent.putExtra("flag", flag);
-				intent.putExtra("sid", storyID); 
+				intent.putExtra("sid", storyID);
 				intent.putExtra("fid", c.getChild());
 				startActivity(intent);
-				/* This line terminates the last fragment so that you
-				 * can't "cheat" and go back to the previous fragment.
-				 * Do we want this feature?
+				/*
+				 * This line terminates the last fragment so that you can't
+				 * "cheat" and go back to the previous fragment. Do we want this
+				 * feature?
 				 */
 				finish();
 			}
 		});
 	}
-	
+
+	/**
+	 * Starts the activity that displays the annotations of the fragment.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
 	public void showAnnots(View view) {
 		Intent intent = new Intent(getApplicationContext(), AnnotViewer.class);
 		intent.putExtra("sid", storyID);
@@ -174,40 +180,46 @@ public class FragmentViewer extends Activity {
 		startActivity(intent);
 	}
 
-
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
-		String helpText = "This displays the fragment's images and text. Existing choices are at the bottom of the screen" +
-				"and the 'Random Choice?' button chooses a random existing choice. Annotations can be made by pressing the" +
-				"paperclip button on the bottom right corner.";
+		String helpText = "This displays the fragment's images and text. Existing choices are at the bottom of the screen"
+				+ "and the 'Random Choice?' button chooses a random existing choice. Annotations can be made by pressing the"
+				+ "paperclip button on the bottom right corner.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.fragment_viewer, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.help:
-				help();
-				return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}
 
-	public void addRandom(){
+	/**
+	 * Adds a new choice that allows the user to make a random choice.
+	 */
+	public void addRandom() {
 		Random r = new Random();
 		int ranId = r.nextInt(choices.size());
 		// Create the random choice
@@ -219,10 +231,17 @@ public class FragmentViewer extends Activity {
 		// Append the random Choice to the end of the list
 		choices.add(ranChoice);
 	}
-	public boolean hasRandom(){
+
+	/**
+	 * Checks if the choice selected is asking for a random choice.
+	 * 
+	 * @return boolean of whether the next fragment should be chosen randomly or
+	 *         not.
+	 */
+	public boolean hasRandom() {
 		boolean hasRandom = false;
-		for (Choice c : choices){
-			if (c.getBody().equals("Random Choice?")){
+		for (Choice c : choices) {
+			if (c.getBody().equals("Random Choice?")) {
 				hasRandom = true;
 			}
 		}

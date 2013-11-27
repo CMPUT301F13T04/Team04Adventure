@@ -23,82 +23,38 @@ package com.example.team04adventure.Model;
  * @author Team04Adventure
  */
 public class Choice {
-	
+
 	String body;
 	long id;
 	String childID;
-	
-	public Choice(){
-		
-		/** a childID of -1 signifies that the choice 
-		 * does not yet have a child **/
+
+	public Choice() {
 		this.childID = "";
 		this.body = "";
-		
 	}
-	
-	/*
-	 * Simple getters and setters.
-	 * 
-	 */
-	
-	/**
-	 * Gets the body of the choice.
-	 * @return body of the choice.
-	 */
-	public String getBody(){
-		
+
+	public String getBody() {
 		return this.body;
-		
 	}
-	
-	/**
-	 * Sets the body of the choice as specified.
-	 * @param body body of the choice.
-	 */
-	public void setBody(String body){
-		
+
+	public void setBody(String body) {
 		this.body = body;
-		
 	}
-	
-	/**
-	 * Sets the child of the choice as the specified ID.
-	 * @param id ID of the choice.
-	 */
-	public void setChild(String id){
-		
+
+	public void setChild(String id) {
 		this.childID = id;
-		
 	}
-	
-	/**
-	 * Gets the child of the choice.
-	 * @return ID of the child of the choice.
-	 */
-	public String getChild(){
-	
+
+	public String getChild() {
 		return this.childID;
-	
 	}
-	
-	/**
-	 * Gets the ID of the choice.
-	 * @return ID of the choice.
-	 */
-	public long getID(){
-		
+
+	public long getID() {
 		return this.id;
 	}
-	
-	/**
-	 * Sets the ID of the choice.
-	 * @param id ID of the choice.
-	 */
-	public void setID(long id){
-		
+
+	public void setID(long id) {
 		this.id = id;
-		
 	}
 
 }

@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.JSONparser;
@@ -48,29 +49,36 @@ import com.example.team04adventure.View.CachedStoriesListSwipe;
 import com.example.team04adventure.View.MainActivity;
 import com.example.team04adventure.View.MyStoriesListSwipe;
 
+/**
+ * OnlineStoryList is the swipe view that the user uses to control between the
+ * main story lists.
+ * 
+ * @author Team04Adventure
+ */
 public class OnlineStoryList extends FragmentActivity implements
 		ActionBar.TabListener {
 
-	/**
+	/*
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+	 * fragments for each of the sections. We use a {@link
+	 * android.support.v4.app.FragmentPagerAdapter} derivative, which will keep
+	 * every loaded fragment in memory. If this becomes too memory intensive, it
+	 * may be best to switch to a {@link
+	 * android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
-	/**
+	/*
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
 	String Uname;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_online_story_list);
-		
+
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -106,45 +114,47 @@ public class OnlineStoryList extends FragmentActivity implements
 					.setTabListener(this));
 		}
 	}
-		
 
-		
-		
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
-		String helpText = "All stories are displayed here. Press a story to read it. Online stories contains all" +
-				"the stories on the server. My stories contains all the stories written by you." +
-				"Cached stories contains all the stories downloaded on your phone that aren't written by you. " +
-				"The 'I'm Feeling Lucky!' button chooses a random story for you from the existing online stories." +
-				"The 'Add Story' button lets you create a new story, and new stories can only be published by creating a" +
-				"new story from here. The 'Sync' button locally mirrors the cached stories with the online stories so that" +
-				"the cached stories are updated.";
+		String helpText = "All stories are displayed here. Press a story to read it. Online stories contains all"
+				+ "the stories on the server. My stories contains all the stories written by you."
+				+ "Cached stories contains all the stories downloaded on your phone that aren't written by you. "
+				+ "The 'I'm Feeling Lucky!' button chooses a random story for you from the existing online stories."
+				+ "The 'Add Story' button lets you create a new story, and new stories can only be published by creating a"
+				+ "new story from here. The 'Sync' button locally mirrors the cached stories with the online stories so that"
+				+ "the cached stories are updated.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.online_story_list, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.help:
-				help();
-				return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}
+
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
@@ -178,12 +188,13 @@ public class OnlineStoryList extends FragmentActivity implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			//Frag fragment = new DummySectionFragment();
-			//Bundle args = new Bundle();
-			//args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			//fragment.setArguments(args);
-			
-			switch (position){
+			// Frag fragment = new DummySectionFragment();
+			// Bundle args = new Bundle();
+			// args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position +
+			// 1);
+			// fragment.setArguments(args);
+
+			switch (position) {
 			case 0:
 				return new AllStoriesListSwipe();
 			case 1:
@@ -191,8 +202,7 @@ public class OnlineStoryList extends FragmentActivity implements
 			case 2:
 				return new CachedStoriesListSwipe();
 			}
-			
-			
+
 			return null;
 		}
 
@@ -245,100 +255,106 @@ public class OnlineStoryList extends FragmentActivity implements
 		}
 	}
 
-	public void addStory(View view){
-
-		
+	/**
+	 * Starts a dialog box which allows the user to create a new story.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
+	public void addStory(View view) {
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    final EditText titleinput = new EditText(this); 
-	    final EditText bodyinput = new EditText(this);
-	    titleinput.setHint("Enter the Title here.");
-	    bodyinput.setHint("Enter a Synopsis here.");
-	    lila1.addView(titleinput);
-	    lila1.addView(bodyinput);
-	    adb.setView(lila1);
-	
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+		final EditText titleinput = new EditText(this);
+		final EditText bodyinput = new EditText(this);
+		titleinput.setHint("Enter the Title here.");
+		bodyinput.setHint("Enter a Synopsis here.");
+		lila1.addView(titleinput);
+		lila1.addView(bodyinput);
+		adb.setView(lila1);
 
 		adb.setTitle("New Story");
 
-		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {  
-			public void onClick(DialogInterface dialog, int whichButton) {  
+		adb.setNegativeButton("Create", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
 				Story story = new Story();
 				story.setTitle(titleinput.getText().toString());
 				Random rg = new Random();
 				int rint = rg.nextInt(100);
 				story.setSynopsis(bodyinput.getText().toString());
-				story.setId(story.getTitle().replace(" ", "")+rint);
+				story.setId(story.getTitle().replace(" ", "") + rint);
 				story.setAuthor(MainActivity.username);
 				story.setVersion(1);
 
-
 				StorageManager sm = new StorageManager(getBaseContext());
 
-				
 				sm.addStory(story);
 
-				Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				Intent intent = new Intent(OnlineStoryList.this,
+						OnlineStoryList.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 				startActivity(intent);
-				
-			}  
-		});  
+			}
+		});
 
 		adb.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 
-				return;   
+				return;
 			}
 		});
-		
+
 		adb.show();
 
-
 	}
-	
-	public void sync(View view){
-		
-	
-		StorageManager sm = new StorageManager(this);
-		
-		Integer tempIndex = Integer.valueOf(-5);
-		ArrayList<Story> onlines = null;
-		try {
-			onlines = new JSONparser().execute(tempIndex).get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ArrayList<Story> offlines = sm.getAll();
-		
-		
-		
-		for(Story s : onlines){
-			for(Story ss : offlines){
-				if(s.getId().equals(ss.getId())){
-					if(s.getVersion()>ss.getVersion()){
-						sm.deleteStory(ss);
-						sm.addStory(s);
-						
-					}
 
-				}					
-				
+	/**
+	 * Updates the cached stories with the stories of their online versions.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
+	public void sync(View view) {
+		StorageManager sm = new StorageManager(this);
+		ArrayList<Story> offlines = sm.getAll();
+
+		if (offlines.isEmpty()) {
+			Toast.makeText(getBaseContext(), "You have no stories to sync..",
+					Toast.LENGTH_LONG).show();
+
+		} else {
+
+			Integer tempIndex = Integer.valueOf(-5);
+			ArrayList<Story> onlines = null;
+			try {
+				onlines = new JSONparser().execute(tempIndex).get();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
+
+			for (Story s : onlines) {
+				for (Story ss : offlines) {
+					if (s.getId().equals(ss.getId())) {
+						if (s.getVersion() > ss.getVersion()) {
+							sm.deleteStory(ss);
+							sm.addStory(s);
+						}
+					}
+				}
+			}
+
+			Intent intent = new Intent(OnlineStoryList.this,
+					OnlineStoryList.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
-		
-		Intent intent = new Intent(OnlineStoryList.this, OnlineStoryList.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-		
-		
 	}
 }

@@ -10,24 +10,22 @@ import com.example.team04adventure.Model.JSONparser;
 import com.example.team04adventure.Model.Story;
 
 /**
- * @author Team04Adventure
- * The JUnit test case for the JSONparser class.
- *
+ * @author Team04Adventure The JUnit test case for the JSONparser class.
+ * 
  */
 public class JsonParserTest extends TestCase {
 	// Hardcoded story and fragment objects
 	Frag frag;
 	Story story;
 	JSONparser jp;
-	
+
 	public JsonParserTest(String name) {
 		super(name);
 	}
-	
+
 	/**
-	 * @author Team04Adventure
-	 * Create the default story and fragment. Also create the new 
-	 * JSONparser object.
+	 * @author Team04Adventure Create the default story and fragment. Also
+	 *         create the new JSONparser object.
 	 * @param void
 	 * @return void
 	 */
@@ -47,7 +45,7 @@ public class JsonParserTest extends TestCase {
 		this.frag = f;
 		this.story = s;
 		this.jp = new JSONparser();
-		
+
 		super.setUp();
 	}
 
@@ -56,8 +54,9 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * Tests the storeStory() method. Ensures that the parser actually
-	 * stores a story into the server.
+	 * Tests the storeStory() method. Ensures that the parser actually stores a
+	 * story into the server.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -67,8 +66,7 @@ public class JsonParserTest extends TestCase {
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -79,9 +77,10 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * Tests the getStory() method. Ensures that the parser actually
-	 * gets a story from the server. It also ensures that the story is the
-	 * correct one and not an arbitrary story.
+	 * Tests the getStory() method. Ensures that the parser actually gets a
+	 * story from the server. It also ensures that the story is the correct one
+	 * and not an arbitrary story.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -92,8 +91,7 @@ public class JsonParserTest extends TestCase {
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -110,9 +108,10 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * Tests the checkStory() method. Ensures that the parser actually
-	 * checks the server for a story. It also ensures that the story is the
-	 * correct one and not an arbitrary story.
+	 * Tests the checkStory() method. Ensures that the parser actually checks
+	 * the server for a story. It also ensures that the story is the correct one
+	 * and not an arbitrary story.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -123,8 +122,7 @@ public class JsonParserTest extends TestCase {
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -138,29 +136,29 @@ public class JsonParserTest extends TestCase {
 		Assert.assertTrue(s.equals(story));
 		/* Clean up and delete the story */
 		jp.deleteStory(story);
-		
+
 	}
 
 	/**
-	 * Tests the search() method. Ensures that the parser actually
-	 * checks the server for a story that matches the search criteria and returns
-	 * all stories that satisfy it. It also ensures that the story is the
-	 * correct one and not an arbitrary story.
+	 * Tests the search() method. Ensures that the parser actually checks the
+	 * server for a story that matches the search criteria and returns all
+	 * stories that satisfy it. It also ensures that the story is the correct
+	 * one and not an arbitrary story.
+	 * 
 	 * @param void
 	 * @return void
 	 */
 	public void testSearch() {
 		Story s;
-		ArrayList <Story> storyArr = new ArrayList<Story>();
-		String[] badQuery = {"Leg", "Day"};
-		String[] goodQuery = {"unique", "story"};
+		ArrayList<Story> storyArr = new ArrayList<Story>();
+		String[] badQuery = { "Leg", "Day" };
+		String[] goodQuery = { "unique", "story" };
 		/* Assert that story does not already exist in the server */
 		Assert.assertFalse(jp.checkStory(story));
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -169,8 +167,7 @@ public class JsonParserTest extends TestCase {
 		/* Attempt to query with bad parameters */
 		try {
 			storyArr = jp.search(badQuery);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Query the Server");
 		}
@@ -179,8 +176,7 @@ public class JsonParserTest extends TestCase {
 		/* Attempt to query with good parameters */
 		try {
 			storyArr = jp.search(goodQuery);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Query the Server");
 		}
@@ -197,8 +193,9 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * Tests the delete() method. Ensures that the parser actually
-	 * deletes the right story from the server.
+	 * Tests the delete() method. Ensures that the parser actually deletes the
+	 * right story from the server.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -208,8 +205,7 @@ public class JsonParserTest extends TestCase {
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -222,21 +218,21 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * This method tests the 'getAll()' method. It ensures that the
-	 * method returns all of the stories stored in the server.
+	 * This method tests the 'getAll()' method. It ensures that the method
+	 * returns all of the stories stored in the server.
+	 * 
 	 * @param void
 	 * @return void
 	 */
 	public void testGetAll() {
 		Story s;
-		ArrayList <Story> storyArr = new ArrayList<Story>();
+		ArrayList<Story> storyArr = new ArrayList<Story>();
 		/* Assert that story does not already exist in the server */
 		Assert.assertFalse(jp.checkStory(story));
 		/* Add story to the server */
 		try {
 			jp.storeStory(story);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
@@ -245,8 +241,7 @@ public class JsonParserTest extends TestCase {
 		/* Attempt to query with bad parameters */
 		try {
 			storyArr = jp.getAll();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Query the Server");
 		}
@@ -263,8 +258,9 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * This method is useless. Thought I'd keep the test case in case
-	 * it gets implemented later.
+	 * This method is useless. Thought I'd keep the test case in case it gets
+	 * implemented later.
+	 * 
 	 * @param void
 	 * @return void
 	 */
@@ -273,8 +269,9 @@ public class JsonParserTest extends TestCase {
 	}
 
 	/**
-	 * This method is internal to the JSONparser class. Should probably
-	 * be private but just in case, I kept the test. Looking at you Hassaan.
+	 * This method is internal to the JSONparser class. Should probably be
+	 * private but just in case, I kept the test. Looking at you Hassaan.
+	 * 
 	 * @param void
 	 * @return void
 	 */

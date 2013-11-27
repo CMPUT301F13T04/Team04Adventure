@@ -45,83 +45,97 @@ import com.example.team04adventure.Model.Media;
 import com.example.team04adventure.Model.StorageManager;
 import com.example.team04adventure.Model.Story;
 
+/**
+ * EditCreateAnnot opens the activity that allows the user to create new
+ * annotations for a fragment.
+ * 
+ * @author Team04Adventure
+ */
 public class EditCreateAnnot extends Activity {
 
 	private static final int SELECT_PICTURE = 1;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	
-	String	sid,
-			fid;
-	String 	online;
+
+	String sid, fid;
+	String online;
 	JSONparser jp;
 	StorageManager sm;
-	
-	String 	author,
-			review,
-			image;
-	
+
+	String author, review, image;
+
 	EditText reviewIn;
 	ProgressDialog mDialog;
 	Button saveButton;
 	Annotation a;
-	
+
 	private Uri imageFileUri;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_create_annot);
 		Bundle extras = getIntent().getExtras();
-		
+
 		sid = extras.getString("sid");
 		fid = extras.getString("fid");
 		online = extras.getString("online");
 		reviewIn = (EditText) findViewById(R.id.annotBody);
 		a = new Annotation();
-		
+
 	}
-	
+
+	/**
+	 * Saves the entered information as a new annotation.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
 	public void saveAnnot(View view) {
 		mDialog = new ProgressDialog(view.getContext());
-        mDialog.setMessage("Please wait...");
-        mDialog.show();
+		mDialog.setMessage("Please wait...");
+		mDialog.show();
 		review = reviewIn.getText().toString();
 		author = MainActivity.username;
-				
+
 		a.setAuthor(author);
 		a.setReview(review);
-		
-		if (online.equals("online")) {			
-				Story s;
-				System.out.println("BEGINS ONLINE");
-				AdventureApp Adventure = (AdventureApp)getApplicationContext();
-				s = Adventure.getCurrentStory();
 
-				Frag f = s.getFrag(fid);
-				int index2 = s.getFrags().indexOf(f);
-				f.addAnnotations(a);
-				s.deleteFrag(fid);
-				s.addFragment(f,index2);
-				
-				Integer index = Integer.valueOf(-1);
-				new JSONparser().execute(index,s);
-				System.out.println("IT SAVED ONLINE");
-							
+		if (online.equals("online")) {
+			Story s;
+			System.out.println("BEGINS ONLINE");
+			AdventureApp Adventure = (AdventureApp) getApplicationContext();
+			s = Adventure.getCurrentStory();
+
+			Frag f = s.getFrag(fid);
+			int index2 = s.getFrags().indexOf(f);
+			f.addAnnotations(a);
+			s.deleteFrag(fid);
+			s.addFragment(f, index2);
+
+			Integer index = Integer.valueOf(-1);
+			new JSONparser().execute(index, s);
+			System.out.println("IT SAVED ONLINE");
+
 		} else {
-			
+
 			System.out.println("SAVED OFFLINE");
 			sm = new StorageManager(this);
 			Story s = sm.getStory(sid);
 			sm.deleteStory(s);
-			s.getFrag(fid).addAnnotations(a);	
+			s.getFrag(fid).addAnnotations(a);
 			sm.addStory(s);
-						
+
 		}
-			
+
 		finish();
 	}
-	
+
+	/**
+	 * Opens the file picker to select an image.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
 	public void uploadImage(View view) {
 		Intent intent = new Intent();
 		intent.setType("image/*");
@@ -129,12 +143,19 @@ public class EditCreateAnnot extends Activity {
 		startActivityForResult(Intent.createChooser(intent, "Select Picture"),
 				SELECT_PICTURE);
 	}
-	
+
+	/**
+	 * Opens the camera application and prepares a file for the image to be
+	 * stored into.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
 	public void uploadCamera(View view) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		String folder = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/team04adventure/pic";
+				.getAbsolutePath() + "/team04adventure";
 		File folderF = new File(folder);
 		if (!folderF.exists()) {
 			folderF.mkdir();
@@ -148,7 +169,7 @@ public class EditCreateAnnot extends Activity {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode,
 			final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
@@ -185,42 +206,46 @@ public class EditCreateAnnot extends Activity {
 			}
 		}
 	}
-	
-	public void onStop(){
+
+	public void onStop() {
 		super.onStop();
-		
-		if (mDialog!=null){
-		mDialog.dismiss();
+
+		if (mDialog != null) {
+			mDialog.dismiss();
 		}
 	}
-	
+
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
-		String helpText = "Enter a review, or attach images from memory or from the camera. Press the save button " +
-				"to save the annotation";
+		String helpText = "Enter a review, or attach images from memory or from the camera. Press the save button "
+				+ "to save the annotation";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.edit_create_annot, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.help:
-				help();
-				return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}

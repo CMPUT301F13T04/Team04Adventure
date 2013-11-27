@@ -15,7 +15,6 @@
 
 package com.example.team04adventure.View;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -35,82 +34,82 @@ import com.example.team04adventure.R;
 import com.example.team04adventure.Controller.OnlineStoryList;
 
 /**
- * MainActivity is the initial login screen that the user sees upon opening the app. The user can enter his or her name to login, 
- * and this will bring the user to the swipe view containing all of the existing stories.
+ * MainActivity is the initial login screen that the user sees upon opening the
+ * app. The user can enter his or her name to login, and this will bring the
+ * user to the swipe view containing all of the existing stories.
  * 
  * @author Team04Adventure
  */
 public class MainActivity extends Activity {
-	
+
 	public static String username;
-	private EditText UsernameText; 
+	private EditText UsernameText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		SharedPreferences prefs = getSharedPreferences("prefs",0);
+
+		SharedPreferences prefs = getSharedPreferences("prefs", 0);
 		String prevUsername = prefs.getString("uname", "");
-		
+
 		UsernameText = (EditText) findViewById(R.id.username);
 		Button Login = (Button) findViewById(R.id.login);
 		UsernameText.setText(prevUsername);
-		Login.setOnClickListener(new View.OnClickListener() 
-		{
-				
-			public void onClick(View v)
-			{
-				
+		Login.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
 				String Uname = UsernameText.getText().toString();
 
-				if ((Uname.equals("")) || Uname.equals(null)){
-					
-				String validun = "Please enter a valid username.";
-				Toast.makeText(getBaseContext(), validun, Toast.LENGTH_LONG).show();
-				}
-				else {
-				Intent i = new Intent(MainActivity.this, OnlineStoryList.class);
-				username = Uname;
-				SharedPreferences prefs = getSharedPreferences("prefs",0);
-				Editor editor = prefs.edit();
-				editor.putString("uname",  username);
-				editor.commit();
-				
-				startActivity(i);				
+				if ((Uname.equals("")) || Uname.equals(null)) {
+
+					String validun = "Please enter a valid username.";
+					Toast.makeText(getBaseContext(), validun, Toast.LENGTH_LONG)
+							.show();
+				} else {
+					Intent i = new Intent(MainActivity.this,
+							OnlineStoryList.class);
+					username = Uname;
+					SharedPreferences prefs = getSharedPreferences("prefs", 0);
+					Editor editor = prefs.edit();
+					editor.putString("uname", username);
+					editor.commit();
+
+					startActivity(i);
 				}
 			}
 		});
-		
-				
 	}
-	
+
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
 		String helpText = "Please enter a username and press the login button to proceed.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.help:
-				help();
-				return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}

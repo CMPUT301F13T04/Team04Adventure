@@ -84,10 +84,10 @@ public class EditFragment extends Activity {
 	ProgressDialog mDialog;
 	// "Add New Choice" Flag
 	int nc = 0;
-	
+
 	String flag;
 	String fid;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,19 +101,10 @@ public class EditFragment extends Activity {
 		fid = extras.getString("fid");
 
 		sm = new StorageManager(this);
-		
-		if (flag.equals("online")) {
-//			Integer index = Integer.valueOf(-2);
-//			try {
-				AdventureApp Adventure = (AdventureApp)getApplicationContext();
-				story = Adventure.getCurrentStory();
 
-//				story = new JSONparser().execute(index, sid).get().get(0);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			} catch (ExecutionException e) {
-//				e.printStackTrace();
-//			}
+		if (flag.equals("online")) {
+			AdventureApp Adventure = (AdventureApp) getApplicationContext();
+			story = Adventure.getCurrentStory();
 		} else {
 			story = sm.getStory(sid);
 		}
@@ -140,19 +131,20 @@ public class EditFragment extends Activity {
 		fragTitle.setText(fragment.getTitle());
 		fragBody.setText(fragment.getBody());
 	}
-	
+
 	/**
 	 * Opens the camera application and prepares to store the captured image in
 	 * a file.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void openCamera(View view) {
-		// Opens the camera app and stores the resulting image as a jpg file in
-		// the /team04adventure in the external memory.
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		String folder = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/team04adventure/pic";
+				.getAbsolutePath() + "/team04adventure";
 		File folderF = new File(folder);
 		if (!folderF.exists()) {
 			folderF.mkdir();
@@ -169,10 +161,11 @@ public class EditFragment extends Activity {
 
 	/**
 	 * Opens the image picker for the user to add to the fragment.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void uploadImage(View view) {
-		// Starts the image picker for the user to choose a picture to add to
-		// the fragment
 		Intent intent = new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -181,8 +174,10 @@ public class EditFragment extends Activity {
 	}
 
 	/**
-	 * Opens the activity that contains all existing fragments to allow the user
-	 * to choose one to make a connection to.
+	 * Opens the image picker for the user to change the fragment profile image.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void setProfile(View view) {
 		Intent intent = new Intent();
@@ -192,6 +187,13 @@ public class EditFragment extends Activity {
 				SELECT_PROFILE);
 	}
 
+	/**
+	 * Opens the activity that contains all existing fragments to allow the user
+	 * to choose one to make a connection to.
+	 * 
+	 * @param view
+	 *            the current view.
+	 */
 	public void linkFrag(View view) {
 		Intent intent = new Intent(getApplicationContext(), fragList.class);
 		intent.putExtra("id", sid);
@@ -204,13 +206,16 @@ public class EditFragment extends Activity {
 	/**
 	 * Saves the current text in the main TextView as the body text of the
 	 * fragment.
+	 * 
+	 * @param view
+	 *            the current view.
 	 */
 	public void saveFrag(View view) {
 		// Saves the changes to the fragment text
 		mDialog = new ProgressDialog(view.getContext());
-        mDialog.setMessage("Please wait...");
-        mDialog.show();
-        
+		mDialog.setMessage("Please wait...");
+		mDialog.show();
+
 		refreshIdList();
 		fragSaveText();
 		saveToStory();
@@ -220,7 +225,7 @@ public class EditFragment extends Activity {
 		Intent intent = new Intent();
 		if (flag.equals("online")) {
 			intent = new Intent(this, OnlineStoryIntro.class);
-			
+
 		} else {
 			intent = new Intent(this, MyStoryIntro.class);
 		}
@@ -231,6 +236,9 @@ public class EditFragment extends Activity {
 
 	}
 
+	/**
+	 * Saves the information from the EditTexts into the fragment.
+	 */
 	public void fragSaveText() {
 		String fragTitleString = fragTitle.getText().toString();
 		String fragBodyString = fragBody.getText().toString();
@@ -238,6 +246,9 @@ public class EditFragment extends Activity {
 		fragment.setBody(fragBodyString);
 	}
 
+	/**
+	 * Saves the story into the correct storage.
+	 */
 	public void saveToStory() {
 		int listIndex = idList.indexOf(fragment.getId());
 		if (listIndex == -1) {
@@ -249,12 +260,12 @@ public class EditFragment extends Activity {
 			story.addFragment(fragment, listIndex);
 			story.incVersion();
 		}
-		
+
 		refreshIdList();
-		
+
 		if (flag.equals("online")) {
 			Integer index = Integer.valueOf(-1);
-			new JSONparser().execute(index, story);	
+			new JSONparser().execute(index, story);
 		} else {
 			sm.deleteStory(origStory);
 			sm.addStory(story);
@@ -262,6 +273,9 @@ public class EditFragment extends Activity {
 		origStory = story;
 	}
 
+	/**
+	 * Refreshes the list of fragment IDs.
+	 */
 	public void refreshIdList() {
 		ArrayList<Frag> a = story.getFrags();
 		int b = a.size();
@@ -271,7 +285,6 @@ public class EditFragment extends Activity {
 		}
 	}
 
-	
 	protected void onActivityResult(int requestCode, int resultCode,
 			final Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
@@ -404,60 +417,64 @@ public class EditFragment extends Activity {
 		}
 
 	}
-	
+
+	/**
+	 * Shows the help information for this fragment.
+	 */
 	private void help() {
-		String helpText = "Add or make changes to a fragment. You can add images from memory or from the camera to" +
-				"the fragment, change the profile image of the fragment, and link the current fragment to another " +
-				"one to create a possible choice in the story.";
+		String helpText = "Add or make changes to a fragment. You can add images from memory or from the camera to"
+				+ "the fragment, change the profile image of the fragment, and link the current fragment to another "
+				+ "one to create a possible choice in the story.";
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		LinearLayout lila1= new LinearLayout(this);
-	    lila1.setOrientation(1);
-	    
-	    final TextView helpTextView = new TextView(this);
-	    helpTextView.setText(helpText);
-	    lila1.addView(helpTextView);
-	    adb.setView(lila1);
-	    adb.setTitle("Help");
-	    
-	    adb.show();
+		LinearLayout lila1 = new LinearLayout(this);
+		lila1.setOrientation(1);
+
+		final TextView helpTextView = new TextView(this);
+		helpTextView.setText(helpText);
+		lila1.addView(helpTextView);
+		adb.setView(lila1);
+		adb.setTitle("Help");
+
+		adb.show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.edit, menu);
 		return true;
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		View view = new View(this);
 		switch (item.getItemId()) {
-			case R.id.upload_image_menu:
-				uploadImage(view);
-				return true;
-			case R.id.camera_menu:
-				openCamera(view);
-				return true;
-			case R.id.upload_profile_menu:
-				setProfile(view);
-				return true;
-			case R.id.link_menu:
-				linkFrag(view);
-				return true;
-			case R.id.save_menu:
-				saveFrag(view);
-				return true;
-			case R.id.help:
-				help();
-				return true;
+		case R.id.upload_image_menu:
+			uploadImage(view);
+			return true;
+		case R.id.camera_menu:
+			openCamera(view);
+			return true;
+		case R.id.upload_profile_menu:
+			setProfile(view);
+			return true;
+		case R.id.link_menu:
+			linkFrag(view);
+			return true;
+		case R.id.save_menu:
+			saveFrag(view);
+			return true;
+		case R.id.help:
+			help();
+			return true;
 		}
 		return true;
 	}
-	
-	public void onStop(){
+
+	public void onStop() {
 		super.onStop();
-		
-		if (mDialog!=null){
-		mDialog.dismiss();
+
+		if (mDialog != null) {
+			mDialog.dismiss();
 		}
 	}
 }

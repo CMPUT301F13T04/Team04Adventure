@@ -49,10 +49,16 @@ import com.example.team04adventure.View.CachedStoriesListSwipe;
 import com.example.team04adventure.View.MainActivity;
 import com.example.team04adventure.View.MyStoriesListSwipe;
 
+
+/**
+ * OnlineStoryList is the swipe view that the user uses to control between the main story lists.
+ * 
+ * @author Team04Adventure
+ */
 public class OnlineStoryList extends FragmentActivity implements
 		ActionBar.TabListener {
 
-	/**
+	/*
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
 	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
@@ -62,7 +68,7 @@ public class OnlineStoryList extends FragmentActivity implements
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
-	/**
+	/*
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;

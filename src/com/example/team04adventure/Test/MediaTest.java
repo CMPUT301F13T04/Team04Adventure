@@ -1,12 +1,10 @@
 package com.example.team04adventure.Test;
 
-import java.io.ByteArrayOutputStream;
-
+import junit.framework.Assert;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
-import android.util.Base64;
 
 import com.example.team04adventure.R;
 import com.example.team04adventure.Model.Media;

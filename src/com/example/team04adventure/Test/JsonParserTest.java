@@ -62,18 +62,22 @@ public class JsonParserTest extends TestCase {
 	 */
 	public void testStoreStory() {
 		/* Assert that story does not already exist in the server */
-		Assert.assertFalse(jp.checkStory(story));
+		//Assert.assertFalse(jp.checkStory(story));
+		Integer index = Integer.valueOf(-3);
+		Assert.assertNotNull(jp.execute(index, story));
 		/* Add story to the server */
 		try {
-			jp.storeStory(story);
+			index = Integer.valueOf(-6);
+			jp.execute(index, story);
+			//jp.storeStory(story);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Cannot Store the Story to Server");
 		}
 		/* Assert that the story story now does exist in the server */
-		Assert.assertTrue(jp.checkStory(story));
+		Assert.assertNotNull(jp.execute(-3, story));
 		/* Clean up and delete the story */
-		jp.deleteStory(story);
+		jp.execute(-4, story);
 	}
 
 	/**

@@ -281,7 +281,8 @@ public class OnlineStoryList extends FragmentActivity implements
 	public void sync(View view) {
 		StorageManager sm = new StorageManager(this);
 		ArrayList<Story> offlines = sm.getAll();
-
+		boolean exists = false;
+		
 		if (offlines.isEmpty()) {
 			Toast.makeText(getBaseContext(), "You have no stories to sync..",
 					Toast.LENGTH_LONG).show();
@@ -300,22 +301,30 @@ public class OnlineStoryList extends FragmentActivity implements
 				e.printStackTrace();
 			}
 
+			
 			for (Story s : onlines) {
 				for (Story ss : offlines) {
 					if (s.getId().equals(ss.getId())) {
 						if (s.getVersion() > ss.getVersion()) {
 							sm.deleteStory(ss);
 							sm.addStory(s);
+							exists = true;
 						}
 					}
 				}
 			}
-
+			
+			if (exists == true){
 			Intent intent = new Intent(OnlineStoryList.this,
 					OnlineStoryList.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
 					| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			}
+			
+			else
+				Toast.makeText(getBaseContext(), "Everything is up to date.",
+						Toast.LENGTH_LONG).show();
 		}
 	}
 }

@@ -102,23 +102,22 @@ public class EditCreateAnnot extends Activity {
 
 		if (online.equals("online")) {
 			Story s;
-//			System.out.println("BEGINS ONLINE");
 			AdventureApp Adventure = (AdventureApp) getApplicationContext();
 			s = Adventure.getCurrentStory();
 
 			Frag f = s.getFrag(fid);
 			int index2 = s.getFrags().indexOf(f);
+			
 			f.addAnnotations(a);
 			s.deleteFrag(fid);
 			s.addFragment(f, index2);
-
+			s.incVersion();
 			Integer index = Integer.valueOf(-1);
 			new JSONparser().execute(index, s);
-//			System.out.println("IT SAVED ONLINE");
+
 
 		} else {
 
-//			System.out.println("SAVED OFFLINE");
 			sm = new StorageManager(this);
 			Story s = sm.getStory(sid);
 			sm.deleteStory(s);

@@ -12,7 +12,7 @@
 
     <SearchView
         android:id="@+id/offline_story_search"
-        android:layout_width="194dp"
+        android:layout_width="285dp"
         android:layout_height="wrap_content" />
 
       <Button

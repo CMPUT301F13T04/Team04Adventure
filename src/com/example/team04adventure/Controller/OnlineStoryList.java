@@ -290,18 +290,17 @@ public class OnlineStoryList extends FragmentActivity implements
 		} else {
 
 			Integer tempIndex = Integer.valueOf(-5);
-			ArrayList<Story> onlines = null;
+			ArrayList<Story> onlines = new ArrayList<Story>();
 			try {
 				onlines = new JSONparser().execute(tempIndex).get();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			
 			for (Story s : onlines) {
 				for (Story ss : offlines) {
 					if (s.getId().equals(ss.getId())) {

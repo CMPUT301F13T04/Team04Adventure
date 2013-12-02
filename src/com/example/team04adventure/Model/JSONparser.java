@@ -344,7 +344,7 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 			String[] a = new String[1];
 			a[0] = "*";
 			list = search(a);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -362,6 +362,8 @@ public class JSONparser extends AsyncTask<Object, Integer, ArrayList<Story>>
 			a[0] = "*";
 			list = searchcompressed(a);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
